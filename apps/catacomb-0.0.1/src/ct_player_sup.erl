@@ -16,5 +16,6 @@ init([]) ->
 
 %% Starts an individual player
 start_player(Name, Params) ->
-    {ok,Pid}=supervisor:start_child(?MODULE, [Name, Params]),
-    {ok,Pid}.
+    {ok,Pid}=supervisor:start_child(?MODULE, [Name, [self()|Params]]),
+    Player=ct_player:get_handler(Pid),
+    {ok,Player}.
