@@ -9,24 +9,24 @@
 		room_data_max_y=10}). %% TODO: Rewrite with nested records
 
 start_link() ->
-    gen_server:start_link({local,?MODULE}, ?MODULE, [], []).
+    gen_server:start_link({global,?MODULE}, ?MODULE, [], []).
 
 %% Client API    
 get_room_setup_max_x() ->
-    gen_server:call(?MODULE, {get_room_setup_max_x}).
+    gen_server:call({global,?MODULE}, {get_room_setup_max_x}).
 get_room_setup_max_y() ->
-    gen_server:call(?MODULE, {get_room_setup_max_y}).
+    gen_server:call({global,?MODULE}, {get_room_setup_max_y}).
 set_room_setup_max_x(Max_x)->
-	gen_server:call(?MODULE,{set_room_setup_max_x,Max_x}).
+	gen_server:call({global,?MODULE},{set_room_setup_max_x,Max_x}).
 set_room_setup_max_y(Max_y)->
-	gen_server:call(?MODULE,{set_room_setup_max_y,Max_y}).
+	gen_server:call({global,?MODULE},{set_room_setup_max_y,Max_y}).
 
 %% Internal functions
 init([]) ->
 	io:format("ct_config has started (~w)~n", [self()]),
 	State=#state{},
     {ok, State}.
-stop() -> gen_server:cast(?MODULE, stop).
+stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% Callbacks
 handle_call({get_room_setup_max_x}, _From, State) ->

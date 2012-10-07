@@ -1,11 +1,11 @@
 -module(ct_player_sup).
 -behaviour(supervisor).
 -export([start_link/0]).
--export([init/1,start_player/2]).
+-export([init/1,start_player/3]).
 
 
 start_link() ->
-    supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+    supervisor:start_link({global, ?MODULE}, ?MODULE, []).
 
 init([]) ->
 	%% Declare a simple_one_for_one supervisor as this king of supervisor is ideal for workers.
@@ -15,7 +15,7 @@ init([]) ->
     {ok, StartSpecs}.
 
 %% Starts an individual player
-start_player(Name, Params) ->
-    {ok,Pid}=supervisor:start_child(?MODULE, [Name, [self()|Params]]),
+start_player(Name, ClientPid,Params) ->
+    {ok,Pid}=supervisor:start_child({global,?MODULE}, [Name, [ClientPid|Params]]),
     Player=ct_player:get_handler(Pid),
     {ok,Player}.

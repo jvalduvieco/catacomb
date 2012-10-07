@@ -62,13 +62,12 @@ init({X,Y}) ->
 	State=#state{x=X,y=Y,room_name=RoomName,exits=RoomExits,params=Props},
 	ets:insert(coordToPid,{list_to_atom([X,Y]),self()}),
     {ok, State}.
-stop() -> gen_server:cast(?MODULE, stop).
+stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% Callbacks
 handle_call({get_exits},_From, State) ->
 	{reply,{ok,State#state.exits},State}.
 handle_cast({enter, Player, RoomFromPid}, State) ->
-	io:format("~w is entering into a ~s ~n", [Player,State#state.room_name]),
     NewState=State#state{players=[Player|State#state.players]},
     case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Player); false -> true end,
     ct_player:entered(Player, self(), State#state.exits, State#state.room_name),
@@ -80,9 +79,8 @@ handle_cast({enter, Player, RoomFromPid}, State) ->
     {noreply, NewState};
 handle_cast({player_left, Player}, State) ->
 	%% Check if player is really in
-	NewState=State#state{players=[P || P <- State#state.players, P=/=Player]},
+	NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)]},
 	%% Replace by room event handler?
-	io:format("In room: ~w",[State#state.players]),
     lists:map(fun(X) -> ct_player:unseen(X,Player) end,NewState#state.players),
     lists:map(fun(X) -> ct_player:unseen(Player,X) end,NewState#state.players),
 	{noreply, NewState};

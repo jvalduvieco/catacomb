@@ -10,11 +10,11 @@ c(ct_config).
 
 ct_root_sup:start_link().
 ct_god:init_map().
-{ok,JoanPlayer}=ct_player_sup:start_player("joan",[]).
-{ok,PerePlayer}=ct_player_sup:start_player("pere",[]).
+{ok,JoanPlayer}=ct_player_sup:start_player("joan",self(),[]).
+{ok,PerePlayer}=ct_player_sup:start_player("pere",self(),[]).
 ct_player:set_room(JoanPlayer,[3,3]).
 ct_player:set_room(PerePlayer,[3,3]).
-ct_player:go(JoanPlayer,e).
+ct_player:go(JoanPlayer,ne).
 
 ct_player_sup:start_link(). 
 

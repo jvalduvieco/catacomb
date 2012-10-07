@@ -8,17 +8,17 @@
 -record(state,{}).
 
 start_link() ->
-    gen_server:start_link({local,?MODULE}, ?MODULE, [], []).
+    gen_server:start_link({global,?MODULE}, ?MODULE, [], []).
 %% Client API    
 init_map() ->
-    gen_server:call(?MODULE, {init_map}).
+    gen_server:call({global,?MODULE}, {init_map}).
 
 %% Internal functions
 init([]) ->
 	io:format("ct_god has started (~w)~n", [self()]),
 	State=#state{},
     {ok, State}.
-stop() -> gen_server:cast(?MODULE, stop).
+stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% User Callbacks
 handle_call({init_map}, _From, State) ->
