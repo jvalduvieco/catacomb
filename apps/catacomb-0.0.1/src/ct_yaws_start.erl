@@ -7,8 +7,9 @@ start() ->
 run() ->
     Id = "embedded",
     GconfList = [{id, Id}],
-    Docroot = "/tmp/www",
+    Docroot = "./www/",
     SconfList = [{docroot, Docroot},
+                {logdir, "./log/"},
                 {port, 8080},
                 {listen, {127,0,0,1}},
                 {appmods, [{"/catacomb_ws_endpoint", ct_yaws_catacomb_ws_endpoint}]}

@@ -1,0 +1,3 @@
+<erl>
+out(A) -> {websocket, ct_yaws_catacomb_ws_endpoint, []}.
+</erl>
