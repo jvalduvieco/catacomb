@@ -1,3 +1,5 @@
 <erl>
-out(A) -> {websocket, ct_yaws_catacomb_ws_endpoint, []}.
+out(A) -> 
+	InitialState = [],
+	{websocket, ct_yaws_catacomb_ws_endpoint, [{callback, {advanced, InitialState}}]}.
 </erl>
