@@ -1,6 +1,8 @@
 -module(ct_yaws_start).
 -compile(export_all).
 
+-include("yaws.hrl").
+
 start() ->
     {ok, spawn(?MODULE, run, [])}.
 
@@ -16,7 +18,6 @@ run() ->
                 ],
 
     {ok, SCList, GC, ChildSpecs} = yaws_api:embedded_start_conf(Docroot, SconfList, GconfList, Id),
-
     [supervisor:start_child({global, ct_yaws_sup}, Ch) || Ch <- ChildSpecs],
 
     %% now configure Yaws

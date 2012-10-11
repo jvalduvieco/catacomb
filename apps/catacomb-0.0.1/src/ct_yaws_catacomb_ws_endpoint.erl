@@ -44,21 +44,29 @@ handle_message(#ws_frame_info{fin=1,
 
 %% one full non-fragmented message
 handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
-    io:format("QQ~n",[]),
+  try
+    %% Decode received data into a Erlang structures
     Decoded = rfc4627:decode(Data),
     io:format("Raw decoded: ~w~n", [Decoded]),
-    Result = case Decoded of
+    {ok,Result} = case Decoded of
       {ok, DataObj, _} -> 
         io:format("DataObj: ~p~n", [DataObj]),
-        rfc4627:get_field(DataObj,"name",<<>>);
+        ct_client_command:execute(DataObj),      
+        {ok,DataObj};
       {error, Error} -> 
         io:format("Error when decoding ~p~n",[Error]),
         list_to_binary("Error when decoding: " ++ atom_to_list(Error));
       _ -> 
-        io:format("WTF?~n")
+        io:format("WTF?~n"),
+        {error,[]}
     end,
     io:format("Returning ~s~n",[Result]),
-    {reply, {text, Result}, State};
+    {reply, {text, Result}, State}
+  catch Exc:Why ->
+      Trace=erlang:get_stacktrace(),
+      error_logger:error_msg("Error in WS endpoint: ~p ~p ~p.\n", [Exc,Why,Trace]),
+        {stop, Why, State}
+  end;
 
 
 %% end of binary fragmented message
