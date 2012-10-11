@@ -10,7 +10,7 @@ run() ->
                 {logdir, "./log/"}],
     Docroot = "./www/",
     SconfList = [{docroot, Docroot},
-                {port, 8080},
+                {port, 8081},
                 {listen, {127,0,0,1}},
                 {appmods, [{"/catacomb_ws_endpoint", ct_yaws_catacomb_ws_endpoint}]}
                 ],

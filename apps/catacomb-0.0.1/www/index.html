@@ -17,7 +17,7 @@ function writeStatus(message) {
 }
 
 function connect() {
-    ws = new WebSocket("ws://localhost:8080/ws.yaws");
+    ws = new WebSocket("ws://localhost:8081/ws.yaws");
 
     ws.onopen = function(evt) {
         writeStatus("connected");

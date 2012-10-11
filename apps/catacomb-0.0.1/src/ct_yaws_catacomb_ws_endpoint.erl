@@ -45,11 +45,21 @@ handle_message(#ws_frame_info{fin=1,
 %% one full non-fragmented message
 handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
     io:format("QQ~n",[]),
-    {ok, {struct,DataObj}} = rfc4627:decode(Data),
-    io:format("Decoded: ~w",[DataObj]),
-    Result=rfc4627:get_field(DataObj,"name",<<>>),
-    io:format("Returning ~s",[Result]),
+    Decoded = rfc4627:decode(Data),
+    io:format("Raw decoded: ~w~n", [Decoded]),
+    Result = case Decoded of
+      {ok, DataObj, _} -> 
+        io:format("DataObj: ~p~n", [DataObj]),
+        rfc4627:get_field(DataObj,"name",<<>>);
+      {error, Error} -> 
+        io:format("Error when decoding ~p~n",[Error]),
+        list_to_binary("Error when decoding: " ++ atom_to_list(Error));
+      _ -> 
+        io:format("WTF?~n")
+    end,
+    io:format("Returning ~s~n",[Result]),
     {reply, {text, Result}, State};
+
 
 %% end of binary fragmented message
 handle_message(#ws_frame_info{fin=1,

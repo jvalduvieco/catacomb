@@ -1,0 +1,4 @@
+deps
+localhost*
+*.log
+.DS_Store
