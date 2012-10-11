@@ -7,7 +7,7 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 	Command = rfc4627:get_field(Cmd,"command",<<>>),
 	io:format("Command: ~p~n", [Command]),
 	Result = case Command of
-		login ->
+		<<"login">> ->
 			Login=rfc4627:get_field(Cmd,"login",<<>>),
 			Password=rfc4627:get_field(Cmd,"password",<<>>),
 			rfc4627:get_field(Cmd,"name",<<>>),

@@ -51,7 +51,7 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
     {ok,Result} = case Decoded of
       {ok, DataObj, _} -> 
         io:format("DataObj: ~p~n", [DataObj]),
-        ct_client_command:execute(DataObj),      
+        ct_client_command:execute(DataObj,[]),      
         {ok,DataObj};
       {error, Error} -> 
         io:format("Error when decoding ~p~n",[Error]),
@@ -60,7 +60,7 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
         io:format("WTF?~n"),
         {error,[]}
     end,
-    io:format("Returning ~s~n",[Result]),
+    %%io:format("Returning ~s~n",[Result]),
     {reply, {text, Result}, State}
   catch Exc:Why ->
       Trace=erlang:get_stacktrace(),
