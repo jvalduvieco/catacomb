@@ -1,13 +1,3 @@
-%-module(ct_yaws_catacomb_ws_endpoint).
-%-export([handle_message/1]).
-
-%handle_message({text, Message}) ->
-%   {reply, {text, Message}}.
-
-%%%==============================================================
-%%% compiled using erlc -I include src/advanced_echo_callback.erl
-%%%==============================================================
-
 -module(ct_yaws_catacomb_ws_endpoint).
 
 -export([handle_message/2]).
@@ -47,10 +37,8 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
   try
     %% Decode received data into a Erlang structures
     Decoded = rfc4627:decode(Data),
-    io:format("Raw decoded: ~w~n", [Decoded]),
     {ok,Result} = case Decoded of
       {ok, DataObj, _} -> 
-        io:format("DataObj: ~p~n", [DataObj]),
         ct_client_command:execute(DataObj,[]),      
         {ok,DataObj};
       {error, Error} -> 
@@ -64,7 +52,7 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
     {reply, {text, Result}, State}
   catch Exc:Why ->
       Trace=erlang:get_stacktrace(),
-      error_logger:error_msg("Error in WS endpoint: ~p ~p ~p.\n", [Exc,Why,Trace]),
+      error_logger:error_msg("Error in ~s: ~p ~p ~p.\n", [?MODULE,Exc,Why,Trace]),
         {stop, Why, State}
   end;
 
@@ -97,7 +85,12 @@ handle_message(#ws_frame_info{opcode=pong}, State) ->
     %%            draft-ietf-hybi-thewebsocketprotocol-08#section-4
     io:format("ignoring unsolicited pong~n",[]),
     {noreply, State};
+%% Client is closing connection
+handle_message(#ws_frame_info{opcode=close}, State) ->
+    io:format("WS Endpoint client closing.~n"),
+    {noreply, State};
 
+%% Catch all
 handle_message(#ws_frame_info{}=FrameInfo, State) ->
     io:format("WS Endpoint Unhandled message: ~p~n~p~n", [FrameInfo, State]),
     {close, {error, {unhandled_message, FrameInfo}}}.

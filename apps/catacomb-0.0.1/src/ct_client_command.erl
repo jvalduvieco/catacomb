@@ -2,32 +2,45 @@
 -export([execute/2]).
 
 execute(Cmd,State) -> %% State contains State data relevant to this module
-	io:format("QQ33~n"),
 	try
 	Command = rfc4627:get_field(Cmd,"command",<<>>),
 	io:format("Command: ~p~n", [Command]),
 	Result = case Command of
 		<<"login">> ->
-			Login=rfc4627:get_field(Cmd,"login",<<>>),
+			User=rfc4627:get_field(Cmd,"user",<<>>),
 			Password=rfc4627:get_field(Cmd,"password",<<>>),
-			rfc4627:get_field(Cmd,"name",<<>>),
-			io:format("Log in: User: ~p Password: ~p",[Login,Password]),
-			%% SessionId = ct_session:login(),
+			io:format("Log in: User: ~p Password: ~p ~n",[User,Password]),
+			%% SessionId = ct_session:login(Status#status.session_pid,Login,Password),
 			{ok,[]};
-		get_character_list->
-			%% CharacterList = ct_session:get_character_list(),
+		<<"get_character_list">> ->
+			%% CharacterList = ct_session:get_character_list(Status#status.session_pid),
 			{ok,[]};
-		new_character->
+		<<"new_character">>->
+			%% NewCharacter = ct_session:new_character(Status#status.session_pid,....)
 			{ok,[]};
-		exit_game->
+		<<"load_character">>->
 			{ok,[]};
-		logout->
+		<<"start_game">>->
+			{ok,[]};
+		<<"exit_game">>->
+			{ok,[]};
+		<<"logout">>->
+			{ok,[]};
+		<<"go">>->
+			{ok,[]};
+		<<"catch">>->
+			{ok,[]};
+		<<"drop">>->
+			{ok,[]};
+		<<"get_inventory">>->
+			{ok,[]};
+		<<"hit">>->
 			{ok,[]}
 		end,
 	{Result}
 	catch
 		What:Why ->
-      Trace=erlang:get_stacktrace(),
-      error_logger:error_msg("ct_client_command: ~p ~p ~p.\n", [What,Why,Trace]),
-        {stop, Why, State}
+	    Trace=erlang:get_stacktrace(),
+	    error_logger:error_msg("ct_client_command: ~p ~p ~p.\n", [What,Why,Trace]),
+	    {stop, Why, State}
   end.
