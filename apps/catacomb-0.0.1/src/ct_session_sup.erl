@@ -9,7 +9,7 @@ start_link() ->
 
 init([]) ->
 	io:format("~s has started (~w)~n", [?MODULE,self()]),
-	WorkerSpecs = {{global,ct_session}, {ct_session, start_link, []}, temporary, 2000, worker,[ct_session]},
+	WorkerSpecs = {ct_session, {ct_session, start_link, []}, temporary, 2000, worker,[ct_session]},
 	StartSpecs = {{simple_one_for_one, 0, 1},[WorkerSpecs]},
     {ok, StartSpecs}.
 

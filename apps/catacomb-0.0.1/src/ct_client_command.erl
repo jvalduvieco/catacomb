@@ -1,5 +1,7 @@
 -module(ct_client_command).
 -export([execute/2]).
+-record(ct_client_state,{session_pid=none,
+	player_uid=none}).
 
 execute(Cmd,State) -> %% State contains State data relevant to this module
 	try
@@ -11,10 +13,17 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 			Password=rfc4627:get_field(Cmd,"password",<<>>),
 			io:format("Log in: User: ~p Password: ~p ~n",[User,Password]),
 			%% if ! Status#status.session_pid   %%In case a login fails we can retry
-			{ok,SessionPid} = ct_session_sup:get_new_session_pid(),
-			ct_session:login(SessionPid,User,Password),
-			%%NewStatus=Status#status.session_pid=SessionPid, 
-			{ok,[]};
+			{ok,SessionPid}=case State#ct_client_state.session_pid of
+				none ->
+					ct_session_sup:get_new_session_pid();
+				_ ->
+					{ok,State#ct_client_state.session_pid}
+			end,
+			{ok,PlayerUid}=ct_session:login(SessionPid,User,Password),
+			NewState=State#ct_client_state{session_pid=SessionPid,player_uid=PlayerUid},
+			%%LoginResponse="{\"type\":\"LoginResponse\",\"body\":\"OK\"}",
+			JSONResult=[{"type","LoginResponse"},{"body","OK"}],
+			{ok,rfc4627:encode({obj,JSONResult}),NewState};
 		<<"get_character_list">> ->
 			%% CharacterList = ct_session:get_character_list(Status#status.session_pid),
 			{ok,[]};
@@ -57,7 +66,7 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 			{ok,[]}
 		%% Chat commands to be added
 		end,
-	{Result}
+	Result
 	catch
 		What:Why ->
 	    Trace=erlang:get_stacktrace(),

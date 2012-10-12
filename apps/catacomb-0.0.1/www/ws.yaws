@@ -1,5 +1,11 @@
 <erl>
+-record(ct_client_state,{session_pid=none,
+	player_uid=none}). 
+-record(state, {frag_type = none,               % fragment type
+                acc = <<>>,                     % accumulate fragment data
+                client_command_state=#ct_client_state{}}).    % client command state (opaque) 
+
 out(A) -> 
 	InitialState = [],
-	{websocket, ct_yaws_catacomb_ws_endpoint, [{callback, {advanced, InitialState}}]}.
+	{websocket, ct_yaws_catacomb_ws_endpoint, [{callback, {advanced, #state{}}}]}.
 </erl>

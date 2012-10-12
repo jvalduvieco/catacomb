@@ -3,14 +3,15 @@
 -export([start_link/0,stop/0]).
 -export([login/3]).
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
+-record(session_state,{current_state=not_logged}).
 
 start_link() ->
-    gen_server:start_link({global,?MODULE}, ?MODULE, [], []).
+    gen_server:start_link(?MODULE,[], []).
 
 init([]) ->
 	io:format("~s has started (~w)~n", [?MODULE,self()]),
-    {ok, []}.
-stop() -> gen_server:cast({global,?MODULE}, stop).
+    {ok, #session_state{}}.
+stop() -> gen_server:cast(?MODULE, stop).
 
 %% Client API
 login(SessionPid,User,Password) ->
@@ -20,8 +21,21 @@ login(SessionPid,User,Password) ->
 %% User Callbacks
 handle_call({login, [_User, _Password]}, _From, State) ->
 	%% Sould connect to DB, etc...
-    Uid=33,
-    {reply, {ok, Uid}, State}.
+	Result=case State#session_state.current_state of
+		not_logged ->
+    		Uid=33,
+    		{ok,Uid};
+    	_->
+    		{error,already_logged_in}
+    	end,
+    %% State handling
+    NewState= case Result of
+    	{ok,_}->
+    		State#session_state{current_state=logged_in};
+    	_ ->
+    		State
+    	end,
+    {reply, Result, NewState}.
 
 %% System Callbacks
 terminate(_Reason, State) -> {ok,State}.

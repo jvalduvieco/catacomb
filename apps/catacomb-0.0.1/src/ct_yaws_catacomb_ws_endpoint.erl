@@ -7,8 +7,11 @@
 %% define callback state to accumulate a fragmented WS message
 %% which we echo back when all fragments are in, returning to
 %% initial state.
+-record(ct_client_state,{session_pid=none,
+  player_uid=none}).
 -record(state, {frag_type = none,               % fragment type
-                acc = <<>>}).                   % accumulate fragment data
+                acc = <<>>,                     % accumulate fragment data
+                client_command_state=#ct_client_state{}}).    % client command state (opaque)              
 
 %% start of a fragmented message
 handle_message(#ws_frame_info{fin=0,
@@ -35,11 +38,13 @@ handle_message(#ws_frame_info{fin=1,
 %% one full non-fragmented message
 handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
   try
+    is_record (State,state),
+    ClientState=State#state.client_command_state,
+    io:format("Current state ~p ~p~n",[ClientState#ct_client_state.session_pid,ClientState#ct_client_state.player_uid]),
     %% Decode received data into a Erlang structures
-    Decoded = rfc4627:decode(Data),
-    {ok,Result} = case Decoded of
-      {ok, DataObj, _} -> 
-        ct_client_command:execute(DataObj,[]),      
+    DecodeResult = rfc4627:decode(Data),
+    {ok,DecodedJSON} = case DecodeResult of
+      {ok, DataObj, _} ->      
         {ok,DataObj};
       {error, Error} -> 
         io:format("Error when decoding ~p~n",[Error]),
@@ -48,8 +53,10 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
         io:format("WTF?~n"),
         {error,[]}
     end,
-    %%io:format("Returning ~s~n",[Result]),
-    {reply, {text, Result}, State}
+    {ok,Result,NewClientState}=ct_client_command:execute(DecodedJSON,ClientState),
+    NewState=State#state{client_command_state=NewClientState},
+    io:format("Returning ~s~n",[Result]),
+    {reply, {text, list_to_binary(Result)}, NewState}
   catch Exc:Why ->
       Trace=erlang:get_stacktrace(),
       error_logger:error_msg("Error in ~s: ~p ~p ~p.\n", [?MODULE,Exc,Why,Trace]),
