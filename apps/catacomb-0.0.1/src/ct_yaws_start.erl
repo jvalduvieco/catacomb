@@ -7,6 +7,7 @@ start() ->
     {ok, spawn(?MODULE, run, [])}.
 
 run() ->
+    io:format("~s has started (~w)~n", [?MODULE,self()]),
     Id = "embedded",
     GconfList = [{id, Id},
                 {logdir, "./log/"}],

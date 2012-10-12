@@ -10,9 +10,19 @@ start_link() ->
 %% Using a SOFO strategy because we get to have many
 %% supervisees of the same type.
 init([]) ->
+    io:format("~s has started (~w)~n", [?MODULE,self()]),
     {ok,
      	{{one_for_one, 1, 60},
-			[{{global,ct_player_sup},
+			[{{global,ct_auth_service},
+                {ct_auth_service, start_link, []},
+                permanent, infinity, worker, [ct_auth_service]},
+            {{global,ct_character_service},
+                {ct_character_service, start_link, []},
+                permanent, infinity, worker, [ct_character_service]},
+            {{global,ct_session_sup},
+                {ct_session_sup, start_link, []},
+                permanent, infinity, supervisor, [ct_session_sup]},
+            {{global,ct_player_sup},
         		{ct_player_sup, start_link, []},
         		permanent, infinity, supervisor, [ct_player_sup]},
         	{{global,ct_room_sup},
@@ -23,9 +33,9 @@ init([]) ->
                 permanent, infinity, supervisor, [ct_yaws_sup]},
         	{{global,ct_config},
         		{ct_config, start_link, []},
-        		permanent, infinity, supervisor, [ct_config]},
+        		permanent, infinity, worker, [ct_config]},
     		{{global,ct_god},
         		{ct_god, start_link, []},
-        		permanent, infinity, supervisor, [ct_god]}
+        		permanent, infinity, worker, [ct_god]}
         	]
         }}.

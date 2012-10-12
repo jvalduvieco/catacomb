@@ -11,9 +11,9 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 			Password=rfc4627:get_field(Cmd,"password",<<>>),
 			io:format("Log in: User: ~p Password: ~p ~n",[User,Password]),
 			%% if ! Status#status.session_pid   %%In case a login fails we can retry
-			%%  SessionId = ct_session_sup:get_new_session_pid(),
-			%%  ct_session:login(Status#status.session_pid,Login,Password),
-			%%  NewStatus=Status#status.session_pid=SessionPid, 
+			{ok,SessionPid} = ct_session_sup:get_new_session_pid(),
+			ct_session:login(SessionPid,User,Password),
+			%%NewStatus=Status#status.session_pid=SessionPid, 
 			{ok,[]};
 		<<"get_character_list">> ->
 			%% CharacterList = ct_session:get_character_list(Status#status.session_pid),

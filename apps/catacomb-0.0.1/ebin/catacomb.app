@@ -3,8 +3,10 @@
               {vsn,"0.0.1"},
               {mod,{catacomb,[]}},
               {registered,[ct_soot_sup]},
-              {modules,[catacomb,ct_client_command,ct_config,ct_god,ct_player,
+              {modules,[catacomb,ct_auth_service,ct_character_service,
+                        ct_client_command,ct_config,ct_god,ct_player,
                         ct_player_sup,ct_room,ct_room_sup,ct_root_sup,
+                        ct_session,ct_session_sup,
                         ct_yaws_catacomb_ws_endpoint,ct_yaws_start,
                         ct_yaws_sup]},
               {applications,[stdlib,kernel,crypto]}]}.

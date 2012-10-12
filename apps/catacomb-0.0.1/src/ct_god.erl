@@ -15,7 +15,7 @@ init_map() ->
 
 %% Internal functions
 init([]) ->
-	io:format("ct_god has started (~w)~n", [self()]),
+	io:format("~s has started (~w)~n", [?MODULE,self()]),
 	State=#state{},
     {ok, State}.
 stop() -> gen_server:cast({global,?MODULE}, stop).
