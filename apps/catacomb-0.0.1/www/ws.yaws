@@ -1,6 +1,9 @@
 <erl>
+% -include("ct_client_state.hrl"). % FIXME: Must investigate how to supply include path to dynamic compiler
 -record(ct_client_state,{session_pid=none,
-	player_uid=none}). 
+	user_id=none,
+	player_pid=none}).
+
 -record(state, {frag_type = none,               % fragment type
                 acc = <<>>,                     % accumulate fragment data
                 client_command_state=#ct_client_state{}}).    % client command state (opaque) 

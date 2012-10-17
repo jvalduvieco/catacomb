@@ -7,8 +7,7 @@
 %% define callback state to accumulate a fragmented WS message
 %% which we echo back when all fragments are in, returning to
 %% initial state.
--record(ct_client_state,{session_pid=none,
-  player_uid=none}).
+-include("ct_client_state.hrl").
 -record(state, {frag_type = none,               % fragment type
                 acc = <<>>,                     % accumulate fragment data
                 client_command_state=#ct_client_state{}}).    % client command state (opaque)              
@@ -40,7 +39,7 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
   try
     is_record (State,state),
     ClientState=State#state.client_command_state,
-    io:format("Current state ~p ~p~n",[ClientState#ct_client_state.session_pid,ClientState#ct_client_state.player_uid]),
+    io:format("Current state ~p ~p~n",[ClientState#ct_client_state.session_pid,ClientState#ct_client_state.user_id]),
     %% Decode received data into a Erlang structures
     DecodeResult = rfc4627:decode(Data),
     {ok,DecodedJSON} = case DecodeResult of
@@ -55,7 +54,7 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
     end,
     {ok,Result,NewClientState}=ct_client_command:execute(DecodedJSON,ClientState),
     NewState=State#state{client_command_state=NewClientState},
-    io:format("Returning ~s~n",[Result]),
+    %%io:format("Returning ~s~n",[Result]),
     {reply, {text, list_to_binary(Result)}, NewState}
   catch Exc:Why ->
       Trace=erlang:get_stacktrace(),

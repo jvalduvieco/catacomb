@@ -1,7 +1,10 @@
 -module(ct_client_command).
 -export([execute/2]).
+-include ("ct_character_info.hrl").
+
 -record(ct_client_state,{session_pid=none,
-	player_uid=none}).
+	user_id=none,
+	player_pid=none}).
 
 execute(Cmd,State) -> %% State contains State data relevant to this module
 	try
@@ -19,21 +22,25 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 				_ ->
 					{ok,State#ct_client_state.session_pid}
 			end,
-			{ok,PlayerUid}=ct_session:login(SessionPid,User,Password),
-			NewState=State#ct_client_state{session_pid=SessionPid,player_uid=PlayerUid},
-			%%LoginResponse="{\"type\":\"LoginResponse\",\"body\":\"OK\"}",
+			{ok,UserId}=ct_session:login(SessionPid,User,Password),
+			NewState=State#ct_client_state{session_pid=SessionPid,user_id=UserId},
+			%LoginResponse="{\"type\":\"LoginResponse\",\"body\":\"OK\"}",
 			JSONResult=[{"type","LoginResponse"},{"body","OK"}],
 			{ok,rfc4627:encode({obj,JSONResult}),NewState};
 		<<"get_character_list">> ->
-			%% CharacterList = ct_session:get_character_list(Status#status.session_pid),
-			{ok,[]};
-		<<"new_character">>->
-			%% NewCharacter = ct_session:new_character(Status#status.session_pid,...),
-			{ok,[]};
+			CharacterList = ct_character_service:get_character_list(State#ct_client_state.user_id),
+			%JSONResult=[{"type","LoginResponse"},{"body","OK"}],
+			JSONResult=[rfc4627:from_record(Char, ct_character_info, record_info(fields, ct_character_info))||Char<-CharacterList],
+			{ok,JSONResult,State};
+		<<"new_character">> ->
+			%decode request body
+			%NewCharacter = ct_character_service:new_character(Status#status.user_id,...),
+			{ok,[],State};
 		<<"load_character">>->
-			%% PlayerPid= ct_session:load_character(Status#status.session_pid,CharacterId)
-			%% NewStatus=Status#status.player_pid=PlayerPid,  %% Wakes up a character frozen
-			{ok,[]};
+			CharacterId=rfc4627:get_field(Cmd,"character_id",<<>>),
+			{ok,PlayerHandle}=ct_session:load_character(State#ct_client_state.session_pid,CharacterId),
+			JSONResult=rfc4627:from_record(Char, ct_character_info, record_info(fields, ct_character_info)),
+			{ok,PlayerHandle,State};
 		<<"start_game">>->
 			%% Unfreeze the character
 			%% session change state
@@ -47,7 +54,7 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 			%% suicide ourselves
 			{ok,[]};
 		<<"go">>->
-			%%ct_player:go(Status#status.player_pid,Direction)
+			%%ct_player:go(State#ct_client_state.player_pid,Direction),
 			{ok,[]};
 		<<"catch">>->
 			%%ct_player:catch(Status#status.player_pid,ObjectId)

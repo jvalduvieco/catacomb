@@ -1,7 +1,7 @@
 -module(ct_player_sup).
 -behaviour(supervisor).
 -export([start_link/0]).
--export([init/1,start_player/3]).
+-export([init/1,start_player/1]).
 
 
 start_link() ->
@@ -16,7 +16,7 @@ init([]) ->
     {ok, StartSpecs}.
 
 %% Starts an individual player
-start_player(Name, ClientPid,Params) ->
-    {ok,Pid}=supervisor:start_child({global,?MODULE}, [Name, [ClientPid|Params]]),
+start_player(CharacterSpecs) ->
+	    {ok,Pid}=supervisor:start_child({global,?MODULE}, [CharacterSpecs]),
     Player=ct_player:get_handler(Pid),
     {ok,Player}.

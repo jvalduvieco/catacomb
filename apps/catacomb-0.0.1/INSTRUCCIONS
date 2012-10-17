@@ -31,3 +31,7 @@ ct_config:get_room_setup().
 ct_config:set_room_setup_max_y(33).
 
 rp(registered()). - Veure els processos registrats
+
+{"command":"login","password":"232323","user":"dsdsd"}
+{"command":"get_character_list"}
+{"command":"load_character","character_id":33}

@@ -1,10 +1,12 @@
 -module(ct_player).
 -behaviour(gen_server).
 
--export([start_link/2,stop/0]).
+-export([start_link/1,stop/0]).
 -export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1]).
 -export([go/2, set_room/2,seen/2,unseen/2,entered/4,leave_denied/1]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
+
+-include ("ct_character_info.hrl").
 
 -record(player_state,{id,
 	my_pid,
@@ -31,9 +33,8 @@ get_max_life_points(#player_state{max_life_points=MaxLifePoints} = _Player) ->
 get_life_points(#player_state{life_points=LifePoints} = _Player) ->
 	LifePoints.
 
-start_link(Name, Params) ->
-	[ClientPid|_]=Params, 
-    gen_server:start_link(?MODULE,{Name,ClientPid, Params}, []).
+start_link(CharacterSpecs) ->
+    gen_server:start_link(?MODULE,CharacterSpecs, []).
 
 %% Client API
 go(Player,Direction) ->
@@ -53,8 +54,8 @@ leave_denied(Player) ->
 	gen_server:cast(ct_player:get_pid(Player),{leave_denied}).
 
 %% Internal functions
-init({Name,ClientPid,Params}) ->
-	State=#player_state{id=1,my_pid=self(),name=Name,client_pid=ClientPid, params=Params},
+init(CharacterSpecs) ->
+	State=#player_state{id=CharacterSpecs#ct_character_info.id,my_pid=self(),name=CharacterSpecs#ct_character_info.name},
 	io:format("ct_player has started (~w)~n", [self()]),
     {ok, State}.
 stop() -> gen_server:cast(?MODULE, stop).
