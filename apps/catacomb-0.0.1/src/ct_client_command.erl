@@ -19,11 +19,17 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 				_ ->
 					{ok,State#ct_client_state.session_pid}
 			end,
-			{ok,PlayerUid}=ct_session:login(SessionPid,User,Password),
-			NewState=State#ct_client_state{session_pid=SessionPid,player_uid=PlayerUid},
-			%%LoginResponse="{\"type\":\"LoginResponse\",\"body\":\"OK\"}",
-			JSONResult=[{"type","LoginResponse"},{"body","OK"}],
-			{ok,rfc4627:encode({obj,JSONResult}),NewState};
+			LoginResult=ct_session:login(SessionPid,User,Password),
+			case LoginResult of 
+				{ok,PlayerUid} ->
+					NewState=State#ct_client_state{session_pid=SessionPid,player_uid=PlayerUid},
+					%%LoginResponse="{\"type\":\"LoginResponse\",\"body\":\"OK\"}",
+					JSONResult=[{"type","LoginResponse"},{"body","OK"}],
+					{ok,rfc4627:encode({obj,JSONResult}),NewState};
+				{error, Error} ->
+					JSONResult=[{"type","LoginResponse"},{"success",false},{"body",Error}],
+					{ok,rfc4627:encode({obj,JSONResult}),State}
+			end;					
 		<<"get_character_list">> ->
 			%% CharacterList = ct_session:get_character_list(Status#status.session_pid),
 			{ok,[]};

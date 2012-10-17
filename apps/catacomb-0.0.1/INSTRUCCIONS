@@ -31,3 +31,25 @@ ct_config:get_room_setup().
 ct_config:set_room_setup_max_y(33).
 
 rp(registered()). - Veure els processos registrats
+
+
+MySQL
+=====
+CREATE DATABASE catacomb;
+CREATE USER 'catacomb'@'localhost' IDENTIFIED BY  '***';
+GRANT USAGE ON * . * TO  'catacomb'@'localhost' IDENTIFIED BY  '***' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+GRANT ALL PRIVILEGES ON  `catacomb` . * TO  'catacomb'@'localhost' WITH GRANT OPTION ;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+INSERT INTO `user` (`id`, `login`, `password`) VALUES (1, 'jordi', '1a1dc91c907325c69271ddf0c944bc72'); # password='pass'
+INSERT INTO `user` (`id`, `login`, `password`) VALUES (2, 'joan', '1a1dc91c907325c69271ddf0c944bc72');
+INSERT INTO `user` (`id`, `login`, `password`) VALUES (3, 'dani', '1a1dc91c907325c69271ddf0c944bc72');
+
+
+Websocket
+=========
+{"command":"login","user":"jordi","password":"pass"}

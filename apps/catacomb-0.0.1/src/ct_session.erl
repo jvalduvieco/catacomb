@@ -19,12 +19,20 @@ login(SessionPid,User,Password) ->
     Result.
 
 %% User Callbacks
-handle_call({login, [_User, _Password]}, _From, State) ->
+handle_call({login, [User, Password]}, _From, State) ->
 	%% Sould connect to DB, etc...
 	Result=case State#session_state.current_state of
 		not_logged ->
-    		Uid=33,
-    		{ok,Uid};
+            %% use ct_auth_service to log in
+            LoginResult = ct_auth_service:login(User, Password),
+            io:format("LoginResult: ~p~n", [LoginResult]),
+            %{reply, {ok, Uid}, State}.
+            case LoginResult of 
+                {ok, Uid} -> {ok,Uid};
+                {error, Error} -> {error, Error}
+            end;
+    		%Uid=33,
+    		%{ok,Uid};
     	_->
     		{error,already_logged_in}
     	end,
