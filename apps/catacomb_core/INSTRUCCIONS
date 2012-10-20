@@ -36,7 +36,7 @@ erl -pa ebin/ deps/*/ebin/ -boot catacomb_core
 
 Websocket
 =========
-{"command":"LoginRequest","body":{"user":"jordi","password":"pass"}}
+{"type":"LoginRequest","body":{"user":"jordi","password":"pass"}}
 
 
 MySQL
