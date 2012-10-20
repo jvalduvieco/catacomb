@@ -31,9 +31,9 @@ init([]) ->
             {{global,ct_yaws_sup},
                 {ct_yaws_sup,start_link,[]},
                 permanent, infinity, supervisor, [ct_yaws_sup]},
-        	{{global,ct_config},
-        		{ct_config, start_link, []},
-        		permanent, infinity, worker, [ct_config]},
+        	{{global,ct_config_service},
+        		{ct_config_service, start_link, []},
+        		permanent, infinity, worker, [ct_config_service]},
     		{{global,ct_god},
         		{ct_god, start_link, []},
         		permanent, infinity, worker, [ct_god]}

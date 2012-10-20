@@ -1,4 +1,4 @@
--module(ct_config).
+-module(ct_config_service).
 -behaviour(gen_server).
 
 -export([start_link/0,stop/0]).
@@ -23,7 +23,7 @@ set_room_setup_max_y(Max_y)->
 
 %% Internal functions
 init([]) ->
-	io:format("ct_config has started (~w)~n", [self()]),
+	io:format("ct_config_service has started (~w)~n", [self()]),
 	State=#state{},
     {ok, State}.
 stop() -> gen_server:cast({global,?MODULE}, stop).

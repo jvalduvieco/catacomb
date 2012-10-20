@@ -7,31 +7,55 @@
 	player_pid=none}).
 
 execute(Cmd,State) -> %% State contains State data relevant to this module
-	try
-	Command = rfc4627:get_field(Cmd,"command",<<>>),
+	try 
+		DecodeResult=ct_translation_tools:from_client(Cmd),
+    	case DecodeResult of
+      		{ok, DataObj} ->
+      			{BoolResult,Result,NewState}=do_command(DataObj,State),
+      			% Encode response in JSON format. Force ok response as an error here probably is a developer bug
+      			{ok,EncodedJSON}=ct_translation_tools:to_client(Result),
+      			{BoolResult,EncodedJSON,NewState};
+      		{error, Error} -> 
+        		io:format("Error when decoding ~p~n",[Error]),
+        		Result=list_to_binary("Error when decoding: " ++ atom_to_list(Error)),
+        		{error,Result,State};
+  			_ -> 	
+        		io:format("WTF?~n"),
+        		{error,[],State}
+    	end
+    catch
+		What:Why ->
+		    Trace=erlang:get_stacktrace(),
+		    error_logger:error_msg("ct_client_command: ~p ~p ~p.\n", [What,Why,Trace]),
+		    {stop, Why, State}
+  	end.
+
+do_command(Cmd,State) ->
+	Command = ct_translation_tools:get_type(Cmd),
 	io:format("Command: ~p~n", [Command]),
 	Result = case Command of
-		<<"login">> ->
-			User=rfc4627:get_field(Cmd,"user",<<>>),
-			Password=rfc4627:get_field(Cmd,"password",<<>>),
+		<<"LoginRequest">> ->
+			User=ct_translation_tools:get_value(<<"user">>,Cmd),
+			Password=ct_translation_tools:get_value(<<"password">>,Cmd),
 			io:format("Log in: User: ~p Password: ~p ~n",[User,Password]),
-			%% if ! Status#status.session_pid   %%In case a login fails we can retry
+			% Check if we have a session. If there is no session create a new one.
 			{ok,SessionPid}=case State#ct_client_state.session_pid of
 				none ->
 					ct_session_sup:get_new_session_pid();
 				_ ->
 					{ok,State#ct_client_state.session_pid}
 			end,
+
+			% Try to login onto the system
 			LoginResult=ct_session:login(SessionPid,User,Password),
 			case LoginResult of 
-				{ok,PlayerUid} ->
-					NewState=State#ct_client_state{session_pid=SessionPid,player_uid=PlayerUid},
-					%%LoginResponse="{\"type\":\"LoginResponse\",\"body\":\"OK\"}",
-					JSONResult=[{"type","LoginResponse"},{"body","OK"}],
-					{ok,rfc4627:encode({obj,JSONResult}),NewState};
+				{ok,UserId} ->
+					NewState=State#ct_client_state{session_pid=SessionPid,user_id=UserId},
+					CmdResult={obj,[{"type",<<"LoginResponse">>},{"result",<<"success">>}]},
+					{ok,CmdResult,NewState};
 				{error, Error} ->
-					JSONResult=[{"type","LoginResponse"},{"success",false},{"body",Error}],
-					{ok,rfc4627:encode({obj,JSONResult}),State}
+					CmdResult={obj,[{"type",<<"LoginResponse">>},{"result",<<"failure">>},{"body",Error}]},
+					{ok,CmdResult,State}
 			end;
 		<<"get_character_list">> ->
 			CharacterList = ct_character_service:get_character_list(State#ct_client_state.user_id),
@@ -45,44 +69,42 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 		<<"load_character">>->
 			CharacterId=rfc4627:get_field(Cmd,"character_id",<<>>),
 			{ok,PlayerHandle}=ct_session:load_character(State#ct_client_state.session_pid,CharacterId),
-			JSONResult=rfc4627:from_record(Char, ct_character_info, record_info(fields, ct_character_info)),
-			{ok,PlayerHandle,State};
+			JSONResult=rfc4627:from_record(PlayerHandle, ct_character_info, record_info(fields, ct_character_info)),
+			{ok,JSONResult,State};
 		<<"start_game">>->
 			%% Unfreeze the character
 			%% session change state
-			{ok,[]};
+			{ok,[],State};
 		<<"exit_game">>->
 			%% tell the session to kill everyone and get to idle state.
 			%% by a call
-			{ok,[]};
+			{ok,[],State};
 		<<"logout">>->
 			%% tell the session to die
 			%% suicide ourselves
-			{ok,[]};
+			{ok,[],State};
 		<<"go">>->
 			%%ct_player:go(State#ct_client_state.player_pid,Direction),
-			{ok,[]};
+			{ok,[],State};
 		<<"catch">>->
 			%%ct_player:catch(Status#status.player_pid,ObjectId)
-			{ok,[]};
+			{ok,[],State};
 		<<"drop">>->
 			%%ct_player:drop(Status#status.player_pid,ObjectId)
-			{ok,[]};
+			{ok,[],State};
 		<<"get_inventory">>->
 			%%ct_player:get_inventory(Status#status.player_pid)
-			{ok,[]};
+			{ok,[],State};
 		<<"info">> ->
 			%%ct_player:info(Status#status.player_pid)
-			{ok,[]};
+			{ok,[],State};
 		<<"hit">>->
 			%%ct_player:hit(Status#status.player_pid,PlayerPid)
-			{ok,[]}
+			{ok,[],State};
+		InvalidCommand->
+			ErrorStr= "Unkown command: "++ binary_to_list(InvalidCommand),
+			CmdResult={obj,[{"type",<<"GeneralResponse">>},{"result",<<"failure">>},{"body",list_to_binary(ErrorStr)}]},
+			{error,CmdResult,State}
 		%% Chat commands to be added
 		end,
-	Result
-	catch
-		What:Why ->
-	    Trace=erlang:get_stacktrace(),
-	    error_logger:error_msg("ct_client_command: ~p ~p ~p.\n", [What,Why,Trace]),
-	    {stop, Why, State}
-  end.
+	Result.

@@ -1,42 +1,43 @@
 INSTRUCCIONS
 
-c(ct_root_sup).
-c(ct_player_sup).
-c(ct_room_sup).
-c(ct_room).
-c(ct_player).
-c(ct_god).
-c(ct_config).
+BOOTSTRAP
+*********
+cd catacomb
+#FiXME passos que s'ha de fer pq algo passa amb les deps.
+push apps/catacomb_core
+./rebar get-deps
+popd
+#Fi FIXME
+./rebar get-deps
+./rebar compile
+#per fer release, no cal per ara
+pushd rel
+../rebar create-node nodeid=catacomb
+cp reltool.config.catacomb reltool.config
+popd
+./rebar generate
+#Falta fer que copii el www
+cp -av apps/catacomb_core/www/* rel/catacomb/www/
+#per executar la release
+chmod +x rel/catacomb/bin/catacomb
+rel/catacomb/bin/catacomb console  # Inicia la app i ens dona una consola amb l'entorn
 
-ct_root_sup:start_link().
-ct_god:init_map().
-{ok,JoanPlayer}=ct_player_sup:start_player("joan",self(),[]).
-{ok,PerePlayer}=ct_player_sup:start_player("pere",self(),[]).
-ct_player:set_room(JoanPlayer,[3,3]).
-ct_player:set_room(PerePlayer,[3,3]).
-ct_player:go(JoanPlayer,ne).
+#Per executar en dev
+cd catacomb/apps/catacomb_core
+./rebar compile
 
-ct_player_sup:start_link(). 
+#creem el bootscript
+erl -pa ebin deps/*/ebin
+systools:make_script("catacomb_core").
+q().
 
-ct_player_sup:start_player("joan",[]).
-ct_room_sup:start_link().
-ct_room_sup:create_room([1,1]).
-{ok,Pid}=ct_room_sup:get_pid([1,1]).
-ct_room:enter_room(Pid).
-supervisor:which_children(ct_player_sup).
-supervisor:which_children(ct_root_sup).
+#Ara ja podem executar tota la app de cop
+erl -pa ebin/ deps/*/ebin/ -boot catacomb_core
 
-ct_config:start_link().
-ct_config:get_room_setup().
-ct_config:set_room_setup_max_y(33).
+Websocket
+=========
+{"command":"LoginRequest","body":{"user":"jordi","password":"pass"}}
 
-rp(registered()). - Veure els processos registrats
-
-<<<<<<< HEAD
-{"command":"login","password":"232323","user":"dsdsd"}
-{"command":"get_character_list"}
-{"command":"load_character","character_id":33}
-=======
 
 MySQL
 =====
@@ -54,8 +55,21 @@ INSERT INTO `user` (`id`, `login`, `password`) VALUES (1, 'jordi', '1a1dc91c9073
 INSERT INTO `user` (`id`, `login`, `password`) VALUES (2, 'joan', '1a1dc91c907325c69271ddf0c944bc72');
 INSERT INTO `user` (`id`, `login`, `password`) VALUES (3, 'dani', '1a1dc91c907325c69271ddf0c944bc72');
 
+#Obsolet
+ct_root_sup:start_link().
+ct_god:init_map().
+{ok,JoanPlayer}=ct_player_sup:start_player("joan",self(),[]).
+{ok,PerePlayer}=ct_player_sup:start_player("pere",self(),[]).
+ct_player:set_room(JoanPlayer,[3,3]).
+ct_player:set_room(PerePlayer,[3,3]).
+ct_player:go(JoanPlayer,ne).
 
-Websocket
-=========
-{"command":"login","user":"jordi","password":"pass"}
->>>>>>> bbaa179382d58bd8e9249b4468adbe126c0201e6
+
+supervisor:which_children(ct_player_sup).
+supervisor:which_children(ct_root_sup).
+
+ct_config:start_link().
+ct_config:get_room_setup().
+ct_config:set_room_setup_max_y(33).
+
+rp(registered()). - Veure els processos registrats

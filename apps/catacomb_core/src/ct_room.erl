@@ -55,8 +55,8 @@ get_exits(RoomPid) ->
 init({X,Y}) ->
 <<A:32, B:32, C:32>> = crypto:rand_bytes(12),
     random:seed({A,B,C}),
-    MaxX=ct_config:get_room_setup_max_x(),
-    MaxY=ct_config:get_room_setup_max_y(),
+    MaxX=ct_config_service:get_room_setup_max_x(),
+    MaxY=ct_config_service:get_room_setup_max_y(),
 	{RoomName, Props}=create_room_properties(),		%% Define Room properties and name.
 	{ok,RoomExits}=create_room_exits(X,Y,MaxX,MaxY),
 	State=#state{x=X,y=Y,room_name=RoomName,exits=RoomExits,params=Props},

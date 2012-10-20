@@ -1,5 +1,5 @@
 -module(ct_translation_tools).
--export([from_client/1,to_client/1]).
+-export([from_client/1,to_client/1,get_type/1,get_value/2]).
 
 %%% JSON translation tools. 
 
@@ -21,7 +21,7 @@
 %% Returns 	{ok, JSON_data_propslist}
 %%			{error, Error_info}
 from_client(Data) ->
-	{JSONObj,_,_} = ktj_parse:parse(JSONext),
+	{JSONObj,_,_} = ktj_parse:parse(Data),
 	Result = case JSONObj of
 		{obj,_} ->
 			{ok,JSONObj};
@@ -32,11 +32,19 @@ from_client(Data) ->
 
 %% Encodes data from Erlang proplists to JSON text
 to_client(Data)->
-	JSONText = JSONText:parse(JSONErr),
-	Result = case JSONObj of
+	JSONText = ktj_encode:encode(Data),
+	Result = case JSONText of
 		{error,_} ->
-			Result; % {error,{"Expected object seperator",58,0,8}}
+			JSONText; % {error,{"Expected object seperator",58,0,8}}
 		_ ->
-			{ok,Result}
+			{ok,lists:flatten(JSONText)}
 	end,
 	Result.
+
+get_type(Data) ->
+	{obj,Header}=Data,
+	proplists:get_value(<<"type">>,Header,none).
+get_value(Key,Data) ->
+	{obj,Header}=Data,
+	{obj,Body}=proplists:get_value(<<"body">>,Header,none),
+	proplists:get_value(Key,Body,none).

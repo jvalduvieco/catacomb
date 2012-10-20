@@ -40,21 +40,12 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
     is_record (State,state),
     ClientState=State#state.client_command_state,
     io:format("Current state ~p ~p~n",[ClientState#ct_client_state.session_pid,ClientState#ct_client_state.user_id]),
+    
     %% Decode received data into a Erlang structures
-    DecodeResult = rfc4627:decode(Data),
-    {ok,DecodedJSON} = case DecodeResult of
-      {ok, DataObj, _} ->      
-        {ok,DataObj};
-      {error, Error} -> 
-        io:format("Error when decoding ~p~n",[Error]),
-        list_to_binary("Error when decoding: " ++ atom_to_list(Error));
-      _ -> 
-        io:format("WTF?~n"),
-        {error,[]}
-    end,
-    {ok,Result,NewClientState}=ct_client_command:execute(DecodedJSON,ClientState),
+    {_BoolResult,Result,NewClientState}=ct_client_command:execute(Data,ClientState),
+    
     NewState=State#state{client_command_state=NewClientState},
-    %%io:format("Returning ~s~n",[Result]),
+
     {reply, {text, list_to_binary(Result)}, NewState}
   catch Exc:Why ->
       Trace=erlang:get_stacktrace(),

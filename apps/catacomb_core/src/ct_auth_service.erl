@@ -1,4 +1,4 @@
--module(ct_auth_service).
+ -module(ct_auth_service).
 -behaviour(gen_server).
 -export([start_link/0,stop/0]).
 -export([login/2]).
@@ -11,14 +11,6 @@
 -record(user_record, {id, login, password}).
 
 start_link() ->
-	application:start(sasl),
-	crypto:start(),
-	application:start(emysql),
-
-	emysql:add_pool(ct_auth_pool, 1,
-		"catacomb", "pass", "localhost", 3306,
-		"catacomb", utf8),
-
     gen_server:start_link({global,?MODULE}, ?MODULE, [], []).
 
 init([]) ->

@@ -29,24 +29,18 @@ handle_call({login, [User, Password]}, _From, State) ->
             %% use ct_auth_service to log in
             LoginResult = ct_auth_service:login(User, Password),
             io:format("LoginResult: ~p~n", [LoginResult]),
-            %{reply, {ok, Uid}, State}.
-            case LoginResult of 
-                {ok, Uid} -> {ok,Uid};
-                {error, Error} -> {error, Error}
-            end;
-    		%Uid=33,
-    		%{ok,Uid};
+            LoginResult;
     	_->
     		{error,already_logged_in}
     	end,
     %% State handling
-    NewState= case Result of
+    NewState=case Result of
     	{ok,_}->
     		State#session_state{login_state=logged_in};
     	_ ->
     		State
     	end,
-    {reply, {ok,Result}, NewState};
+    {reply, Result, NewState};
 handle_call({load_character,CharacterId}, _From, State) ->
     {ok,CharacterInfo}=ct_character_service:get_character(CharacterId),
     % Pass character data to player
