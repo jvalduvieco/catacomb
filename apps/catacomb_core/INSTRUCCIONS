@@ -37,7 +37,7 @@ erl -pa ebin/ deps/*/ebin/ -boot catacomb_core
 Websocket
 =========
 {"type":"LoginRequest","body":{"user":"jordi","password":"pass"}}
-
+{"type":"GetCharacterList","body":"none"}
 
 MySQL
 =====
@@ -73,3 +73,29 @@ ct_config:get_room_setup().
 ct_config:set_room_setup_max_y(33).
 
 rp(registered()). - Veure els processos registrats
+
+
+tmp
+===
+Data4={obj,[{"type",<<"GetCharacterListResponse">>},
+      {"result",<<"success">>},
+      {"body",
+       [{obj,[{<<"id">>,1},
+              {<<"login">>,<<"jordi">>},
+              {<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]},
+        {obj,[{<<"id">>,2},
+              {<<"login">>,<<"joan">>},
+              {<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]},
+        {obj,[{<<"id">>,3},
+              {<<"login">>,<<"dani">>},
+              {<<"password">>,
+               <<"1a1dc91c907325c69271ddf0c944bc72">>}]}]}]}
+10> ktj_encode:encode(Data4).
+
+
+
+ rr("src/ct_client_command.erl").
+ State=#ct_client_state{}.
+ {_BoolResult,Result,NewClientState}=ct_client_command:execute("{\"type\":\"LoginRequest\",\"body\":{\"user\":\"jordi\",\"password\":\"pass\"}}",State).
+  ct_client_command:execute("{\"type\":\"GetCharacterList\",\"body\":\"\"}",NewClientState).
+  

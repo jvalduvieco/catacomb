@@ -57,11 +57,20 @@ do_command(Cmd,State) ->
 					CmdResult={obj,[{"type",<<"LoginResponse">>},{"result",<<"failure">>},{"body",Error}]},
 					{ok,CmdResult,State}
 			end;
-		<<"get_character_list">> ->
-			CharacterList = ct_character_service:get_character_list(State#ct_client_state.user_id),
+		<<"GetCharacterList">> ->
+			%{ok,CharacterList} = ct_character_service:get_character_list(State#ct_client_state.user_id),
+			CharacterList=[{obj,[{<<"id">>,1},
+  							{<<"login">>,<<"jordi">>},
+							{<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]},
+							{obj,[{<<"id">>,2},
+							{<<"login">>,<<"joan">>},
+							{<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]},
+							{obj,[{<<"id">>,3},
+							{<<"login">>,<<"dani">>},
+							{<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]}],
 			%JSONResult=[{"type","LoginResponse"},{"body","OK"}],
-			JSONResult=[rfc4627:from_record(Char, ct_character_info, record_info(fields, ct_character_info))||Char<-CharacterList],
-			{ok,JSONResult,State};
+			CmdResult={obj,[{"type",<<"GetCharacterListResponse">>},{"result",<<"success">>},{"body",CharacterList}]},
+			{ok,CmdResult,State};
 		<<"new_character">> ->
 			%decode request body
 			%NewCharacter = ct_character_service:new_character(Status#status.user_id,...),
