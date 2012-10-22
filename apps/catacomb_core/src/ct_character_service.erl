@@ -1,7 +1,7 @@
 -module(ct_character_service).
 -behaviour(gen_server).
 -export([start_link/0,stop/0]).
--export([get_character_list/1,get_character/1]).
+-export([get_character_list/1,get_character_data/2]).
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
 
 -include ("ct_character_info.hrl").
@@ -22,8 +22,8 @@ stop() -> gen_server:cast({global,?MODULE}, stop).
 %% Client API
 get_character_list(UserId) ->
     gen_server:call({global,?MODULE}, {get_character_list, UserId}).
-get_character(CharacterId) ->
-    gen_server:call({global,?MODULE}, {get_character, CharacterId}).
+get_character_data(UserId,CharacterId) ->
+    gen_server:call({global,?MODULE}, {get_character_data, UserId, CharacterId}).
     
 
 %% User Callbacks
@@ -37,24 +37,23 @@ handle_call({get_character_list, UserId}, _From, State) ->
 		#result_packet{rows=[]} ->
 			{reply, {ok, []}, State};
 		#result_packet{} ->
-		    List = emysql_util:as_proplists(Result,fun(A)->{obj,A} end),
+		    List = emysql_util:as_proplists(Result,fun(A)-> {obj,A} end),
 			{reply, {ok, List}, State};
 		#ok_packet{} ->
 			{reply, {error, sql_error}, State};
 		#error_packet{} ->
 			{reply, {error, sql_error}, State};
 		_ -> {reply, {error, sql_error}, State}
-	end;
-handle_call({get_character,CharacterId}, _From, State) ->
+	end;	
+handle_call({get_character_data,UserId,CharacterId}, _From, State) ->
 	%Get character data from DB
-	% CharacterInfo=#ct_character_info{id=32908230984,name="TITO",max_life_points=52000,life_points=100},
-	% {reply,{ok,CharacterInfo},State}.
-    Result = emysql:execute(ct_auth_pool, "SELECT * FROM `character` WHERE id=" ++ emysql_util:encode(CharacterId)),
+	SQL=io_lib:format("SELECT * FROM `character` WHERE id=~s AND user_id=~s", [emysql_util:encode(CharacterId),emysql_util:encode(UserId)]),
+    Result = emysql:execute(ct_auth_pool, SQL ),
 	case Result of
 		#result_packet{rows=[]} ->
 			{reply, {ok, []}, State};
 		#result_packet{} ->
-		    List = emysql_util:as_proplists(Result),
+		    List = emysql_util:as_proplists(Result,fun(A)->{obj,A} end),
 			{reply, {ok, List}, State};
 		#ok_packet{} ->
 			{reply, {error, sql_error}, State};

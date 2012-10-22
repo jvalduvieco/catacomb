@@ -29,7 +29,7 @@ create_room([X,Y]) ->
 get_pid([X,Y]) ->
 	case ets:lookup(coordToPid,list_to_atom([X,Y])) of
 		[] ->
-			undefined;
+			{error,undefined};
 		[{_,Pid}] ->
 			{ok,Pid}
 	end.

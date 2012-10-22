@@ -31,10 +31,10 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
   	end.
 
 do_command(Cmd,State) ->
-	Command = ct_translation_tools:get_type(Cmd),
+	Command=ct_translation_tools:get_type(Cmd),
 	io:format("Command: ~p~n", [Command]),
-	Result = case Command of
-		<<"LoginRequest">> ->
+	Result=case Command of
+		<<"login_request">> ->
 			User=ct_translation_tools:get_value(<<"user">>,Cmd),
 			Password=ct_translation_tools:get_value(<<"password">>,Cmd),
 			io:format("Log in: User: ~p Password: ~p ~n",[User,Password]),
@@ -47,29 +47,52 @@ do_command(Cmd,State) ->
 			end,
 
 			% Try to login onto the system
-			LoginResult=ct_session:login(SessionPid,User,Password),
-			case LoginResult of 
+			case ct_session:login(SessionPid,User,Password) of 
 				{ok,UserId} ->
 					NewState=State#ct_client_state{session_pid=SessionPid,user_id=UserId},
-					CmdResult={obj,[{"type",<<"LoginResponse">>},{"result",<<"success">>}]},
+					CmdResult={obj,[{"type",<<"login_response">>},{"result",<<"success">>}]},
 					{ok,CmdResult,NewState};
 				{error, Error} ->
-					CmdResult={obj,[{"type",<<"LoginResponse">>},{"result",<<"failure">>},{"body",Error}]},
+					CmdResult={obj,[{"type",<<"login_response">>},{"result",<<"failure">>},{"body",Error}]},
 					{ok,CmdResult,State}
 			end;
-		<<"GetCharacterList">> ->
+		<<"get_character_list_request">> ->
 			{ok,CharacterList} = ct_character_service:get_character_list(State#ct_client_state.user_id),
-			CmdResult={obj,[{"type",<<"GetCharacterListResponse">>},{"result",<<"success">>},{"body",CharacterList}]},
+			CmdResult = {obj,[{"type",<<"get_character_list_response">>},{"result",<<"success">>},{"body",CharacterList}]},
 			{ok,CmdResult,State};
-		<<"new_character">> ->
+		<<"new_character_request">> ->
 			%decode request body
 			%NewCharacter = ct_character_service:new_character(Status#status.user_id,...),
 			{ok,[],State};
-		<<"load_character">>->
-			CharacterId=rfc4627:get_field(Cmd,"character_id",<<>>),
-			{ok,PlayerHandle}=ct_session:load_character(State#ct_client_state.session_pid,CharacterId),
-			JSONResult=rfc4627:from_record(PlayerHandle, ct_character_info, record_info(fields, ct_character_info)),
-			{ok,JSONResult,State};
+		<<"load_character_request">>->
+			CharacterId = ct_translation_tools:get_value(<<"character_id">>, Cmd),
+
+			LoadCharacterResult = case ct_character_service:get_character_data(State#ct_client_state.user_id,CharacterId) of
+				{ok, CharacterData} ->
+					case ct_player_sup:start_player(CharacterData) of
+						{ok, PlayerHandler} ->
+							case ct_session:set_character(State#ct_client_state.session_pid, CharacterId) of
+								{ok, PlayerHandler} -> {ok, PlayerHandler};
+								{error, Error} -> {error, Error}
+							end;
+						{error, Error} -> {error, Error}
+					end;
+				{error, Error} -> {error, Error}
+			end,
+			{ok,CmdResult,NewState} = case LoadCharacterResult of
+				{ok,PlayerHandler2}->  %% Using the same variable name in two context makes de compiler complain of unsafe variables
+					{ok,
+						{obj, [{"type", <<"load_character_response">>}, 
+							{"result", <<"success">>}]},
+						State#ct_client_state{player_pid = PlayerHandler2}};
+				{error,Error2} ->
+					{ok,
+						{obj, [{"type", <<"load_character_response">>}, 
+							{"result", <<"error">>}, {"body", Error2}]}, 
+							State#ct_client_state{}}
+					
+			end,
+			{ok,CmdResult,NewState};
 		<<"start_game">>->
 			%% Unfreeze the character
 			%% session change state
@@ -102,7 +125,7 @@ do_command(Cmd,State) ->
 			{ok,[],State};
 		InvalidCommand->
 			ErrorStr= "Unkown command: "++ binary_to_list(InvalidCommand),
-			CmdResult={obj,[{"type",<<"GeneralResponse">>},{"result",<<"failure">>},{"body",list_to_binary(ErrorStr)}]},
+			CmdResult={obj,[{"type",<<"general_response">>},{"result",<<"failure">>},{"body",list_to_binary(ErrorStr)}]},
 			{error,CmdResult,State}
 		%% Chat commands to be added
 		end,

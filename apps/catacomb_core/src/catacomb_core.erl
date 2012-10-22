@@ -9,6 +9,7 @@ start(normal,[]) ->
 
     case ct_root_sup:start_link() of
         {ok, Pid} ->
+        	ct_god:init_map(),
             {ok, Pid, []};
         Error -> Error
     end.
