@@ -37,7 +37,7 @@ handle_call({get_character_list, UserId}, _From, State) ->
 		#result_packet{rows=[]} ->
 			{reply, {ok, []}, State};
 		#result_packet{} ->
-		    List = emysql_util:as_proplists(Result),
+		    List = emysql_util:as_proplists(Result,fun(A)->{obj,A} end),
 			{reply, {ok, List}, State};
 		#ok_packet{} ->
 			{reply, {error, sql_error}, State};

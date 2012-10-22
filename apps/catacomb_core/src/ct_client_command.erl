@@ -58,17 +58,7 @@ do_command(Cmd,State) ->
 					{ok,CmdResult,State}
 			end;
 		<<"GetCharacterList">> ->
-			%{ok,CharacterList} = ct_character_service:get_character_list(State#ct_client_state.user_id),
-			CharacterList=[{obj,[{<<"id">>,1},
-  							{<<"login">>,<<"jordi">>},
-							{<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]},
-							{obj,[{<<"id">>,2},
-							{<<"login">>,<<"joan">>},
-							{<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]},
-							{obj,[{<<"id">>,3},
-							{<<"login">>,<<"dani">>},
-							{<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]}],
-			%JSONResult=[{"type","LoginResponse"},{"body","OK"}],
+			{ok,CharacterList} = ct_character_service:get_character_list(State#ct_client_state.user_id),
 			CmdResult={obj,[{"type",<<"GetCharacterListResponse">>},{"result",<<"success">>},{"body",CharacterList}]},
 			{ok,CmdResult,State};
 		<<"new_character">> ->

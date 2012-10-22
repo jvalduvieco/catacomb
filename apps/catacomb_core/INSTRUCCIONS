@@ -46,17 +46,36 @@ MySQL
 CREATE DATABASE catacomb;
 CREATE USER 'catacomb'@'localhost' IDENTIFIED BY  'pass';
 GRANT USAGE ON * . * TO  'catacomb'@'localhost' IDENTIFIED BY  'pass' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
-GRANT ALL PRIVILEGES ON  `catacomb` . * TO  'catacomb'@'localhost' WITH GRANT OPTION ;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+GRANT ALL PRIVILEGES ON  'catacomb' . * TO  'catacomb'@'localhost' WITH GRANT OPTION ;
+CREATE TABLE IF NOT EXISTS 'user' (
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'login' varchar(50) DEFAULT NULL,
+  'password' varchar(50) DEFAULT NULL,
+  PRIMARY KEY ('id')
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-INSERT INTO `user` (`id`, `login`, `password`) VALUES (1, 'jordi', '1a1dc91c907325c69271ddf0c944bc72'); # password='pass'
-INSERT INTO `user` (`id`, `login`, `password`) VALUES (2, 'joan', '1a1dc91c907325c69271ddf0c944bc72');
-INSERT INTO `user` (`id`, `login`, `password`) VALUES (3, 'dani', '1a1dc91c907325c69271ddf0c944bc72');
+CREATE TABLE IF NOT EXISTS 'character' (
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'user_id' int(11) DEFAULT NULL,
+  'name' varchar(50) DEFAULT NULL,
+  'max_life_points' int(11) NOT NULL,
+  'life_points' int(11) NOT NULL,
+  'level' int(11) NOT NULL,
+  'experience_points' int(11) NOT NULL,
+  PRIMARY KEY ('id'),
+  FOREIGN KEY (user_id) REFERENCES user(id),
+  UNIQUE INDEX ('name')
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
+
+INSERT INTO 'user' ('id', 'login', 'password') VALUES (1, 'jordi', '1a1dc91c907325c69271ddf0c944bc72'); # password='pass'
+INSERT INTO 'user' ('id', 'login', 'password') VALUES (2, 'joan', '1a1dc91c907325c69271ddf0c944bc72');
+INSERT INTO 'user' ('id', 'login', 'password') VALUES (3, 'dani', '1a1dc91c907325c69271ddf0c944bc72');
+
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points) VALUES (1,1,'lazi',232323,2333,56,123098);
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points) VALUES (2,1,'iguana',22222,11,33,121211);
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points) VALUES (3,2,'Sr.Muerte',3333333,333,6,1238);
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points) VALUES (4,2,'Ged',2333233,1111,60,12000);
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points) VALUES (5,3,'TITO',33333,4,1,123);
 #Obsolet
 ct_root_sup:start_link().
 ct_god:init_map().
