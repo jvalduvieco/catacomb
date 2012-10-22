@@ -87,8 +87,10 @@ do_command(Cmd,State) ->
 			%% tell the session to die
 			%% suicide ourselves
 			{ok,[],State};
-		<<"go">>->
-			%%ct_player:go(State#ct_client_state.player_pid,Direction),
+		<<"player_go_request">>->
+			% check if there is a player already, if the user has logged in, etc...
+			Direction = list_to_existing_atom(binary_to_list(ct_translation_tools:get_value(<<"direction">>, Cmd))),
+			ct_player:go(State#ct_client_state.player_handle,Direction),
 			{ok,[],State};
 		<<"catch">>->
 			%%ct_player:catch(Status#status.player_pid,ObjectId)

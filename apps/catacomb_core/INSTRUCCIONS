@@ -46,6 +46,10 @@ Login:
 {"type":"get_character_list","body":"none"}
 
 {"type":"load_character_request","body":{"character_id":"1"}}
+
+
+{"type":"player_go_request","body":{"direction":"n"}}
+
 MySQL
 =====
 CREATE DATABASE catacomb;
