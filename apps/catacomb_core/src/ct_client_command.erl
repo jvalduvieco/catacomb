@@ -4,7 +4,7 @@
 
 -record(ct_client_state,{session_pid=none,
 	user_id=none,
-	player_pid=none}).
+	player_handle=none}).
 
 execute(Cmd,State) -> %% State contains State data relevant to this module
 	try 
@@ -65,34 +65,16 @@ do_command(Cmd,State) ->
 			%NewCharacter = ct_character_service:new_character(Status#status.user_id,...),
 			{ok,[],State};
 		<<"load_character_request">>->
+			% check if there is a player already, if the user has logged in, etc...
 			CharacterId = ct_translation_tools:get_value(<<"character_id">>, Cmd),
 
-			LoadCharacterResult = case ct_character_service:get_character_data(State#ct_client_state.user_id,CharacterId) of
-				{ok, CharacterData} ->
-					case ct_player_sup:start_player(CharacterData) of
-						{ok, PlayerHandler} ->
-							case ct_session:set_character(State#ct_client_state.session_pid, CharacterId) of
-								{ok, PlayerHandler} -> {ok, PlayerHandler};
-								{error, Error} -> {error, Error}
-							end;
-						{error, Error} -> {error, Error}
-					end;
-				{error, Error} -> {error, Error}
-			end,
-			{ok,CmdResult,NewState} = case LoadCharacterResult of
-				{ok,PlayerHandler2}->  %% Using the same variable name in two context makes de compiler complain of unsafe variables
-					{ok,
-						{obj, [{"type", <<"load_character_response">>}, 
+			{ok, CharacterData} = ct_character_service:get_character_data(State#ct_client_state.user_id,CharacterId),
+			{ok, PlayerHandle} = ct_player_sup:start_player(CharacterData),
+			ok = ct_session:set_character(State#ct_client_state.session_pid, CharacterId),
+				
+			{ok,{obj, [{"type", <<"load_character_response">>}, 
 							{"result", <<"success">>}]},
-						State#ct_client_state{player_pid = PlayerHandler2}};
-				{error,Error2} ->
-					{ok,
-						{obj, [{"type", <<"load_character_response">>}, 
-							{"result", <<"error">>}, {"body", Error2}]}, 
-							State#ct_client_state{}}
-					
-			end,
-			{ok,CmdResult,NewState};
+						State#ct_client_state{player_handle = PlayerHandle}};
 		<<"start_game">>->
 			%% Unfreeze the character
 			%% session change state

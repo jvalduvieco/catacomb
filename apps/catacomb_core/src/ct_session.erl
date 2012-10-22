@@ -1,9 +1,9 @@
 -module(ct_session).
 -behaviour(gen_server).
 -export([start_link/0,stop/0]).
--export([login/3,load_character/2]).
+-export([login/3,set_character/2]).
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
--record(session_state,{login_state=not_logged}).
+-record(session_state,{login_state=not_logged,character_id=undefined}).
 
 start_link() ->
     gen_server:start_link(?MODULE,[], []).
@@ -17,8 +17,8 @@ stop() -> gen_server:cast(?MODULE, stop).
 login(SessionPid,User,Password) ->
     Result=gen_server:call(SessionPid, {login, [User, Password]}),
     Result.
-load_character(SessionPid,CharacterInfo) ->
-    Result=gen_server:call(SessionPid,{load_character,CharacterInfo}),
+set_character(SessionPid,CharacterId) ->
+    Result=gen_server:call(SessionPid,{set_character,CharacterId}),
     Result.
 
 %% User Callbacks
@@ -41,12 +41,9 @@ handle_call({login, [User, Password]}, _From, State) ->
     		State
     	end,
     {reply, Result, NewState};
-handle_call({load_character,CharacterId}, _From, State) ->
-    {ok,CharacterInfo}=ct_character_service:get_character(CharacterId),
-    % Pass character data to player
-    {ok,PlayerHandler}=ct_player_sup:start_player(CharacterInfo),
-    ct_player:set_room(PlayerHandler,[3,3]),
-    {reply,{ok,PlayerHandler},State}.
+handle_call({set_character,CharacterId}, _From, State) ->
+    NewState=State#session_state{character_id=CharacterId},
+    {reply, ok,NewState}.
 
 
 
