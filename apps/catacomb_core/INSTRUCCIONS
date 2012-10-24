@@ -43,7 +43,7 @@ Websocket
 Login:
 {"type":"login_request","body":{"user":"jordi","password":"pass"}}
 
-{"type":"get_character_list","body":"none"}
+{"type":"get_character_list_request","body":"none"}
 
 {"type":"load_character_request","body":{"character_id":"1"}}
 
@@ -56,25 +56,26 @@ CREATE DATABASE catacomb;
 CREATE USER 'catacomb'@'localhost' IDENTIFIED BY  'pass';
 GRANT USAGE ON * . * TO  'catacomb'@'localhost' IDENTIFIED BY  'pass' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
 GRANT ALL PRIVILEGES ON  'catacomb' . * TO  'catacomb'@'localhost' WITH GRANT OPTION ;
-CREATE TABLE IF NOT EXISTS 'user' (
-  'id' int(11) NOT NULL AUTO_INCREMENT,
-  'login' varchar(50) DEFAULT NULL,
-  'password' varchar(50) DEFAULT NULL,
-  PRIMARY KEY ('id')
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-CREATE TABLE IF NOT EXISTS 'character' (
-  'id' int(11) NOT NULL AUTO_INCREMENT,
-  'user_id' int(11) DEFAULT NULL,
-  'name' varchar(50) DEFAULT NULL,
-  'max_life_points' int(11) NOT NULL,
-  'life_points' int(11) NOT NULL,
-  'level' int(11) NOT NULL,
-  'experience_points' int(11) NOT NULL,
-  'coord_x' int(11) NOT NULL,
-  'coord_y' int(11) NOT NULL,
-  PRIMARY KEY ('id'),
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+CREATE TABLE IF NOT EXISTS `character` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `max_life_points` int(11) NOT NULL,
+  `life_points` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `experience_points` int(11) NOT NULL,
+  `coord_x` int(11) NOT NULL,
+  `coord_y` int(11) NOT NULL,
+  PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES user(id),
-  UNIQUE INDEX ('name')
+  UNIQUE INDEX (name)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 

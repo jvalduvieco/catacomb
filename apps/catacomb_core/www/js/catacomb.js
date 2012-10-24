@@ -46,20 +46,19 @@ function disconnect() {
 }
 
 function sendMessage() {
-    var msg = document.getElementById('messageField').value
+    var msg = $("#messageField").val();
     ws.send(msg);
 }
 
 function login() {
     var user = $("#login").val();
     var password = $("#password").val();
-    ws.send('{"type":"LoginRequest","body":{"user":"' + user + '","password":"' + password + '"}}');
-
+    ws.send('{"type":"login_request","body":{"user":"' + user + '","password":"' + password + '"}}');
     setStatusAuthenticated();
 }
 
 function getCharacterList() {
-    ws.send('{"type":"GetCharacterList"}');
+    ws.send('{"type":"get_character_list_request","body":"none"}');
 }
 
 // FSM
