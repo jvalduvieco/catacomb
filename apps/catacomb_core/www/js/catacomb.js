@@ -133,14 +133,7 @@ function setUI()
             $("#loginButton").attr('disabled', 'disabled');
             $("#getCharacterListButton").attr('disabled', 'disabled');
             $("#sendButton").attr('disabled', 'disabled');
-            $("#roomDirNW").attr('disabled', 'disabled');
-            $("#roomDirN").attr('disabled', 'disabled');
-            $("#roomDirNE").attr('disabled', 'disabled');
-            $("#roomDirW").attr('disabled', 'disabled');
-            $("#roomDirE").attr('disabled', 'disabled');
-            $("#roomDirSW").attr('disabled', 'disabled');
-            $("#roomDirS").attr('disabled', 'disabled');
-            $("#roomDirSE").attr('disabled', 'disabled');
+            disableAllRoomDirections();
             break;
     }
 }
@@ -159,7 +152,8 @@ function processResponse(data)
             break;
         case "load_character_response":
             break;
-        case "":
+        case "room_info":
+            roomInfo(obj.body);
             break;
         case "":
             break;
@@ -171,8 +165,42 @@ function processResponse(data)
 
 }
 
+function disableAllRoomDirections()
+{
+    $("#roomDirNW").attr('disabled', 'disabled');
+    $("#roomDirN").attr('disabled', 'disabled');
+    $("#roomDirNE").attr('disabled', 'disabled');
+    $("#roomDirW").attr('disabled', 'disabled');
+    $("#roomDirE").attr('disabled', 'disabled');
+    $("#roomDirSW").attr('disabled', 'disabled');
+    $("#roomDirS").attr('disabled', 'disabled');
+    $("#roomDirSE").attr('disabled', 'disabled');
+}
+
 function go(direction)
 {
     console.log('go: ' + direction.data);
     console.log(direction);
+}
+
+function roomInfo(data)
+{
+    var name = data.name;
+    var exits = data.exits;
+
+    $("#roomName").html(name);
+    disableAllRoomDirections();
+    $.each(exits, function(index, value) {
+        switch(value)
+        {
+            case "nw": $("#roomDirNW").removeAttr('disabled'); break;
+            case "n": $("#roomDirN").removeAttr('disabled'); break;
+            case "ne": $("#roomDirNE").removeAttr('disabled'); break;
+            case "w": $("#roomDirW").removeAttr('disabled'); break;
+            case "e": $("#roomDirE").removeAttr('disabled'); break;
+            case "sw": $("#roomDirSW").removeAttr('disabled'); break;
+            case "s": $("#roomDirS").removeAttr('disabled'); break;
+            case "se": $("#roomDirSE").removeAttr('disabled'); break;
+        }
+    });
 }
