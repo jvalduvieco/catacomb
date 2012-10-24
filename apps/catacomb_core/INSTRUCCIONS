@@ -34,31 +34,59 @@ q().
 #Ara ja podem executar tota la app de cop
 erl -pa ebin/ deps/*/ebin/ -boot catacomb_core
 
+Carregar player
+{ok,CharacterData}=ct_character_service:get_character_data(1,1).
+{ok,Player}=ct_player_sup:start_player(CharacterData).
+
 Websocket
 =========
 Login:
-{"type":"LoginRequest","body":{"user":"jordi","password":"pass"}}
+{"type":"login_request","body":{"user":"jordi","password":"pass"}}
 
-Get character list:
-{"type":"GetCharacterList"}
+{"type":"get_character_list","body":"none"}
 
+{"type":"load_character_request","body":{"character_id":"1"}}
+
+
+{"type":"player_go_request","body":{"direction":"n"}}
 
 MySQL
 =====
 CREATE DATABASE catacomb;
 CREATE USER 'catacomb'@'localhost' IDENTIFIED BY  'pass';
 GRANT USAGE ON * . * TO  'catacomb'@'localhost' IDENTIFIED BY  'pass' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
-GRANT ALL PRIVILEGES ON  `catacomb` . * TO  'catacomb'@'localhost' WITH GRANT OPTION ;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+GRANT ALL PRIVILEGES ON  'catacomb' . * TO  'catacomb'@'localhost' WITH GRANT OPTION ;
+CREATE TABLE IF NOT EXISTS 'user' (
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'login' varchar(50) DEFAULT NULL,
+  'password' varchar(50) DEFAULT NULL,
+  PRIMARY KEY ('id')
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-INSERT INTO `user` (`id`, `login`, `password`) VALUES (1, 'jordi', '1a1dc91c907325c69271ddf0c944bc72'); # password='pass'
-INSERT INTO `user` (`id`, `login`, `password`) VALUES (2, 'joan', '1a1dc91c907325c69271ddf0c944bc72');
-INSERT INTO `user` (`id`, `login`, `password`) VALUES (3, 'dani', '1a1dc91c907325c69271ddf0c944bc72');
+CREATE TABLE IF NOT EXISTS 'character' (
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'user_id' int(11) DEFAULT NULL,
+  'name' varchar(50) DEFAULT NULL,
+  'max_life_points' int(11) NOT NULL,
+  'life_points' int(11) NOT NULL,
+  'level' int(11) NOT NULL,
+  'experience_points' int(11) NOT NULL,
+  'coord_x' int(11) NOT NULL,
+  'coord_y' int(11) NOT NULL,
+  PRIMARY KEY ('id'),
+  FOREIGN KEY (user_id) REFERENCES user(id),
+  UNIQUE INDEX ('name')
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
+
+INSERT INTO 'user' ('id', 'login', 'password') VALUES (1, 'jordi', '1a1dc91c907325c69271ddf0c944bc72'); # password='pass'
+INSERT INTO 'user' ('id', 'login', 'password') VALUES (2, 'joan', '1a1dc91c907325c69271ddf0c944bc72');
+INSERT INTO 'user' ('id', 'login', 'password') VALUES (3, 'dani', '1a1dc91c907325c69271ddf0c944bc72');
+
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points,coord_x,coord_y) VALUES (1,1,'lazi',232323,2333,56,123098,5,5);
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points,coord_x,coord_y) VALUES (2,1,'iguana',22222,11,33,121211,6,6);
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points,coord_x,coord_y) VALUES (3,2,'Sr.Muerte',3333333,333,6,1238,7,7);
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points,coord_x,coord_y) VALUES (4,2,'Ged',2333233,1111,60,12000,3,3);
+INSERT INTO `character` (id,user_id,name,max_life_points,life_points,level,experience_points,coord_x,coord_y) VALUES (5,3,'TITO',33333,4,1,123,5,5);
 #Obsolet
 ct_root_sup:start_link().
 ct_god:init_map().
@@ -77,3 +105,29 @@ ct_config:get_room_setup().
 ct_config:set_room_setup_max_y(33).
 
 rp(registered()). - Veure els processos registrats
+
+
+tmp
+===
+Data4={obj,[{"type",<<"GetCharacterListResponse">>},
+      {"result",<<"success">>},
+      {"body",
+       [{obj,[{<<"id">>,1},
+              {<<"login">>,<<"jordi">>},
+              {<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]},
+        {obj,[{<<"id">>,2},
+              {<<"login">>,<<"joan">>},
+              {<<"password">>,<<"1a1dc91c907325c69271ddf0c944bc72">>}]},
+        {obj,[{<<"id">>,3},
+              {<<"login">>,<<"dani">>},
+              {<<"password">>,
+               <<"1a1dc91c907325c69271ddf0c944bc72">>}]}]}]}
+10> ktj_encode:encode(Data4).
+
+
+
+ rr("src/ct_client_command.erl").
+ State=#ct_client_state{}.
+ {_BoolResult,Result,NewClientState}=ct_client_command:execute("{\"type\":\"LoginRequest\",\"body\":{\"user\":\"jordi\",\"password\":\"pass\"}}",State).
+  ct_client_command:execute("{\"type\":\"GetCharacterList\",\"body\":\"\"}",NewClientState).
+  

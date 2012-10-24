@@ -14,6 +14,8 @@
 	name,
 	max_life_points,
 	life_points,
+	level,
+	experience_points,
 	room,			
 	room_exits,
 	params=[]}).
@@ -54,8 +56,17 @@ leave_denied(Player) ->
 	gen_server:cast(ct_player:get_pid(Player),{leave_denied}).
 
 %% Internal functions
-init(CharacterSpecs) ->
-	State=#player_state{id=CharacterSpecs#ct_character_info.id,my_pid=self(),name=CharacterSpecs#ct_character_info.name},
+init([{obj,CharacterSpecs}]) ->
+	State=#player_state{
+		id=proplists:get_value(<<"id">>, CharacterSpecs, none),
+		my_pid=self(),
+		name=proplists:get_value(<<"name">>, CharacterSpecs, none),
+		max_life_points=proplists:get_value(<<"max_life_points">>, CharacterSpecs, none),
+		life_points=proplists:get_value(<<"life_points">>, CharacterSpecs, none),
+		level=proplists:get_value(<<"level">>, CharacterSpecs, none),
+		experience_points=proplists:get_value(<<"experience_points">>, CharacterSpecs, none)
+		%room=ct_room_sup:get_pid([proplists:get_value(<<"coord_x">>, CharacterSpecs, none),proplists:get_value(<<"coord_y">>, CharacterSpecs, none)])
+	},
 	io:format("ct_player has started (~w)~n", [self()]),
     {ok, State}.
 stop() -> gen_server:cast(?MODULE, stop).
