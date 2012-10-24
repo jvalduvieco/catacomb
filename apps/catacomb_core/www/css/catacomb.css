@@ -51,6 +51,15 @@ body {
 .controls-player::after {
     content: "Player";
 }
+.controls-game::after {
+    content: "Game";
+}
+.controls-status::after {
+    content: "Status";
+}
+.controls-room-directions::after {
+    content: "Room directions";
+}
 
 .response {
     margin: 15px 0;
