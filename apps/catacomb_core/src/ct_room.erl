@@ -59,6 +59,7 @@ init({X,Y}) ->
     MaxY=ct_config_service:get_room_setup_max_y(),
 	{RoomName, Props}=create_room_properties(),		%% Define Room properties and name.
 	{ok,RoomExits}=create_room_exits(X,Y,MaxX,MaxY),
+	io:format("~p : ~w ~n",[{X,Y},RoomExits]),
 	State=#state{x=X,y=Y,room_name=RoomName,exits=RoomExits,params=Props},
 	ets:insert(coordToPid,{list_to_atom([X,Y]),self()}),
     {ok, State}.
@@ -193,9 +194,9 @@ clean_exits (List) ->
 	lists:filter(
 		fun({_,Z}) -> Z/=null end, List).
 find_neighbours_entrances(X,Y,MaxX,MaxY) -> 
-	%% Ask our neighbours for exits to this rooms. We only ask our left w sw and s neighbours
+	%% Ask our neighbours for exits to this rooms. We only ask our left nw w sw and s neighbours
 	%% as map generation is from bottom left to up right.
-	CheckNeighList=[w,sw,s],
+	CheckNeighList=[nw,w,sw,s],
 	NeighExits = lists:map(
 		fun(Dir) ->
 			case relative_coords_to_absolute(X,Y,MaxX,MaxY,Dir) of
@@ -208,6 +209,11 @@ find_neighbours_entrances(X,Y,MaxX,MaxY) ->
 							null;
 						N when N>0 -> 
 							case Dir of
+								nw->
+									case lists:member(se,[W||{W,_}<-NeighExits]) of
+										true -> nw;
+										false ->null
+									end;
 								w ->
 									case lists:member(e,[W||{W,_}<-NeighExits]) of
 										true -> w;

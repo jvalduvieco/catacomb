@@ -1,5 +1,5 @@
 -module(ct_client_command).
--export([execute/2]).
+-export([execute/2,send_feedback/2]).
 -include ("ct_character_info.hrl").
 
 -record(ct_client_state,{session_pid=none,
@@ -70,6 +70,7 @@ do_command(Cmd,State) ->
 
 			{ok, CharacterData} = ct_character_service:get_character_data(State#ct_client_state.user_id,CharacterId),
 			{ok, PlayerHandle} = ct_player_sup:start_player(CharacterData),
+			ct_player:set_client(PlayerHandle,self()),
 			ok = ct_session:set_character(State#ct_client_state.session_pid, CharacterId),
 				
 			{ok,{obj, [{"type", <<"load_character_response">>}, 
@@ -114,3 +115,11 @@ do_command(Cmd,State) ->
 		%% Chat commands to be added
 		end,
 	Result.
+	websocket_feedback(Pid,Feedback)->
+		{ok,Response}=ct_translation_tools:to_client(Feedback),
+		yaws_api:websocket_send(Pid,{text, list_to_binary(Response)}).
+	send_feedback(Player,Feedback)->
+		ClientPid=ct_player:get_client(Player),
+		% Depending on app configuration do a callback
+		websocket_feedback(ClientPid,Feedback).
+
