@@ -179,8 +179,7 @@ function disableAllRoomDirections()
 
 function go(direction)
 {
-    console.log('go: ' + direction.data);
-    console.log(direction);
+    ws.send('{"type":"player_go_request","body":{"direction":"' + direction.data + '"}}');
 }
 
 function roomInfo(data)
