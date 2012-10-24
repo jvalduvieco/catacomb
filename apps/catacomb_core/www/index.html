@@ -1,57 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<script>
-window.onload = function() {
-    document.getElementById('sendbutton').addEventListener('click', sendMessage, false);
-    document.getElementById('connectbutton').addEventListener('click', connect, false);
-    document.getElementById('disconnectbutton').addEventListener('click', disconnect, false);
-}
-
-function writeStatus(message) {
-    var html = document.createElement("div");
-    html.setAttribute("class", "message");
-    html.innerHTML = message;
-    document.getElementById("status").appendChild(html);
-}
-
-function connect() {
-    ws = new WebSocket("ws://localhost:8081/ws.yaws");
-
-    ws.onopen = function(evt) {
-        writeStatus("connected");
-    }
-
-    ws.onclose = function(evt) {
-        writeStatus("disconnected");
-    }
-
-    ws.onmessage = function(evt) {
-        writeStatus("response: " + evt.data);
-    }
-
-    ws.onerror = function(evt) {
-        writeStatus("error: " + evt.data);
-    }
-}
-
-function disconnect() {
-    ws.close();
-}
-
-function sendMessage() {
-    var msg = document.getElementById('messagefield').value
-    ws.send(msg);
-}
-</script>
+    <meta charset="utf-8"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/catacomb.css" rel="stylesheet">
 </head>
 <body>
-<h1>Chat</h1>
-<button id="connectbutton">Connect</button>
-<button id="disconnectbutton">Disconnect</button><br/>
-<input type="text" id="messagefield" size="100"/><br/>
-<button id="sendbutton">Send</button>
-<div id="status"></div>
+
+<h1>Catacomb</h1>
+
+<div class="row">
+
+    <div class="span4">
+        <div class="controls controls-connection">
+            <button id="connectButton" class="btn">Connect</button>
+            <button id="disconnectButton" class="btn">Disconnect</button>
+        </div>
+        <div class="controls controls-auth">
+            <input id="login" type="text" class="input-small" placeholder="Login">
+            <input id="password" type="password" class="input-small" placeholder="Password">
+            <button id="loginButton" class="btn">Login</button><br/>
+        </div>
+        <div class="controls controls-player">
+            <button id="getCharacterListButton" class="btn">Get character list</button><br/>
+        </div>
+
+        <div class="controls controls-debug">
+            <input type="text" id="messageField" size="100" placeholder="json"/><br/>
+            <button id="sendButton" class="btn">Send</button>
+        </div>
+    </div>
+
+    <div class="span8">
+        <div id="status" class="response"></div>
+    </div>
+
+</div>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/catacomb.js"></script>
 </body>
 </html>
