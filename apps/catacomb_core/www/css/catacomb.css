@@ -48,8 +48,8 @@ body {
 .controls-auth::after {
     content: "Authentication";
 }
-.controls-player::after {
-    content: "Player";
+.controls-characters::after {
+    content: "Characters";
 }
 .controls-game::after {
     content: "Game";
@@ -69,4 +69,8 @@ body {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+}
+
+.character-list-button {
+    margin: 10px;
 }

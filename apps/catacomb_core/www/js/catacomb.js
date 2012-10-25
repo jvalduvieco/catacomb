@@ -7,7 +7,6 @@ $(document).ready(function()
     $("#connectButton").click(connect);
     $("#disconnectButton").click(disconnect);
     $("#loginButton").click(login);
-    $("#getCharacterListButton").click(getCharacterList);
 
     // player
     $("#roomDirNW").click("nw", go);
@@ -22,10 +21,12 @@ $(document).ready(function()
 
 function writeStatus(message)
 {
-    var html = document.createElement("div");
-    html.setAttribute("class", "message");
-    html.innerHTML = message;
-    document.getElementById("console").appendChild(html);
+    $("#console").prepend('<div class="message">' + message + '</div>');
+}
+
+function writeTimeline(message)
+{
+    $("#timeline").prepend('<div class="message">' + message + '</div>');
 }
 
 // Websockets
@@ -36,12 +37,14 @@ function connect()
     ws.onopen = function (evt)
     {
         writeStatus("connected");
+        writeTimeline("Connected to server");
         setStatusConnected();
     }
 
     ws.onclose = function (evt)
     {
         writeStatus("disconnected");
+        writeTimeline("Disconnected from server");
         setStatusNotConnected();
     }
 
@@ -57,6 +60,7 @@ function connect()
     ws.onerror = function (evt)
     {
         writeStatus("error: " + evt.data);
+        writeTimeline("ERROR");
         setStatusNotConnected();
     }
 }
@@ -79,7 +83,6 @@ function login()
     var user = $("#login").val();
     var password = $("#password").val();
     ws.send('{"type":"login_request","body":{"user":"' + user + '","password":"' + password + '"}}');
-    setStatusAuthenticated();
 }
 
 function getCharacterList()
@@ -141,28 +144,45 @@ function setUI()
 function processResponse(data)
 {
     var obj = $.parseJSON(data);
-    console.log(obj);
+    //console.log(obj);
     if(obj == null) return;
 
     switch (obj.type)
     {
         case "login_response":
+            loginResponse(obj);
             break;
         case "get_character_list_response":
+            characterList(obj.body);
             break;
         case "load_character_response":
             break;
         case "room_info":
             roomInfo(obj.body);
             break;
-        case "":
+        case "seen_by_info":
+            playerSeen(obj.body);
             break;
-        case "":
-            break;
-        case "":
+        case "unseen_by_info":
+            playerUnseen(obj.body);
             break;
     }
 
+}
+
+function loginResponse(obj)
+{
+    if(obj.result == "success")
+    {
+        writeTimeline("Login success");
+        setStatusAuthenticated();
+        getCharacterList();
+    }
+    else
+    {
+        writeTimeline("Login failed");
+        $('#loginFailed').modal('show');
+    }
 }
 
 function disableAllRoomDirections()
@@ -187,6 +207,8 @@ function roomInfo(data)
     var name = data.name;
     var exits = data.exits;
 
+    writeTimeline("You are in room: " + name);
+
     $("#roomName").html(name);
     disableAllRoomDirections();
     $.each(exits, function(index, value) {
@@ -202,4 +224,35 @@ function roomInfo(data)
             case "se": $("#roomDirSE").removeAttr('disabled'); break;
         }
     });
+}
+
+function characterList(data)
+{
+    $("#characterList").empty();
+
+    $.each(data, function(index, value) {
+        var id = value.id;
+        var name = value.name;
+        $("#characterList").append('<button onclick="loadCharacter(' + id + ')" class="btn btn-success character-list-button">' + name + '</button>');
+    });
+}
+function loadCharacter(id)
+{
+    $(".character-list-button").attr('disabled', 'disabled');
+    ws.send('{"type":"load_character_request","body":{"character_id":"' + id + '"}}');
+    writeTimeline("Character loaded");
+}
+
+function playerSeen(data)
+{
+    var name = data.name;
+    var id = data.player_id;
+    writeTimeline("You can see " + name);
+    $("#playersInRoom").append('<dt id="player_seen_' + id + '">' + name + '</dt>');
+}
+function playerUnseen(data)
+{
+    var name = data.name;
+    var id = data.player_id;
+    $("#player_seen_" + id).remove();
 }

@@ -20,9 +20,21 @@
             <input id="login" type="text" class="input-small" placeholder="Login">
             <input id="password" type="password" class="input-small" placeholder="Password">
             <button id="loginButton" class="btn">Login</button><br/>
+            <div id="loginFailed" class="modal hide fade">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Login failed</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Wrong login or password.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+                </div>
+            </div>
         </div>
-        <div class="controls controls-player">
-            <button id="getCharacterListButton" class="btn">Get character list</button><br/>
+        <div class="controls controls-characters">
+            <div id="characterList"></div>
         </div>
 
         <div class="controls controls-debug">
@@ -70,9 +82,14 @@
                         </div>
                         <div class="span12">
                             <div class="controls controls-status">
-                                <ul>
-                                    <li>Room: <span id="roomName"></span></li>
-                                    <li>Players in room: </li>
+                                <ul class="unstyled">
+                                    <dl>Room</dl>
+                                    <dt id="roomName"></dt>
+
+                                    <dl>Players in room</dl>
+                                    <dt>
+                                      <ul id="playersInRoom" class="unstyled"></ul>
+                                    </dt>
                                 </ul>
                             </div>
                         </div>

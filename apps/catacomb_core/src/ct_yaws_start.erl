@@ -14,7 +14,8 @@ run() ->
     Docroot = "./www/",
     SconfList = [{docroot, Docroot},
                 {port, 8081},
-                {listen, {127,0,0,1}},
+                %%{listen, {127,0,0,1}},
+                {listen, {0,0,0,0}},
                 {appmods, [{"/catacomb_ws_endpoint", ct_yaws_catacomb_ws_endpoint}]}
                 ],
 
