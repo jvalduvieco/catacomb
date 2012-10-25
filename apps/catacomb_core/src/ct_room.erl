@@ -2,8 +2,8 @@
 -behaviour(gen_server).
 
 -export([start_link/2,stop/0]).
--export([enter/3, request_leave/3,get_exits/1,player_left/2]).
--export([relative_coords_to_absolute/5,find_neighbours_entrances/4]). %% REMOVEME When done
+-export([enter/3, request_leave/3,get_exits/1,player_left/2,add_exit/4]).
+-export([relative_coords_to_absolute/5,find_neighbours_entrances/5]). %% REMOVEME When done
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
 
 -record(state,{
@@ -51,6 +51,14 @@ get_exits(RoomPid) ->
 			{badarg,[]}
 		end,
 	{Result,Data}.
+add_exit(RoomPid,Exit,X,Y)->
+	case is_pid(RoomPid) of
+		true ->
+			gen_server:cast(RoomPid, {add_exit,Exit,X,Y});
+		false ->
+			{badarg,[]}
+	end.
+
 %% Internal functions
 init({X,Y}) ->
 <<A:32, B:32, C:32>> = crypto:rand_bytes(12),
@@ -59,9 +67,9 @@ init({X,Y}) ->
     MaxY=ct_config_service:get_room_setup_max_y(),
 	{RoomName, Props}=create_room_properties(),		%% Define Room properties and name.
 	{ok,RoomExits}=create_room_exits(X,Y,MaxX,MaxY),
-	io:format("~p : ~w ~n",[{X,Y},RoomExits]),
 	State=#state{x=X,y=Y,room_name=RoomName,exits=RoomExits,params=Props},
 	ets:insert(coordToPid,{list_to_atom([X,Y]),self()}),
+	%io:format("~p : ~w ~n",[{X,Y},RoomExits]),
     {ok, State}.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 
@@ -78,6 +86,11 @@ handle_cast({enter, Player, RoomFromPid}, State) ->
     lists:map(fun(X) -> ct_player:seen(X,Player) end,State#state.players),
     lists:map(fun(X) -> ct_player:seen(Player,X) end,State#state.players),
     {noreply, NewState};
+handle_cast({add_exit, Exit,X,Y}, State) ->
+	NewExits=lists:sort(lists:append(State#state.exits,[{Exit,[X,Y]}])),
+	NewState=State#state{exits=NewExits},
+	%io:format("aki: ~p :  ~p ~n",[State,NewState]),
+	{noreply, NewState};
 handle_cast({player_left, Player}, State) ->
 	%% Check if player is really in
 	NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)]},
@@ -193,10 +206,10 @@ clean_list (List) ->
 clean_exits (List) ->
 	lists:filter(
 		fun({_,Z}) -> Z/=null end, List).
-find_neighbours_entrances(X,Y,MaxX,MaxY) -> 
-	%% Ask our neighbours for exits to this rooms. We only ask our left nw w sw and s neighbours
+find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits) -> 
+	%% Ask our neighbours for exits to this rooms. We only ask our left w sw and s neighbours
 	%% as map generation is from bottom left to up right.
-	CheckNeighList=[nw,w,sw,s],
+	CheckNeighList=[w,sw,s,nw],
 	NeighExits = lists:map(
 		fun(Dir) ->
 			case relative_coords_to_absolute(X,Y,MaxX,MaxY,Dir) of
@@ -209,25 +222,49 @@ find_neighbours_entrances(X,Y,MaxX,MaxY) ->
 							null;
 						N when N>0 -> 
 							case Dir of
-								nw->
-									case lists:member(se,[W||{W,_}<-NeighExits]) of
-										true -> nw;
-										false ->null
-									end;
 								w ->
 									case lists:member(e,[W||{W,_}<-NeighExits]) of
 										true -> w;
-										false ->null
+										false ->
+											%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
+											case lists:member(w,[Z||Z<-RandomExits]) of
+												true -> ct_room:add_exit(NeighRoom,e,X,Y),
+													null;
+												false ->null
+											end
 									end;
 								sw->
 									case lists:member(ne,[W||{W,_}<-NeighExits]) of
 										true -> sw;
-										false ->null
+										false ->
+											%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
+											case lists:member(sw,[Z||Z<-RandomExits]) of
+												true -> ct_room:add_exit(NeighRoom,ne,X,Y),
+													null;
+												false ->null
+											end
+									end;
+								nw->
+									case lists:member(se,[W||{W,_}<-NeighExits]) of
+										true -> nw;
+										false ->
+											%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
+											case lists:member(nw,[Z||Z<-RandomExits]) of
+												true -> ct_room:add_exit(NeighRoom,se,X,Y),
+													null;
+												false ->null
+											end
 									end;
 								s->
 									case lists:member(n,[W||{W,_}<-NeighExits]) of
 										true -> s;
-										false ->null
+										false ->
+											%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
+											case lists:member(s,[Z||Z<-RandomExits]) of
+												true -> ct_room:add_exit(NeighRoom,n,X,Y),
+													null;
+												false ->null
+											end
 									end
 							end
 					end
@@ -242,7 +279,7 @@ create_room_exits(X,Y,MaxX,MaxY)->
 		lists:map(
 			fun(Coord) -> case random:uniform(3) of 1 -> Coord; _-> null end end, 
 			PossibleExits) ),
-	NeighExits=find_neighbours_entrances(X,Y,MaxX,MaxY),
+	NeighExits=find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits),
 	%% We have a list of exits cardinal point [s,w,n]
 	%%io:format("Exits (~w): ~w ~n",[[X,Y],lists:umerge(lists:sort(RandomExits),lists:sort(NeighExits))]),
 	Exits=clean_exits(translate(X,Y,MaxX,MaxY,lists:umerge(lists:sort(RandomExits),lists:sort(NeighExits)))),

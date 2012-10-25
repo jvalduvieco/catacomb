@@ -25,7 +25,7 @@ handle_call({init_map}, _From, State) ->
     io:format("Creating map ~p~n", [_From]),
     X_list=lists:seq(1,ct_config_service:get_room_setup_max_x()),
     Y_list=lists:seq(1,ct_config_service:get_room_setup_max_y()),
-    Combined_list=lists:foldl(fun (X, Acc) -> Acc ++ lists:map(fun (Y) -> [X,Y] end, X_list) end, [], Y_list),
+    Combined_list=[[X,Y] || X <- X_list, Y <- Y_list],
     lists:foldl( fun(Room_coords, Sum) -> ct_room_sup:create_room(Room_coords), Sum+1 end,0, Combined_list),
     {reply, ok, State}.
 
