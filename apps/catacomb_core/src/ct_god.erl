@@ -27,6 +27,7 @@ handle_call({init_map}, _From, State) ->
     Y_list=lists:seq(1,ct_config_service:get_room_setup_max_y()),
     Combined_list=[[X,Y] || X <- X_list, Y <- Y_list],
     lists:foldl( fun(Room_coords, Sum) -> ct_room_sup:create_room(Room_coords), Sum+1 end,0, Combined_list),
+    %lists:foldl( fun(Room_coords, Sum) -> {ok,Pid}=ct_room_sup:get_pid(Room_coords), ct_room:print_exits(Pid), Sum+1 end,0, Combined_list),
     {reply, ok, State}.
 
 

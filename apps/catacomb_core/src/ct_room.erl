@@ -6,6 +6,9 @@
 -export([relative_coords_to_absolute/5,find_neighbours_entrances/5]). %% REMOVEME When done
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
 
+%tmp
+-export([print_exits/1]).
+
 -record(state,{
 	x,
 	y,
@@ -59,6 +62,15 @@ add_exit(RoomPid,Exit,X,Y)->
 			{badarg,[]}
 	end.
 
+%tmp
+print_exits(RoomPid)->
+	case is_pid(RoomPid) of
+		true ->
+			gen_server:cast(RoomPid, {print_exits});
+		false ->
+			{badarg,[]}
+	end.
+
 %% Internal functions
 init({X,Y}) ->
 <<A:32, B:32, C:32>> = crypto:rand_bytes(12),
@@ -89,7 +101,7 @@ handle_cast({enter, Player, RoomFromPid}, State) ->
 handle_cast({add_exit, Exit,X,Y}, State) ->
 	NewExits=lists:sort(lists:append(State#state.exits,[{Exit,[X,Y]}])),
 	NewState=State#state{exits=NewExits},
-	%io:format("aki: ~p :  ~p ~n",[State,NewState]),
+	%io:format("FROM {~p,~p} :: State ~p :  NewState :~p ~n",[X,Y,State,NewState]),
 	{noreply, NewState};
 handle_cast({player_left, Player}, State) ->
 	%% Check if player is really in
@@ -111,6 +123,12 @@ handle_cast({request_leave, Direction, Player}, State) ->
 			true
 	end,
 	{noreply,State};
+
+%tmp
+handle_cast({print_exits}, State) ->
+	io:format("{~p,~p} :  ~p ~n",[State#state.x,State#state.y,State#state.exits]),
+	{noreply, State};
+
 handle_cast(stop, State) -> {stop, normal, State}.
 
 %% System Callbacks
@@ -217,57 +235,53 @@ find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits) ->
 				Coords ->
 					{ok,NeighRoom}=ct_room_sup:get_pid(Coords),
 					{ok,NeighExits}=ct_room:get_exits(NeighRoom),
-					case length(NeighExits) of
-						0 ->
-							null;
-						N when N>0 -> 
-							case Dir of
-								w ->
-									case lists:member(e,[W||{W,_}<-NeighExits]) of
-										true -> w;
-										false ->
-											%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
-											case lists:member(w,[Z||Z<-RandomExits]) of
-												true -> ct_room:add_exit(NeighRoom,e,X,Y),
-													null;
-												false ->null
-											end
-									end;
-								sw->
-									case lists:member(ne,[W||{W,_}<-NeighExits]) of
-										true -> sw;
-										false ->
-											%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
-											case lists:member(sw,[Z||Z<-RandomExits]) of
-												true -> ct_room:add_exit(NeighRoom,ne,X,Y),
-													null;
-												false ->null
-											end
-									end;
-								nw->
-									case lists:member(se,[W||{W,_}<-NeighExits]) of
-										true -> nw;
-										false ->
-											%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
-											case lists:member(nw,[Z||Z<-RandomExits]) of
-												true -> ct_room:add_exit(NeighRoom,se,X,Y),
-													null;
-												false ->null
-											end
-									end;
-								s->
-									case lists:member(n,[W||{W,_}<-NeighExits]) of
-										true -> s;
-										false ->
-											%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
-											case lists:member(s,[Z||Z<-RandomExits]) of
-												true -> ct_room:add_exit(NeighRoom,n,X,Y),
-													null;
-												false ->null
-											end
-									end
-							end
-					end
+						case Dir of
+							w ->
+								case lists:member(e,[W||{W,_}<-NeighExits]) of
+									true -> w;
+									false ->
+										%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
+										case lists:member(w,[Z||Z<-RandomExits]) of
+											true -> ct_room:add_exit(NeighRoom,e,X,Y),
+												null;
+											false ->null
+										end
+								end;
+							sw->
+								case lists:member(ne,[W||{W,_}<-NeighExits]) of
+									true -> sw;
+									false ->
+										%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
+										case lists:member(sw,[Z||Z<-RandomExits]) of
+											true -> ct_room:add_exit(NeighRoom,ne,X,Y),
+												null;
+											false ->null
+										end
+								end;
+							nw->
+								case lists:member(se,[W||{W,_}<-NeighExits]) of
+									true -> nw;
+									false ->
+										%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
+										case lists:member(nw,[Z||Z<-RandomExits]) of
+											true -> ct_room:add_exit(NeighRoom,se,X,Y),
+												null;
+											false ->null
+										end
+								end;
+							s->
+								case lists:member(n,[W||{W,_}<-NeighExits]) of
+									true -> s;
+									false ->
+										%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
+										case lists:member(s,[Z||Z<-RandomExits]) of
+											true -> ct_room:add_exit(NeighRoom,n,X,Y),
+												null;
+											false ->null
+										end
+								end
+						end
+					
 			end
 		end
 		, CheckNeighList),
