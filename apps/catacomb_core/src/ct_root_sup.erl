@@ -34,8 +34,11 @@ init([]) ->
         	{{global,ct_config_service},
         		{ct_config_service, start_link, []},
         		permanent, infinity, worker, [ct_config_service]},
-    		{{global,ct_god},
-        		{ct_god, start_link, []},
-        		permanent, infinity, worker, [ct_god]}
+            {{global,ct_god},
+                {ct_god, start_link, []},
+                permanent, infinity, worker, [ct_god]},
+    		{{global,ct_ai_sup},
+        		{ct_ai_sup, start_link, []},
+        		permanent, infinity, worker, [ct_ai_sup]}
         	]
         }}.

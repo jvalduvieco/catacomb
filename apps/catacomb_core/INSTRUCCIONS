@@ -1,7 +1,7 @@
 INSTRUCCIONS
 
 BOOTSTRAP
-*********
+=========
 cd catacomb
 #FiXME passos que s'ha de fer pq algo passa amb les deps.
 pushd apps/catacomb_core
@@ -37,6 +37,12 @@ erl -pa ebin/ deps/*/ebin/ -boot catacomb_core
 Carregar player
 {ok,CharacterData}=ct_character_service:get_character_data(1,1).
 {ok,Player}=ct_player_sup:start_player(CharacterData).
+
+IA
+==
+Afegir una IA:
+{ok,AiPlayer} = ct_ai_sup:start_ai(none).
+
 
 Websocket
 =========
