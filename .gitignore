@@ -2,3 +2,7 @@
 deps
 .idea
 erl_crash.dump
+catacomb_core.boot
+catacomb_core.rel
+catacomb_core.script
+

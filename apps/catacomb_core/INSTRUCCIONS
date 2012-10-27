@@ -37,6 +37,10 @@ erl -pa ebin/ deps/*/ebin/ -boot catacomb_core
 Carregar player
 {ok,CharacterData}=ct_character_service:get_character_data(1,1).
 {ok,Player}=ct_player_sup:start_player(CharacterData).
+{ok,Player2}=ct_player_sup:start_player(CharacterData).
+
+
+ct_player:attack(Player,Player2).
 
 Websocket
 =========

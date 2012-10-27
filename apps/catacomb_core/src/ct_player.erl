@@ -3,10 +3,15 @@
 
 -export([start_link/1,stop/0]).
 -export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2]).
--export([go/2, set_room/2,seen/2,unseen/2,entered/4,leave_denied/1]).
+-export([go/2, set_room/2,seen/2,unseen/2,entered/4,leave_denied/1,attack/2,hit/5]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
+%dcodix tmp
+-export([get_players/1]).
+
+
 -include ("ct_character_info.hrl").
+
 
 -record(player_state,{id,
 	my_pid,
@@ -14,10 +19,16 @@
 	name,
 	max_life_points,
 	life_points,
+	hit_chance=80,
+	dodge_chance=40,
+	max_damage=10,
+	min_damage=2,
+	armor=1,
 	level,
 	experience_points,
 	room,			
 	room_exits,
+	located_players=[],
 	params=[]}).
 %% Accessors
 get_handler(Pid) ->
@@ -56,6 +67,15 @@ unseen(Player,OtherPlayer) ->
 	gen_server:cast(ct_player:get_pid(Player), {unseen, OtherPlayer}).
 leave_denied(Player) ->
 	gen_server:cast(ct_player:get_pid(Player),{leave_denied}).
+hit(Player,OtherPlayer,HitChance,MaxDamage,MinDamage) ->
+	gen_server:cast(ct_player:get_pid(Player),{hit, OtherPlayer, HitChance, MaxDamage, MinDamage}).
+attack(Player,OtherPlayer) ->
+	gen_server:cast(ct_player:get_pid(Player),{attack, OtherPlayer}).
+
+
+%dcodix tmp
+get_players(Player) ->
+	gen_server:cast(ct_player:get_pid(Player), {get_players}).
 
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
@@ -87,6 +107,10 @@ handle_cast({set_client,Client},State) ->
 	{noreply,NewState};
 handle_cast({seen, OtherPlayer}, State) ->
 	%%Decide wether to attack or not.
+	%NewState=State#player_state{located_players=[OtherPlayer#player_state.my_pid|State#player_state.located_players]},
+	CleanOtherPlayer=OtherPlayer#player_state{located_players=[]},
+	NewState=State#player_state{located_players=[CleanOtherPlayer|State#player_state.located_players]},
+	io:format("~p~n",[NewState]),
 	io:format("~s: has been seen by ~s~n",[State#player_state.name,ct_player:get_name(OtherPlayer)]),
 	ct_client_command:send_feedback(State,
 		{obj,[{"type",<<"seen_by_info">>},
@@ -95,9 +119,12 @@ handle_cast({seen, OtherPlayer}, State) ->
 				{"player_id",99} % TODO define a way of referring to players, objs, etc..
 			]}}
 		]}),
-	{noreply,State};
+	{noreply,NewState};
 handle_cast({unseen, OtherPlayer}, State) ->
 	%%The player left the room
+	NewState=State#player_state{located_players=[P || P <- State#player_state.located_players, ct_player:get_pid(P)=/=ct_player:get_pid(OtherPlayer)]},
+	%NewState=State#player_state{located_players=lists:delete(ct_player:get_pid(OtherPlayer),State#player_state.located_players)},
+	%NewState=State#player_state{located_players=lists:delete(OtherPlayer,State#player_state.located_players)},
 	%io:format("~s: no longer see ~s~n",[State#player_state.name,ct_player:get_name(OtherPlayer)]),
 	ct_client_command:send_feedback(State,
 		{obj,[{"type",<<"unseen_by_info">>},
@@ -106,7 +133,7 @@ handle_cast({unseen, OtherPlayer}, State) ->
 				{"player_id",99} % TODO define a way of referring to players, objs, etc..
 			]}}
 		]}),
-	{noreply,State};
+	{noreply,NewState};
 handle_cast({entered, RoomPid, RoomExits, RoomName}, State) ->
 	NewState=State#player_state{room_exits=RoomExits,room=RoomPid},
 	ct_client_command:send_feedback(State,
@@ -129,6 +156,41 @@ handle_cast({leave_denied},State) ->
 			]}}
 		]}),
 	{noreply,State};
+
+
+
+handle_cast({hit, OtherPlayer, HitChance, MaxDamage, MinDamage}, State) ->
+	case random:uniform(100) > HitChance of
+		false -> 
+			case random:uniform(100) > State#player_state.dodge_chance of
+				true -> 
+					Damage=(MinDamage+random:uniform(MaxDamage-MinDamage))-State#player_state.armor,
+					NewLifePoints = State#player_state.life_points - Damage,
+					io:format("~p hits ~p dealing ~p .~n",[OtherPlayer#player_state.name,State#player_state.name,Damage]),
+					NewState=State#player_state{life_points=NewLifePoints};
+				false -> 
+					NewState=State,
+					io:format("~p tried to hit ~p but ~p dodged. ~n",[OtherPlayer#player_state.name,State#player_state.name,State#player_state.name])
+			end;
+		true -> 
+			NewState=State,
+			io:format("~p failed tying to hit ~p. ~n",[OtherPlayer#player_state.name,State#player_state.name])
+	end,
+	%io:format("~p ~n", [NewState#player_state.life_points]),
+	{noreply, NewState};
+handle_cast({attack, OtherPlayer}, State) ->
+	%% It is done with player name but it could be with player pid.
+	%OtherPlayer=ct_player:get_handler(PlayerPid),
+	%ct_player:hit(OtherPlayer,State#player_state.my_pid,State#player_state.hit_chance,State#player_state.max_damage,State#player_state.min_damage),
+	ct_player:hit(OtherPlayer,State,State#player_state.hit_chance,State#player_state.max_damage,State#player_state.min_damage),
+	%io:format("otherplayer is:    ::  ~p ~n", [OtherPlayer]),
+	{noreply, State};
+
+% dcodix tmp
+handle_cast({get_players}, State) ->
+	io:format("located:  ~p~n",[State#player_state.located_players]),
+	{noreply,State};
+
 handle_cast(stop, State) -> {stop, normal, State}.
 
 handle_call({get_handler},_From,State) -> 
