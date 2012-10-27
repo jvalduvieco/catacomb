@@ -137,6 +137,8 @@ function setUI()
             $("#getCharacterListButton").attr('disabled', 'disabled');
             $("#sendButton").attr('disabled', 'disabled');
             disableAllRoomDirections();
+            $("#playersInRoom").empty();
+            $("#playersUnseen").empty();
             break;
     }
 }
@@ -224,6 +226,8 @@ function roomInfo(data)
             case "se": $("#roomDirSE").removeAttr('disabled'); break;
         }
     });
+
+    $("#playersUnseen").empty();
 }
 
 function characterList(data)
@@ -248,11 +252,17 @@ function playerSeen(data)
     var name = data.name;
     var id = data.player_id;
     writeTimeline("You can see " + name);
-    $("#playersInRoom").append('<dt id="player_seen_' + id + '">' + name + '</dt>');
+    $("#playersInRoom").append('<dt id="playerSeen' + id + '">' + name + '</dt>');
+
+    $("#playerUnseen" + id).remove();
 }
 function playerUnseen(data)
 {
     var name = data.name;
     var id = data.player_id;
-    $("#player_seen_" + id).remove();
+    var direction = data.direction;
+    $("#playerSeen" + id).remove();
+
+    $("#playerUnseen" + id).remove();
+    if(direction != "none") $("#playersUnseen").append('<dt id="playerUnseen' + id + '">' + name + ' (' + direction + ')</dt>');
 }

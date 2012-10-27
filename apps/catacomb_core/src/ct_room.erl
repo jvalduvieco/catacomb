@@ -2,7 +2,7 @@
 -behaviour(gen_server).
 
 -export([start_link/2,stop/0]).
--export([enter/3, request_leave/3,get_exits/1,player_left/2,add_exit/4]).
+-export([enter/4, request_leave/3,get_exits/1,player_left/3,add_exit/4]).
 -export([relative_coords_to_absolute/5,find_neighbours_entrances/5]). %% REMOVEME When done
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
 
@@ -30,18 +30,18 @@ request_leave(RoomPid,Direction,Player)->
 		false ->
 			{badarg,[]}
 	end.
-player_left(RoomFromPid, Player)->
+player_left(RoomFromPid, Direction, Player)->
 	case is_pid(RoomFromPid) of
 		true ->
-			gen_server:cast(RoomFromPid, {player_left, Player});
+			gen_server:cast(RoomFromPid, {player_left, Player, Direction});
 		false ->
 			{badarg,[]}
 	end.
 
-enter(RoomPid,Player,RoomFromPid) ->
+enter(RoomPid,Direction,Player,RoomFromPid) ->
 	case is_pid(RoomPid) of
 		true ->
-			gen_server:cast(RoomPid, {enter, Player, RoomFromPid});
+			gen_server:cast(RoomPid, {enter, Player, RoomFromPid, Direction});
 		false ->
 			{badarg,[]}
 	end.
@@ -88,9 +88,9 @@ stop() -> gen_server:cast({global,?MODULE}, stop).
 %% Callbacks
 handle_call({get_exits},_From, State) ->
 	{reply,{ok,State#state.exits},State}.
-handle_cast({enter, Player, RoomFromPid}, State) ->
+handle_cast({enter, Player, RoomFromPid, Direction}, State) ->
     NewState=State#state{players=[Player|State#state.players]},
-    case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Player); false -> true end,
+    case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Direction, Player); false -> true end,
     ct_player:entered(Player, self(), State#state.exits, State#state.room_name),
 	% Notificar players de la room que hi ha un nou player
     %lists:map(fun(X) -> io:format("~w is here.~n",[X]) end,State#state.players),
@@ -103,12 +103,12 @@ handle_cast({add_exit, Exit,X,Y}, State) ->
 	NewState=State#state{exits=NewExits},
 	%io:format("FROM {~p,~p} :: State ~p :  NewState :~p ~n",[X,Y,State,NewState]),
 	{noreply, NewState};
-handle_cast({player_left, Player}, State) ->
+handle_cast({player_left, Player, Direction}, State) ->
 	%% Check if player is really in
 	NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)]},
 	%% Replace by room event handler?
-    lists:map(fun(X) -> ct_player:unseen(X,Player) end,NewState#state.players),
-    lists:map(fun(X) -> ct_player:unseen(Player,X) end,NewState#state.players),
+    lists:map(fun(X) -> ct_player:unseen(X,Player,Direction) end,NewState#state.players),
+    lists:map(fun(X) -> if Player/=X -> ct_player:unseen(Player,X,none) end end,NewState#state.players),
 	{noreply, NewState};
 handle_cast({request_leave, Direction, Player}, State) ->
 	%controlar que es pugui anar en la direcció
@@ -117,7 +117,7 @@ handle_cast({request_leave, Direction, Player}, State) ->
 			%obtenir la room destí
     		{ok,RoomToPid}=ct_room_sup:get_pid(Coords),
 			%notificar ala habitació desti que el player entra
-			ct_room:enter(RoomToPid,Player,self());
+			ct_room:enter(RoomToPid,Direction,Player,self());
     	[] ->
     		ct_player:leave_denied(Player),
 			true

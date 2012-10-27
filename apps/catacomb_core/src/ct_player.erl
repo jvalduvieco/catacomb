@@ -3,7 +3,7 @@
 
 -export([start_link/1,stop/0]).
 -export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2]).
--export([go/2, set_room/2,seen/2,unseen/2,entered/4,leave_denied/1]).
+-export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
 -include ("ct_character_info.hrl").
@@ -52,8 +52,8 @@ entered(Player, RoomPid, RoomExits, RoomName) ->
 	gen_server:cast(ct_player:get_pid(Player), {entered, RoomPid, RoomExits, RoomName}).
 seen(Player,OtherPlayer) ->
 	gen_server:cast(ct_player:get_pid(Player), {seen, OtherPlayer}).
-unseen(Player,OtherPlayer) ->
-	gen_server:cast(ct_player:get_pid(Player), {unseen, OtherPlayer}).
+unseen(Player,OtherPlayer,Direction) ->
+	gen_server:cast(ct_player:get_pid(Player), {unseen, OtherPlayer, Direction}).
 leave_denied(Player) ->
 	gen_server:cast(ct_player:get_pid(Player),{leave_denied}).
 
@@ -80,7 +80,7 @@ handle_cast({go, Direction}, State) ->
     {noreply, State};
 handle_cast({set_room, [X,Y]}, State) ->
 	{ok,RoomPid}=ct_room_sup:get_pid([X,Y]),
-	ct_room:enter(RoomPid, State, null),
+	ct_room:enter(RoomPid, none, State, null),
 	{noreply, State};
 handle_cast({set_client,Client},State) ->
 	NewState=State#player_state{client=Client},
@@ -96,14 +96,15 @@ handle_cast({seen, OtherPlayer}, State) ->
 			]}}
 		]}),
 	{noreply,State};
-handle_cast({unseen, OtherPlayer}, State) ->
+handle_cast({unseen, OtherPlayer, Direction}, State) ->
 	%%The player left the room
 	%io:format("~s: no longer see ~s~n",[State#player_state.name,ct_player:get_name(OtherPlayer)]),
 	ct_client_command:send_feedback(State,
 		{obj,[{"type",<<"unseen_by_info">>},
 			{"body",{obj,[
 				{"name",ct_player:get_name(OtherPlayer)},
-				{"player_id",99} % TODO define a way of referring to players, objs, etc..
+				{"player_id",99}, % TODO define a way of referring to players, objs, etc..
+				{"direction", Direction}
 			]}}
 		]}),
 	{noreply,State};
