@@ -19,11 +19,11 @@
 	name,
 	max_life_points,
 	life_points,
-	hit_chance=80,
-	dodge_chance=40,
-	max_damage=10,
-	min_damage=2,
-	armor=1,
+	hit_chance,
+	dodge_chance,
+	max_damage,
+	min_damage,
+	armor,
 	level,
 	experience_points,
 	room,			
@@ -85,6 +85,11 @@ init([{obj,CharacterSpecs}]) ->
 		name=proplists:get_value(<<"name">>, CharacterSpecs, none),
 		max_life_points=proplists:get_value(<<"max_life_points">>, CharacterSpecs, none),
 		life_points=proplists:get_value(<<"life_points">>, CharacterSpecs, none),
+		hit_chance=proplists:get_value(<<"hit_chance">>, CharacterSpecs, none),
+		dodge_chance=proplists:get_value(<<"dodge_chance">>, CharacterSpecs, none),
+		max_damage=proplists:get_value(<<"max_damage">>, CharacterSpecs, none),
+		min_damage=proplists:get_value(<<"min_damage">>, CharacterSpecs, none),
+		armor=proplists:get_value(<<"armor">>, CharacterSpecs, none),
 		level=proplists:get_value(<<"level">>, CharacterSpecs, none),
 		experience_points=proplists:get_value(<<"experience_points">>, CharacterSpecs, none)
 		%room=ct_room_sup:get_pid([proplists:get_value(<<"coord_x">>, CharacterSpecs, none),proplists:get_value(<<"coord_y">>, CharacterSpecs, none)])
@@ -107,7 +112,6 @@ handle_cast({set_client,Client},State) ->
 	{noreply,NewState};
 handle_cast({seen, OtherPlayer}, State) ->
 	%%Decide wether to attack or not.
-	%NewState=State#player_state{located_players=[OtherPlayer#player_state.my_pid|State#player_state.located_players]},
 	CleanOtherPlayer=OtherPlayer#player_state{located_players=[]},
 	NewState=State#player_state{located_players=[CleanOtherPlayer|State#player_state.located_players]},
 	io:format("~p~n",[NewState]),
@@ -123,8 +127,6 @@ handle_cast({seen, OtherPlayer}, State) ->
 handle_cast({unseen, OtherPlayer}, State) ->
 	%%The player left the room
 	NewState=State#player_state{located_players=[P || P <- State#player_state.located_players, ct_player:get_pid(P)=/=ct_player:get_pid(OtherPlayer)]},
-	%NewState=State#player_state{located_players=lists:delete(ct_player:get_pid(OtherPlayer),State#player_state.located_players)},
-	%NewState=State#player_state{located_players=lists:delete(OtherPlayer,State#player_state.located_players)},
 	%io:format("~s: no longer see ~s~n",[State#player_state.name,ct_player:get_name(OtherPlayer)]),
 	ct_client_command:send_feedback(State,
 		{obj,[{"type",<<"unseen_by_info">>},
@@ -164,24 +166,24 @@ handle_cast({hit, OtherPlayer, HitChance, MaxDamage, MinDamage}, State) ->
 		false -> 
 			case random:uniform(100) > State#player_state.dodge_chance of
 				true -> 
+					%io:format("min ~p max ~p armor ~p hitch ~p dodch ~p .~n",[MinDamage,MaxDamage,State#player_state.armor,HitChance,State#player_state.dodge_chance]),
 					Damage=(MinDamage+random:uniform(MaxDamage-MinDamage))-State#player_state.armor,
 					NewLifePoints = State#player_state.life_points - Damage,
 					io:format("~p hits ~p dealing ~p .~n",[OtherPlayer#player_state.name,State#player_state.name,Damage]),
 					NewState=State#player_state{life_points=NewLifePoints};
 				false -> 
+					%io:format("min ~p max ~p armor ~p hitch ~p dodch ~p .~n",[MinDamage,MaxDamage,State#player_state.armor,HitChance,State#player_state.dodge_chance]),
 					NewState=State,
 					io:format("~p tried to hit ~p but ~p dodged. ~n",[OtherPlayer#player_state.name,State#player_state.name,State#player_state.name])
 			end;
 		true -> 
+			%io:format("min ~p max ~p armor ~p hitch ~p dodch ~p .~n",[MinDamage,MaxDamage,State#player_state.armor,HitChance,State#player_state.dodge_chance]),
 			NewState=State,
 			io:format("~p failed tying to hit ~p. ~n",[OtherPlayer#player_state.name,State#player_state.name])
 	end,
 	%io:format("~p ~n", [NewState#player_state.life_points]),
 	{noreply, NewState};
 handle_cast({attack, OtherPlayer}, State) ->
-	%% It is done with player name but it could be with player pid.
-	%OtherPlayer=ct_player:get_handler(PlayerPid),
-	%ct_player:hit(OtherPlayer,State#player_state.my_pid,State#player_state.hit_chance,State#player_state.max_damage,State#player_state.min_damage),
 	ct_player:hit(OtherPlayer,State,State#player_state.hit_chance,State#player_state.max_damage,State#player_state.min_damage),
 	%io:format("otherplayer is:    ::  ~p ~n", [OtherPlayer]),
 	{noreply, State};

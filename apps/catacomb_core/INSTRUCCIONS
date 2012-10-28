@@ -101,6 +101,13 @@ ct_player:set_room(JoanPlayer,[3,3]).
 ct_player:set_room(PerePlayer,[3,3]).
 ct_player:go(JoanPlayer,ne).
 
+USE catacomb;
+ALTER TABLE `character` ADD hit_chance int(4) NOT NULL DEFAULT 10 AFTER life_points;
+ALTER TABLE `character` ADD dodge_chance int(4) NOT NULL DEFAULT 0 AFTER hit_chance;
+ALTER TABLE `character` ADD max_damage int(4) NOT NULL DEFAULT 2 AFTER dodge_chance;
+ALTER TABLE `character` ADD min_damage int(4) NOT NULL DEFAULT 1 AFTER max_damage;
+ALTER TABLE `character` ADD armor int(4) NOT NULL DEFAULT 0 AFTER min_damage;
+
 
 supervisor:which_children(ct_player_sup).
 supervisor:which_children(ct_root_sup).
