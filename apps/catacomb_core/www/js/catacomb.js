@@ -249,6 +249,7 @@ function playerSeen(data)
     var id = data.player_id;
     writeTimeline("You can see " + name);
     $("#playersInRoom").append('<dt id="player_seen_' + id + '">' + name + '</dt>');
+    $("#playersInRoom").append('<button id="attack" class="btn btn-danger btn-small">attack ' + name + '</button>');
 }
 function playerUnseen(data)
 {

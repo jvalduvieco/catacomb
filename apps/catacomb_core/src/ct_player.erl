@@ -6,10 +6,6 @@
 -export([go/2, set_room/2,seen/2,unseen/2,entered/4,leave_denied/1,attack/2,hit/5]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
-%dcodix tmp
--export([get_players/1]).
-
-
 -include ("ct_character_info.hrl").
 
 
@@ -72,10 +68,6 @@ hit(Player,OtherPlayer,HitChance,MaxDamage,MinDamage) ->
 attack(Player,OtherPlayer) ->
 	gen_server:cast(ct_player:get_pid(Player),{attack, OtherPlayer}).
 
-
-%dcodix tmp
-get_players(Player) ->
-	gen_server:cast(ct_player:get_pid(Player), {get_players}).
 
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
@@ -187,12 +179,6 @@ handle_cast({attack, OtherPlayer}, State) ->
 	ct_player:hit(OtherPlayer,State,State#player_state.hit_chance,State#player_state.max_damage,State#player_state.min_damage),
 	%io:format("otherplayer is:    ::  ~p ~n", [OtherPlayer]),
 	{noreply, State};
-
-% dcodix tmp
-handle_cast({get_players}, State) ->
-	io:format("located:  ~p~n",[State#player_state.located_players]),
-	{noreply,State};
-
 handle_cast(stop, State) -> {stop, normal, State}.
 
 handle_call({get_handler},_From,State) -> 
