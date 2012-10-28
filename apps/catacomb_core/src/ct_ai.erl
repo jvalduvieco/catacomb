@@ -5,14 +5,7 @@
 -export([get_handler/1,send_feedback/2, start_moving/1]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
--record(ai_state,{
-		player,
-		room_name,
-		room_exits,
-		players_seen = [],
-		last_player_unseen,
-		behaviour_fun
-	}).
+-include ("ct_ai.hrl").
 
 start_link(AiSpecs) ->
     gen_server:start_link(?MODULE, AiSpecs, []).
@@ -34,7 +27,7 @@ get_handler(Pid) ->
 init(AiSpecs) ->
 	AiCharacter=[
 		{<<"id">>, 32908230982},
-		{<<"name">>, <<"HAL">>},
+		{<<"name">>, list_to_binary(AiSpecs#ai_specs.name)},
 		{<<"max_life_points">>, 1000000},
 		{<<"life_points">>, 150000},
 		{<<"level">>, 60},
@@ -46,9 +39,13 @@ init(AiSpecs) ->
 	ct_player:set_client(AiPlayer,self()),
 	ct_player:set_feedback_fun(AiPlayer, fun(Player, Feedback) -> ct_ai:send_feedback(Player, Feedback) end),
 
-	State=#ai_state{player=AiPlayer
-					behaviour_fun=AiSpecs#ai_specs.behaviour_fun},
-	io:format("ct_ia has started (~w)~n", [self()]),
+	State=#ai_state{player=AiPlayer,
+					behaviour=AiSpecs#ai_specs.behaviour,
+					behaviour_on_room_enter=AiSpecs#ai_specs.behaviour_on_room_enter,
+					behaviour_on_player_seen=AiSpecs#ai_specs.behaviour_on_player_seen,
+					behaviour_on_player_unseen=AiSpecs#ai_specs.behaviour_on_player_unseen
+					},
+	io:format("ct_ai has started (~w)~n", [self()]),
     {ok, State}.
 stop() -> gen_server:cast(?MODULE, stop).
 %% User Callbacks
@@ -59,21 +56,33 @@ handle_cast({feedback, Feedback}, State) ->
               				{"exits",Exits}]}}]} -> 
 			io:format("room name: ~p~n", [RoomName]), 
 			io:format("exits: ~p~n", [Exits]),
-			State#ai_state{room_name=RoomName,room_exits=Exits};
+			% behaviour on enter room
+			NewState2 = State#ai_state{room_name=RoomName,room_exits=Exits},
+			Fun = State#ai_state.behaviour_on_room_enter,
+			NewState3 = Fun(NewState2),
+			NewState3;
         {obj,[{"type",<<"seen_by_info">>},
               {"body",{obj,[{"name",PlayerName},
               				{"player_id",PlayerId}]}}]} -> 
  			PlayersSeen = State#ai_state.players_seen,
  			PlayersSeen2 = proplists:delete(PlayerId, PlayersSeen),
  			PlayersSeen3 = PlayersSeen2 ++ [{PlayerId, PlayerName}],
- 			State#ai_state{players_seen=PlayersSeen3};
+ 			% behaviour on player seen
+ 			NewState2 = State#ai_state{players_seen=PlayersSeen3},
+ 			Fun = State#ai_state.behaviour_on_player_seen,
+			NewState3 = Fun(NewState2),
+ 			NewState3;
         {obj,[{"type",<<"unseen_by_info">>},
               {"body",{obj,LastPlayerUnseen}}]} ->
             %%LastPlayerUnseen = [{"name",PlayerName},{"player_id",PlayerId},{"direction",Direction}]
  			PlayersSeen = State#ai_state.players_seen,
  			PlayerId = proplists:get_value("player_id", LastPlayerUnseen),
  			PlayersSeen2 = proplists:delete(PlayerId, PlayersSeen),
-            State#ai_state{players_seen=PlayersSeen2,last_player_unseen=LastPlayerUnseen};
+ 			% behaviour on player seen
+ 			NewState2 = State#ai_state{players_seen=PlayersSeen2,last_player_unseen=LastPlayerUnseen},
+ 			Fun = State#ai_state.behaviour_on_player_unseen,
+			NewState3 = Fun(NewState2),
+ 			NewState3;
  		Default ->
  			io:format("unexpected feedback: ~p~n", [Default]),
  			State            
@@ -81,18 +90,9 @@ handle_cast({feedback, Feedback}, State) ->
 	io:format("new state: ~p~n", [NewState]),
     {noreply, NewState};
 handle_cast({move, AiPid}, State) ->
-	%io:format("moving ai...~n"),
-	%% select rand exit
-	Exits = State#ai_state.room_exits,
-	RandomExit = lists:nth(random:uniform(length(Exits)), Exits),
-	%io:format("RandomExit: ~p~n", [RandomExit]),
-	%% move player
-	ct_player:go(State#ai_state.player, RandomExit),
-	%% wait
-	%io:format("waiting...~n"),
-	timer:sleep(2000),
-	ct_ai:start_moving(AiPid),
-	{noreply,State}.
+	Fun = State#ai_state.behaviour,
+	NewState = Fun(State, AiPid),
+	{noreply,NewState}.
 handle_call({get_handler},_From,State) -> 
 	{reply,State#ai_state.player,State}.
 
