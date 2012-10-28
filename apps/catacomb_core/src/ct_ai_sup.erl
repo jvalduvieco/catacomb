@@ -16,5 +16,7 @@ init([]) ->
 
 %% Starts an individual player
 start_ai(AiSpecs) ->
-	{ok,AiPlayer}=supervisor:start_child({global,?MODULE}, [AiSpecs]),
-	{ok,AiPlayer}.
+	{ok,Pid}=supervisor:start_child({global,?MODULE}, [AiSpecs]),
+	AiPlayer=ct_player:get_handler(Pid),
+	ct_ai:start_moving(Pid),
+	{ok,Pid,AiPlayer}.

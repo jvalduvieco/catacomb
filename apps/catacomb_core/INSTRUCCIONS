@@ -41,7 +41,7 @@ Carregar player
 IA
 ==
 Afegir una IA:
-{ok,AiPlayer} = ct_ai_sup:start_ai(none).
+{ok, AiPid, AiPlayer} = ct_ai_sup:start_ai(none).
 
 
 Websocket
