@@ -43,6 +43,9 @@ IA
 Afegir una IA:
 {ok, AiPid, AiPlayer} = ct_ai_sup:start_ai_random_movements("HAL").
 
+Afegir N IAs:
+ct_ai_sup:start_N_ai("HAL", 300).
+
 Websocket
 =========
 Login:

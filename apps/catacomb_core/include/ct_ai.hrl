@@ -1,5 +1,6 @@
 %% AI state
 -record(ai_state,{
+    pid,
 		player,
 		room_name,
 		room_exits,
