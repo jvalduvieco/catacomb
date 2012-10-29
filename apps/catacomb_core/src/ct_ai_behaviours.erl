@@ -1,10 +1,14 @@
 -module(ct_ai_behaviours).
--export([random_movements/2]).
+-export([random_movements/1]).
 
 -include ("ct_ai.hrl").
 
-random_movements(State, AiPid) ->
-	%io:format("moving ai...~n"),
+random_movements(State) ->
+  apply_after(Time, Module, Function, Arguments).
+
+random_movements(State) ->
+  timer:sleep(1000+random:uniform(3000)),
+  %io:format("moving ai...~n"),
 	%% select rand exit
 	Exits = State#ai_state.room_exits,
 	RandomExit = lists:nth(random:uniform(length(Exits)), Exits),
@@ -13,7 +17,5 @@ random_movements(State, AiPid) ->
 	ct_player:go(State#ai_state.player, RandomExit),
 	%% wait
 	%io:format("waiting...~n"),
-	timer:sleep(2000),
-	ct_ai:start_moving(AiPid),
 
 	State.
