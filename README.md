@@ -5,7 +5,7 @@ For us it is an excuse to learn Erlang so don't take it too seriously, we are in
 
 This game is developed by:
 
-* Daniel Codina
+* Daniel Codina [@dcodix](https://twitter.com/dcodix)
 * Jordi Llonch [@jordillonch](https://twitter.com/jordillonch)
 * Joan Valduvieco [@jvalduvieco](https://twitter.com/jvalduvieco)
 
