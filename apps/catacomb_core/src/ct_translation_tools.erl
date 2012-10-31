@@ -20,6 +20,7 @@
 %% 
 %% Returns 	{ok, JSON_data_propslist}
 %%			{error, Error_info}
+-spec from_client(_) -> none().
 from_client(Data) ->
 	{JSONObj,_,_} = ktj_parse:parse(Data),
 	Result = case JSONObj of
@@ -31,6 +32,7 @@ from_client(Data) ->
 	Result.
 
 %% Encodes data from Erlang proplists to JSON text
+-spec to_client('false' | 'null' | 'true' | binary() | ['false' | 'null' | 'true' | binary() | ['false' | 'null' | 'true' | binary() | [any()] | number() | {_,_}] | number() | {'obj',[any()]}] | number() | {'obj',[{_,_}]}) -> {'ok',string()}.
 to_client(Data)->
 	JSONText = ktj_encode:encode(Data),
 	Result = case JSONText of
@@ -41,9 +43,11 @@ to_client(Data)->
 	end,
 	Result.
 
+-spec get_type({'obj',[any()]}) -> any().
 get_type(Data) ->
 	{obj,Header}=Data,
 	proplists:get_value(<<"type">>,Header,none).
+-spec get_value(_,{'obj',[any()]}) -> any().
 get_value(Key,Data) ->
 	{obj,Header}=Data,
 	{obj,Body}=proplists:get_value(<<"body">>,Header,none),

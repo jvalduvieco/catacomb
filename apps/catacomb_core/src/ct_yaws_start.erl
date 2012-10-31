@@ -1,11 +1,13 @@
 -module(ct_yaws_start).
 -compile(export_all).
 
--include("yaws.hrl").
+-include("deps/yaws/include/yaws.hrl").
 
+-spec start() -> {'ok',pid()}.
 start() ->
     {ok, spawn(?MODULE, run, [])}.
 
+-spec run() -> {'ok',pid()}.
 run() ->
     io:format("~s has started (~w)~n", [?MODULE,self()]),
     Id = "embedded",

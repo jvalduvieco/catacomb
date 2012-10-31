@@ -7,20 +7,25 @@
 
 -record(state,{}).
 
+-spec start_link() -> 'ignore' | {'error',_} | {'ok',pid()}.
 start_link() ->
     gen_server:start_link({global,?MODULE}, ?MODULE, [], []).
 %% Client API    
+-spec init_map() -> any().
 init_map() ->
     gen_server:call({global,?MODULE}, {init_map}).
 
 %% Internal functions
+-spec init([]) -> {'ok',#state{}}.
 init([]) ->
 	io:format("~s has started (~w)~n", [?MODULE,self()]),
 	State=#state{},
     {ok, State}.
+-spec stop() -> 'ok'.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% User Callbacks
+-spec handle_call({'init_map'},_,_) -> {'reply','ok',_}.
 handle_call({init_map}, _From, State) ->
     io:format("Creating map ~p~n", [_From]),
     X_list=lists:seq(1,ct_config_service:get_room_setup_max_x()),
@@ -32,7 +37,11 @@ handle_call({init_map}, _From, State) ->
 
 
 %% System Callbacks
+-spec terminate(_,_) -> {'ok',_}.
 terminate(_Reason, State) -> {ok,State}.
+-spec handle_cast('stop',_) -> {'stop','normal',_}.
 handle_cast(stop, State) -> {stop, normal, State}.
+-spec code_change(_,_,_) -> {'ok',_}.
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
+-spec handle_info(_,_) -> {'noreply',_}.
 handle_info( _, State) -> {noreply,State}.

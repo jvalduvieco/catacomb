@@ -2,7 +2,7 @@
 
 -export([handle_message/2]).
 
--include("yaws_api.hrl").
+-include("deps/yaws/include/yaws_api.hrl").
 
 %% define callback state to accumulate a fragmented WS message
 %% which we echo back when all fragments are in, returning to
@@ -13,6 +13,7 @@
                 client_command_state=#ct_client_state{}}).    % client command state (opaque)              
 
 %% start of a fragmented message
+-spec handle_message(#ws_frame_info{},_) -> {'close',{'error',{'unhandled_message',{_,_,_,_,_,_,_,_,_,_}}}} | {'noreply',_} | {'reply',{'binary',_} | {'pong',_} | {'text',binary()},_} | {'stop',_,_}.
 handle_message(#ws_frame_info{fin=0,
                               opcode=FragType,
                               data=Data},

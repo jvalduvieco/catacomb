@@ -4,6 +4,7 @@
 -export([init/1,start_player/1]).
 
 
+-spec start_link() -> 'ignore' | {'error',_} | {'ok',pid()}.
 start_link() ->
     supervisor:start_link({global, ?MODULE}, ?MODULE, []).
 
@@ -16,6 +17,7 @@ init([]) ->
     {ok, StartSpecs}.
 
 %% Starts an individual player
+-spec start_player([{'obj',[any()]},...]) -> {'ok',{'player_state',_,_,_,_,_,_,_,_,_,_,_,_}}.
 start_player(CharacterSpecs) ->
 	{ok,Pid}=supervisor:start_child({global,?MODULE}, [CharacterSpecs]),
     Player=ct_player:get_handler(Pid),

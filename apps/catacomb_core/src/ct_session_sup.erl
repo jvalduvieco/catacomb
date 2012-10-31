@@ -4,6 +4,7 @@
 -export([init/1]).
 -export([get_new_session_pid/0]).
 
+-spec start_link() -> 'ignore' | {'error',_} | {'ok',pid()}.
 start_link() ->
     supervisor:start_link({global, ?MODULE}, ?MODULE, []).
 
@@ -14,6 +15,7 @@ init([]) ->
     {ok, StartSpecs}.
 
 %% Starts a new session
+-spec get_new_session_pid() -> {'ok','undefined' | pid()}.
 get_new_session_pid() ->
 	{ok,Pid}=supervisor:start_child({global,?MODULE}, []),
 	{ok,Pid}.

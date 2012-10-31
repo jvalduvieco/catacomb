@@ -1,14 +1,16 @@
 -module(ct_ai_behaviours).
 -export([random_movements/1,random_movements_fun/1]).
 
--include ("ct_ai.hrl").
+-include ("include/ct_ai.hrl").
 
+-spec random_movements(#ai_state{}) -> #ai_state{}.
 random_movements(State) ->
   Pid = State#ai_state.pid,
   Fun = fun(StateV) -> ct_ai_behaviours:random_movements_fun(StateV) end,
   timer:apply_after(1000+random:uniform(3000), ct_ai, do_fun, [Pid, Fun]),
   State.
 
+-spec random_movements_fun(#ai_state{player::{'player_state',_,_,_,_,_,_,_,_,_,_,_,_},room_exits::[any(),...]}) -> #ai_state{player::{'player_state',_,_,_,_,_,_,_,_,_,_,_,_},room_exits::[any(),...]}.
 random_movements_fun(State) ->
   timer:sleep(1000+random:uniform(3000)),
   %io:format("moving ai...~n"),

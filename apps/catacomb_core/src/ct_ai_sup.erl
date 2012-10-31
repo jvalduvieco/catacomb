@@ -3,7 +3,10 @@
 -export([start_link/0]).
 -export([init/1,start_ai/1,start_ai_random_movements/1, start_N_ai/2]).
 
--include ("ct_ai.hrl").
+-include ("include/ct_ai.hrl").
+-include ("include/ct_character_info.hrl").
+
+-spec start_link() -> 'ignore' | {'error',_} | {'ok',pid()}.
 
 start_link() ->
     supervisor:start_link({global, ?MODULE}, ?MODULE, []).
@@ -17,16 +20,22 @@ init([]) ->
     {ok, StartSpecs}.
 
 %% Starts an individual player
+-spec start_ai(_) -> {'ok', pid(), #player_state{}}.
+
 start_ai(AiSpecs) ->
 	{ok,Pid}=supervisor:start_child({global,?MODULE}, [AiSpecs]),
 	AiPlayer=ct_player:get_handler(Pid),
 	%timer:sleep(1000), %% wait initialization
 	{ok,Pid,AiPlayer}.
 
+-spec start_ai_random_movements(_) -> {'ok', pid(), #player_state{}}.
+
 start_ai_random_movements(Name) ->
 	Fun = fun(State) -> ct_ai_behaviours:random_movements(State) end,
 	AiSpecs=#ai_specs{name=Name, behaviour_on_room_enter=Fun},
 	start_ai(AiSpecs).
+
+-spec start_N_ai(_,non_neg_integer()) -> 'ok'.
 
 start_N_ai(_, 0) -> ok;
 start_N_ai(Name, N) ->

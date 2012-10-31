@@ -4,6 +4,7 @@
 -export([init/1]).
 -export([create_room/1,get_pid/1]).
 
+-spec start_link() -> 'ignore' | {'error',_} | {'ok',pid()}.
 start_link() ->
     supervisor:start_link({global, ?MODULE}, ?MODULE, []).
 
@@ -17,6 +18,7 @@ init([]) ->
     {ok, StartSpecs}.
 
 %% Starts an individual player
+-spec create_room(nonempty_string()) -> {'ok',_}.
 create_room([X,Y]) ->
 	case ets:lookup(coordToPid,list_to_atom([X,Y])) of
 		[] ->
@@ -26,6 +28,7 @@ create_room([X,Y]) ->
 			{ok,Pid}
 	end.
 	
+-spec get_pid(nonempty_string()) -> {'error','undefined'} | {'ok',_}.
 get_pid([X,Y]) ->
 	case ets:lookup(coordToPid,list_to_atom([X,Y])) of
 		[] ->

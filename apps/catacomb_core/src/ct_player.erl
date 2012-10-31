@@ -6,61 +6,66 @@
 -export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
--include ("ct_character_info.hrl").
+-include ("include/ct_character_info.hrl").
 
--record(player_state,{id,
-	my_pid,
-	client,
-	name,
-	max_life_points,
-	life_points,
-	level,
-	experience_points,
-	room,			
-	room_exits,
-	params=[],
-	feedback_fun}).
 %% Accessors
+-spec get_handler(_) -> any().
 get_handler(Pid) ->
 	gen_server:call(Pid,{get_handler}).
+-spec is_player(_) -> 'bad_arg' | 'true'.
 is_player(Player) when is_record(Player,player_state) ->
 	true;
 is_player(_) ->
 	bad_arg.
+-spec get_pid(#player_state{}) -> any().
 get_pid(#player_state{my_pid=Pid} = _Player) ->
 	Pid.
+-spec get_name(#player_state{}) -> any().
 get_name(#player_state{name=Name} = _Player) ->
 	Name.
+-spec get_max_life_points(#player_state{}) -> any().
 get_max_life_points(#player_state{max_life_points=MaxLifePoints} = _Player) ->
 	MaxLifePoints.
+-spec get_life_points(#player_state{}) -> any().
 get_life_points(#player_state{life_points=LifePoints} = _Player) ->
 	LifePoints.
+-spec get_client(#player_state{}) -> any().
 get_client(#player_state{client=Client} = _Player) ->
 	Client.
+-spec start_link(_) -> 'ignore' | {'error',_} | {'ok',pid()}.
 start_link(CharacterSpecs) ->
     gen_server:start_link(?MODULE,CharacterSpecs, []).
 
 %% Client API
+-spec go(#player_state{},_) -> 'ok'.
 go(Player,Direction) ->
     gen_server:cast(ct_player:get_pid(Player), {go, Direction}).
 %% To be called when the user is created
+-spec set_room(#player_state{},[any(),...]) -> 'ok'.
 set_room(Player,[X,Y]) ->
     gen_server:cast(ct_player:get_pid(Player), {set_room, [X,Y]}).
+-spec set_client(#player_state{},_) -> 'ok'.
 set_client(Player,Client) ->
 	gen_server:cast(ct_player:get_pid(Player), {set_client, Client}).
+-spec set_feedback_fun(#player_state{},_) -> 'ok'.
 set_feedback_fun(Player, Fun) ->
 	gen_server:cast(ct_player:get_pid(Player), {set_feedback_fun, Fun}).
 %% Events
+-spec entered(#player_state{},_,_,_) -> 'ok'.
 entered(Player, RoomPid, RoomExits, RoomName) ->
 	gen_server:cast(ct_player:get_pid(Player), {entered, RoomPid, RoomExits, RoomName}).
+-spec seen(#player_state{},_) -> 'ok'.
 seen(Player,OtherPlayer) ->
 	gen_server:cast(ct_player:get_pid(Player), {seen, OtherPlayer}).
+-spec unseen(#player_state{},_,_) -> 'ok'.
 unseen(Player,OtherPlayer,Direction) ->
 	gen_server:cast(ct_player:get_pid(Player), {unseen, OtherPlayer, Direction}).
+-spec leave_denied(#player_state{}) -> 'ok'.
 leave_denied(Player) ->
 	gen_server:cast(ct_player:get_pid(Player),{leave_denied}).
 
 %% Internal functions
+-spec init([{'obj',[any()]},...]) -> {'ok',#player_state{my_pid::pid(),params::[]}}.
 init([{obj,CharacterSpecs}]) ->
 	State=#player_state{
 		id=proplists:get_value(<<"id">>, CharacterSpecs, none),
@@ -74,8 +79,10 @@ init([{obj,CharacterSpecs}]) ->
 	},
 	io:format("ct_player has started (~w)~n", [self()]),
     {ok, State}.
+-spec stop() -> 'ok'.
 stop() -> gen_server:cast(?MODULE, stop).
 %% User Callbacks
+-spec handle_cast('stop' | {'leave_denied'} | {'go',_} | {'seen',#player_state{}} | {'set_client',_} | {'set_feedback_fun',_} | {'set_room',nonempty_string()} | {'unseen',#player_state{},_} | {'entered',_,[any()],_},_) -> {'noreply',_} | {'stop','normal',_}.
 handle_cast({go, Direction}, State) ->
 	%Feedback=io_lib:format("Going ~p~n", [Direction]),
 	%ct_client_command:send_feedback(State,Feedback),
@@ -143,11 +150,15 @@ handle_cast({leave_denied},State) ->
 	{noreply,State};
 handle_cast(stop, State) -> {stop, normal, State}.
 
+-spec handle_call({'get_handler'},_,_) -> {'reply',_,_}.
 handle_call({get_handler},_From,State) -> 
 	{reply,State,State}.
 
 %% System callbacks
+-spec terminate(_,_) -> {'ok',_}.
 terminate(_Reason, State) -> {ok,State}.
 
+-spec code_change(_,_,_) -> {'ok',_}.
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
+-spec handle_info(_,_) -> {'noreply',_}.
 handle_info( _, State) -> {noreply,State}.

@@ -19,9 +19,11 @@
 	params=[]}).
 
 
+-spec start_link(_,_) -> 'ignore' | {'error',_} | {'ok',pid()}.
 start_link(X,Y) ->
     gen_server:start_link(?MODULE, {X,Y}, []).
 %% Client API 
+-spec request_leave(_,_,_) -> 'ok' | {'badarg',[]}.
 request_leave(RoomPid,Direction,Player)->
 	% Cridem ct_room:leave(Direction,Player)
 	case is_pid(RoomPid) of
@@ -30,6 +32,7 @@ request_leave(RoomPid,Direction,Player)->
 		false ->
 			{badarg,[]}
 	end.
+-spec player_left(_,_,_) -> 'ok' | {'badarg',[]}.
 player_left(RoomFromPid, Direction, Player)->
 	case is_pid(RoomFromPid) of
 		true ->
@@ -38,6 +41,7 @@ player_left(RoomFromPid, Direction, Player)->
 			{badarg,[]}
 	end.
 
+-spec enter(_,_,_,_) -> 'ok' | {'badarg',[]}.
 enter(RoomPid,Direction,Player,RoomFromPid) ->
 	case is_pid(RoomPid) of
 		true ->
@@ -46,6 +50,7 @@ enter(RoomPid,Direction,Player,RoomFromPid) ->
 			{badarg,[]}
 	end.
 
+-spec get_exits(_) -> {_,_}.
 get_exits(RoomPid) ->
 	{Result,Data} = case is_pid(RoomPid) of
 		true ->
@@ -54,6 +59,7 @@ get_exits(RoomPid) ->
 			{badarg,[]}
 		end,
 	{Result,Data}.
+-spec add_exit(_,_,_,_) -> 'ok' | {'badarg',[]}.
 add_exit(RoomPid,Exit,X,Y)->
 	case is_pid(RoomPid) of
 		true ->
@@ -63,6 +69,7 @@ add_exit(RoomPid,Exit,X,Y)->
 	end.
 
 %tmp
+-spec print_exits(_) -> 'ok' | {'badarg',[]}.
 print_exits(RoomPid)->
 	case is_pid(RoomPid) of
 		true ->
@@ -72,6 +79,7 @@ print_exits(RoomPid)->
 	end.
 
 %% Internal functions
+-spec init({char(),char()}) -> {'ok',#state{x::char(),y::char(),room_name::<<_:56,_:_*8>>,exits::[{_,_}],players::[],objects::[],params::[{_,_},...]}}.
 init({X,Y}) ->
 <<A:32, B:32, C:32>> = crypto:rand_bytes(12),
     random:seed({A,B,C}),
@@ -83,11 +91,14 @@ init({X,Y}) ->
 	ets:insert(coordToPid,{list_to_atom([X,Y]),self()}),
 	%io:format("~p : ~w ~n",[{X,Y},RoomExits]),
     {ok, State}.
+-spec stop() -> 'ok'.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% Callbacks
+-spec handle_call({'get_exits'},_,#state{}) -> {'reply',{'ok',_},#state{}}.
 handle_call({get_exits},_From, State) ->
 	{reply,{ok,State#state.exits},State}.
+-spec handle_cast('stop' | {'print_exits'} | {'player_left',_,_} | {'request_leave',_,_} | {'add_exit',_,_,_} | {'enter',{'player_state',_,_,_,_,_,_,_,_,_,_,_,_},_,_},_) -> {'noreply',#state{}} | {'stop','normal',_}.
 handle_cast({enter, Player, RoomFromPid, Direction}, State) ->
     NewState=State#state{players=[Player|State#state.players]},
     case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Direction, Player); false -> true end,
@@ -132,11 +143,15 @@ handle_cast({print_exits}, State) ->
 handle_cast(stop, State) -> {stop, normal, State}.
 
 %% System Callbacks
+-spec terminate(_,_) -> {'ok',_}.
 terminate(_Reason, State) -> {ok,State}.
+-spec code_change(_,_,_) -> {'ok',_}.
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
+-spec handle_info(_,_) -> {'noreply',_}.
 handle_info( _, State) -> {noreply,State}.
 
 %% Services
+-spec rooms() -> [{<<_:56,_:_*8>>,[{_,_},...]},...].
 rooms() ->
     [{<<"Dark room">>, [{drop, {<<"Spider Egg">>, 1}}, {experience, 1}]},
      {<<"Lightly illuminated room">>, [{drop, {<<"Pelt">>, 1}}, {experience, 1}]},
@@ -156,9 +171,11 @@ rooms() ->
      {<<"Waterfall room">>, [{drop, {<<"branch">>,1}}, {experience, 2}]},
      {<<"Smoky room">>, [{drop, {<<"Penguin Egg">>,1}}, {experience, 3}]}].
 
+-spec create_room_properties() -> {<<_:56,_:_*8>>,[{_,_},...]}.
 create_room_properties() ->
     L = rooms(),
     lists:nth(random:uniform(length(L)), L).
+-spec relative_coords_to_absolute(_,_,_,_,'e' | 'n' | 'ne' | 'nw' | 's' | 'se' | 'sw' | 'w') -> 'null' | [any(),...].
 relative_coords_to_absolute(X,Y,MaxX,MaxY,Dir) ->
 	case Dir of
 		n->
@@ -218,12 +235,15 @@ relative_coords_to_absolute(X,Y,MaxX,MaxY,Dir) ->
 				true -> [NewX,NewY]
 			end
 		end.	
+-spec clean_list([any(),...]) -> [any()].
 clean_list (List) -> 
 	lists:filter(
 		fun(Z) -> Z/=null end, List).
+-spec clean_exits([{'e' | 'n' | 'ne' | 'nw' | 's' | 'se' | 'sw' | 'w','null' | [any(),...]}]) -> [{'e' | 'n' | 'ne' | 'nw' | 's' | 'se' | 'sw' | 'w','null' | [any(),...]}].
 clean_exits (List) ->
 	lists:filter(
 		fun({_,Z}) -> Z/=null end, List).
+-spec find_neighbours_entrances(_,_,_,_,_) -> [any()].
 find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits) -> 
 	%% Ask our neighbours for exits to this rooms. We only ask our left w sw and s neighbours
 	%% as map generation is from bottom left to up right.
@@ -287,6 +307,7 @@ find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits) ->
 		, CheckNeighList),
 	clean_list (NeighExits).
 
+-spec create_room_exits(_,_,_,_) -> {'ok',[{_,_}]}.
 create_room_exits(X,Y,MaxX,MaxY)->
 	PossibleExits=[n,ne,e,se,s,sw,w,nw],
 	RandomExits=clean_list (
@@ -298,6 +319,7 @@ create_room_exits(X,Y,MaxX,MaxY)->
 	%%io:format("Exits (~w): ~w ~n",[[X,Y],lists:umerge(lists:sort(RandomExits),lists:sort(NeighExits))]),
 	Exits=clean_exits(translate(X,Y,MaxX,MaxY,lists:umerge(lists:sort(RandomExits),lists:sort(NeighExits)))),
 	{ok,Exits}.
+-spec translate(_,_,_,_,['e' | 'n' | 'ne' | 'nw' | 's' | 'se' | 'sw' | 'w']) -> [{'e' | 'n' | 'ne' | 'nw' | 's' | 'se' | 'sw' | 'w','null' | [any(),...]}].
 translate(_,_,_,_,[]) -> [];
 translate(X,Y,MaxX,MaxY,[Element | RoomList]) ->
 	[{Element,relative_coords_to_absolute(X,Y,MaxX,MaxY,Element)}|translate(X,Y,MaxX,MaxY,RoomList)].

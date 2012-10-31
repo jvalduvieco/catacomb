@@ -6,6 +6,7 @@
 	user_id=none,
 	player_handle=none}).
 
+-spec execute(_,_) -> {'stop',_,_}.
 execute(Cmd,State) -> %% State contains State data relevant to this module
 	try 
 		DecodeResult=ct_translation_tools:from_client(Cmd),
@@ -30,6 +31,7 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 		    {stop, Why, State}
   	end.
 
+-spec do_command({'obj',[any()]},_) -> {'error',{'obj',[any(),...]},_} | {'ok',[] | {'obj',[any(),...]},_}.
 do_command(Cmd,State) ->
 	Command=ct_translation_tools:get_type(Cmd),
 	io:format("Command: ~p~n", [Command]),
@@ -116,9 +118,11 @@ do_command(Cmd,State) ->
 		%% Chat commands to be added
 		end,
 	Result.
+-spec websocket_feedback(atom() | pid() | {atom(),_} | {'via',_,_} | {'ws_state',8,_,'binary' | 'none' | 'text' | 'undefined'},'false' | 'null' | 'true' | binary() | ['false' | 'null' | 'true' | binary() | ['false' | 'null' | 'true' | binary() | [any()] | number() | {_,_}] | number() | {'obj',[any()]}] | number() | {'obj',[{_,_}]}) -> any().
 	websocket_feedback(Pid,Feedback)->
 		{ok,Response}=ct_translation_tools:to_client(Feedback),
 		yaws_api:websocket_send(Pid,{text, list_to_binary(Response)}).
+-spec send_feedback(#player_state{},'false' | 'null' | 'true' | binary() | ['false' | 'null' | 'true' | binary() | ['false' | 'null' | 'true' | binary() | [any()] | number() | {_,_}] | number() | {'obj',[any()]}] | number() | {'obj',[{_,_}]}) -> any().
 	send_feedback(Player,Feedback)->
 		ClientPid=ct_player:get_client(Player),
 		% Depending on app configuration do a callback

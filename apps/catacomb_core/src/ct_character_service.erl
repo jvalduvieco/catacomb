@@ -11,22 +11,28 @@
 %% https://github.com/JoelPM/gen_server_pool/tree/master/src
 %% http://hg.rabbitmq.com/rabbitmq-server/file/default/src/gen_server2.erl
 
+-spec start_link() -> 'ignore' | {'error',_} | {'ok',pid()}.
 start_link() ->
     gen_server:start_link({global,?MODULE}, ?MODULE, [], []).
 
+-spec init([]) -> {'ok',[]}.
 init([]) ->
 	io:format("~s has started (~w)~n", [?MODULE,self()]),
     {ok, []}.
+-spec stop() -> 'ok'.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% Client API
+-spec get_character_list(_) -> any().
 get_character_list(UserId) ->
     gen_server:call({global,?MODULE}, {get_character_list, UserId}).
+-spec get_character_data(_,_) -> any().
 get_character_data(UserId,CharacterId) ->
     gen_server:call({global,?MODULE}, {get_character_data, UserId, CharacterId}).
     
 
 %% User Callbacks
+-spec handle_call({'get_character_list',_} | {'get_character_data',_,_},_,_) -> {'reply',{'error','sql_error'} | {'ok',[any()]},_}.
 handle_call({get_character_list, UserId}, _From, State) ->
 	% User1=#ct_character_info{id=32908230982,name="lazi",max_life_points=32200,life_points=18000},
 	% User2=#ct_character_info{id=32908230983,name="GeD",max_life_points=32000,life_points=15000},
@@ -62,7 +68,11 @@ handle_call({get_character_data,UserId,CharacterId}, _From, State) ->
 		_ -> {reply, {error, sql_error}, State}
 	end.
 %% System Callbacks
+-spec terminate(_,_) -> {'ok',_}.
 terminate(_Reason, State) -> {ok,State}.
+-spec handle_cast('stop',_) -> {'stop','normal',_}.
 handle_cast(stop, State) -> {stop, normal, State}.
+-spec code_change(_,_,_) -> {'ok',_}.
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
+-spec handle_info(_,_) -> {'noreply',_}.
 handle_info( _, State) -> {noreply,State}.

@@ -10,20 +10,25 @@
 -include("../deps/emysql/include/emysql.hrl").
 -record(user_record, {id, login, password}).
 
+-spec start_link() -> 'ignore' | {'error',_} | {'ok',pid()}.
 start_link() ->
     gen_server:start_link({global,?MODULE}, ?MODULE, [], []).
 
+-spec init([]) -> {'ok',[]}.
 init([]) ->
 	io:format("~s has started (~w)~n", [?MODULE,self()]),
     {ok, []}.
+-spec stop() -> 'ok'.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% Client API
+-spec login(_,_) -> any().
 login(UserName,Password) ->
     Result=gen_server:call({global,?MODULE}, {login, UserName, Password}),
     Result.
 
 %% User Callbacks
+-spec handle_call({'login',_,_},_,_) -> {'reply',{'error','sql_error' | 'wrong_login_or_password'} | {'ok',_},_}.
 handle_call({login, UserName, Password}, _From, State) ->
 	%% Should connect to DB, etc...
 	%io:format("username: ~w~n", [UserName]), 
@@ -58,7 +63,11 @@ handle_call({login, UserName, Password}, _From, State) ->
  %   {reply, {ok, Uid}, State}.
 
 %% System Callbacks
+-spec terminate(_,_) -> {'ok',_}.
 terminate(_Reason, State) -> {ok,State}.
+-spec handle_cast('stop',_) -> {'stop','normal',_}.
 handle_cast(stop, State) -> {stop, normal, State}.
+-spec code_change(_,_,_) -> {'ok',_}.
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
+-spec handle_info(_,_) -> {'noreply',_}.
 handle_info( _, State) -> {noreply,State}.

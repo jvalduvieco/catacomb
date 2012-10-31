@@ -4,6 +4,7 @@
 -export([init/1]).
 
 %% We register it so that it's guaranteed to be unique
+-spec start_link() -> 'ignore' | {'error',_} | {'ok',pid()}.
 start_link() ->
     supervisor:start_link({global, ?MODULE}, ?MODULE, []).
 
