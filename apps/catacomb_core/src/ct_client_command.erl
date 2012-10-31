@@ -11,18 +11,15 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
 	try 
 		DecodeResult=ct_translation_tools:from_client(Cmd),
     	case DecodeResult of
-      		{ok, DataObj} ->
-      			{BoolResult,Result,NewState}=do_command(DataObj,State),
-      			% Encode response in JSON format. Force ok response as an error here probably is a developer bug
-      			{ok,EncodedJSON}=ct_translation_tools:to_client(Result),
-      			{BoolResult,EncodedJSON,NewState};
-      		{error, Error} -> 
-        		io:format("Error when decoding ~p~n",[Error]),
-        		Result=list_to_binary("Error when decoding: " ++ atom_to_list(Error)),
-        		{error,Result,State};
-  			_ -> 	
-        		io:format("WTF?~n"),
-        		{error,[],State}
+        {ok, DataObj} ->
+          {BoolResult,Result,NewState}=do_command(DataObj,State),
+          % Encode response in JSON format. Force ok response as an error here probably is a developer bug
+          {ok,EncodedJSON}=ct_translation_tools:to_client(Result),
+          {BoolResult,EncodedJSON,NewState};
+        {error, Error} ->
+          io:format("Error when decoding ~p~n",[Error]),
+          Result=list_to_binary("Error when decoding: " ++ atom_to_list(Error)),
+          {error,Result,State}
     	end
     catch
 		What:Why ->

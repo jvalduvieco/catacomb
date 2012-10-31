@@ -2,7 +2,7 @@
 -behaviour(application).
 -export([start/2, stop/1]).
 
--spec start('normal',[]) -> 'ignore' | {'error',_} | {'ok',pid(),[]}.
+-spec start('normal',[]) -> {'error',_} | {'ok',pid(),[]}.
 start(normal,[]) ->
 	emysql:add_pool(ct_auth_pool, 1,
 		"catacomb", "pass", "localhost", 3306,

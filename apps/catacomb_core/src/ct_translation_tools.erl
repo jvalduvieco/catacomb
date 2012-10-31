@@ -20,28 +20,21 @@
 %% 
 %% Returns 	{ok, JSON_data_propslist}
 %%			{error, Error_info}
--spec from_client(_) -> none().
+-spec from_client(_) -> {'ok',any()} | {'error','bad_args'}.
 from_client(Data) ->
-	{JSONObj,_,_} = ktj_parse:parse(Data),
-	Result = case JSONObj of
-		{obj,_} ->
-			{ok,JSONObj};
-		_ ->
-			{error,bad_args}
-	end,
-	Result.
+  {JSONObj,_,_} = ktj_parse:parse(Data),
+  case JSONObj of
+    {obj,_} ->
+      {ok,JSONObj};
+    _ ->
+      {error,bad_args}
+  end.
 
 %% Encodes data from Erlang proplists to JSON text
 -spec to_client('false' | 'null' | 'true' | binary() | ['false' | 'null' | 'true' | binary() | ['false' | 'null' | 'true' | binary() | [any()] | number() | {_,_}] | number() | {'obj',[any()]}] | number() | {'obj',[{_,_}]}) -> {'ok',string()}.
 to_client(Data)->
 	JSONText = ktj_encode:encode(Data),
-	Result = case JSONText of
-		{error,_} ->
-			JSONText; % {error,{"Expected object seperator",58,0,8}}
-		_ ->
-			{ok,lists:flatten(JSONText)}
-	end,
-	Result.
+  {ok,lists:flatten(JSONText)}.
 
 -spec get_type({'obj',[any()]}) -> any().
 get_type(Data) ->

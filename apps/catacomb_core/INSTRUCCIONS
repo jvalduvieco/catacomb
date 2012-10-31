@@ -77,18 +77,14 @@ rm /home/jordi/Dropbox/Projectes/erlang/catacomb/apps/catacomb_core/deps/yaws/eb
 ./rebar compile
 dialyzer --add_to_plt --apps deps/yaws
 
-
-
 Analisis
 --------
 dialyzer src/ --src
 
-* errors trobats:
-catacomb_core.erl:5: The return type 'ignore' in the specification of start/2 is not a subtype of {'error',_} | {'ok',pid()} | {'ok',pid(),_}, which is the expected return type for the callback of application behaviour
-ct_client_command.erl:35: Function do_command/2 will never be called
+* errors coneguts:
+ct_client_command.erl:32: Function do_command/2 will never be called
 ct_translation_tools.erl:24: Function from_client/1 has no local return
 ct_translation_tools.erl:25: The attempt to match a term of type ktj_parse:mid_parse_stream() against the pattern {JSONObj, _, _} breaks the opaqueness of the term
-ct_translation_tools.erl:39: The pattern {'error', _} can never match the type string()
 
 
 
