@@ -14,7 +14,7 @@ start_link() ->
     gen_server:start_link({global,?MODULE}, ?MODULE, [], []).
 
 init([]) ->
-	io:format("~s has started (~w)~n", [?MODULE,self()]),
+	lager:info("~s has started (~w)~n", [?MODULE,self()]),
     {ok, []}.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 

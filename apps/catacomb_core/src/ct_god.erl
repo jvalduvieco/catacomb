@@ -15,14 +15,14 @@ init_map() ->
 
 %% Internal functions
 init([]) ->
-	io:format("~s has started (~w)~n", [?MODULE,self()]),
+	lager:info("~s has started (~w)~n", [?MODULE,self()]),
 	State=#state{},
     {ok, State}.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% User Callbacks
 handle_call({init_map}, _From, State) ->
-    io:format("Creating map ~p~n", [_From]),
+    lager:debug("Creating map ~p~n", [_From]),
     X_list=lists:seq(1,ct_config_service:get_room_setup_max_x()),
     Y_list=lists:seq(1,ct_config_service:get_room_setup_max_y()),
     Combined_list=[[X,Y] || X <- X_list, Y <- Y_list],

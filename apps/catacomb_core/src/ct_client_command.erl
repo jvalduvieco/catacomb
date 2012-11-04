@@ -1,5 +1,5 @@
 -module(ct_client_command).
--export([execute/2,send_feedback/2]).
+-export([execute/2,send_feedback/2,client_disconnected/1]).
 -include ("ct_character_info.hrl").
 
 -record(ct_client_state,{session_pid=none,
@@ -16,19 +16,22 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
       			{ok,EncodedJSON}=ct_translation_tools:to_client(Result),
       			{BoolResult,EncodedJSON,NewState};
       		{error, Error} -> 
-        		io:format("Error when decoding ~p~n",[Error]),
+        		lager:error("Error when decoding ~p~n",[Error]),
         		Result=list_to_binary("Error when decoding: " ++ atom_to_list(Error)),
         		{error,Result,State};
   			_ -> 	
-        		io:format("WTF?~n"),
+        		lager:error("WTF?~n"),
         		{error,[],State}
     	end
     catch
 		What:Why ->
 		    Trace=erlang:get_stacktrace(),
-		    error_logger:error_msg("ct_client_command: ~p ~p ~p.\n", [What,Why,Trace]),
+		    lager:error("ct_client_command: ~p ~p ~p.\n", [What,Why,Trace]),
 		    {stop, Why, State}
   	end.
+client_disconnected(#ct_client_state{session_pid=SessionPid,player_handle=PlayerHandle}) ->
+	ct_session:stop(SessionPid),
+	ct_player:stop(PlayerHandle).
 
 do_command(Cmd,State) ->
 	Command=ct_translation_tools:get_type(Cmd),
@@ -37,7 +40,7 @@ do_command(Cmd,State) ->
 		<<"login_request">> ->
 			User=ct_translation_tools:get_value(<<"user">>,Cmd),
 			Password=ct_translation_tools:get_value(<<"password">>,Cmd),
-			io:format("Log in: User: ~p Password: ~p ~n",[User,Password]),
+			lager:info("Log in: User: ~p Password: ~p ~n",[User,Password]),
 			% Check if we have a session. If there is no session create a new one.
 			{ok,SessionPid}=case State#ct_client_state.session_pid of
 				none ->

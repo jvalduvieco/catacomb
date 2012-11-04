@@ -1,9 +1,9 @@
 -module(ct_player).
 -behaviour(gen_server).
 
--export([start_link/1,stop/0]).
+-export([start_link/1]).
 -export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2]).
--export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1]).
+-export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1,stop/1]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
 -include ("ct_character_info.hrl").
@@ -36,6 +36,7 @@ get_life_points(#player_state{life_points=LifePoints} = _Player) ->
 	LifePoints.
 get_client(#player_state{client=Client} = _Player) ->
 	Client.
+
 start_link(CharacterSpecs) ->
     gen_server:start_link(?MODULE,CharacterSpecs, []).
 
@@ -56,6 +57,8 @@ unseen(Player,OtherPlayer,Direction) ->
 	gen_server:cast(ct_player:get_pid(Player), {unseen, OtherPlayer, Direction}).
 leave_denied(Player) ->
 	gen_server:cast(ct_player:get_pid(Player),{leave_denied}).
+stop(Player) ->
+	gen_server:cast(ct_player:get_pid(Player),stop).
 
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
@@ -69,9 +72,9 @@ init([{obj,CharacterSpecs}]) ->
 		experience_points=proplists:get_value(<<"experience_points">>, CharacterSpecs, none)
 		%room=ct_room_sup:get_pid([proplists:get_value(<<"coord_x">>, CharacterSpecs, none),proplists:get_value(<<"coord_y">>, CharacterSpecs, none)])
 	},
-	io:format("ct_player has started (~w)~n", [self()]),
+	lager:info("ct_player has started (~w)~n", [self()]),
     {ok, State}.
-stop() -> gen_server:cast(?MODULE, stop).
+
 %% User Callbacks
 handle_cast({go, Direction}, State) ->
 	%Feedback=io_lib:format("Going ~p~n", [Direction]),
@@ -87,7 +90,7 @@ handle_cast({set_client,Client},State) ->
 	{noreply,NewState};
 handle_cast({seen, OtherPlayer}, State) ->
 	%%Decide wether to attack or not.
-	io:format("~s: has been seen by ~s~n",[State#player_state.name,ct_player:get_name(OtherPlayer)]),
+	lager:debug("~s: has been seen by ~s~n",[State#player_state.name,ct_player:get_name(OtherPlayer)]),
 	ct_client_command:send_feedback(State,
 		{obj,[{"type",<<"seen_by_info">>},
 			{"body",{obj,[
@@ -121,7 +124,7 @@ handle_cast({entered, RoomPid, RoomExits, RoomName}, State) ->
 	%ct_client_command:send_feedback(State,io_lib:format("Room exits ~p ~n", [[X || {X,_} <- RoomExits]])),
 	{noreply, NewState};
 handle_cast({leave_denied},State) ->
-	io:format("~s has hit with a wall ~n", [State#player_state.name]),
+	lager:debug("~s has hit with a wall ~n", [State#player_state.name]),
 	ct_client_command:send_feedback(State,
 		{obj,[{"type",<<"game_message_info">>},
 			{"body",{obj,[
@@ -130,7 +133,10 @@ handle_cast({leave_denied},State) ->
 			]}}
 		]}),
 	{noreply,State};
-handle_cast(stop, State) -> {stop, normal, State}.
+handle_cast(stop, State) ->
+	% leave the room
+	ct_room:player_left(State#player_state.room,left_game,State),
+	{stop, normal, State}.
 
 handle_call({get_handler},_From,State) -> 
 	{reply,State,State}.

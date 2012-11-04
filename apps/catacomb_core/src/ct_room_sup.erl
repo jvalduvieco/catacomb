@@ -11,7 +11,7 @@ init([]) ->
 	ets:new(coordToPid, [set, named_table,public]),
 	%% Declare a simple_one_for_one supervisor as this king of supervisor is ideal for workers.
 	%% All childrem must be started dynamically and are copies of the same module.
-	io:format("~s has started (~w)~n", [?MODULE,self()]),
+	lager:info("~s has started (~w)~n", [?MODULE,self()]),
 	WorkerSpecs = {{global,ct_room}, {ct_room, start_link, []}, temporary, 2000, worker,[ct_room]},
 	StartSpecs = {{simple_one_for_one, 0, 1},[WorkerSpecs]},
     {ok, StartSpecs}.

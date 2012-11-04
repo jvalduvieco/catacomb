@@ -9,4 +9,5 @@
                         ct_session,ct_session_sup,ct_translation_tools,
                         ct_yaws_catacomb_ws_endpoint,ct_yaws_start,
                         ct_yaws_sup]},
-              {applications,[stdlib,kernel,crypto,sasl,emysql]}]}.
+              {applications,[stdlib,kernel,crypto,sasl,compiler,syntax_tools,
+                             lager,emysql]}]}.

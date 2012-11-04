@@ -1,7 +1,7 @@
 -module(ct_session).
 -behaviour(gen_server).
--export([start_link/0,stop/0]).
--export([login/3,set_character/2]).
+-export([start_link/0]).
+-export([login/3,set_character/2,stop/1]).
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
 -record(session_state,{login_state=not_logged,character_id=undefined}).
 
@@ -9,9 +9,10 @@ start_link() ->
     gen_server:start_link(?MODULE,[], []).
 
 init([]) ->
-	io:format("~s has started (~w)~n", [?MODULE,self()]),
+	lager:info("~s has started (~w)~n", [?MODULE,self()]),
     {ok, #session_state{}}.
-stop() -> gen_server:cast(?MODULE, stop).
+stop(Session) -> 
+    gen_server:cast(Session, stop).
 
 %% Client API
 login(SessionPid,User,Password) ->
@@ -28,7 +29,7 @@ handle_call({login, [User, Password]}, _From, State) ->
 		not_logged ->
             %% use ct_auth_service to log in
             LoginResult = ct_auth_service:login(User, Password),
-            io:format("LoginResult: ~p~n", [LoginResult]),
+            lager:debug("LoginResult: ~p~n", [LoginResult]),
             LoginResult;
     	_->
     		{error,already_logged_in}

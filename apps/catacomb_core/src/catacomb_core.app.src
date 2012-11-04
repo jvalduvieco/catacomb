@@ -4,4 +4,4 @@
   {mod, {catacomb_core, []}},
   {registered, [ct_soot_sup]},
   {modules, [catacomb_core, ct_auth_service,ct_character_service,ct_session,ct_session_sup,ct_player,ct_player_sup,ct_room,ct_room_sup,ct_config_service,ct_god,ct_root_sup,ct_client_command,ct_yaws_start,ct_yaws_sup,ct_yaws_catacomb_ws_endpoint]},
-  {applications, [stdlib, kernel, crypto, sasl, emysql]}]}.
+  {applications, [stdlib, kernel, crypto, sasl, compiler,syntax_tools,lager,emysql]}]}.

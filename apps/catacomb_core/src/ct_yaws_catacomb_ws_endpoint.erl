@@ -39,7 +39,7 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
   try
     is_record (State,state),
     ClientState=State#state.client_command_state,
-    io:format("Current state ~p ~p~n",[ClientState#ct_client_state.session_pid,ClientState#ct_client_state.user_id]),
+    lager:debug("Current state ~p ~p~n",[ClientState#ct_client_state.session_pid,ClientState#ct_client_state.user_id]),
     
     %% Decode received data into a Erlang structures
     {_BoolResult,Result,NewClientState}=ct_client_command:execute(Data,ClientState),
@@ -49,7 +49,7 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
     {reply, {text, list_to_binary(Result)}, NewState}
   catch Exc:Why ->
       Trace=erlang:get_stacktrace(),
-      error_logger:error_msg("Error in ~s: ~p ~p ~p.\n", [?MODULE,Exc,Why,Trace]),
+      lager:error("Error in ~s: ~p ~p ~p.\n", [?MODULE,Exc,Why,Trace]),
         {stop, Why, State}
   end;
 
@@ -60,34 +60,36 @@ handle_message(#ws_frame_info{fin=1,
                               data=Data},
                #state{frag_type=binary, acc=Acc}) ->
     Unfragged = <<Acc/binary, Data/binary>>,
-    io:format("echoing back binary message~n",[]),
+    lager:debug("echoing back binary message~n",[]),
     {reply, {binary, Unfragged}, #state{frag_type=none, acc = <<>>}};
 
 %% one full non-fragmented binary message
 handle_message(#ws_frame_info{opcode=binary,
                               data=Data},
                State) ->
-    io:format("echoing back binary message~n",[]),
+    lager:debug("echoing back binary message~n",[]),
     {reply, {binary, Data}, State};
 
 handle_message(#ws_frame_info{opcode=ping,
                               data=Data},
                State) ->
-    io:format("replying pong to ping~n",[]),
+    lager:debug("replying pong to ping~n",[]),
     {reply, {pong, Data}, State};
 
 handle_message(#ws_frame_info{opcode=pong}, State) ->
     %% A response to an unsolicited pong frame is not expected.
     %% http://tools.ietf.org/html/\
     %%            draft-ietf-hybi-thewebsocketprotocol-08#section-4
-    io:format("ignoring unsolicited pong~n",[]),
+    lager:warning("ignoring unsolicited pong~n",[]),
     {noreply, State};
 %% Client is closing connection
 handle_message(#ws_frame_info{opcode=close}, State) ->
-    io:format("WS Endpoint client closing.~n"),
-    {noreply, State};
+    ClientState=State#state.client_command_state,
+    lager:debug("WS Endpoint client closing.~n"),
+    ct_client_command:client_disconnected(ClientState),
+    {close, normal};
 
 %% Catch all
 handle_message(#ws_frame_info{}=FrameInfo, State) ->
-    io:format("WS Endpoint Unhandled message: ~p~n~p~n", [FrameInfo, State]),
+    lager:warning("WS Endpoint Unhandled message: ~p~n~p~n", [FrameInfo, State]),
     {close, {error, {unhandled_message, FrameInfo}}}.

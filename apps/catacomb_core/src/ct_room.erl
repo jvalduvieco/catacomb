@@ -126,7 +126,7 @@ handle_cast({request_leave, Direction, Player}, State) ->
 
 %tmp
 handle_cast({print_exits}, State) ->
-	io:format("{~p,~p} :  ~p ~n",[State#state.x,State#state.y,State#state.exits]),
+	lager:debug("{~p,~p} :  ~p ~n",[State#state.x,State#state.y,State#state.exits]),
 	{noreply, State};
 
 handle_cast(stop, State) -> {stop, normal, State}.

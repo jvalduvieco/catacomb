@@ -23,7 +23,7 @@ set_room_setup_max_y(Max_y)->
 
 %% Internal functions
 init([]) ->
-	io:format("ct_config_service has started (~w)~n", [self()]),
+	lager:info("ct_config_service has started (~w)~n", [self()]),
 	State=#state{},
     {ok, State}.
 stop() -> gen_server:cast({global,?MODULE}, stop).
