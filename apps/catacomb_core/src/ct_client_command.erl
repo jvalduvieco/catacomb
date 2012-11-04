@@ -74,6 +74,7 @@ do_command(Cmd,State) ->
 			{ok, CharacterData} = ct_character_service:get_character_data(State#ct_client_state.user_id,CharacterId),
 			{ok, PlayerHandle} = ct_player_sup:start_player(CharacterData),
 			ct_player:set_client(PlayerHandle,self()),
+			ct_player:set_feedback_fun(PlayerHandle, fun(Player, Feedback) -> ct_client_command:send_feedback(Player, Feedback) end),
 			ok = ct_session:set_character(State#ct_client_state.session_pid, CharacterId),
 				
 			{ok,{obj, [{"type", <<"load_character_response">>}, 

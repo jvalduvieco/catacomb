@@ -1,9 +1,9 @@
 -module(ct_player).
 -behaviour(gen_server).
 
--export([start_link/1]).
+-export([start_link/1,stop/0]).
 -export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2]).
--export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1,stop/1]).
+-export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
 -include ("ct_character_info.hrl").
@@ -18,7 +18,8 @@
 	experience_points,
 	room,			
 	room_exits,
-	params=[]}).
+	params=[],
+	feedback_fun}).
 %% Accessors
 get_handler(Pid) ->
 	gen_server:call(Pid,{get_handler}).
@@ -48,6 +49,8 @@ set_room(Player,[X,Y]) ->
     gen_server:cast(ct_player:get_pid(Player), {set_room, [X,Y]}).
 set_client(Player,Client) ->
 	gen_server:cast(ct_player:get_pid(Player), {set_client, Client}).
+set_feedback_fun(Player, Fun) ->
+	gen_server:cast(ct_player:get_pid(Player), {set_feedback_fun, Fun}).
 %% Events
 entered(Player, RoomPid, RoomExits, RoomName) ->
 	gen_server:cast(ct_player:get_pid(Player), {entered, RoomPid, RoomExits, RoomName}).
@@ -88,10 +91,15 @@ handle_cast({set_room, [X,Y]}, State) ->
 handle_cast({set_client,Client},State) ->
 	NewState=State#player_state{client=Client},
 	{noreply,NewState};
+handle_cast({set_feedback_fun,Fun},State) ->
+	NewState=State#player_state{feedback_fun=Fun},
+	{noreply,NewState};
 handle_cast({seen, OtherPlayer}, State) ->
 	%%Decide wether to attack or not.
 	lager:debug("~s: has been seen by ~s~n",[State#player_state.name,ct_player:get_name(OtherPlayer)]),
-	ct_client_command:send_feedback(State,
+	
+	FeedbackFun = State#player_state.feedback_fun,
+	FeedbackFun(State,
 		{obj,[{"type",<<"seen_by_info">>},
 			{"body",{obj,[
 				{"name",ct_player:get_name(OtherPlayer)},
@@ -102,7 +110,8 @@ handle_cast({seen, OtherPlayer}, State) ->
 handle_cast({unseen, OtherPlayer, Direction}, State) ->
 	%%The player left the room
 	%io:format("~s: no longer see ~s~n",[State#player_state.name,ct_player:get_name(OtherPlayer)]),
-	ct_client_command:send_feedback(State,
+	FeedbackFun = State#player_state.feedback_fun,
+	FeedbackFun(State,
 		{obj,[{"type",<<"unseen_by_info">>},
 			{"body",{obj,[
 				{"name",ct_player:get_name(OtherPlayer)},
@@ -113,7 +122,9 @@ handle_cast({unseen, OtherPlayer, Direction}, State) ->
 	{noreply,State};
 handle_cast({entered, RoomPid, RoomExits, RoomName}, State) ->
 	NewState=State#player_state{room_exits=RoomExits,room=RoomPid},
-	ct_client_command:send_feedback(State,
+	%ct_client_command:send_feedback(State,
+	FeedbackFun = State#player_state.feedback_fun,
+	FeedbackFun(State,
 		{obj,[{"type",<<"room_info">>},
 			{"body",{obj,[
 				{"name",RoomName},
@@ -125,7 +136,9 @@ handle_cast({entered, RoomPid, RoomExits, RoomName}, State) ->
 	{noreply, NewState};
 handle_cast({leave_denied},State) ->
 	lager:debug("~s has hit with a wall ~n", [State#player_state.name]),
-	ct_client_command:send_feedback(State,
+	
+	FeedbackFun = State#player_state.feedback_fun,
+	FeedbackFun(State,
 		{obj,[{"type",<<"game_message_info">>},
 			{"body",{obj,[
 				{"msg_type",<<"warning">>},
