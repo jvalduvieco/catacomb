@@ -1,8 +1,8 @@
 -module(ct_player).
 -behaviour(gen_server).
 
--export([start_link/1,stop/0]).
--export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2]).
+-export([start_link/1,stop/1]).
+-export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_fun/2]).
 -export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 

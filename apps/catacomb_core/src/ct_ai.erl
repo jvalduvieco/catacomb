@@ -13,7 +13,7 @@ start_link(AiSpecs) ->
 send_feedback(Player, Feedback) ->
   ClientPid = ct_player:get_client(Player),
 % Depending on app configuration do a callback
-  io:format("AI receives feedback: ~p~n", [Feedback]),
+  lager:debug("AI receives feedback: ~p~n", [Feedback]),
   gen_server:cast(ClientPid, {feedback, Feedback}).
 
 get_handler(Pid) ->
@@ -47,7 +47,7 @@ init(AiSpecs) ->
                     behaviour_on_player_seen = AiSpecs#ai_specs.behaviour_on_player_seen,
                     behaviour_on_player_unseen = AiSpecs#ai_specs.behaviour_on_player_unseen
   },
-  io:format("ct_ai has started (~w)~n", [self()]),
+  lager:info("ct_ai has started (~w)~n", [self()]),
   {ok, State}.
 stop() -> gen_server:cast(?MODULE, stop).
 %% User Callbacks
@@ -56,8 +56,8 @@ handle_cast({feedback, Feedback}, State) ->
     {obj, [{"type", <<"room_info">>},
            {"body", {obj, [{"name", RoomName},
                            {"exits", Exits}]}}]} ->
-      io:format("room name: ~p~n", [RoomName]),
-      io:format("exits: ~p~n", [Exits]),
+      lager:debug("room name: ~p~n", [RoomName]),
+      lager:debug("exits: ~p~n", [Exits]),
 % behaviour on enter room
       NewState2 = State#ai_state{room_name = RoomName, room_exits = Exits},
       Fun = State#ai_state.behaviour_on_room_enter,
@@ -86,10 +86,10 @@ handle_cast({feedback, Feedback}, State) ->
       NewState3 = Fun(NewState2),
       NewState3;
     Default ->
-      io:format("unexpected feedback: ~p~n", [Default]),
+      lager:debug("unexpected feedback: ~p~n", [Default]),
       State
   end,
-  io:format("new state: ~p~n", [NewState]),
+  lager:debug("new state: ~p~n", [NewState]),
   {noreply, NewState};
 handle_cast({do_fun, Fun}, State) ->
   NewState = Fun(State),
