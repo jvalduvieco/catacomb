@@ -35,7 +35,7 @@ client_disconnected(#ct_client_state{session_pid=SessionPid,player_handle=Player
 
 do_command(Cmd,State) ->
 	Command=ct_translation_tools:get_type(Cmd),
-	logger:debug("Command: ~p~n", [Command]),
+  lager:debug("Command: ~p~n", [Command]),
 	Result=case Command of
 		<<"login_request">> ->
 			User=ct_translation_tools:get_value(<<"user">>,Cmd),
@@ -111,6 +111,10 @@ do_command(Cmd,State) ->
 			{ok,[],State};
 		<<"hit">>->
 			%%ct_player:hit(Status#status.player_pid,PlayerPid)
+			{ok,[],State};
+		<<"player_talk_request">>->
+            Message=ct_translation_tools:get_value(<<"message">>,Cmd),
+			ct_player:talk(State#ct_client_state.player_handle, Message),
 			{ok,[],State};
 		InvalidCommand->
 			ErrorStr= "Unkown command: "++ binary_to_list(InvalidCommand),

@@ -34,9 +34,19 @@ q().
 #Ara ja podem executar tota la app de cop
 erl -pa ebin/ deps/*/ebin/ -boot catacomb_core
 
+Debugar
+=======
+lager:set_loglevel(lager_console_backend, debug).
+
 Carregar player
-{ok,CharacterData}=ct_character_service:get_character_data(1,1).
-{ok,Player}=ct_player_sup:start_player(CharacterData).
+===============
+{ok, CharacterData} = ct_character_service:get_character_data(1,1),
+{ok, PlayerHandle} = ct_player_sup:start_player(CharacterData),
+ct_player:set_client(PlayerHandle,self()).
+
+Parlar
+======
+ct_player:talk(PlayerHandle, <<"Hi buddy!">>).
 
 IA
 ==

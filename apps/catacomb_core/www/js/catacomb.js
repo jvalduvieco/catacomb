@@ -17,6 +17,7 @@ $(document).ready(function()
     $("#roomDirSW").click("sw", go);
     $("#roomDirS").click("s", go);
     $("#roomDirSE").click("se", go);
+    $("#chatSendButton").click(chatTalk);
 });
 
 function writeStatus(message)
@@ -122,6 +123,7 @@ function setUI()
             $("#loginButton").removeAttr('disabled');
             $("#getCharacterListButton").attr('disabled', 'disabled');
             $("#sendButton").removeAttr('disabled');
+            $("#chatSendButton").attr('disabled', 'disabled');
             break;
         case STATUS_CONNECTED_AUTH:
             $("#connectButton").attr('disabled', 'disabled');
@@ -129,6 +131,7 @@ function setUI()
             $("#loginButton").attr('disabled', 'disabled');
             $("#getCharacterListButton").removeAttr('disabled');
             $("#sendButton").removeAttr('disabled');
+            $("#chatSendButton").attr('disabled', 'disabled');
             break;
         case STATUS_NOT_CONNECTED:
             $("#connectButton").removeAttr('disabled');
@@ -136,9 +139,12 @@ function setUI()
             $("#loginButton").attr('disabled', 'disabled');
             $("#getCharacterListButton").attr('disabled', 'disabled');
             $("#sendButton").attr('disabled', 'disabled');
+            $("#chatSendButton").attr('disabled', 'disabled');
             disableAllRoomDirections();
             $("#playersInRoom").empty();
             $("#playersUnseen").empty();
+            $("#chatRoom").empty();
+            $("#roomName").empty();
             break;
     }
 }
@@ -167,6 +173,9 @@ function processResponse(data)
             break;
         case "unseen_by_info":
             playerUnseen(obj.body);
+            break;
+        case "room_chat_talk":
+            roomChatTalk(obj.body);
             break;
     }
 
@@ -204,6 +213,13 @@ function go(direction)
     ws.send('{"type":"player_go_request","body":{"direction":"' + direction.data + '"}}');
 }
 
+function chatTalk()
+{
+    var message = $("#chatMessage").val();
+    ws.send('{"type":"player_talk_request","body":{"message":"' + message + '"}}');
+    $("#chatMessage").val('');
+}
+
 function roomInfo(data)
 {
     var name = data.name;
@@ -228,6 +244,7 @@ function roomInfo(data)
     });
 
     $("#playersUnseen").empty();
+    $("#chatSendButton").removeAttr('disabled');
 }
 
 function characterList(data)
@@ -265,4 +282,10 @@ function playerUnseen(data)
 
     $("#playerUnseen" + id).remove();
     if(direction != "none") $("#playersUnseen").append('<dt id="playerUnseen' + id + '">' + name + ' (' + direction + ')</dt>');
+}
+function roomChatTalk(data)
+{
+    var name = data.player_name;
+    var message = data.message;
+    $("#chatRoom").prepend('<div class="chat-message">[' + name + ']: ' + message + '</div>');
 }

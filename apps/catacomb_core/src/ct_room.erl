@@ -2,12 +2,14 @@
 -behaviour(gen_server).
 
 -export([start_link/2,stop/0]).
--export([enter/4, request_leave/3,get_exits/1,player_left/3,add_exit/4]).
+-export([enter/4, request_leave/3,get_exits/1,player_left/3,add_exit/4,chat_talk/3]).
 -export([relative_coords_to_absolute/5,find_neighbours_entrances/5]). %% REMOVEME When done
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
 
 %tmp
 -export([print_exits/1]).
+
+-include ("ct_player.hrl").
 
 -record(state,{
 	x,
@@ -16,7 +18,9 @@
 	exits=[],
 	players=[],
 	objects=[],
-	params=[]}).
+	params=[],
+  chat_evm_pid,
+  chat_players_pid=[]}).
 
 
 start_link(X,Y) ->
@@ -62,6 +66,10 @@ add_exit(RoomPid,Exit,X,Y)->
 			{badarg,[]}
 	end.
 
+%% chat
+chat_talk(RoomPid, PlayerWhoTalksName, Message) ->
+  gen_server:cast(RoomPid, {chat_talk, PlayerWhoTalksName, Message}).
+
 %tmp
 print_exits(RoomPid)->
 	case is_pid(RoomPid) of
@@ -73,42 +81,63 @@ print_exits(RoomPid)->
 
 %% Internal functions
 init({X,Y}) ->
-<<A:32, B:32, C:32>> = crypto:rand_bytes(12),
-    random:seed({A,B,C}),
-    MaxX=ct_config_service:get_room_setup_max_x(),
-    MaxY=ct_config_service:get_room_setup_max_y(),
+  <<A:32, B:32, C:32>> = crypto:rand_bytes(12),
+  random:seed({A,B,C}),
+  MaxX=ct_config_service:get_room_setup_max_x(),
+  MaxY=ct_config_service:get_room_setup_max_y(),
 	{RoomName, Props}=create_room_properties(),		%% Define Room properties and name.
 	{ok,RoomExits}=create_room_exits(X,Y,MaxX,MaxY),
-	State=#state{x=X,y=Y,room_name=RoomName,exits=RoomExits,params=Props},
+
+  %% start chat server
+  {ok, ChatPid} = gen_event:start_link(),
+
+  %% state
+  State=#state{x=X,y=Y,room_name=RoomName,exits=RoomExits,params=Props, chat_evm_pid=ChatPid},
 	ets:insert(coordToPid,{list_to_atom([X,Y]),self()}),
 	%io:format("~p : ~w ~n",[{X,Y},RoomExits]),
-    {ok, State}.
+  {ok, State}.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% Callbacks
 handle_call({get_exits},_From, State) ->
 	{reply,{ok,State#state.exits},State}.
 handle_cast({enter, Player, RoomFromPid, Direction}, State) ->
-    NewState=State#state{players=[Player|State#state.players]},
-    case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Direction, Player); false -> true end,
-    ct_player:entered(Player, self(), State#state.exits, State#state.room_name),
-	% Notificar players de la room que hi ha un nou player
-    %lists:map(fun(X) -> io:format("~w is here.~n",[X]) end,State#state.players),
-    %% Replace by room event handler?
-    lists:map(fun(X) -> ct_player:seen(X,Player) end,State#state.players),
-    lists:map(fun(X) -> ct_player:seen(Player,X) end,State#state.players),
-    {noreply, NewState};
+  case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Direction, Player); false -> true end,
+  ct_player:entered(Player, self(), State#state.exits, State#state.room_name),
+
+  %% chat
+%%   HandlerId = {ct_room_chat, make_ref()},
+  HandlerId = {ct_room_chat, Player#player_state.my_pid},
+  gen_event:add_sup_handler(State#state.chat_evm_pid, HandlerId, [Player]),
+
+  %% save entering player and player chat in a proplist
+  NewState=State#state{players=[Player|State#state.players],
+                       chat_players_pid=[{Player#player_state.my_pid, HandlerId}|State#state.chat_players_pid]},
+
+  % Notificar players de la room que hi ha un nou player
+  %lists:map(fun(X) -> io:format("~w is here.~n",[X]) end,State#state.players),
+  %% Replace by room event handler?
+  lists:map(fun(X) -> ct_player:seen(X,Player) end,State#state.players),
+  lists:map(fun(X) -> ct_player:seen(Player,X) end,State#state.players),
+  {noreply, NewState};
 handle_cast({add_exit, Exit,X,Y}, State) ->
 	NewExits=lists:sort(lists:append(State#state.exits,[{Exit,[X,Y]}])),
 	NewState=State#state{exits=NewExits},
 	%io:format("FROM {~p,~p} :: State ~p :  NewState :~p ~n",[X,Y,State,NewState]),
 	{noreply, NewState};
 handle_cast({player_left, Player, Direction}, State) ->
-	%% Check if player is really in
-	NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)]},
+
+  %% chat
+  ChatPlayerPid = proplists:get_value(Player#player_state.my_pid, State#state.chat_players_pid),
+  gen_event:delete_handler(State#state.chat_evm_pid, ChatPlayerPid, []),
+
+  %% Check if player is really in
+  NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)],
+                       chat_players_pid=proplists:delete(Player#player_state.my_pid, State#state.chat_players_pid)},
 	%% Replace by room event handler?
-    lists:map(fun(X) -> ct_player:unseen(X,Player,Direction) end,NewState#state.players),
-    lists:map(fun(X) -> if Player/=X -> ct_player:unseen(Player,X,none) end end,NewState#state.players),
+  lists:map(fun(X) -> ct_player:unseen(X,Player,Direction) end,NewState#state.players),
+  lists:map(fun(X) -> if Player/=X -> ct_player:unseen(Player,X,none) end end,NewState#state.players),
+
 	{noreply, NewState};
 handle_cast({request_leave, Direction, Player}, State) ->
 	%controlar que es pugui anar en la direcció
@@ -128,7 +157,10 @@ handle_cast({request_leave, Direction, Player}, State) ->
 handle_cast({print_exits}, State) ->
 	lager:debug("{~p,~p} :  ~p ~n",[State#state.x,State#state.y,State#state.exits]),
 	{noreply, State};
-
+handle_cast({chat_talk, PlayerWhoTalksName, Message}, State) ->
+  lager:debug("cast room chat talk: ~p: ~p~n", [PlayerWhoTalksName, Message]),
+  gen_event:notify(State#state.chat_evm_pid, {talk, PlayerWhoTalksName, Message}),
+  {noreply, State};
 handle_cast(stop, State) -> {stop, normal, State}.
 
 %% System Callbacks

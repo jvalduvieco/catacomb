@@ -3,23 +3,12 @@
 
 -export([start_link/1,stop/1]).
 -export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_fun/2]).
--export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1]).
+-export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1,talk/2,heard/3]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
 -include ("ct_character_info.hrl").
+-include ("ct_player.hrl").
 
--record(player_state,{id,
-	my_pid,
-	client,
-	name,
-	max_life_points,
-	life_points,
-	level,
-	experience_points,
-	room,			
-	room_exits,
-	params=[],
-	feedback_fun}).
 %% Accessors
 get_handler(Pid) ->
 	gen_server:call(Pid,{get_handler}).
@@ -62,6 +51,10 @@ leave_denied(Player) ->
 	gen_server:cast(ct_player:get_pid(Player),{leave_denied}).
 stop(Player) ->
 	gen_server:cast(ct_player:get_pid(Player),stop).
+talk(Player, Message) ->
+  gen_server:cast(ct_player:get_pid(Player),{talk, Message}).
+heard(Player, PlayerWhoTalksName, Message) ->
+  gen_server:cast(ct_player:get_pid(Player),{heard, PlayerWhoTalksName, Message}).
 
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
@@ -146,6 +139,22 @@ handle_cast({leave_denied},State) ->
 			]}}
 		]}),
 	{noreply,State};
+handle_cast({talk, Message},State) ->
+	lager:debug("~s say ~s~n", [State#player_state.name, Message]),
+
+  ct_room:chat_talk(State#player_state.room, State#player_state.name, Message),
+
+	{noreply,State};
+handle_cast({heard, PlayerWhoTalksName, Message},State) ->
+  FeedbackFun = State#player_state.feedback_fun,
+  FeedbackFun(State,
+    {obj,[{"type",<<"room_chat_talk">>},
+      {"body",{obj,[
+        {"player_name", PlayerWhoTalksName},
+        {"message", Message}
+      ]}}
+    ]}),
+  {noreply,State};
 handle_cast(stop, State) ->
 	% leave the room
 	ct_room:player_left(State#player_state.room,left_game,State),

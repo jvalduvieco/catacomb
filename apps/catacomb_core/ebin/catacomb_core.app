@@ -6,9 +6,9 @@
               {modules,[catacomb_core,ct_ai,ct_ai_behaviours,ct_ai_sup,
                         ct_auth_service,ct_character_service,
                         ct_client_command,ct_config_service,ct_god,ct_player,
-                        ct_player_sup,ct_room,ct_room_sup,ct_root_sup,
-                        ct_session,ct_session_sup,ct_translation_tools,
-                        ct_yaws_catacomb_ws_endpoint,ct_yaws_start,
-                        ct_yaws_sup]},
+                        ct_player_sup,ct_room,ct_room_chat,ct_room_sup,
+                        ct_root_sup,ct_session,ct_session_sup,
+                        ct_translation_tools,ct_yaws_catacomb_ws_endpoint,
+                        ct_yaws_start,ct_yaws_sup]},
               {applications,[stdlib,kernel,crypto,sasl,compiler,syntax_tools,
                              lager,emysql]}]}.

@@ -57,8 +57,20 @@ body {
 .controls-status::after {
     content: "Status";
 }
+.controls-chat::after {
+    content: "Chat";
+}
 .controls-room-directions::after {
     content: "Room directions";
+}
+
+.controls-status {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.controls-chat {
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .response {
@@ -73,4 +85,8 @@ body {
 
 .character-list-button {
     margin: 10px;
+}
+
+.chat-message {
+    font-size: 10px;
 }
