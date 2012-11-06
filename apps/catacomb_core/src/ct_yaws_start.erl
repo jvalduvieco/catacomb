@@ -7,7 +7,7 @@ start() ->
     {ok, spawn(?MODULE, run, [])}.
 
 run() ->
-    lager:notice("~s has started (~w)~n", [?MODULE,self()]),
+    lager:info("~s has started (~w)~n", [?MODULE,self()]),
     Id = "embedded",
     GconfList = [{id, Id},
                 {logdir, "./log/"}],
