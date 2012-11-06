@@ -287,5 +287,5 @@ function roomChatTalk(data)
 {
     var name = data.player_name;
     var message = data.message;
-    $("#chatRoom").prepend('<div class="chat-message">[' + name + ']: ' + message + '</div>');
+    $("#timeline").prepend('<div class="chat-message">[' + name + ']: ' + message + '</div>');
 }
