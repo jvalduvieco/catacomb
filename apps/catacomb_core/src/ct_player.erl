@@ -107,7 +107,7 @@ handle_cast({seen, OtherPlayer}, State) ->
 		{obj,[{"type",<<"seen_by_info">>},
 			{"body",{obj,[
 				{"name",ct_player:get_name(OtherPlayer)},
-				{"player_id",ct_player:get_public_id(OtherPlayer)}
+				{"public_id",ct_player:get_public_id(OtherPlayer)}
 			]}}
 		]}),
 	{noreply,State};
@@ -119,7 +119,7 @@ handle_cast({unseen, OtherPlayer, Direction}, State) ->
 		{obj,[{"type",<<"unseen_by_info">>},
 			{"body",{obj,[
 				{"name",ct_player:get_name(OtherPlayer)},
-				{"player_id",ct_player:get_public_id(OtherPlayer)}, 
+				{"public_id",ct_player:get_public_id(OtherPlayer)}, 
 				{"direction", Direction}
 			]}}
 		]}),

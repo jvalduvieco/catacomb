@@ -235,7 +235,7 @@ function characterList(data)
     $("#characterList").empty();
 
     $.each(data, function(index, value) {
-        var id = value.id;
+        var id = value.public_id;
         var name = value.name;
         $("#characterList").append('<button onclick="loadCharacter(' + id + ')" class="btn btn-success character-list-button">' + name + '</button>');
     });
@@ -250,7 +250,7 @@ function loadCharacter(id)
 function playerSeen(data)
 {
     var name = data.name;
-    var id = data.player_id;
+    var id = data.public_id;
     writeTimeline("You can see " + name);
     $("#playersInRoom").append('<dt id="playerSeen' + id + '">' + name + '</dt>');
 
@@ -259,7 +259,7 @@ function playerSeen(data)
 function playerUnseen(data)
 {
     var name = data.name;
-    var id = data.player_id;
+    var id = data.public_id;
     var direction = data.direction;
     $("#playerSeen" + id).remove();
 
