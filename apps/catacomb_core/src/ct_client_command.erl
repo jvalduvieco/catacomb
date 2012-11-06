@@ -112,6 +112,10 @@ do_command(Cmd,State) ->
 		<<"hit">>->
 			%%ct_player:hit(Status#status.player_pid,PlayerPid)
 			{ok,[],State};
+		<<"player_talk_request">>->
+            Message=ct_translation_tools:get_value(<<"message">>,Cmd),
+			ct_player:talk(State#ct_client_state.player_handle, Message),
+			{ok,[],State};
 		InvalidCommand->
 			ErrorStr= "Unkown command: "++ binary_to_list(InvalidCommand),
 			CmdResult={obj,[{"type",<<"general_response">>},{"result",<<"failure">>},{"body",list_to_binary(ErrorStr)}]},
