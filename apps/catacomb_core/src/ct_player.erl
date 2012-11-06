@@ -6,6 +6,9 @@
 -export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1,talk/2,heard/3]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
+-export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_fun/2,get_public_id/1]).
+-export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1]).
+
 -include ("ct_character_info.hrl").
 -include ("ct_player.hrl").
 
@@ -26,6 +29,8 @@ get_life_points(#player_state{life_points=LifePoints} = _Player) ->
 	LifePoints.
 get_client(#player_state{client=Client} = _Player) ->
 	Client.
+get_public_id(#player_state{public_id=PublicId} = _Player) ->
+	PublicId.
 
 start_link(CharacterSpecs) ->
     gen_server:start_link(?MODULE,CharacterSpecs, []).
@@ -65,7 +70,8 @@ init([{obj,CharacterSpecs}]) ->
 		max_life_points=proplists:get_value(<<"max_life_points">>, CharacterSpecs, none),
 		life_points=proplists:get_value(<<"life_points">>, CharacterSpecs, none),
 		level=proplists:get_value(<<"level">>, CharacterSpecs, none),
-		experience_points=proplists:get_value(<<"experience_points">>, CharacterSpecs, none)
+		experience_points=proplists:get_value(<<"experience_points">>, CharacterSpecs, none),
+		public_id=proplists:get_value(<<"public_id">>, CharacterSpecs, none)
 		%room=ct_room_sup:get_pid([proplists:get_value(<<"coord_x">>, CharacterSpecs, none),proplists:get_value(<<"coord_y">>, CharacterSpecs, none)])
 	},
 	lager:info("ct_player has started (~w)~n", [self()]),
@@ -96,7 +102,7 @@ handle_cast({seen, OtherPlayer}, State) ->
 		{obj,[{"type",<<"seen_by_info">>},
 			{"body",{obj,[
 				{"name",ct_player:get_name(OtherPlayer)},
-				{"player_id",99} % TODO define a way of referring to players, objs, etc..
+				{"public_id",ct_player:get_public_id(OtherPlayer)}
 			]}}
 		]}),
 	{noreply,State};
@@ -108,7 +114,7 @@ handle_cast({unseen, OtherPlayer, Direction}, State) ->
 		{obj,[{"type",<<"unseen_by_info">>},
 			{"body",{obj,[
 				{"name",ct_player:get_name(OtherPlayer)},
-				{"player_id",99}, % TODO define a way of referring to players, objs, etc..
+				{"public_id",ct_player:get_public_id(OtherPlayer)}, 
 				{"direction", Direction}
 			]}}
 		]}),

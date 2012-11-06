@@ -42,3 +42,14 @@ INSERT INTO `user` (`id`, `login`, `password`) VALUES
 ALTER TABLE `character`
 ADD CONSTRAINT `character_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES
 `user` (`id`);
+
+# MIGRATIONS
+# 1 ====
+ALTER TABLE `character` ADD public_id int(11) NOT NULL;
+UPDATE `character` SET public_id=1001 WHERE id=1;
+UPDATE `character` SET public_id=1002 WHERE id=2;
+UPDATE `character` SET public_id=1003 WHERE id=3;
+UPDATE `character` SET public_id=1004 WHERE id=4;
+UPDATE `character` SET public_id=1005 WHERE id=5;
+CREATE UNIQUE INDEX character_public_id_idx
+ON `character` ( public_id );

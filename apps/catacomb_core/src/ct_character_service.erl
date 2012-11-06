@@ -45,9 +45,9 @@ handle_call({get_character_list, UserId}, _From, State) ->
 			{reply, {error, sql_error}, State};
 		_ -> {reply, {error, sql_error}, State}
 	end;	
-handle_call({get_character_data,UserId,CharacterId}, _From, State) ->
+handle_call({get_character_data,UserId,PublicCharacterId}, _From, State) ->
 	%Get character data from DB
-	SQL=io_lib:format("SELECT * FROM `character` WHERE id=~s AND user_id=~s", [emysql_util:encode(CharacterId),emysql_util:encode(UserId)]),
+	SQL=io_lib:format("SELECT * FROM `character` WHERE public_id=~s AND user_id=~s", [emysql_util:encode(PublicCharacterId),emysql_util:encode(UserId)]),
     Result = emysql:execute(ct_auth_pool, SQL ),
 	case Result of
 		#result_packet{rows=[]} ->
