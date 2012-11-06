@@ -1,4 +1,4 @@
-catacomb
+Catacomb
 ========
 This is a game full of rooms that can be played from the web browser. It is inspired in the old MUD games that we used to play.
 For us it is an excuse to learn Erlang so don't take it too seriously, we are in the early stages of Erlang. 
@@ -8,6 +8,10 @@ This game is developed by:
 * Daniel Codina [@dcodix](https://twitter.com/dcodix)
 * Jordi Llonch [@jordillonch](https://twitter.com/jordillonch)
 * Joan Valduvieco [@jvalduvieco](https://twitter.com/jvalduvieco)
+
+## Screenshot
+
+![Screenshot](https://raw.github.com/jvalduvieco/catacomb/master/apps/catacomb_core/priv/screenshot.png "Screenshot")
 
 
 ## Using catacomb
