@@ -32,7 +32,7 @@ handle_call({get_character_list, UserId}, _From, State) ->
 	% User2=#ct_character_info{id=32908230983,name="GeD",max_life_points=32000,life_points=15000},
 	% User3=#ct_character_info{id=32908230984,name="TITO",max_life_points=52000,life_points=100},
  %    {reply, {ok, [User1,User2,User3]}, State};
-    Result = emysql:execute(ct_auth_pool, "SELECT * FROM `character` WHERE user_id=" ++ emysql_util:encode(UserId)),
+    Result = emysql:execute(ct_auth_pool, "SELECT name,public_id,max_life_points,life_points,level FROM `character` WHERE user_id=" ++ emysql_util:encode(UserId)),
 	case Result of
 		#result_packet{rows=[]} ->
 			{reply, {ok, []}, State};
