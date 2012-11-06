@@ -35,7 +35,7 @@ client_disconnected(#ct_client_state{session_pid=SessionPid,player_handle=Player
 
 do_command(Cmd,State) ->
 	Command=ct_translation_tools:get_type(Cmd),
-	logger:debug("Command: ~p~n", [Command]),
+	lager:debug("Command: ~p~n", [Command]),
 	Result=case Command of
 		<<"login_request">> ->
 			User=ct_translation_tools:get_value(<<"user">>,Cmd),
