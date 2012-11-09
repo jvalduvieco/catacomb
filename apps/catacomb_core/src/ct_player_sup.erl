@@ -9,6 +9,7 @@ start_link() ->
 
 init([]) ->
 	lager:info("~s has started (~w)~n", [?MODULE,self()]),
+    ets:new(player_id_to_pid, [set, named_table,public]),
 	%% Declare a simple_one_for_one supervisor as this king of supervisor is ideal for workers.
 	%% All childrem must be started dynamically and are copies of the same module.
 	WorkerSpecs = {ct_player, {ct_player, start_link, []}, temporary, 2000, worker,[ct_player]},
@@ -24,11 +25,11 @@ start_player(CharacterSpecs) ->
     X=proplists:get_value(<<"coord_x">>, CharacterData, none),
     Y=proplists:get_value(<<"coord_y">>, CharacterData, none),
     ct_player:set_room(Player,[X,Y]),
-    ets:insert(player_id_to_pid,{list_to_atom(PlayerId),Player}),
+    ets:insert(player_id_to_pid,{PlayerId,Player}),
     {ok,Player}.
 
 get_handler(PlayerId) ->
-    case ets:lookup(player_id_to_pid,list_to_atom(PlayerId)) of
+    case ets:lookup(player_id_to_pid,PlayerId) of
         [] ->
             {error,undefined};
         [{_,PlayerHandle}] ->
