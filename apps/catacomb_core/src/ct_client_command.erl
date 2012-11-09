@@ -109,8 +109,9 @@ do_command(Cmd,State) ->
 		<<"info">> ->
 			%%ct_player:info(Status#status.player_pid)
 			{ok,[],State};
-		<<"hit">>->
-			%%ct_player:hit(Status#status.player_pid,PlayerPid)
+		<<"attack">>->
+			PlayerId=ct_translation_tools:get_value(<<"character_id">>, Cmd),
+			ct_player:attack(Status#status.player_pid,ct_player_sup:get_handler(PlayerId)),
 			{ok,[],State};
 		<<"player_talk_request">>->
             Message=ct_translation_tools:get_value(<<"message">>,Cmd),

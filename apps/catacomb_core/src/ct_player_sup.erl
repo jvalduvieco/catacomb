@@ -1,7 +1,7 @@
 -module(ct_player_sup).
 -behaviour(supervisor).
 -export([start_link/0]).
--export([init/1,start_player/1]).
+-export([init/1,start_player/1,get_handler/1]).
 
 
 start_link() ->
@@ -19,8 +19,18 @@ init([]) ->
 start_player(CharacterSpecs) ->
 	{ok,Pid}=supervisor:start_child({global,?MODULE}, [CharacterSpecs]),
     Player=ct_player:get_handler(Pid),
+    PlayerId=ct_player:get_public_id(Player),
     [{obj,CharacterData}]=CharacterSpecs,
     X=proplists:get_value(<<"coord_x">>, CharacterData, none),
     Y=proplists:get_value(<<"coord_y">>, CharacterData, none),
     ct_player:set_room(Player,[X,Y]),
+    ets:insert(player_id_to_pid,{list_to_atom(PlayerId),Player}),
     {ok,Player}.
+
+get_handler(PlayerId) ->
+    case ets:lookup(player_id_to_pid,list_to_atom(PlayerId)) of
+        [] ->
+            {error,undefined};
+        [{_,PlayerHande}] ->
+            {ok,PlayerHandle}
+    end.
