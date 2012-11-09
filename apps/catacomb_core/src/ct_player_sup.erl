@@ -31,6 +31,6 @@ get_handler(PlayerId) ->
     case ets:lookup(player_id_to_pid,list_to_atom(PlayerId)) of
         [] ->
             {error,undefined};
-        [{_,PlayerHande}] ->
+        [{_,PlayerHandle}] ->
             {ok,PlayerHandle}
     end.
