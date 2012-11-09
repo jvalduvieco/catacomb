@@ -26,6 +26,8 @@ random_movements_fun(State) ->
   %io:format("RandomExit: ~p~n", [RandomExit]),
   %% move player
   ct_player:go(State#ai_state.player, RandomExit),
+  %% heartbeat
+  ct_player:heartbeat(State#ai_state.player, 0),
   %% wait
   %io:format("waiting...~n"),
 

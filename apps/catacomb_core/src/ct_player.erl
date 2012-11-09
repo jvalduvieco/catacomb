@@ -181,6 +181,8 @@ handle_cast(stop, State) ->
 	ct_room:player_left(State#player_state.room,left_game,State),
 	{stop, normal, State}.
 
+handle_call({heartbeat_check},_From,#player_state{heartbeat_last_timestamp=HeartbeatLastTimestamp} = State) when HeartbeatLastTimestamp =:= undefined->
+  {reply,State,State};
 handle_call({heartbeat_check},_From,State) ->
   CurrentTimestamp = now(),
   Dif = timer:now_diff(CurrentTimestamp, State#player_state.heartbeat_last_timestamp),
