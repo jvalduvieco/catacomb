@@ -113,8 +113,12 @@ do_command(Cmd,State) ->
 			%%ct_player:hit(Status#status.player_pid,PlayerPid)
 			{ok,[],State};
 		<<"player_talk_request">>->
-            Message=ct_translation_tools:get_value(<<"message">>,Cmd),
+      Message=ct_translation_tools:get_value(<<"message">>,Cmd),
 			ct_player:talk(State#ct_client_state.player_handle, Message),
+			{ok,[],State};
+		<<"heartbeat_request">>->
+      LastTimeDiff=ct_translation_tools:get_value(<<"ltd">>,Cmd),
+			ct_player:heartbeat(State#ct_client_state.player_handle, LastTimeDiff),
 			{ok,[],State};
 		InvalidCommand->
 			ErrorStr= "Unkown command: "++ binary_to_list(InvalidCommand),

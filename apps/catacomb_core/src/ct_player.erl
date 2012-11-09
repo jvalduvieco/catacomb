@@ -2,7 +2,7 @@
 -behaviour(gen_server).
 
 -export([start_link/1,stop/1]).
--export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_fun/2,get_public_id/1]).
+-export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_fun/2,get_public_id/1,heartbeat/2,heartbeat_check/1]).
 -export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1,talk/2,heard/3]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
@@ -57,6 +57,10 @@ talk(Player, Message) ->
   gen_server:cast(ct_player:get_pid(Player),{talk, Message}).
 heard(Player, PlayerWhoTalksName, Message) ->
   gen_server:cast(ct_player:get_pid(Player),{heard, PlayerWhoTalksName, Message}).
+heartbeat(Player, LastTimeDiff) ->
+  gen_server:cast(ct_player:get_pid(Player),{heartbeat, LastTimeDiff}).
+heartbeat_check(Player) ->
+  gen_server:call(ct_player:get_pid(Player),{heartbeat_check}).
 
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
@@ -71,8 +75,10 @@ init([{obj,CharacterSpecs}]) ->
 		public_id=proplists:get_value(<<"public_id">>, CharacterSpecs, none)
 		%room=ct_room_sup:get_pid([proplists:get_value(<<"coord_x">>, CharacterSpecs, none),proplists:get_value(<<"coord_y">>, CharacterSpecs, none)])
 	},
-	lager:info("ct_player has started (~w)~n", [self()]),
-    {ok, State}.
+  %% spawn heartbeat watchdog (10 s)
+  timer:apply_after(10000, ?MODULE, heartbeat_check, [State]),
+  lager:info("ct_player has started (~w)~n", [self()]),
+  {ok, State}.
 
 %% User Callbacks
 handle_cast({go, Direction}, State) ->
@@ -158,12 +164,39 @@ handle_cast({heard, PlayerWhoTalksName, Message},State) ->
       ]}}
     ]}),
   {noreply,State};
+handle_cast({heartbeat, LastTimeDiff},State) ->
+  lager:debug("heartbeat last time diff: ~p ms~n", [LastTimeDiff]),
+  %% heartbeat response to cli
+  FeedbackFun = State#player_state.feedback_fun,
+  FeedbackFun(State,
+    {obj,[{"type",<<"heartbeat_response">>},
+      {"body",{obj,[]}}
+    ]}),
+  %% hearbeat info
+  LastTimestamp = now(),
+  NewState = State#player_state{heartbeat_last_timestamp=LastTimestamp, heartbeat_last_cli_time_diff=LastTimeDiff},
+  {noreply,NewState};
 handle_cast(stop, State) ->
 	% leave the room
 	ct_room:player_left(State#player_state.room,left_game,State),
 	{stop, normal, State}.
 
-handle_call({get_handler},_From,State) -> 
+handle_call({heartbeat_check},_From,State) ->
+  CurrentTimestamp = now(),
+  Dif = timer:now_diff(CurrentTimestamp, State#player_state.heartbeat_last_timestamp),
+  lager:debug("Heartbeat check. ~p - ~p = ~p~n", [CurrentTimestamp, State#player_state.heartbeat_last_timestamp, Dif]),
+  if
+    Dif > 12000000 -> %% 12 s
+      lager:debug("Heartbeat timeout. Stopping player."),
+      % leave the room
+      ct_room:player_left(State#player_state.room,left_game,State),
+      {stop, heartbeat_timeout, State};
+    true ->
+      %% spawn heartbeat watchdog (10 s)
+      timer:apply_after(10000, ?MODULE, heartbeat_check, [State]),
+      {reply,State,State}
+  end;
+handle_call({get_handler},_From,State) ->
 	{reply,State,State}.
 
 %% System callbacks

@@ -33,7 +33,7 @@ function writeTimeline(message)
 // Websockets
 function connect()
 {
-    ws = new WebSocket("ws://localhost:8081/ws.yaws");
+    ws = new WebSocket("ws://" + location.hostname + ":" + location.port + "/ws.yaws");
 
     ws.onopen = function (evt)
     {
@@ -95,27 +95,27 @@ function getCharacterList()
 var STATUS_NOT_CONNECTED = 0;
 var STATUS_CONNECTED_NOT_AUTH = 1;
 var STATUS_CONNECTED_AUTH = 2;
-var current_status = STATUS_NOT_CONNECTED;
+var currentStatus = STATUS_NOT_CONNECTED;
 
 function setStatusNotConnected()
 {
-    current_status = STATUS_NOT_CONNECTED;
+    currentStatus = STATUS_NOT_CONNECTED;
     setUI();
 }
 function setStatusConnected()
 {
-    current_status = STATUS_CONNECTED_NOT_AUTH;
+    currentStatus = STATUS_CONNECTED_NOT_AUTH;
     setUI();
 }
 function setStatusAuthenticated()
 {
-    current_status = STATUS_CONNECTED_AUTH;
+    currentStatus = STATUS_CONNECTED_AUTH;
     setUI();
 }
 
 function setUI()
 {
-    switch(current_status)
+    switch(currentStatus)
     {
         case STATUS_CONNECTED_NOT_AUTH:
             $("#connectButton").attr('disabled', 'disabled');
@@ -145,6 +145,7 @@ function setUI()
             $("#playersUnseen").empty();
             $("#chatRoom").empty();
             $("#roomName").empty();
+            heartbeatStop();
             break;
     }
 }
@@ -164,6 +165,7 @@ function processResponse(data)
             characterList(obj.body);
             break;
         case "load_character_response":
+            heartbeatStart();
             break;
         case "room_info":
             roomInfo(obj.body);
@@ -176,6 +178,9 @@ function processResponse(data)
             break;
         case "room_chat_talk":
             roomChatTalk(obj.body);
+            break;
+        case "heartbeat_response":
+            heartbeatResponse(obj.body);
             break;
     }
 
@@ -289,4 +294,34 @@ function roomChatTalk(data)
     var message = data.message;
     $("#chatRoom").prepend('<div class="chat-message">[' + name + ']: ' + message + '</div>');
     $("#timeline").prepend('<div class="chat-message">[' + name + ']: ' + message + '</div>');
+}
+
+// Heartbeat
+var heartbeatId;
+var heartbeatLastTimeDiff = null;
+var heartbeatTs1;
+function heartbeatStart()
+{
+    // heartbeat
+    heartbeatId = window.setInterval(function() {
+      heartbeatRequest();
+    }, 10000);
+    writeStatus("Heartbeat started");
+}
+function heartbeatStop()
+{
+    window.clearInterval(heartbeatId);
+    writeStatus("Heartbeat stopped");
+}
+function heartbeatRequest()
+{
+    heartbeatTs1 = new Date();
+    ws.send('{"type":"heartbeat_request","body":{"ltd":' + heartbeatLastTimeDiff + '}}');
+    writeStatus("Heartbeat request sent (ltd: " + heartbeatLastTimeDiff + " ms)");
+}
+function heartbeatResponse()
+{
+    var heartbeatTs2 = new Date();
+    heartbeatLastTimeDiff = heartbeatTs2.getTime() - heartbeatTs1.getTime();
+    writeStatus("Heartbeat response time diff: " + heartbeatLastTimeDiff + " ms");
 }

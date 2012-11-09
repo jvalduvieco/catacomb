@@ -12,5 +12,7 @@
                       room_exits,
                       params=[],
                       feedback_fun=fun(_Player, Feedback) -> io:format("Player default feedback fun: ~p~n", [Feedback]) end,
-                      public_id
+                      public_id,
+                      heartbeat_last_timestamp,
+                      heartbeat_last_cli_time_diff
                      }).
