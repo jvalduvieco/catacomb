@@ -18,9 +18,9 @@ init([]) ->
 %% Starts an individual player
 start_player(CharacterSpecs) ->
 	{ok,Pid}=supervisor:start_child({global,?MODULE}, [CharacterSpecs]),
-    Player=ct_player:get_handler(Pid),
-    [{obj,CharacterData}]=CharacterSpecs,
-    X=proplists:get_value(<<"coord_x">>, CharacterData, none),
-    Y=proplists:get_value(<<"coord_y">>, CharacterData, none),
-    ct_player:set_room(Player,[X,Y]),
-    {ok,Player}.
+  Player=ct_player:get_handler(Pid),
+  [{obj,CharacterData}]=CharacterSpecs,
+  X=proplists:get_value(<<"coord_x">>, CharacterData, none),
+  Y=proplists:get_value(<<"coord_y">>, CharacterData, none),
+  ct_player:set_room(Player,[X,Y]),
+  {ok,Player}.
