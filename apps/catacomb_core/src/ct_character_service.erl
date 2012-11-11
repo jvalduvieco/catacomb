@@ -7,6 +7,8 @@
 -include ("ct_character_info.hrl").
 -include("../deps/emysql/include/emysql.hrl").
 
+-compile([debug_info]).
+
 %% Simple version of character service, for further enhancement consider:
 %% https://github.com/JoelPM/gen_server_pool/tree/master/src
 %% http://hg.rabbitmq.com/rabbitmq-server/file/default/src/gen_server2.erl

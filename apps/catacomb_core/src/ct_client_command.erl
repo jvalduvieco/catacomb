@@ -2,6 +2,8 @@
 -export([execute/2,send_feedback/2,client_disconnected/1]).
 -include ("ct_character_info.hrl").
 
+-compile([debug_info]).
+
 -record(ct_client_state,{session_pid=none,
 	user_id=none,
 	player_handle=none}).
@@ -110,8 +112,9 @@ do_command(Cmd,State) ->
 			%%ct_player:info(Status#status.player_pid)
 			{ok,[],State};
 		<<"attack">>->
-			PlayerId=ct_translation_tools:get_value(<<"character_id">>, Cmd),
-			ct_player:attack(State#ct_client_state.player_handle,ct_player_sup:get_handler(PlayerId)),
+			PlayerId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"character_id">>, Cmd))),
+			{ok,OtherPlayer}=ct_player_sup:get_handler(PlayerId),
+			ct_player:attack(State#ct_client_state.player_handle,OtherPlayer),
 			{ok,[],State};
 		<<"player_talk_request">>->
             Message=ct_translation_tools:get_value(<<"message">>,Cmd),

@@ -177,6 +177,9 @@ function processResponse(data)
         case "room_chat_talk":
             roomChatTalk(obj.body);
             break;
+        case "attack_info":
+            attackInfo(obj.body);
+            break;  
     }
 
 }
@@ -269,7 +272,9 @@ function playerSeen(data)
     var name = data.name;
     var id = data.public_id;
     writeTimeline("You can see " + name);
-    $("#playersInRoom").append('<dt id="playerSeen' + id + '">' + name + '</dt>');
+    //$("#playersInRoom").append('<dt id="playerSeen' + id + '">' + name + '</dt>');
+    //dcodix
+    $("#playersInRoom").append('<dt id="playerSeen' + id + '"><button class="btn btn-danger btn-mini" type="button" onclick="playerAttack(' + id + ')">Attack ' + name + '</button></dt>');
 
     $("#playerUnseen" + id).remove();
 }
@@ -288,4 +293,41 @@ function roomChatTalk(data)
     var name = data.player_name;
     var message = data.message;
     $("#timeline").prepend('<div class="chat-message">[' + name + ']: ' + message + '</div>');
+}
+
+//dcodix
+function playerAttack(id)
+{
+    ws.send('{"type":"attack","body":{"character_id":"' + id + '"}}');
+}
+
+function attackInfo(data)
+{
+    var type = data.msg_type;
+    var otherplayer = data.otherplayer;
+    var damage = data.damage;
+
+
+    switch (type)
+    {
+        case "failed":
+            writeTimeline(otherplayer + " failed to hit you.");
+            break;
+        case "hitted":
+            writeTimeline(otherplayer + " hitted you dealing " + damage + ".");
+            break;
+        case "dodged":
+            writeTimeline("You dodged " + otherplayer + " attack.");
+            break;
+        case "otherfailed":
+            writeTimeline("You failed to hit " + otherplayer + ".");
+            break;
+        case "otherhitted":
+            writeTimeline("Youy hit " + otherplayer + " dealing " + damage + ".");
+            break;
+        case "otherdodged":
+            writeTimeline(otherplayer + " doddged your attack.");
+            break;
+        
+    }
 }
