@@ -2,9 +2,6 @@
 -export([from_client/1,to_client/1,get_type/1,get_value/2]).
 
 
--compile([debug_info]).
-
-
 %%% JSON translation tools. 
 
 %% Decode data from JSON text to erlang proplists.

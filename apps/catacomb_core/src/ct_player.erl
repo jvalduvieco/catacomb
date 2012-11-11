@@ -9,8 +9,6 @@
 -include ("ct_character_info.hrl").
 -include ("ct_player.hrl").
 
--compile([debug_info]).
-
 %% Accessors
 get_handler(Pid) ->
 	gen_server:call(Pid,{get_handler}).
@@ -179,33 +177,55 @@ handle_cast({hit, OtherPlayer, HitChance, MaxDamage, MinDamage}, State) ->
 		false -> 
 			case random:uniform(100) > State#player_state.dodge_chance of
 				true -> 
-					%io:format("min ~p max ~p armor ~p hitch ~p dodch ~p .~n",[MinDamage,MaxDamage,State#player_state.armor,HitChance,State#player_state.dodge_chance]),
 					Damage=(MinDamage+random:uniform(MaxDamage-MinDamage))-State#player_state.armor,
 					NewLifePoints = State#player_state.life_points - Damage,
 					%io:format("~p hits ~p dealing ~p .~n",[OtherPlayer#player_state.name,State#player_state.name,Damage]),
-					%dcodix
-					FeedbackFun = State#player_state.feedback_fun,
-					FeedbackFun(State,
-						{obj,[{"type",<<"attack_info">>},
-							{"body",{obj,[
-								{"msg_type",<<"hitted">>},
-								{"otherplayer",OtherPlayer#player_state.name},
-								{"damage",Damage}
-							]}}
-						]}),
-					OtherFeedbackFun = OtherPlayer#player_state.feedback_fun,
-					OtherFeedbackFun(OtherPlayer,
-						{obj,[{"type",<<"attack_info">>},
-							{"body",{obj,[
-								{"msg_type",<<"otherhitted">>},
-								{"otherplayer",State#player_state.name},
-								{"damage",Damage}
-							]}}
-						]}),
+					case NewLifePoints =< 0 of
+						true ->
+							FeedbackFun = State#player_state.feedback_fun,
+							FeedbackFun(State,
+								{obj,[{"type",<<"attack_info">>},
+									{"body",{obj,[
+										{"msg_type",<<"dead">>},
+										{"otherplayer",OtherPlayer#player_state.name},
+										{"damage",Damage}
+									]}}
+								]}),
+							OtherFeedbackFun = OtherPlayer#player_state.feedback_fun,
+							OtherFeedbackFun(OtherPlayer,
+								{obj,[{"type",<<"attack_info">>},
+									{"body",{obj,[
+										{"msg_type",<<"otherdead">>},
+										{"otherplayer",State#player_state.name},
+										{"damage",Damage}
+									]}}
+								]}),
 
-					NewState=State#player_state{life_points=NewLifePoints};
+							NewState=State#player_state{life_points=NewLifePoints};
+							%FALTA eliminar el jugador!!
+						false ->
+							FeedbackFun = State#player_state.feedback_fun,
+							FeedbackFun(State,
+								{obj,[{"type",<<"attack_info">>},
+									{"body",{obj,[
+										{"msg_type",<<"hitted">>},
+										{"otherplayer",OtherPlayer#player_state.name},
+										{"damage",Damage}
+									]}}
+								]}),
+							OtherFeedbackFun = OtherPlayer#player_state.feedback_fun,
+							OtherFeedbackFun(OtherPlayer,
+								{obj,[{"type",<<"attack_info">>},
+									{"body",{obj,[
+										{"msg_type",<<"otherhitted">>},
+										{"otherplayer",State#player_state.name},
+										{"damage",Damage}
+									]}}
+								]}),
+
+							NewState=State#player_state{life_points=NewLifePoints}
+				end;
 				false -> 
-					%io:format("min ~p max ~p armor ~p hitch ~p dodch ~p .~n",[MinDamage,MaxDamage,State#player_state.armor,HitChance,State#player_state.dodge_chance]),
 					NewState=State,
 					%io:format("~p tried to hit ~p but ~p dodged. ~n",[OtherPlayer#player_state.name,State#player_state.name,State#player_state.name]),
 					FeedbackFun = State#player_state.feedback_fun,
@@ -226,7 +246,6 @@ handle_cast({hit, OtherPlayer, HitChance, MaxDamage, MinDamage}, State) ->
 						]})
 			end;
 		true -> 
-			%io:format("min ~p max ~p armor ~p hitch ~p dodch ~p .~n",[MinDamage,MaxDamage,State#player_state.armor,HitChance,State#player_state.dodge_chance]),
 			NewState=State,
 			%io:format("~p failed tying to hit ~p. ~n",[OtherPlayer#player_state.name,State#player_state.name]),
 			FeedbackFun = State#player_state.feedback_fun,

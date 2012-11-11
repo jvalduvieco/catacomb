@@ -2,8 +2,6 @@
 -export([execute/2,send_feedback/2,client_disconnected/1]).
 -include ("ct_character_info.hrl").
 
--compile([debug_info]).
-
 -record(ct_client_state,{session_pid=none,
 	user_id=none,
 	player_handle=none}).
