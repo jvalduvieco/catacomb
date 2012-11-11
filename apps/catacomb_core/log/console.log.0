@@ -1,0 +1,1343 @@
+2012-11-10 11:38:55.538 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 11:38:55.645 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 11:38:55.736 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 11:38:55.737 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 11:38:55.745 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 11:38:55.747 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 11:38:55.754 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 11:38:55.755 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 11:38:55.761 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 11:38:55.762 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 11:38:55.777 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 11:38:55.779 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 11:38:55.790 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 11:38:55.863 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 11:38:55.964 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 11:39:11.446 [info] <0.310.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 11:39:11.462 [info] <0.311.0>@ct_session:init:12 ct_session has started (<0.311.0>)
+2012-11-10 11:39:12.243 [info] <0.315.0>@ct_player:init:84 ct_player has started (<0.315.0>)
+2012-11-10 11:39:21.635 [info] <0.317.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 11:39:21.635 [info] <0.318.0>@ct_session:init:12 ct_session has started (<0.318.0>)
+2012-11-10 11:39:22.714 [info] <0.322.0>@ct_player:init:84 ct_player has started (<0.322.0>)
+2012-11-10 11:39:26.934 [error] <0.322.0> gen_server <0.322.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 11:39:27.060 [error] <0.322.0> CRASH REPORT Process <0.322.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 11:39:27.199 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.322.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 11:39:34.389 [error] <0.315.0> gen_server <0.315.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 11:39:34.440 [error] <0.315.0> CRASH REPORT Process <0.315.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 11:39:34.524 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.315.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 11:40:00.142 [info] <0.294.0> stop_ready([], <0.295.0>)
+
+2012-11-10 11:40:00.143 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 11:40:03.083 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 11:40:03.087 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 11:40:03.100 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 11:40:03.101 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 11:40:03.102 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 11:40:03.102 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 11:40:03.103 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 11:40:03.104 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 11:40:03.104 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 11:40:03.105 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 11:40:03.112 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 11:40:03.112 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 11:40:03.113 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 11:40:03.127 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 11:40:03.164 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 11:40:07.398 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 11:40:07.399 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 11:40:09.994 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-10 11:40:18.089 [error] <0.311.0> gen_server <0.311.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 11:40:18.119 [error] <0.311.0> CRASH REPORT Process <0.311.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 11:40:18.136 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.311.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 11:42:47.813 [info] <0.317.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 11:42:47.813 [info] <0.318.0>@ct_session:init:12 ct_session has started (<0.318.0>)
+2012-11-10 11:42:56.785 [info] <0.322.0>@ct_player:init:84 ct_player has started (<0.322.0>)
+2012-11-10 11:43:03.850 [error] <0.322.0> gen_server <0.322.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 11:43:03.934 [error] <0.322.0> CRASH REPORT Process <0.322.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 11:43:04.012 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.322.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 11:43:16.055 [info] <0.324.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 11:43:16.055 [info] <0.325.0>@ct_session:init:12 ct_session has started (<0.325.0>)
+2012-11-10 11:43:16.737 [info] <0.329.0>@ct_player:init:84 ct_player has started (<0.329.0>)
+2012-11-10 11:43:39.050 [error] <0.329.0> gen_server <0.329.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 11:43:39.131 [error] <0.329.0> CRASH REPORT Process <0.329.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 11:43:39.202 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.329.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 11:44:54.047 [info] <0.294.0> stop_ready([], <0.323.0>)
+
+2012-11-10 11:44:54.047 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 11:44:57.692 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 11:44:57.698 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 11:44:57.710 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 11:44:57.710 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 11:44:57.711 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 11:44:57.712 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 11:44:57.712 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 11:44:57.713 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 11:44:57.714 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 11:44:57.715 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 11:44:57.722 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 11:44:57.723 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 11:44:57.730 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 11:44:57.757 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 11:44:57.784 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 11:45:07.650 [info] <0.310.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 11:45:07.651 [info] <0.311.0>@ct_session:init:12 ct_session has started (<0.311.0>)
+2012-11-10 11:45:16.319 [info] <0.315.0>@ct_player:init:84 ct_player has started (<0.315.0>)
+2012-11-10 11:45:47.744 [error] <0.315.0> gen_server <0.315.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 11:45:47.809 [error] <0.315.0> CRASH REPORT Process <0.315.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 11:45:47.904 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.315.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 12:49:52.729 [error] <0.317.0> CRASH REPORT Process <0.317.0> with 0 neighbours exited with reason: no function clause matching ct_player:init([]) line 67 in gen_server:init_it/6 line 328
+2012-11-10 12:49:52.838 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.317.0> exit with reason no function clause matching ct_player:init([]) line 67 in context child_terminated
+2012-11-10 12:50:10.390 [error] <0.321.0> CRASH REPORT Process <0.321.0> with 0 neighbours exited with reason: no function clause matching ct_player:init([]) line 67 in gen_server:init_it/6 line 328
+2012-11-10 12:50:10.453 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.321.0> exit with reason no function clause matching ct_player:init([]) line 67 in context child_terminated
+2012-11-10 12:50:51.909 [error] <0.326.0> CRASH REPORT Process <0.326.0> with 0 neighbours exited with reason: no function clause matching ct_player:init([]) line 67 in gen_server:init_it/6 line 328
+2012-11-10 12:50:51.962 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.326.0> exit with reason no function clause matching ct_player:init([]) line 67 in context child_terminated
+2012-11-10 12:54:53.049 [info] <0.292.0> stop_ready([], <0.293.0>)
+
+2012-11-10 12:54:53.050 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 12:55:00.418 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 12:55:00.422 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 12:55:00.435 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 12:55:00.436 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 12:55:00.437 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 12:55:00.437 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 12:55:00.438 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 12:55:00.439 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 12:55:00.439 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 12:55:00.440 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 12:55:00.446 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 12:55:00.448 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 12:55:00.454 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 12:55:00.487 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 12:55:00.504 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 12:55:29.880 [info] <0.312.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 12:55:29.882 [info] <0.313.0>@ct_session:init:12 ct_session has started (<0.313.0>)
+2012-11-10 12:55:30.390 [error] <0.312.0>@ct_client_command:execute:29 ct_client_command: error {badmatch,{error,{function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}}} [{ct_player_sup,start_player,1,[{file,"src/ct_player_sup.erl"},{line,21}]},{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,75}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]}].
+2012-11-10 12:55:30.462 [error] <0.317.0> CRASH REPORT Process <0.317.0> with 0 neighbours exited with reason: no function clause matching ct_player:init([]) line 67 in gen_server:init_it/6 line 328
+2012-11-10 12:55:30.552 [error] <0.312.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[{badmatch,{error,{function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}}}],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 12:55:30.619 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.317.0> exit with reason no function clause matching ct_player:init([]) line 67 in context child_terminated
+2012-11-10 12:56:00.192 [info] <0.294.0> stop_ready([{{1352,548554,343045},<0.302.0>},{{1352,548554,330100},<0.303.0>},{{1352,548554,170178},<0.301.0>}], <0.295.0>)
+
+2012-11-10 12:56:01.193 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 12:56:03.404 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 12:56:03.408 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 12:56:03.421 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 12:56:03.422 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 12:56:03.422 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 12:56:03.423 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 12:56:03.424 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 12:56:03.425 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 12:56:03.425 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 12:56:03.426 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 12:56:03.433 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 12:56:03.434 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 12:56:03.441 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 12:56:03.466 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 12:56:03.491 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 12:56:05.979 [info] <0.292.0> stop_ready([], <0.293.0>)
+
+2012-11-10 12:56:05.980 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 12:56:19.067 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 12:56:19.071 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 12:56:19.085 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 12:56:19.086 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 12:56:19.087 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 12:56:19.087 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 12:56:19.088 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 12:56:19.089 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 12:56:19.090 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 12:56:19.090 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 12:56:19.097 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 12:56:19.113 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 12:56:19.114 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 12:56:19.141 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 12:56:19.141 [info] <0.289.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 12:58:33.732 [info] <0.289.0> stop_ready([], <0.291.0>)
+
+2012-11-10 12:58:33.732 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 12:58:41.664 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 12:58:41.668 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 12:58:41.682 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 12:58:41.683 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 12:58:41.684 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 12:58:41.684 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 12:58:41.685 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 12:58:41.686 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 12:58:41.686 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 12:58:41.687 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 12:58:41.693 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 12:58:41.694 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 12:58:41.695 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 12:58:41.739 [info] <0.282.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 12:58:41.741 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 12:59:05.719 [info] <0.301.0>@ct_player:init:84 ct_player has started (<0.301.0>)
+2012-11-10 13:03:13.590 [info] <0.282.0> stop_ready([], <0.286.0>)
+
+2012-11-10 13:03:13.591 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 13:03:19.894 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 13:03:19.899 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 13:03:19.912 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 13:03:19.913 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 13:03:19.914 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 13:03:19.915 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 13:03:19.916 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 13:03:19.916 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 13:03:19.917 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 13:03:19.918 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 13:03:19.924 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 13:03:19.925 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 13:03:19.926 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 13:03:19.940 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 13:03:19.981 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 13:03:56.309 [info] <0.308.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 13:03:56.310 [info] <0.309.0>@ct_session:init:12 ct_session has started (<0.309.0>)
+2012-11-10 13:03:57.147 [info] <0.313.0>@ct_player:init:84 ct_player has started (<0.313.0>)
+2012-11-10 13:03:58.873 [error] <0.313.0> gen_server <0.313.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 13:03:58.903 [error] <0.313.0> CRASH REPORT Process <0.313.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 13:03:58.920 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.313.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 13:08:11.313 [info] <0.329.0>@ct_player:init:84 ct_player has started (<0.329.0>)
+2012-11-10 13:08:45.798 [info] <0.337.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 13:08:45.798 [info] <0.338.0>@ct_session:init:12 ct_session has started (<0.338.0>)
+2012-11-10 13:08:46.571 [info] <0.342.0>@ct_player:init:84 ct_player has started (<0.342.0>)
+2012-11-10 13:08:48.713 [error] <0.342.0> gen_server <0.342.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 13:08:48.821 [error] <0.342.0> CRASH REPORT Process <0.342.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 13:08:48.977 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.342.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 13:20:59.056 [info] <0.351.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 13:20:59.057 [info] <0.352.0>@ct_session:init:12 ct_session has started (<0.352.0>)
+2012-11-10 13:21:04.275 [info] <0.356.0>@ct_player:init:84 ct_player has started (<0.356.0>)
+2012-11-10 13:21:38.110 [error] <0.356.0> gen_server <0.356.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 13:21:38.166 [error] <0.356.0> CRASH REPORT Process <0.356.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 13:21:38.283 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.356.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 13:32:32.731 [info] <0.373.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 13:32:32.732 [info] <0.374.0>@ct_session:init:12 ct_session has started (<0.374.0>)
+2012-11-10 13:32:33.442 [info] <0.378.0>@ct_player:init:84 ct_player has started (<0.378.0>)
+2012-11-10 13:52:46.348 [info] <0.384.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 13:52:46.348 [info] <0.385.0>@ct_session:init:12 ct_session has started (<0.385.0>)
+2012-11-10 13:52:47.071 [info] <0.389.0>@ct_player:init:84 ct_player has started (<0.389.0>)
+2012-11-10 13:52:53.047 [error] <0.389.0> gen_server <0.389.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 13:52:53.112 [error] <0.389.0> CRASH REPORT Process <0.389.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 13:52:53.175 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.389.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 13:53:04.266 [info] <0.294.0> stop_ready([], <0.301.0>)
+
+2012-11-10 13:53:04.267 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 13:53:11.890 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 13:53:11.894 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 13:53:11.907 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 13:53:11.908 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 13:53:11.908 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 13:53:11.909 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 13:53:11.910 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 13:53:11.910 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 13:53:11.911 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 13:53:11.911 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 13:53:11.919 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 13:53:11.920 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 13:53:11.920 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 13:53:11.940 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 13:53:11.972 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 13:53:15.991 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 13:53:15.995 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 13:53:16.975 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-10 13:53:26.538 [info] <0.313.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 13:53:26.539 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 13:53:27.243 [info] <0.318.0>@ct_player:init:84 ct_player has started (<0.318.0>)
+2012-11-10 13:56:14.516 [info] <0.324.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 13:56:14.516 [info] <0.325.0>@ct_session:init:12 ct_session has started (<0.325.0>)
+2012-11-10 13:56:15.115 [info] <0.329.0>@ct_player:init:84 ct_player has started (<0.329.0>)
+2012-11-10 14:02:09.142 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-10 14:02:09.143 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 14:02:15.207 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 14:02:15.212 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 14:02:15.226 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 14:02:15.226 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 14:02:15.227 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 14:02:15.228 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 14:02:15.228 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 14:02:15.229 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 14:02:15.229 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 14:02:15.230 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 14:02:15.231 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 14:02:15.237 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 14:02:15.238 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 14:02:15.272 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 14:02:15.293 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 14:02:17.503 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 14:02:17.505 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 14:02:18.670 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-10 14:02:26.695 [info] <0.313.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 14:02:26.695 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 14:02:27.451 [info] <0.318.0>@ct_player:init:84 ct_player has started (<0.318.0>)
+2012-11-10 14:02:30.889 [error] <0.318.0> gen_server <0.318.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 14:02:30.960 [error] <0.318.0> CRASH REPORT Process <0.318.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 14:02:31.055 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.318.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 14:03:00.372 [info] <0.292.0> stop_ready([], <0.312.0>)
+
+2012-11-10 14:03:00.373 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 14:03:02.651 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 14:03:02.655 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 14:03:02.668 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 14:03:02.669 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 14:03:02.670 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 14:03:02.671 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 14:03:02.671 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 14:03:02.672 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 14:03:02.673 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 14:03:02.673 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 14:03:02.680 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 14:03:02.681 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 14:03:02.688 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 14:03:02.717 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 14:03:02.742 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 14:03:04.979 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 14:03:04.980 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 14:03:05.394 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-10 14:03:13.432 [info] <0.313.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 14:03:13.433 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 14:03:14.075 [info] <0.318.0>@ct_player:init:84 ct_player has started (<0.318.0>)
+2012-11-10 14:03:20.122 [error] <0.318.0> gen_server <0.318.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 14:03:20.233 [error] <0.318.0> CRASH REPORT Process <0.318.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 14:03:20.312 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.318.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 14:03:35.961 [info] <0.320.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 14:03:35.961 [info] <0.321.0>@ct_session:init:12 ct_session has started (<0.321.0>)
+2012-11-10 14:03:36.504 [info] <0.325.0>@ct_player:init:84 ct_player has started (<0.325.0>)
+2012-11-10 14:03:42.417 [info] <0.327.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 14:03:42.417 [info] <0.328.0>@ct_session:init:12 ct_session has started (<0.328.0>)
+2012-11-10 14:03:43.026 [info] <0.332.0>@ct_player:init:84 ct_player has started (<0.332.0>)
+2012-11-10 14:03:49.965 [error] <0.332.0> gen_server <0.332.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 14:03:50.063 [error] <0.332.0> CRASH REPORT Process <0.332.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 14:03:50.130 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.332.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 14:08:57.539 [info] <0.294.0> stop_ready([], <0.326.0>)
+
+2012-11-10 14:08:57.540 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 14:09:05.076 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 14:09:05.080 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 14:09:05.093 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 14:09:05.094 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 14:09:05.094 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 14:09:05.095 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 14:09:05.096 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 14:09:05.096 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 14:09:05.097 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 14:09:05.098 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 14:09:05.104 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 14:09:05.105 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 14:09:05.112 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 14:09:05.135 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 14:09:05.166 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 14:09:10.755 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 14:09:10.756 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 14:09:11.431 [info] <0.311.0>@ct_player:init:85 ct_player has started (<0.311.0>)
+2012-11-10 14:09:14.880 [info] <0.313.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 14:09:14.881 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 14:09:15.666 [info] <0.318.0>@ct_player:init:85 ct_player has started (<0.318.0>)
+2012-11-10 14:09:20.688 [error] <0.313.0>@ct_client_command:execute:29 ct_client_command: error function_clause [{gen_server,cast,[{player_state,1,<0.318.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.78645111>,1001},{attack,{error,undefined}}],[{file,"gen_server.erl"},{line,194}]},{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,114}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]}].
+2012-11-10 14:09:20.738 [error] <0.313.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[function_clause],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 14:13:17.608 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-10 14:13:17.609 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 14:13:22.938 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 14:13:22.946 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 14:13:22.956 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 14:13:22.956 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 14:13:22.957 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 14:13:22.958 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 14:13:22.959 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 14:13:22.961 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 14:13:22.962 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 14:13:22.963 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 14:13:22.969 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 14:13:22.973 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 14:13:22.981 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 14:13:23.004 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 14:13:23.035 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 14:13:26.958 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 14:13:26.960 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 14:13:27.456 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-10 14:13:30.191 [info] <0.313.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 14:13:30.191 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 14:13:30.857 [info] <0.318.0>@ct_player:init:84 ct_player has started (<0.318.0>)
+2012-11-10 14:13:35.301 [error] <0.318.0> gen_server <0.318.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 14:13:35.402 [error] <0.318.0> CRASH REPORT Process <0.318.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 14:13:35.516 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.318.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 14:19:50.946 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-10 14:19:50.949 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 14:19:53.178 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 14:19:53.182 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 14:19:53.196 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 14:19:53.197 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 14:19:53.197 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-10 14:19:53.198 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 14:19:53.199 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-10 14:19:53.199 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 14:19:53.200 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 14:19:53.200 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 14:19:53.207 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 14:19:53.208 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 14:19:53.216 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 14:19:53.244 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 14:19:53.275 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 14:19:56.990 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 14:19:56.991 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 14:19:57.565 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-10 14:20:00.801 [info] <0.313.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 14:20:00.801 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 14:20:01.423 [info] <0.318.0>@ct_player:init:84 ct_player has started (<0.318.0>)
+2012-11-10 14:20:14.335 [info] <0.324.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 14:20:14.335 [info] <0.325.0>@ct_session:init:12 ct_session has started (<0.325.0>)
+2012-11-10 14:20:14.955 [info] <0.329.0>@ct_player:init:84 ct_player has started (<0.329.0>)
+2012-11-10 14:20:22.345 [info] <0.330.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 14:20:22.346 [info] <0.331.0>@ct_session:init:12 ct_session has started (<0.331.0>)
+2012-11-10 14:20:22.955 [info] <0.335.0>@ct_player:init:84 ct_player has started (<0.335.0>)
+2012-11-10 14:20:27.644 [error] <0.335.0> gen_server <0.335.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19
+2012-11-10 14:20:27.747 [error] <0.335.0> CRASH REPORT Process <0.335.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 19 in gen_server:terminate/6 line 747
+2012-11-10 14:20:27.837 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.335.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 19 in context child_terminated
+2012-11-10 18:20:59.300 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 18:20:59.343 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 18:20:59.522 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 18:20:59.530 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 18:20:59.531 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 18:20:59.615 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 18:20:59.616 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 18:20:59.617 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 18:20:59.638 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 18:20:59.644 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 18:20:59.704 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 18:20:59.717 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 18:20:59.749 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 18:20:59.855 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 18:21:00.254 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 18:21:43.675 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:21:43.676 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 18:21:45.407 [info] <0.328.0>@ct_player:init:86 ct_player has started (<0.328.0>)
+2012-11-10 18:22:12.363 [info] <0.333.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 18:22:12.363 [info] <0.334.0>@ct_session:init:12 ct_session has started (<0.334.0>)
+2012-11-10 18:22:13.014 [info] <0.338.0>@ct_player:init:86 ct_player has started (<0.338.0>)
+2012-11-10 18:22:33.552 [info] <0.345.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 18:22:33.553 [info] <0.346.0>@ct_session:init:12 ct_session has started (<0.346.0>)
+2012-11-10 18:22:34.469 [info] <0.350.0>@ct_player:init:86 ct_player has started (<0.350.0>)
+2012-11-10 18:23:21.955 [error] <0.328.0> gen_server <0.328.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 18:23:22.060 [error] <0.328.0> CRASH REPORT Process <0.328.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 18:23:22.154 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.328.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 18:23:58.416 [info] <0.366.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 18:23:58.417 [info] <0.367.0>@ct_session:init:12 ct_session has started (<0.367.0>)
+2012-11-10 18:23:59.154 [info] <0.371.0>@ct_player:init:86 ct_player has started (<0.371.0>)
+2012-11-10 18:24:03.994 [info] <0.373.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:24:03.995 [info] <0.374.0>@ct_session:init:12 ct_session has started (<0.374.0>)
+2012-11-10 18:24:04.819 [info] <0.378.0>@ct_player:init:86 ct_player has started (<0.378.0>)
+2012-11-10 18:27:41.931 [info] <0.294.0> stop_ready([], <0.372.0>)
+
+2012-11-10 18:27:41.931 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 18:27:45.720 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 18:27:45.724 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 18:27:45.737 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 18:27:45.738 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 18:27:45.739 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 18:27:45.739 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 18:27:45.740 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 18:27:45.741 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 18:27:45.741 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 18:27:45.742 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 18:27:45.749 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 18:27:45.749 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 18:27:45.750 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 18:27:45.764 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 18:27:45.803 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 18:29:27.678 [info] <0.294.0> stop_ready([], <0.295.0>)
+
+2012-11-10 18:29:27.679 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 18:30:12.240 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 18:30:12.244 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 18:30:12.257 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 18:30:12.257 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 18:30:12.258 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 18:30:12.259 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 18:30:12.259 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 18:30:12.260 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 18:30:12.261 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 18:30:12.261 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 18:30:12.268 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 18:30:12.269 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 18:30:12.276 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 18:30:12.312 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 18:30:12.315 [info] <0.290.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 18:34:16.420 [info] <0.328.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:34:16.421 [info] <0.330.0>@ct_session:init:12 ct_session has started (<0.330.0>)
+2012-11-10 18:34:18.294 [info] <0.334.0>@ct_player:init:86 ct_player has started (<0.334.0>)
+2012-11-10 18:34:34.794 [info] <0.337.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 18:34:34.795 [info] <0.339.0>@ct_session:init:12 ct_session has started (<0.339.0>)
+2012-11-10 18:34:35.595 [info] <0.343.0>@ct_player:init:86 ct_player has started (<0.343.0>)
+2012-11-10 18:35:51.148 [error] <0.334.0> gen_server <0.334.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 18:35:51.224 [error] <0.334.0> CRASH REPORT Process <0.334.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 18:35:51.277 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.334.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 18:36:20.163 [info] <0.348.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:36:20.163 [info] <0.350.0>@ct_session:init:12 ct_session has started (<0.350.0>)
+2012-11-10 18:36:20.631 [info] <0.354.0>@ct_player:init:86 ct_player has started (<0.354.0>)
+2012-11-10 18:37:28.187 [info] <0.361.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:37:28.187 [info] <0.363.0>@ct_session:init:12 ct_session has started (<0.363.0>)
+2012-11-10 18:37:29.404 [info] <0.367.0>@ct_player:init:86 ct_player has started (<0.367.0>)
+2012-11-10 18:38:19.756 [error] <0.367.0> gen_server <0.367.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 18:38:19.817 [error] <0.367.0> CRASH REPORT Process <0.367.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 18:38:19.935 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.367.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 18:38:53.306 [info] <0.372.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:38:53.307 [info] <0.374.0>@ct_session:init:12 ct_session has started (<0.374.0>)
+2012-11-10 18:38:53.981 [info] <0.378.0>@ct_player:init:86 ct_player has started (<0.378.0>)
+2012-11-10 18:39:04.451 [info] <0.290.0> stop_ready([], <0.371.0>)
+
+2012-11-10 18:39:04.451 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 18:39:07.324 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 18:39:07.328 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 18:39:07.347 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 18:39:07.348 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 18:39:07.349 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 18:39:07.350 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 18:39:07.350 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 18:39:07.351 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 18:39:07.352 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 18:39:07.352 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 18:39:07.358 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 18:39:07.374 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 18:39:07.375 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 18:39:07.400 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 18:39:07.422 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 18:43:04.155 [info] <0.358.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:43:04.158 [info] <0.361.0>@ct_session:init:12 ct_session has started (<0.361.0>)
+2012-11-10 18:43:10.713 [info] <0.350.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:43:10.714 [info] <0.365.0>@ct_session:init:12 ct_session has started (<0.365.0>)
+2012-11-10 18:43:10.718 [info] <0.350.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:43:10.724 [error] <0.350.0> gen_server <0.350.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-10 18:43:10.770 [error] <0.350.0> CRASH REPORT Process <0.350.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-10 18:43:18.980 [info] <0.372.0>@ct_player:init:86 ct_player has started (<0.372.0>)
+2012-11-10 18:43:33.961 [info] <0.379.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 18:43:33.962 [info] <0.382.0>@ct_session:init:12 ct_session has started (<0.382.0>)
+2012-11-10 18:43:41.086 [info] <0.388.0>@ct_player:init:86 ct_player has started (<0.388.0>)
+2012-11-10 18:44:44.815 [error] <0.372.0> gen_server <0.372.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 18:44:44.861 [error] <0.372.0> CRASH REPORT Process <0.372.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 18:44:44.921 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.372.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 18:44:54.369 [info] <0.397.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:44:54.370 [info] <0.400.0>@ct_session:init:12 ct_session has started (<0.400.0>)
+2012-11-10 18:45:05.492 [info] <0.408.0>@ct_player:init:86 ct_player has started (<0.408.0>)
+2012-11-10 18:45:43.873 [info] <0.420.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 18:45:43.874 [info] <0.423.0>@ct_session:init:12 ct_session has started (<0.423.0>)
+2012-11-10 18:45:48.844 [info] <0.429.0>@ct_player:init:86 ct_player has started (<0.429.0>)
+2012-11-10 18:50:49.812 [error] <0.429.0> gen_server <0.429.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 18:50:49.858 [error] <0.429.0> CRASH REPORT Process <0.429.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 18:50:49.916 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.429.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:03:05.941 [info] <0.294.0> stop_ready([], <0.396.0>)
+
+2012-11-10 19:03:05.943 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:03:13.410 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:03:13.415 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:03:13.427 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:03:13.428 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:03:13.429 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:03:13.430 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:03:13.430 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:03:13.431 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:03:13.432 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:03:13.432 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:03:13.439 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:03:13.440 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:03:13.447 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:03:13.476 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:03:13.500 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:03:34.761 [info] <0.318.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:03:34.762 [info] <0.321.0>@ct_session:init:12 ct_session has started (<0.321.0>)
+2012-11-10 19:03:39.932 [info] <0.328.0>@ct_player:init:86 ct_player has started (<0.328.0>)
+2012-11-10 19:03:48.921 [info] <0.335.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:03:48.922 [info] <0.338.0>@ct_session:init:12 ct_session has started (<0.338.0>)
+2012-11-10 19:03:54.053 [info] <0.344.0>@ct_player:init:86 ct_player has started (<0.344.0>)
+2012-11-10 19:04:20.967 [error] <0.318.0>@ct_client_command:execute:31 ct_client_command: error badarg [{erlang,list_to_atom,[<<"1001">>],[]},{ct_player_sup,get_handler,1,[{file,"ct_player_sup.erl"},{line,33}]},{ct_client_command,do_command,2,[{file,"ct_client_command.erl"},{line,116}]},{ct_client_command,execute,2,[{file,"ct_client_command.erl"},{line,16}]}].
+2012-11-10 19:04:21.983 [error] <0.318.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[badarg],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 19:04:37.009 [info] <0.352.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:04:37.011 [info] <0.355.0>@ct_session:init:12 ct_session has started (<0.355.0>)
+2012-11-10 19:04:41.460 [info] <0.361.0>@ct_player:init:86 ct_player has started (<0.361.0>)
+2012-11-10 19:04:52.063 [error] <0.352.0>@ct_client_command:execute:31 ct_client_command: error badarg [{erlang,list_to_atom,[<<"1001">>],[]},{ct_player_sup,get_handler,1,[{file,"ct_player_sup.erl"},{line,33}]},{ct_client_command,do_command,2,[{file,"ct_client_command.erl"},{line,116}]},{ct_client_command,execute,2,[{file,"ct_client_command.erl"},{line,16}]}].
+2012-11-10 19:04:52.679 [error] <0.352.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[badarg],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 19:05:31.858 [info] <0.371.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:05:31.858 [info] <0.374.0>@ct_session:init:12 ct_session has started (<0.374.0>)
+2012-11-10 19:05:36.364 [info] <0.380.0>@ct_player:init:86 ct_player has started (<0.380.0>)
+2012-11-10 19:06:21.791 [error] <0.371.0>@ct_client_command:execute:31 ct_client_command: error badarg [{erlang,list_to_atom,[<<"1001">>],[]},{ct_player_sup,get_handler,1,[{file,"ct_player_sup.erl"},{line,33}]},{ct_client_command,do_command,2,[{file,"ct_client_command.erl"},{line,116}]},{ct_client_command,execute,2,[{file,"ct_client_command.erl"},{line,16}]}].
+2012-11-10 19:06:28.087 [error] <0.371.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[badarg],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 19:06:38.983 [info] <0.292.0> stop_ready([], <0.370.0>)
+
+2012-11-10 19:06:38.999 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:06:41.930 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:06:41.934 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:06:41.947 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:06:41.948 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:06:41.949 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:06:41.949 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:06:41.950 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:06:41.951 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:06:41.951 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:06:41.952 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:06:41.959 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:06:41.960 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:06:41.960 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:06:41.974 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:06:42.019 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:06:44.161 [info] <0.306.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:06:44.164 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 19:06:49.889 [info] <0.311.0>@ct_player:init:86 ct_player has started (<0.311.0>)
+2012-11-10 19:06:56.880 [info] <0.313.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:06:56.881 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 19:06:57.595 [info] <0.318.0>@ct_player:init:86 ct_player has started (<0.318.0>)
+2012-11-10 19:07:45.520 [error] <0.313.0>@ct_client_command:execute:31 ct_client_command: error badarg [{erlang,list_to_atom,[<<"undefined">>],[]},{ct_player_sup,get_handler,1,[{file,"ct_player_sup.erl"},{line,33}]},{ct_client_command,do_command,2,[{file,"ct_client_command.erl"},{line,116}]},{ct_client_command,execute,2,[{file,"ct_client_command.erl"},{line,16}]}].
+2012-11-10 19:07:45.544 [error] <0.313.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[badarg],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 19:07:51.402 [error] <0.313.0> gen_server <0.313.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-10 19:07:51.632 [error] <0.313.0> CRASH REPORT Process <0.313.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-10 19:08:01.065 [info] <0.339.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:08:01.066 [info] <0.342.0>@ct_session:init:12 ct_session has started (<0.342.0>)
+2012-11-10 19:08:05.597 [info] <0.349.0>@ct_player:init:86 ct_player has started (<0.349.0>)
+2012-11-10 19:08:07.742 [error] <0.311.0> gen_server <0.311.0> terminated with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'/2 from ct_player:handle_cast/2 line 112
+2012-11-10 19:08:07.821 [error] <0.311.0> CRASH REPORT Process <0.311.0> with 0 neighbours exited with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,5,<0.311.0>,<0.306.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{n,[5,6]},{nw,...},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}) in gen_server:terminate/6 line 747
+2012-11-10 19:08:07.870 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.311.0> exit with reason call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,5,<0.311.0>,<0.306.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{n,[5,6]},{nw,...},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}) in context child_terminated
+2012-11-10 19:08:08.031 [error] <0.318.0> gen_server <0.318.0> terminated with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'/2 from ct_player:handle_cast/2 line 112
+2012-11-10 19:08:08.160 [error] <0.318.0> CRASH REPORT Process <0.318.0> with 0 neighbours exited with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.318.0>,<0.313.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{n,[...]},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}) in gen_server:terminate/6 line 747
+2012-11-10 19:08:08.242 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.318.0> exit with reason call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.318.0>,<0.313.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{n,[...]},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}) in context child_terminated
+2012-11-10 19:09:22.008 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-10 19:09:22.009 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:09:28.731 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:09:28.735 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:09:28.748 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:09:28.748 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:09:28.749 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:09:28.750 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:09:28.751 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:09:28.751 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:09:28.752 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:09:28.752 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:09:28.759 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:09:28.760 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:09:28.761 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:09:28.774 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:09:28.818 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:09:41.454 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:09:41.455 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 19:09:41.951 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 19:09:43.993 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:09:43.993 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 19:09:44.539 [info] <0.327.0>@ct_player:init:86 ct_player has started (<0.327.0>)
+2012-11-10 19:10:58.050 [error] <0.327.0> gen_server <0.327.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 19:10:58.116 [error] <0.327.0> CRASH REPORT Process <0.327.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:10:58.265 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.327.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:11:49.977 [info] <0.337.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:11:49.978 [info] <0.342.0>@ct_session:init:12 ct_session has started (<0.342.0>)
+2012-11-10 19:12:35.769 [info] <0.294.0> stop_ready([], <0.336.0>)
+
+2012-11-10 19:12:35.770 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:12:38.777 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:12:38.787 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:12:38.796 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:12:38.797 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:12:38.798 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:12:38.799 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:12:38.799 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:12:38.800 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:12:38.801 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:12:38.801 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:12:38.807 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:12:38.809 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:12:38.815 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:12:38.840 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:12:38.868 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:12:41.357 [info] <0.292.0> stop_ready([], <0.293.0>)
+
+2012-11-10 19:12:41.357 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:12:47.231 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:12:47.239 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:12:47.261 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:12:47.262 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:12:47.263 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:12:47.264 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:12:47.264 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:12:47.265 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:12:47.266 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:12:47.266 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:12:47.267 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:12:47.273 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:12:47.274 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:12:47.308 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:12:47.327 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:12:57.712 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:12:57.714 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 19:12:58.439 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 19:13:02.385 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:13:02.385 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 19:13:03.139 [info] <0.327.0>@ct_player:init:86 ct_player has started (<0.327.0>)
+2012-11-10 19:13:10.135 [error] <0.320.0> gen_server <0.320.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 19:13:10.193 [error] <0.320.0> CRASH REPORT Process <0.320.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:13:10.244 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.320.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:13:20.757 [info] <0.294.0> stop_ready([], <0.321.0>)
+
+2012-11-10 19:13:20.758 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:13:23.241 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:13:23.246 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:13:23.259 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:13:23.260 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:13:23.260 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:13:23.261 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:13:23.262 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:13:23.263 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:13:23.263 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:13:23.264 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:13:23.269 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:13:23.271 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:13:23.272 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:13:23.303 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:13:23.334 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:13:32.252 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:13:32.254 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 19:13:32.776 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 19:13:35.009 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:13:35.010 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 19:13:35.491 [info] <0.327.0>@ct_player:init:86 ct_player has started (<0.327.0>)
+2012-11-10 19:14:08.214 [error] <0.327.0> gen_server <0.327.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 19:14:08.294 [error] <0.327.0> CRASH REPORT Process <0.327.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:14:08.354 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.327.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:15:18.640 [info] <0.294.0> stop_ready([], <0.321.0>)
+
+2012-11-10 19:15:18.640 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:15:25.393 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:15:25.397 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:15:25.410 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:15:25.411 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:15:25.411 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:15:25.412 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:15:25.413 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:15:25.413 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:15:25.414 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:15:25.414 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:15:25.421 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:15:25.422 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:15:25.423 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:15:25.437 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:15:25.478 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:15:37.005 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:15:37.006 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 19:15:37.599 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 19:15:39.985 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:15:39.985 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 19:15:42.354 [info] <0.327.0>@ct_player:init:86 ct_player has started (<0.327.0>)
+2012-11-10 19:16:39.127 [error] <0.327.0> gen_server <0.327.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 19:16:39.166 [error] <0.327.0> CRASH REPORT Process <0.327.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:16:39.225 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.327.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:17:00.007 [info] <0.345.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:17:00.007 [info] <0.350.0>@ct_session:init:12 ct_session has started (<0.350.0>)
+2012-11-10 19:17:04.733 [info] <0.357.0>@ct_player:init:86 ct_player has started (<0.357.0>)
+2012-11-10 19:17:11.743 [error] <0.320.0> gen_server <0.320.0> terminated with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'/2 from ct_player:handle_cast/2 line 112
+2012-11-10 19:17:11.824 [error] <0.320.0> CRASH REPORT Process <0.320.0> with 0 neighbours exited with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.320.0>,<0.315.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{nw,...},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}) in gen_server:terminate/6 line 747
+2012-11-10 19:17:11.906 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.320.0> exit with reason call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.320.0>,<0.315.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{nw,...},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}) in context child_terminated
+2012-11-10 19:19:12.677 [error] <0.357.0> gen_server <0.357.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 19:19:12.758 [error] <0.357.0> CRASH REPORT Process <0.357.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:19:12.803 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.357.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:19:59.474 [info] <0.294.0> stop_ready([], <0.344.0>)
+
+2012-11-10 19:19:59.475 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:20:05.886 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:20:05.890 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:20:05.903 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:20:05.904 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:20:05.905 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:20:05.905 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:20:05.906 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:20:05.907 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:20:05.907 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:20:05.908 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:20:05.915 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:20:05.916 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:20:05.923 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:20:05.956 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:20:05.970 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:20:19.579 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:20:19.581 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 19:20:20.174 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 19:20:22.641 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:20:22.641 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 19:20:23.219 [info] <0.327.0>@ct_player:init:86 ct_player has started (<0.327.0>)
+2012-11-10 19:21:14.328 [error] <0.322.0>@ct_client_command:execute:31 ct_client_command: error badarg [{erlang,list_to_atom,[<<"1005">>],[]},{ct_player_sup,get_handler,1,[{file,"ct_player_sup.erl"},{line,33}]},{ct_client_command,do_command,2,[{file,"ct_client_command.erl"},{line,116}]},{ct_client_command,execute,2,[{file,"ct_client_command.erl"},{line,16}]}].
+2012-11-10 19:21:14.402 [error] <0.322.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[badarg],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 19:21:20.978 [info] <0.335.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:21:20.979 [info] <0.338.0>@ct_session:init:12 ct_session has started (<0.338.0>)
+2012-11-10 19:21:25.971 [info] <0.345.0>@ct_player:init:86 ct_player has started (<0.345.0>)
+2012-11-10 19:21:28.370 [error] <0.320.0> gen_server <0.320.0> terminated with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'/2 from ct_player:handle_cast/2 line 112
+2012-11-10 19:21:28.395 [error] <0.320.0> CRASH REPORT Process <0.320.0> with 0 neighbours exited with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{ne,...},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}) in gen_server:terminate/6 line 747
+2012-11-10 19:21:28.420 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.320.0> exit with reason call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{ne,...},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}) in context child_terminated
+2012-11-10 19:21:28.447 [error] <0.327.0> gen_server <0.327.0> terminated with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'/2 from ct_player:handle_cast/2 line 112
+2012-11-10 19:21:28.469 [error] <0.327.0> CRASH REPORT Process <0.327.0> with 0 neighbours exited with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.327.0>,<0.322.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.172.0>,[{e,[...]},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}) in gen_server:terminate/6 line 747
+2012-11-10 19:21:28.494 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.327.0> exit with reason call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.327.0>,<0.322.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.172.0>,[{e,[...]},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}) in context child_terminated
+2012-11-10 19:22:27.578 [info] <0.292.0> stop_ready([], <0.334.0>)
+
+2012-11-10 19:22:27.578 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:22:33.553 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:22:33.557 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:22:33.570 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:22:33.571 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:22:33.572 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:22:33.572 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:22:33.573 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:22:33.574 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:22:33.575 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:22:33.575 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:22:33.582 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:22:33.583 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:22:33.590 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:22:33.620 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:22:33.639 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:22:43.448 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:22:43.449 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 19:22:43.943 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 19:22:45.977 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:22:45.978 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 19:22:46.576 [info] <0.327.0>@ct_player:init:86 ct_player has started (<0.327.0>)
+2012-11-10 19:24:18.812 [error] <0.327.0> gen_server <0.327.0> terminated with reason: no function clause matching ct_player:get_pid({ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,...}}) line 21
+2012-11-10 19:24:18.880 [error] <0.327.0> CRASH REPORT Process <0.327.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,...}}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:24:18.946 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.327.0> exit with reason no function clause matching ct_player:get_pid({ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,...}}) line 21 in context child_terminated
+2012-11-10 19:24:40.671 [info] <0.292.0> stop_ready([], <0.321.0>)
+
+2012-11-10 19:24:40.672 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:25:00.925 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:25:00.929 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:25:00.943 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:25:00.943 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:25:00.944 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:25:00.945 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:25:00.946 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:25:00.946 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:25:00.947 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:25:00.947 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:25:00.954 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:25:00.955 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:25:00.956 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:25:00.976 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:25:01.014 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:25:14.549 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:25:14.550 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 19:25:15.135 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 19:25:18.665 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:25:18.665 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 19:25:19.131 [info] <0.327.0>@ct_player:init:86 ct_player has started (<0.327.0>)
+2012-11-10 19:29:47.570 [info] <0.294.0> stop_ready([], <0.321.0>)
+
+2012-11-10 19:29:47.571 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:29:56.810 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:29:56.814 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:29:56.827 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:29:56.828 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:29:56.829 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:29:56.829 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:29:56.830 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:29:56.831 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:29:56.831 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:29:56.832 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:29:56.839 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:29:56.839 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:29:56.840 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:29:56.854 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:29:56.897 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:30:00.125 [info] <0.306.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:30:00.126 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 19:30:00.672 [error] <0.306.0>@ct_client_command:execute:31 ct_client_command: error {badmatch,{error,{badarg,[{erlang,atom_to_list,[1005],[]},{ct_player,init,1,[{file,"src/ct_player.erl"},{line,83}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}}} [{ct_player_sup,start_player,1,[{file,"src/ct_player_sup.erl"},{line,22}]},{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,77}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,16}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]}].
+2012-11-10 19:30:00.732 [error] <0.306.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[{badmatch,{error,{badarg,[{erlang,atom_to_list,[1005],[]},{ct_player,init,1,[{file,"src/ct_player.erl"},{line,83}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}}}],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 19:30:00.770 [error] <0.311.0> CRASH REPORT Process <0.311.0> with 0 neighbours exited with reason: bad argument in call to erlang:atom_to_list(1005) in ct_player:init/1 line 83 in gen_server:init_it/6 line 328
+2012-11-10 19:30:00.938 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.311.0> exit with reason bad argument in call to erlang:atom_to_list(1005) in ct_player:init/1 line 83 in context child_terminated
+2012-11-10 19:30:02.874 [info] <0.313.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:30:02.875 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 19:30:03.363 [error] <0.318.0> CRASH REPORT Process <0.318.0> with 0 neighbours exited with reason: bad argument in call to erlang:atom_to_list(1001) in ct_player:init/1 line 83 in gen_server:init_it/6 line 328
+2012-11-10 19:30:03.364 [error] <0.313.0>@ct_client_command:execute:31 ct_client_command: error {badmatch,{error,{badarg,[{erlang,atom_to_list,[1001],[]},{ct_player,init,1,[{file,"src/ct_player.erl"},{line,83}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}}} [{ct_player_sup,start_player,1,[{file,"src/ct_player_sup.erl"},{line,22}]},{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,77}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,16}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]}].
+2012-11-10 19:30:03.413 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.318.0> exit with reason bad argument in call to erlang:atom_to_list(1001) in ct_player:init/1 line 83 in context child_terminated
+2012-11-10 19:30:03.519 [error] <0.313.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[{badmatch,{error,{badarg,[{erlang,atom_to_list,[1001],[]},{ct_player,init,1,[{file,"src/ct_player.erl"},{line,83}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}}}],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 19:30:32.304 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-10 19:30:32.304 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:30:39.076 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:30:39.080 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:30:39.093 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:30:39.094 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:30:39.095 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:30:39.095 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:30:39.096 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:30:39.097 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:30:39.097 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:30:39.098 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:30:39.104 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:30:39.106 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:30:39.112 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:30:39.143 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:30:39.168 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:31:02.035 [info] <0.306.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:31:02.036 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 19:31:05.272 [info] <0.311.0>@ct_player:init:86 ct_player has started (<0.311.0>)
+2012-11-10 19:31:08.665 [info] <0.313.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:31:08.666 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 19:31:09.195 [info] <0.318.0>@ct_player:init:86 ct_player has started (<0.318.0>)
+2012-11-10 19:35:00.152 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-10 19:35:00.152 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:35:09.108 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:35:09.112 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:35:09.125 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:35:09.126 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:35:09.126 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:35:09.127 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:35:09.128 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:35:09.128 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:35:09.129 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:35:09.130 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:35:09.136 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:35:09.137 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:35:09.144 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:35:09.167 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:35:09.193 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:35:15.126 [info] <0.306.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:35:15.126 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 19:35:15.846 [info] <0.311.0>@ct_player:init:86 ct_player has started (<0.311.0>)
+2012-11-10 19:35:19.729 [info] <0.313.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:35:19.730 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 19:35:20.323 [info] <0.318.0>@ct_player:init:86 ct_player has started (<0.318.0>)
+2012-11-10 19:36:08.804 [error] <0.311.0> gen_server <0.311.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 19:36:08.828 [error] <0.311.0> CRASH REPORT Process <0.311.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:36:08.903 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.311.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:37:00.276 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-10 19:37:00.277 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:37:06.994 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:37:06.998 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:37:07.011 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:37:07.012 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:37:07.013 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:37:07.013 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:37:07.014 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:37:07.015 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:37:07.015 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:37:07.016 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:37:07.022 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:37:07.024 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:37:07.031 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:37:07.053 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:37:07.077 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:37:20.434 [info] <0.336.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:37:20.434 [info] <0.337.0>@ct_session:init:12 ct_session has started (<0.337.0>)
+2012-11-10 19:37:20.943 [info] <0.341.0>@ct_player:init:86 ct_player has started (<0.341.0>)
+2012-11-10 19:37:23.903 [info] <0.343.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:37:23.903 [info] <0.344.0>@ct_session:init:12 ct_session has started (<0.344.0>)
+2012-11-10 19:37:24.403 [info] <0.348.0>@ct_player:init:86 ct_player has started (<0.348.0>)
+2012-11-10 19:38:21.102 [error] <0.341.0> gen_server <0.341.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 19:38:21.141 [error] <0.341.0> CRASH REPORT Process <0.341.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:38:21.194 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.341.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:38:40.514 [info] <0.294.0> stop_ready([], <0.342.0>)
+
+2012-11-10 19:38:40.514 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:38:48.421 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:38:48.426 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:38:48.439 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:38:48.440 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:38:48.440 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:38:48.441 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:38:48.442 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:38:48.442 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:38:48.443 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:38:48.443 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:38:48.450 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:38:48.451 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:38:48.458 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:38:48.489 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:38:48.508 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:43:15.415 [info] <0.339.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:43:15.417 [info] <0.340.0>@ct_session:init:12 ct_session has started (<0.340.0>)
+2012-11-10 19:43:16.096 [info] <0.344.0>@ct_player:init:86 ct_player has started (<0.344.0>)
+2012-11-10 19:43:18.169 [info] <0.346.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:43:18.170 [info] <0.347.0>@ct_session:init:12 ct_session has started (<0.347.0>)
+2012-11-10 19:43:18.672 [info] <0.351.0>@ct_player:init:86 ct_player has started (<0.351.0>)
+2012-11-10 19:44:20.491 [error] <0.344.0> gen_server <0.344.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 19:44:20.563 [error] <0.344.0> CRASH REPORT Process <0.344.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:44:20.654 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.344.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:44:45.011 [info] <0.294.0> stop_ready([], <0.345.0>)
+
+2012-11-10 19:44:45.012 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:44:50.453 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:44:50.458 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:44:50.472 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:44:50.473 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:44:50.474 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:44:50.474 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:44:50.475 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:44:50.476 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:44:50.476 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:44:50.477 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:44:50.484 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:44:50.484 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:44:50.485 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:44:50.499 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:44:50.539 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:44:58.476 [info] <0.306.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:44:58.477 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 19:44:58.950 [info] <0.311.0>@ct_player:init:86 ct_player has started (<0.311.0>)
+2012-11-10 19:45:01.377 [info] <0.313.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:45:01.378 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 19:45:01.848 [info] <0.318.0>@ct_player:init:86 ct_player has started (<0.318.0>)
+2012-11-10 19:46:25.091 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-10 19:46:25.092 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:46:31.035 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:46:31.039 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:46:31.052 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:46:31.052 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:46:31.053 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:46:31.054 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:46:31.054 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:46:31.055 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:46:31.056 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:46:31.056 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:46:31.063 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:46:31.064 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:46:31.065 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:46:31.078 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:46:31.121 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:46:37.323 [info] <0.294.0> stop_ready([], <0.295.0>)
+
+2012-11-10 19:46:37.330 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:47:21.398 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:47:21.402 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:47:21.415 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:47:21.415 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:47:21.416 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:47:21.417 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:47:21.418 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:47:21.418 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:47:21.419 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:47:21.419 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:47:21.426 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:47:21.427 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:47:21.434 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:47:21.466 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:47:21.476 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:47:30.759 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:47:30.761 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 19:47:31.374 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 19:47:31.374 [error] <0.315.0>@ct_client_command:execute:31 ct_client_command: error badarg [{erlang,atom_to_list,[1005],[]},{ct_player_sup,start_player,1,[{file,"src/ct_player_sup.erl"},{line,29}]},{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,77}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,16}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]}].
+2012-11-10 19:47:31.464 [error] <0.315.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[badarg],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 19:48:31.092 [info] <0.292.0> stop_ready([], <0.308.0>)
+
+2012-11-10 19:48:31.095 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:48:37.728 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:48:37.732 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:48:37.745 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:48:37.745 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:48:37.746 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:48:37.747 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:48:37.748 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:48:37.749 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:48:37.749 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:48:37.750 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:48:37.757 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:48:37.758 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:48:37.765 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:48:37.788 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:48:37.813 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:48:41.336 [info] <0.306.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:48:41.337 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 19:48:41.934 [info] <0.311.0>@ct_player:init:86 ct_player has started (<0.311.0>)
+2012-11-10 19:48:44.253 [info] <0.313.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:48:44.254 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 19:48:44.715 [info] <0.318.0>@ct_player:init:86 ct_player has started (<0.318.0>)
+2012-11-10 19:49:35.542 [error] <0.318.0> gen_server <0.318.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 19:49:35.588 [error] <0.318.0> CRASH REPORT Process <0.318.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 19:49:35.648 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.318.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 19:53:01.330 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-10 19:53:01.332 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 19:53:08.295 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 19:53:08.299 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 19:53:08.312 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 19:53:08.313 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 19:53:08.314 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 19:53:08.314 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 19:53:08.315 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 19:53:08.316 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 19:53:08.316 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 19:53:08.317 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 19:53:08.324 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 19:53:08.325 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 19:53:08.331 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 19:53:08.363 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 19:53:08.387 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 19:53:21.371 [info] <0.334.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 19:53:21.372 [info] <0.335.0>@ct_session:init:12 ct_session has started (<0.335.0>)
+2012-11-10 19:53:21.984 [info] <0.339.0>@ct_player:init:86 ct_player has started (<0.339.0>)
+2012-11-10 19:53:24.681 [info] <0.341.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 19:53:24.682 [info] <0.342.0>@ct_session:init:12 ct_session has started (<0.342.0>)
+2012-11-10 19:53:25.300 [info] <0.346.0>@ct_player:init:86 ct_player has started (<0.346.0>)
+2012-11-10 20:06:42.486 [error] <0.339.0> gen_server <0.339.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 20:06:42.528 [error] <0.339.0> CRASH REPORT Process <0.339.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 20:06:42.595 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.339.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 20:06:56.586 [info] <0.507.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 20:06:56.586 [info] <0.510.0>@ct_session:init:12 ct_session has started (<0.510.0>)
+2012-11-10 20:07:01.175 [info] <0.517.0>@ct_player:init:86 ct_player has started (<0.517.0>)
+2012-11-10 20:07:03.445 [error] <0.346.0> gen_server <0.346.0> terminated with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'/2 from ct_player:handle_cast/2 line 112
+2012-11-10 20:07:03.568 [error] <0.346.0> CRASH REPORT Process <0.346.0> with 0 neighbours exited with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.346.0>,<0.341.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.171.0>,[{e,[...]},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}) in gen_server:terminate/6 line 747
+2012-11-10 20:07:03.628 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.346.0> exit with reason call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.346.0>,<0.341.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.171.0>,[{e,[...]},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}) in context child_terminated
+2012-11-10 20:08:37.373 [error] <0.517.0> gen_server <0.517.0> terminated with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21
+2012-11-10 20:08:37.419 [error] <0.517.0> CRASH REPORT Process <0.517.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({error,undefined}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 20:08:37.471 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.517.0> exit with reason no function clause matching ct_player:get_pid({error,undefined}) line 21 in context child_terminated
+2012-11-10 20:08:50.538 [info] <0.530.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 20:08:50.539 [info] <0.533.0>@ct_session:init:12 ct_session has started (<0.533.0>)
+2012-11-10 20:08:54.861 [info] <0.539.0>@ct_player:init:86 ct_player has started (<0.539.0>)
+2012-11-10 20:15:47.662 [info] <0.292.0> stop_ready([], <0.529.0>)
+
+2012-11-10 20:15:47.663 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 20:15:51.534 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 20:15:51.538 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 20:15:51.552 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 20:15:51.552 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 20:15:51.553 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 20:15:51.554 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 20:15:51.555 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 20:15:51.555 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 20:15:51.556 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 20:15:51.556 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 20:15:51.563 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 20:15:51.564 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 20:15:51.571 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 20:15:51.600 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 20:15:51.623 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 20:15:53.917 [info] <0.294.0> stop_ready([], <0.295.0>)
+
+2012-11-10 20:15:53.918 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 20:17:22.069 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 20:17:22.073 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 20:17:22.087 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 20:17:22.087 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 20:17:22.088 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 20:17:22.089 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 20:17:22.090 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 20:17:22.090 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 20:17:22.091 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 20:17:22.091 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 20:17:22.098 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 20:17:22.099 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 20:17:22.100 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 20:17:22.114 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 20:17:22.153 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 20:20:02.166 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 20:20:02.168 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 20:20:02.896 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 20:20:05.952 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 20:20:05.952 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 20:20:06.540 [info] <0.327.0>@ct_player:init:86 ct_player has started (<0.327.0>)
+2012-11-10 20:20:48.102 [error] <0.320.0> gen_server <0.320.0> terminated with reason: no function clause matching ct_player:get_pid({ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,...}}) line 21
+2012-11-10 20:20:48.141 [error] <0.320.0> CRASH REPORT Process <0.320.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,...}}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 20:20:48.204 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.320.0> exit with reason no function clause matching ct_player:get_pid({ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,...}}) line 21 in context child_terminated
+2012-11-10 20:21:02.479 [info] <0.294.0> stop_ready([], <0.321.0>)
+
+2012-11-10 20:21:02.480 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 20:21:05.076 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 20:21:05.081 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 20:21:05.094 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 20:21:05.094 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 20:21:05.095 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 20:21:05.096 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 20:21:05.097 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 20:21:05.097 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 20:21:05.098 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 20:21:05.099 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 20:21:05.105 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 20:21:05.121 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 20:21:05.122 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 20:21:05.148 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 20:21:05.155 [info] <0.290.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 20:21:07.087 [info] <0.306.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 20:21:07.089 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-10 20:21:07.626 [info] <0.311.0>@ct_player:init:86 ct_player has started (<0.311.0>)
+2012-11-10 20:21:09.872 [info] <0.313.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 20:21:09.872 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-10 20:21:10.308 [info] <0.318.0>@ct_player:init:86 ct_player has started (<0.318.0>)
+2012-11-10 20:21:15.702 [error] <0.318.0> gen_server <0.318.0> terminated with reason: no function clause matching ct_player:get_pid({ok,{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,...}}) line 21
+2012-11-10 20:21:15.756 [error] <0.318.0> CRASH REPORT Process <0.318.0> with 0 neighbours exited with reason: no function clause matching ct_player:get_pid({ok,{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,...}}) line 21 in gen_server:terminate/6 line 747
+2012-11-10 20:21:15.817 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.318.0> exit with reason no function clause matching ct_player:get_pid({ok,{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,...}}) line 21 in context child_terminated
+2012-11-10 20:21:40.943 [info] <0.290.0> stop_ready([], <0.312.0>)
+
+2012-11-10 20:21:40.943 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 20:22:55.025 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 20:22:55.029 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 20:22:55.042 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 20:22:55.043 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 20:22:55.043 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 20:22:55.044 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 20:22:55.045 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 20:22:55.045 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 20:22:55.046 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 20:22:55.046 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 20:22:55.053 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 20:22:55.055 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 20:22:55.062 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 20:22:55.095 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 20:22:55.112 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 20:23:03.222 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 20:23:03.223 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 20:23:03.774 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 20:23:05.673 [info] <0.322.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 20:23:05.674 [info] <0.323.0>@ct_session:init:12 ct_session has started (<0.323.0>)
+2012-11-10 20:23:06.220 [info] <0.327.0>@ct_player:init:86 ct_player has started (<0.327.0>)
+2012-11-10 20:25:30.895 [info] <0.292.0> stop_ready([], <0.321.0>)
+
+2012-11-10 20:25:30.896 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 20:25:36.694 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 20:25:36.698 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 20:25:36.711 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 20:25:36.712 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 20:25:36.713 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 20:25:36.714 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 20:25:36.714 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 20:25:36.715 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 20:25:36.715 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 20:25:36.716 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 20:25:36.723 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 20:25:36.724 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 20:25:36.731 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 20:25:36.766 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 20:25:36.774 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 20:25:48.417 [info] <0.315.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 20:25:48.418 [info] <0.316.0>@ct_session:init:12 ct_session has started (<0.316.0>)
+2012-11-10 20:25:48.961 [info] <0.320.0>@ct_player:init:86 ct_player has started (<0.320.0>)
+2012-11-10 20:25:56.746 [info] <0.326.0>@ct_client_command:do_command:45 Log in: User: <<>> Password: <<>> 
+2012-11-10 20:25:56.747 [info] <0.327.0>@ct_session:init:12 ct_session has started (<0.327.0>)
+2012-11-10 20:26:02.345 [info] <0.326.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 20:26:02.346 [info] <0.329.0>@ct_session:init:12 ct_session has started (<0.329.0>)
+2012-11-10 20:26:02.996 [info] <0.333.0>@ct_player:init:86 ct_player has started (<0.333.0>)
+2012-11-10 20:26:16.400 [error] <0.315.0>@ct_client_command:execute:21 Error when decoding bad_args
+2012-11-10 20:26:16.466 [error] <0.315.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[<<"Error when decoding: bad_args">>],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 20:26:16.524 [error] <0.315.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error {badrecord,state} [{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,41}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 20:26:19.376 [error] <0.315.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error {badrecord,state} [{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,41}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 20:26:21.801 [error] <0.315.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error {badrecord,state} [{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,41}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-10 20:26:28.179 [info] <0.341.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 20:26:28.179 [info] <0.344.0>@ct_session:init:12 ct_session has started (<0.344.0>)
+2012-11-10 20:26:33.287 [info] <0.351.0>@ct_player:init:86 ct_player has started (<0.351.0>)
+2012-11-10 20:26:35.508 [error] <0.333.0> gen_server <0.333.0> terminated with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'/2 from ct_player:handle_cast/2 line 112
+2012-11-10 20:26:35.571 [error] <0.333.0> CRASH REPORT Process <0.333.0> with 0 neighbours exited with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.333.0>,<0.326.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.173.0>,[{n,[...]},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}) in gen_server:terminate/6 line 747
+2012-11-10 20:26:35.612 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.333.0> exit with reason call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,1,<0.333.0>,<0.326.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.173.0>,[{n,[...]},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}) in context child_terminated
+2012-11-10 20:26:35.728 [error] <0.320.0> gen_server <0.320.0> terminated with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'/2 from ct_player:handle_cast/2 line 112
+2012-11-10 20:26:35.878 [error] <0.320.0> CRASH REPORT Process <0.320.0> with 0 neighbours exited with reason: call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.173.0>,[{n,[5,6]},{ne,...},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}) in gen_server:terminate/6 line 747
+2012-11-10 20:26:35.979 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.320.0> exit with reason call to undefined function ct_client_command:'-do_command/2-fun-0-'({player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.173.0>,[{n,[5,6]},{ne,...},...],...}, {obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}) in context child_terminated
+2012-11-10 20:30:23.890 [error] <0.315.0> gen_server <0.315.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-10 20:30:23.953 [error] <0.315.0> CRASH REPORT Process <0.315.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-10 20:31:09.450 [info] <0.382.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 20:31:09.451 [info] <0.385.0>@ct_session:init:12 ct_session has started (<0.385.0>)
+2012-11-10 20:31:13.797 [info] <0.391.0>@ct_player:init:86 ct_player has started (<0.391.0>)
+2012-11-10 21:25:27.679 [info] <0.292.0> stop_ready([], <0.381.0>)
+
+2012-11-10 21:25:27.679 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-10 23:42:41.503 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-10 23:42:41.552 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-10 23:42:41.655 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-10 23:42:41.656 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-10 23:42:41.663 [info] <0.73.0>@ct_character_service:init:20 ct_character_service has started (<0.73.0>)
+2012-11-10 23:42:41.665 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-10 23:42:41.667 [info] <0.75.0>@ct_player_sup:init:12 ct_player_sup has started (<0.75.0>)
+2012-11-10 23:42:41.668 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-10 23:42:41.680 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-10 23:42:41.681 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-10 23:42:41.698 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-10 23:42:41.792 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-10 23:42:41.831 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-10 23:42:41.900 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-10 23:42:41.908 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-10 23:42:59.216 [info] <0.311.0>@ct_client_command:do_command:45 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-10 23:42:59.229 [info] <0.312.0>@ct_session:init:12 ct_session has started (<0.312.0>)
+2012-11-10 23:42:59.906 [info] <0.316.0>@ct_player:init:86 ct_player has started (<0.316.0>)
+2012-11-10 23:43:05.795 [info] <0.317.0>@ct_client_command:do_command:45 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-10 23:43:05.796 [info] <0.318.0>@ct_session:init:12 ct_session has started (<0.318.0>)
+2012-11-10 23:43:06.796 [info] <0.322.0>@ct_player:init:86 ct_player has started (<0.322.0>)
+2012-11-10 23:43:57.733 [error] <0.316.0> gen_server <0.316.0> terminated with reason: bad argument in ct_player:handle_cast/2 line 209
+2012-11-10 23:43:57.933 [error] <0.316.0> CRASH REPORT Process <0.316.0> with 0 neighbours exited with reason: bad argument in ct_player:handle_cast/2 line 209 in gen_server:terminate/6 line 747
+2012-11-10 23:43:57.995 [error] <0.75.0> Supervisor ct_player_sup had child ct_player started with {ct_player,start_link,undefined} at <0.316.0> exit with reason bad argument in ct_player:handle_cast/2 line 209 in context child_terminated

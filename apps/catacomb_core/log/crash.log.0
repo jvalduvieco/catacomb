@@ -1,0 +1,1648 @@
+2012-11-10 11:39:26 =ERROR REPORT====
+** Generic server <0.322.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,2,<0.322.0>,<0.317.0>,<<"iguana">>,22222,11,10,0,2,1,0,33,121211,<0.192.0>,[{ne,[7,7]},{s,[6,5]},{se,[7,5]},{sw,[5,5]}],[],[],#Fun<ct_client_command.0.73527236>,1002}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 11:39:27 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.322.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 825
+  neighbours:
+2012-11-10 11:39:27 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.322.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 11:39:34 =ERROR REPORT====
+** Generic server <0.315.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.315.0>,<0.310.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{ne,[6,6]},{nw,[4,6]},{sw,[4,4]},{w,[4,5]}],[],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 11:39:34 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.315.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 610
+    stack_size: 24
+    reductions: 835
+  neighbours:
+2012-11-10 11:39:34 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.315.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 11:40:00 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 11:40:18 =ERROR REPORT====
+** Generic server <0.311.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.311.0>,<0.306.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{e,[6,5]},{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 11:40:18 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.311.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 854
+  neighbours:
+2012-11-10 11:40:18 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.311.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 11:43:03 =ERROR REPORT====
+** Generic server <0.322.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.322.0>,<0.317.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{e,[6,5]},{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1005}],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 11:43:03 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.322.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1081
+  neighbours:
+2012-11-10 11:43:04 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.322.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 11:43:39 =ERROR REPORT====
+** Generic server <0.329.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.329.0>,<0.324.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{e,[6,5]},{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1005},{player_state,5,<0.322.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1005}],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 11:43:39 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.329.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 1266
+  neighbours:
+2012-11-10 11:43:39 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.329.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 11:44:54 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 11:45:47 =ERROR REPORT====
+** Generic server <0.315.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.315.0>,<0.310.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{e,[6,5]},{n,[5,6]},{nw,[4,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 11:45:47 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.315.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 853
+  neighbours:
+2012-11-10 11:45:47 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.315.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 12:49:52 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.317.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,init_it,6,[{file,"gen_server.erl"},{line,328}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 610
+    stack_size: 24
+    reductions: 106
+  neighbours:
+2012-11-10 12:49:52 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.317.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 12:50:10 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.321.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,init_it,6,[{file,"gen_server.erl"},{line,328}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 610
+    stack_size: 24
+    reductions: 106
+  neighbours:
+2012-11-10 12:50:10 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.321.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 12:50:51 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.326.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,init_it,6,[{file,"gen_server.erl"},{line,328}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 610
+    stack_size: 24
+    reductions: 106
+  neighbours:
+2012-11-10 12:50:51 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.326.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 12:54:53 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 12:55:30 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.317.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,init_it,6,[{file,"gen_server.erl"},{line,328}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 610
+    stack_size: 24
+    reductions: 106
+  neighbours:
+2012-11-10 12:55:30 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,init,[[]],[{file,"src/ct_player.erl"},{line,67}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.317.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 12:56:01 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 12:56:05 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 12:58:33 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 13:03:13 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 13:03:58 =ERROR REPORT====
+** Generic server <0.313.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.313.0>,<0.308.0>,<<"TITO">>,33333,4,none,none,none,none,none,1,123,<0.170.0>,[{ne,[6,6]},{nw,[4,6]},{w,[4,5]}],[],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 13:03:58 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.313.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 785
+  neighbours:
+2012-11-10 13:03:58 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.313.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 13:08:48 =ERROR REPORT====
+** Generic server <0.342.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,2,<0.342.0>,<0.337.0>,<<"iguana">>,22222,11,10,0,2,1,0,33,121211,<0.192.0>,[{e,[7,6]},{sw,[5,5]}],[],[],#Fun<ct_client_command.0.73527236>,1002}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 13:08:48 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.342.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 778
+  neighbours:
+2012-11-10 13:08:48 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.342.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 13:21:38 =ERROR REPORT====
+** Generic server <0.356.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,1,<0.356.0>,<0.351.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{ne,[6,6]},{nw,[4,6]},{w,[4,5]}],[{player_state,5,<0.313.0>,undefined,<<"TITO">>,33333,4,none,none,none,none,none,1,123,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1005}],[],#Fun<ct_client_command.0.73527236>,1001}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 13:21:38 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.356.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 994
+  neighbours:
+2012-11-10 13:21:38 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.356.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 13:52:53 =ERROR REPORT====
+** Generic server <0.389.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,1,<0.389.0>,<0.384.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{ne,[6,6]},{nw,[4,6]},{w,[4,5]}],[{player_state,5,<0.313.0>,undefined,<<"TITO">>,33333,4,none,none,none,none,none,1,123,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1005},{player_state,1,<0.356.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1001},{player_state,1,<0.329.0>,<0.324.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.192.0>,[{e,[7,6]},{sw,[5,5]}],[],[],#Fun<ct_player.0.23848105>,1001}],[],#Fun<ct_client_command.0.73527236>,1001}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 13:52:53 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.389.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 6007
+  neighbours:
+2012-11-10 13:52:53 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.389.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 13:53:04 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 14:02:30 =ERROR REPORT====
+** Generic server <0.318.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.318.0>,<0.313.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{n,[5,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,1,<0.311.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1001}],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 14:02:30 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.318.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 610
+    stack_size: 24
+    reductions: 1041
+  neighbours:
+2012-11-10 14:02:31 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.318.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 14:03:00 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 14:03:20 =ERROR REPORT====
+** Generic server <0.318.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.318.0>,<0.313.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{e,[6,5]},{n,[5,6]},{ne,[6,6]},{s,[5,4]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,1,<0.311.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1001}],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 14:03:20 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.318.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1075
+  neighbours:
+2012-11-10 14:03:20 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.318.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 14:03:50 =ERROR REPORT====
+** Generic server <0.332.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.332.0>,<0.327.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{e,[6,5]},{n,[5,6]},{ne,[6,6]},{s,[5,4]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,5,<0.318.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1005},{player_state,1,<0.325.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1001}],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 14:03:50 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.332.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 610
+    stack_size: 24
+    reductions: 2930
+  neighbours:
+2012-11-10 14:03:50 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.332.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 14:08:57 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 14:13:17 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 14:13:35 =ERROR REPORT====
+** Generic server <0.318.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.318.0>,<0.313.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{nw,[4,6]},{se,[6,4]}],[{player_state,1,<0.311.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1001}],[],#Fun<ct_client_command.0.73527236>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 14:13:35 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.318.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 986
+  neighbours:
+2012-11-10 14:13:35 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.318.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 14:19:50 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 14:20:27 =ERROR REPORT====
+** Generic server <0.335.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,1,<0.335.0>,<0.330.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{e,[6,5]},{ne,[6,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,5,<0.329.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.23848105>,1005}],[],#Fun<ct_client_command.0.73527236>,1001}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 14:20:27 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.335.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 1033
+  neighbours:
+2012-11-10 14:20:27 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,19}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,46}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,213}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.335.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 18:23:21 =ERROR REPORT====
+** Generic server <0.328.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.328.0>,<0.322.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.146.0>,[{e,[5,3]},{n,[4,4]},{ne,[5,4]},{nw,[3,4]},{w,[3,3]}],[{player_state,1,<0.350.0>,<0.345.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.168.0>,[{e,[6,4]},{ne,[6,5]},{s,[5,3]},{sw,[4,3]},{w,[4,4]}],[],[],#Fun<ct_client_command.0.78018064>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 18:23:22 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.328.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 2891
+  neighbours:
+2012-11-10 18:23:22 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.328.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 18:27:41 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 18:29:27 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 18:35:51 =ERROR REPORT====
+** Generic server <0.334.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.334.0>,<0.328.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{w,[4,5]}],[{player_state,1,<0.343.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<dbg_ieval.15.56107335>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 18:35:51 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.334.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 951
+  neighbours:
+2012-11-10 18:35:51 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.334.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 18:38:19 =ERROR REPORT====
+** Generic server <0.367.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.367.0>,<0.361.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{w,[4,5]}],[{player_state,5,<0.334.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005},{player_state,1,<0.343.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001},{player_state,5,<0.354.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<dbg_ieval.15.56107335>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 18:38:19 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.367.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 1465
+  neighbours:
+2012-11-10 18:38:19 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.367.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 18:39:04 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 18:43:10 =ERROR REPORT====
+** Generic server <0.350.0> terminating 
+** Last message in was {tcp_closed,#Port<0.5363>}
+** When Server state == {state,{arg,#Port<0.5363>,{{127,0,0,1},58543},{headers,"Upgrade",undefined,"localhost:8081",undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,[],undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,[{http_header,0,"Sec-WebSocket-Extensions",undefined,"x-webkit-deflate-frame"},{http_header,0,"Sec-WebSocket-Version",undefined,"13"},{http_header,0,"Sec-Websocket-Key",undefined,"u1RVNBUVLI4KIxmqrQAFIQ=="},{http_header,0,"Origin",undefined,"http://localhost:8081"},{http_header,6,'Upgrade',undefined,"websocket"}]},{http_request,'GET',{abs_path,"/ws.yaws"},{1,1}},undefined,"/ws.yaws",undefined,undefined,"./www/","/","./www//ws.yaws",undefined,undefined,<0.295.0>,[],undefined,"/",undefined},{sconf,8081,7,[],undefined,undefined,"./www/",[],{0,0,0,0},"localhost:8081",undefined,40982,undefined,[{"./www/",[]}],10240,[{"/catacomb_ws_endpoint",ct_yaws_catacomb_ws_endpoint}],[],yaws_outmod,yaws_outmod,yaws_outmod,yaws,yaws_log,[],undefined,[yaws,php,cgi,fcgi],[],["index.yaws","index.html","index.php"],[],[],[],undefined,undefined,{cgi,"/usr/bin/php-cgi"},undefined,undefined,undefined,undefined},ct_yaws_catacomb_ws_endpoint,[{origin,any},{callback,{advanced,{state,none,<<>>,{ct_client_state,none,none,none}}}}],{ws_state,8,#Port<0.5363>,none},{function_clause,[{ct_player,get_pid,[none],[{file,"ct_player.erl"},{line,21}]},{ct_player,stop,1,[{file,"ct_player.erl"},{line,62}]}]},{advanced,{state,none,<<>>,{ct_client_state,none,none,none}}}}
+** Reason for termination == 
+** {{badrecord,state},[{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,87}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,188}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 18:43:10 =CRASH REPORT====
+  crasher:
+    initial call: yaws_websockets:init/1
+    pid: <0.350.0>
+    registered_name: []
+    exception exit: {{{badrecord,state},[{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,87}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,188}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.295.0>,<0.294.0>,yaws_server,<0.77.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: []
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 2800
+  neighbours:
+2012-11-10 18:44:44 =ERROR REPORT====
+** Generic server <0.372.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.372.0>,<0.358.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{sw,[4,4]}],[{player_state,1,<0.388.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1001}],[],#Fun<dbg_ieval.15.56107335>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 18:44:44 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.372.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 4181
+    stack_size: 24
+    reductions: 1685
+  neighbours:
+2012-11-10 18:44:44 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.372.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 18:50:49 =ERROR REPORT====
+** Generic server <0.429.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.429.0>,<0.420.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{sw,[4,4]}],[{player_state,5,<0.372.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1005},{player_state,1,<0.388.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1001},{player_state,5,<0.408.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1005}],[],#Fun<dbg_ieval.15.56107335>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 18:50:49 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.429.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 10946
+    stack_size: 24
+    reductions: 2658
+  neighbours:
+2012-11-10 18:50:49 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.429.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:03:05 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:06:38 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:07:51 =ERROR REPORT====
+** Generic server <0.313.0> terminating 
+** Last message in was {tcp_closed,#Port<0.3007>}
+** When Server state == {state,{arg,#Port<0.3007>,{{127,0,0,1},58924},{headers,"Upgrade",undefined,"localhost:8081",undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,[],undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,[{http_header,0,"Sec-WebSocket-Extensions",undefined,"x-webkit-deflate-frame"},{http_header,0,"Sec-WebSocket-Version",undefined,"13"},{http_header,0,"Sec-Websocket-Key",undefined,"Gck39XeF0/az611Md1L4pw=="},{http_header,0,"Origin",undefined,"http://localhost:8081"},{http_header,6,'Upgrade',undefined,"websocket"}]},{http_request,'GET',{abs_path,"/ws.yaws"},{1,1}},undefined,"/ws.yaws",undefined,undefined,"./www/","/","./www//ws.yaws",undefined,undefined,<0.299.0>,[],undefined,"/",undefined},{sconf,8081,7,[],undefined,undefined,"./www/",[],{0,0,0,0},"localhost:8081",undefined,40982,undefined,[{"./www/",[]}],10240,[{"/catacomb_ws_endpoint",ct_yaws_catacomb_ws_endpoint}],[],yaws_outmod,yaws_outmod,yaws_outmod,yaws,yaws_log,[],undefined,[yaws,php,cgi,fcgi],[],["index.yaws","index.html","index.php"],[],[],[],undefined,undefined,{cgi,"/usr/bin/php-cgi"},undefined,undefined,undefined,undefined},ct_yaws_catacomb_ws_endpoint,[{origin,any},{callback,{advanced,{state,none,<<>>,{ct_client_state,none,none,none}}}}],{ws_state,8,#Port<0.3007>,none},{{case_clause,{stop,badarg,{state,none,<<>>,{ct_client_state,<0.314.0>,1,{player_state,1,<0.318.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}}}}},[{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},{advanced,{state,none,<<>>,{ct_client_state,none,none,none}}}}
+** Reason for termination == 
+** {{badrecord,state},[{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,87}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,188}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 19:07:51 =CRASH REPORT====
+  crasher:
+    initial call: yaws_websockets:init/1
+    pid: <0.313.0>
+    registered_name: []
+    exception exit: {{{badrecord,state},[{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,87}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,188}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.299.0>,<0.294.0>,yaws_server,<0.77.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: []
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 6765
+    stack_size: 24
+    reductions: 7358
+  neighbours:
+2012-11-10 19:08:07 =ERROR REPORT====
+** Generic server <0.311.0> terminating 
+** Last message in was {'$gen_cast',{seen,{player_state,1,<0.349.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1001}}}
+** When Server state == {player_state,5,<0.311.0>,<0.306.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{n,[5,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.318.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {'function not exported',[{ct_client_command,'-do_command/2-fun-0-',[{player_state,5,<0.311.0>,<0.306.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{n,[5,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.318.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+2012-11-10 19:08:07 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.311.0>
+    registered_name: []
+    exception exit: {{undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,5,<0.311.0>,<0.306.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{n,[5,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.318.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 1241
+  neighbours:
+2012-11-10 19:08:07 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,5,<0.311.0>,<0.306.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{n,[5,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.318.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+     Offender:   [{pid,<0.311.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:08:08 =ERROR REPORT====
+** Generic server <0.318.0> terminating 
+** Last message in was {'$gen_cast',{seen,{player_state,1,<0.349.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1001}}}
+** When Server state == {player_state,1,<0.318.0>,<0.313.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{n,[5,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001}
+** Reason for termination == 
+** {'function not exported',[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.318.0>,<0.313.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{n,[5,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+2012-11-10 19:08:08 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.318.0>
+    registered_name: []
+    exception exit: {{undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.318.0>,<0.313.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{n,[5,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 1249
+  neighbours:
+2012-11-10 19:08:08 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.318.0>,<0.313.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{n,[5,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+     Offender:   [{pid,<0.318.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:09:22 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:10:58 =ERROR REPORT====
+** Generic server <0.327.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.327.0>,<0.322.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{n,[5,6]},{nw,[4,6]}],[{player_state,1,<0.320.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 19:10:58 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.327.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1039
+  neighbours:
+2012-11-10 19:10:58 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.327.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:12:35 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:12:41 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:13:10 =ERROR REPORT====
+** Generic server <0.320.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{e,[6,5]},{n,[5,6]},{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 19:13:10 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.320.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1080
+  neighbours:
+2012-11-10 19:13:10 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.320.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:13:20 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:14:08 =ERROR REPORT====
+** Generic server <0.327.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,1,<0.327.0>,<0.322.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{e,[6,5]},{n,[5,6]},{ne,[6,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 19:14:08 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.327.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1093
+  neighbours:
+2012-11-10 19:14:08 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.327.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:15:18 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:16:39 =ERROR REPORT====
+** Generic server <0.327.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.327.0>,<0.322.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,1,<0.320.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 19:16:39 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.327.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 1082
+  neighbours:
+2012-11-10 19:16:39 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.327.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:17:11 =ERROR REPORT====
+** Generic server <0.320.0> terminating 
+** Last message in was {'$gen_cast',{seen,{player_state,5,<0.357.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1005}}}
+** When Server state == {player_state,1,<0.320.0>,<0.315.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,5,<0.327.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001}
+** Reason for termination == 
+** {'function not exported',[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.320.0>,<0.315.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,5,<0.327.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+2012-11-10 19:17:11 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.320.0>
+    registered_name: []
+    exception exit: {{undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.320.0>,<0.315.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,5,<0.327.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 1250
+  neighbours:
+2012-11-10 19:17:11 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.320.0>,<0.315.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.170.0>,[{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,5,<0.327.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+     Offender:   [{pid,<0.320.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:19:12 =ERROR REPORT====
+** Generic server <0.357.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.357.0>,<0.345.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{nw,[4,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,1,<0.320.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001},{player_state,5,<0.327.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<dbg_ieval.15.56107335>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 19:19:12 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.357.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 4181
+    stack_size: 24
+    reductions: 1840
+  neighbours:
+2012-11-10 19:19:12 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.357.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:19:59 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:21:28 =ERROR REPORT====
+** Generic server <0.320.0> terminating 
+** Last message in was {'$gen_cast',{seen,{player_state,1,<0.345.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1001}}}
+** When Server state == {player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {'function not exported',[{ct_client_command,'-do_command/2-fun-0-',[{player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+2012-11-10 19:21:28 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.320.0>
+    registered_name: []
+    exception exit: {{undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 1140
+  neighbours:
+2012-11-10 19:21:28 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+     Offender:   [{pid,<0.320.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:21:28 =ERROR REPORT====
+** Generic server <0.327.0> terminating 
+** Last message in was {'$gen_cast',{seen,{player_state,1,<0.345.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1001}}}
+** When Server state == {player_state,1,<0.327.0>,<0.322.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001}
+** Reason for termination == 
+** {'function not exported',[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.327.0>,<0.322.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+2012-11-10 19:21:28 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.327.0>
+    registered_name: []
+    exception exit: {{undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.327.0>,<0.322.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 1140
+  neighbours:
+2012-11-10 19:21:28 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.327.0>,<0.322.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.172.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"lazi">>},{"public_id",1001}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+     Offender:   [{pid,<0.327.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:22:27 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:24:18 =ERROR REPORT====
+** Generic server <0.327.0> terminating 
+** Last message in was {'$gen_cast',{attack,{ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}}}}
+** When Server state == {player_state,1,<0.327.0>,<0.322.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.171.0>,[{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 19:24:18 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.327.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 1079
+  neighbours:
+2012-11-10 19:24:18 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.327.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:24:40 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:29:47 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:30:00 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.311.0>
+    registered_name: []
+    exception exit: {{badarg,[{erlang,atom_to_list,[1005],[]},{ct_player,init,1,[{file,"src/ct_player.erl"},{line,83}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,init_it,6,[{file,"gen_server.erl"},{line,328}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 377
+    stack_size: 24
+    reductions: 205
+  neighbours:
+2012-11-10 19:30:00 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {badarg,[{erlang,atom_to_list,[1005],[]},{ct_player,init,1,[{file,"src/ct_player.erl"},{line,83}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.311.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:30:03 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.318.0>
+    registered_name: []
+    exception exit: {{badarg,[{erlang,atom_to_list,[1001],[]},{ct_player,init,1,[{file,"src/ct_player.erl"},{line,83}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,init_it,6,[{file,"gen_server.erl"},{line,328}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 377
+    stack_size: 24
+    reductions: 205
+  neighbours:
+2012-11-10 19:30:03 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {badarg,[{erlang,atom_to_list,[1001],[]},{ct_player,init,1,[{file,"src/ct_player.erl"},{line,83}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,304}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.318.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:30:32 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:35:00 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:36:08 =ERROR REPORT====
+** Generic server <0.311.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.311.0>,<0.306.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{sw,[4,4]},{w,[4,5]}],[{player_state,1,<0.318.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 19:36:08 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.311.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1021
+  neighbours:
+2012-11-10 19:36:08 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.311.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:37:00 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:38:21 =ERROR REPORT====
+** Generic server <0.341.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.341.0>,<0.336.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{n,[5,6]},{ne,[6,6]},{se,[6,4]},{sw,[4,4]}],[{player_state,1,<0.348.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 19:38:21 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.341.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1104
+  neighbours:
+2012-11-10 19:38:21 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.341.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:38:40 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:44:20 =ERROR REPORT====
+** Generic server <0.344.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.344.0>,<0.339.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.172.0>,[{ne,[6,6]},{nw,[4,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,1,<0.351.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 19:44:20 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.344.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1086
+  neighbours:
+2012-11-10 19:44:20 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.344.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:44:45 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:46:25 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:46:37 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:48:31 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:49:35 =ERROR REPORT====
+** Generic server <0.318.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,1,<0.318.0>,<0.313.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.172.0>,[{n,[5,6]},{nw,[4,6]},{se,[6,4]},{w,[4,5]}],[{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 19:49:35 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.318.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 1093
+  neighbours:
+2012-11-10 19:49:35 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.318.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 19:53:01 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:06:42 =ERROR REPORT====
+** Generic server <0.339.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.339.0>,<0.334.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.171.0>,[{e,[6,5]},{n,[5,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,1,<0.346.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.78018064>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 20:06:42 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.339.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1073
+  neighbours:
+2012-11-10 20:06:42 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.339.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:07:03 =ERROR REPORT====
+** Generic server <0.346.0> terminating 
+** Last message in was {'$gen_cast',{seen,{player_state,5,<0.517.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1005}}}
+** When Server state == {player_state,1,<0.346.0>,<0.341.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.171.0>,[{e,[6,5]},{n,[5,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,5,<0.339.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001}
+** Reason for termination == 
+** {'function not exported',[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.346.0>,<0.341.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.171.0>,[{e,[6,5]},{n,[5,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,5,<0.339.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+2012-11-10 20:07:03 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.346.0>
+    registered_name: []
+    exception exit: {{undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.346.0>,<0.341.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.171.0>,[{e,[6,5]},{n,[5,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,5,<0.339.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 1140
+  neighbours:
+2012-11-10 20:07:03 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.346.0>,<0.341.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.171.0>,[{e,[6,5]},{n,[5,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,5,<0.339.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.78018064>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+     Offender:   [{pid,<0.346.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:08:37 =ERROR REPORT====
+** Generic server <0.517.0> terminating 
+** Last message in was {'$gen_cast',{attack,{error,undefined}}}
+** When Server state == {player_state,5,<0.517.0>,<0.507.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.171.0>,[{e,[6,5]},{n,[5,6]},{se,[6,4]},{sw,[4,4]},{w,[4,5]}],[{player_state,5,<0.339.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005},{player_state,1,<0.346.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<dbg_ieval.15.56107335>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 20:08:37 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.517.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 4181
+    stack_size: 24
+    reductions: 1916
+  neighbours:
+2012-11-10 20:08:37 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{error,undefined}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.517.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:15:47 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:15:53 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:20:48 =ERROR REPORT====
+** Generic server <0.320.0> terminating 
+** Last message in was {'$gen_cast',{attack,{ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}}}}
+** When Server state == {player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.170.0>,[{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.7652017>,1005}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+2012-11-10 20:20:48 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.320.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 1088
+  neighbours:
+2012-11-10 20:20:48 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{ok,{player_state,1,<0.327.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}}],[{file,"ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,215}]}]}
+     Offender:   [{pid,<0.320.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:21:02 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:21:15 =ERROR REPORT====
+** Generic server <0.318.0> terminating 
+** Last message in was {'$gen_cast',{attack,{ok,{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}}}}
+** When Server state == {player_state,1,<0.318.0>,<0.313.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.173.0>,[{e,[6,5]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.7652017>,1001}
+** Reason for termination == 
+** {function_clause,[{ct_player,get_pid,[{ok,{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 20:21:15 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.318.0>
+    registered_name: []
+    exception exit: {{function_clause,[{ct_player,get_pid,[{ok,{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 1597
+    stack_size: 24
+    reductions: 1026
+  neighbours:
+2012-11-10 20:21:15 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {function_clause,[{ct_player,get_pid,[{ok,{player_state,5,<0.311.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}}],[{file,"src/ct_player.erl"},{line,21}]},{ct_player,hit,5,[{file,"src/ct_player.erl"},{line,48}]},{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,215}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.318.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:21:40 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:25:30 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:26:35 =ERROR REPORT====
+** Generic server <0.333.0> terminating 
+** Last message in was {'$gen_cast',{seen,{player_state,5,<0.351.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1005}}}
+** When Server state == {player_state,1,<0.333.0>,<0.326.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.173.0>,[{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.129887060>,1001}
+** Reason for termination == 
+** {'function not exported',[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.333.0>,<0.326.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.173.0>,[{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.129887060>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+2012-11-10 20:26:35 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.333.0>
+    registered_name: []
+    exception exit: {{undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.333.0>,<0.326.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.173.0>,[{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.129887060>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 1232
+  neighbours:
+2012-11-10 20:26:35 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,1,<0.333.0>,<0.326.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.173.0>,[{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.320.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.129887060>,1001},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+     Offender:   [{pid,<0.333.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:26:35 =ERROR REPORT====
+** Generic server <0.320.0> terminating 
+** Last message in was {'$gen_cast',{seen,{player_state,5,<0.351.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<dbg_ieval.15.56107335>,1005}}}
+** When Server state == {player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.173.0>,[{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.333.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.129887060>,1005}
+** Reason for termination == 
+** {'function not exported',[{ct_client_command,'-do_command/2-fun-0-',[{player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.173.0>,[{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.333.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.129887060>,1005},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+2012-11-10 20:26:35 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.320.0>
+    registered_name: []
+    exception exit: {{undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.173.0>,[{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.333.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.129887060>,1005},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 1245
+  neighbours:
+2012-11-10 20:26:35 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {undef,[{ct_client_command,'-do_command/2-fun-0-',[{player_state,5,<0.320.0>,<0.315.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.173.0>,[{n,[5,6]},{ne,[6,6]},{nw,[4,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.333.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.129887060>,1005},{obj,[{"type",<<"seen_by_info">>},{"body",{obj,[{"name",<<"TITO">>},{"public_id",1005}]}}]}],[]},{ct_player,handle_cast,2,[{file,"ct_player.erl"},{line,112}]}]}
+     Offender:   [{pid,<0.320.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 20:30:23 =ERROR REPORT====
+** Generic server <0.315.0> terminating 
+** Last message in was {tcp_closed,#Port<0.3831>}
+** When Server state == {state,{arg,#Port<0.3831>,{{127,0,0,1},60028},{headers,"Upgrade",undefined,"localhost:8081",undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,[],undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,[{http_header,0,"Sec-WebSocket-Extensions",undefined,"x-webkit-deflate-frame"},{http_header,0,"Sec-WebSocket-Version",undefined,"13"},{http_header,0,"Sec-Websocket-Key",undefined,"K5qv0pfGFdCorc9yuu9KVA=="},{http_header,0,"Origin",undefined,"http://localhost:8081"},{http_header,6,'Upgrade',undefined,"websocket"}]},{http_request,'GET',{abs_path,"/ws.yaws"},{1,1}},undefined,"/ws.yaws",undefined,undefined,"./www/","/","./www//ws.yaws",undefined,undefined,<0.293.0>,[],undefined,"/",undefined},{sconf,8081,7,[],undefined,undefined,"./www/",[],{0,0,0,0},"localhost:8081",undefined,36886,undefined,[{"./www/",[]}],10240,[{"/catacomb_ws_endpoint",ct_yaws_catacomb_ws_endpoint}],[],yaws_outmod,yaws_outmod,yaws_outmod,yaws,yaws_log,[],undefined,[yaws,php,cgi,fcgi],[],["index.yaws","index.html","index.php"],[],[],[],undefined,undefined,{cgi,"/usr/bin/php-cgi"},undefined,undefined,undefined,undefined},ct_yaws_catacomb_ws_endpoint,[{origin,any},{callback,{advanced,{state,none,<<>>,{ct_client_state,none,none,none}}}}],{ws_state,8,#Port<0.3831>,none},{{badrecord,state},[{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,87}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},{advanced,{state,none,<<>>,{ct_client_state,none,none,none}}}}
+** Reason for termination == 
+** {{badrecord,state},[{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,87}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,188}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 20:30:23 =CRASH REPORT====
+  crasher:
+    initial call: yaws_websockets:init/1
+    pid: <0.315.0>
+    registered_name: []
+    exception exit: {{{badrecord,state},[{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,87}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,188}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.293.0>,<0.292.0>,yaws_server,<0.77.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: []
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 2584
+    stack_size: 24
+    reductions: 12997
+  neighbours:
+2012-11-10 21:25:27 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_yaws_sup}
+     Context:    shutdown_error
+     Reason:     noproc
+     Offender:   [{pid,<0.78.0>},{name,ct_yaws_start},{mfargs,{ct_yaws_start,start,[]}},{restart_type,permanent},{shutdown,2000},{child_type,worker}]
+
+2012-11-10 23:43:57 =ERROR REPORT====
+** Generic server <0.316.0> terminating 
+** Last message in was {'$gen_cast',{hit,{player_state,1,<0.322.0>,<0.317.0>,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,<0.173.0>,[{n,[5,6]},{s,[5,4]},{se,[6,4]}],[{player_state,5,<0.316.0>,undefined,<<"TITO">>,33333,4,10,0,2,1,0,1,123,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1005}],[],#Fun<ct_client_command.0.129887060>,1001},10,2,1}}
+** When Server state == {player_state,5,<0.316.0>,<0.311.0>,<<"TITO">>,33333,4,10,0,2,1,0,1,123,<0.173.0>,[{n,[5,6]},{s,[5,4]},{se,[6,4]}],[{player_state,1,<0.322.0>,undefined,<<"lazi">>,232323,2333,10,0,2,1,0,56,123098,undefined,undefined,[],[],#Fun<ct_player.0.102685594>,1001}],[],#Fun<ct_client_command.0.129887060>,1005}
+** Reason for termination == 
+** {badarg,[{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,209}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+2012-11-10 23:43:57 =CRASH REPORT====
+  crasher:
+    initial call: ct_player:init/1
+    pid: <0.316.0>
+    registered_name: []
+    exception exit: {{badarg,[{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,209}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]},[{gen_server,terminate,6,[{file,"gen_server.erl"},{line,747}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+    ancestors: [<0.75.0>,<0.71.0>,<0.67.0>]
+    messages: []
+    links: [<0.75.0>]
+    dictionary: [{random_seed,{27839,21123,25074}}]
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 24
+    reductions: 994
+  neighbours:
+2012-11-10 23:43:57 =SUPERVISOR REPORT====
+     Supervisor: {global,ct_player_sup}
+     Context:    child_terminated
+     Reason:     {badarg,[{ct_player,handle_cast,2,[{file,"src/ct_player.erl"},{line,209}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}]}
+     Offender:   [{pid,<0.316.0>},{name,ct_player},{mfargs,{ct_player,start_link,undefined}},{restart_type,temporary},{shutdown,2000},{child_type,worker}]
+

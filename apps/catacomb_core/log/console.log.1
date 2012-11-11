@@ -1,0 +1,273 @@
+2012-11-09 19:11:07.187 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-09 19:11:07.226 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-09 19:11:07.302 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-09 19:11:07.303 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-09 19:11:07.303 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-09 19:11:07.304 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-09 19:11:07.305 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-09 19:11:07.305 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-09 19:11:07.306 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-09 19:11:07.307 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-09 19:11:07.330 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-09 19:11:07.331 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-09 19:11:07.331 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-09 19:11:07.346 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-09 19:11:07.435 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-09 19:11:33.752 [info] <0.309.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-09 19:11:33.754 [info] <0.310.0>@ct_session:init:12 ct_session has started (<0.310.0>)
+2012-11-09 19:11:33.760 [error] <0.309.0>@ct_client_command:execute:29 ct_client_command: error {badmatch,{error,sql_error}} [{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,63}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:11:33.833 [error] <0.309.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[{badmatch,{error,sql_error}}],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:16:45.092 [info] <0.314.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 19:16:45.092 [info] <0.315.0>@ct_session:init:12 ct_session has started (<0.315.0>)
+2012-11-09 19:16:45.103 [error] <0.314.0>@ct_client_command:execute:29 ct_client_command: error {badmatch,{error,sql_error}} [{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,63}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:16:45.166 [error] <0.314.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[{badmatch,{error,sql_error}}],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:16:54.028 [info] <0.319.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-09 19:16:54.028 [info] <0.320.0>@ct_session:init:12 ct_session has started (<0.320.0>)
+2012-11-09 19:16:54.038 [error] <0.319.0>@ct_client_command:execute:29 ct_client_command: error {badmatch,{error,sql_error}} [{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,63}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:16:54.106 [error] <0.319.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[{badmatch,{error,sql_error}}],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:17:29.220 [error] <0.309.0> gen_server <0.309.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-09 19:17:29.330 [error] <0.309.0> CRASH REPORT Process <0.309.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-09 19:17:29.417 [error] <0.314.0> gen_server <0.314.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-09 19:17:29.501 [error] <0.314.0> CRASH REPORT Process <0.314.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-09 19:17:29.569 [error] <0.319.0> gen_server <0.319.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-09 19:17:29.609 [error] <0.319.0> CRASH REPORT Process <0.319.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-09 19:17:36.180 [info] <0.326.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-09 19:17:36.180 [info] <0.327.0>@ct_session:init:12 ct_session has started (<0.327.0>)
+2012-11-09 19:17:36.197 [error] <0.326.0>@ct_client_command:execute:29 ct_client_command: error {badmatch,{error,sql_error}} [{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,63}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:17:36.287 [error] <0.326.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[{badmatch,{error,sql_error}}],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:18:49.043 [info] <0.331.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-09 19:18:49.044 [info] <0.332.0>@ct_session:init:12 ct_session has started (<0.332.0>)
+2012-11-09 19:18:49.050 [error] <0.331.0>@ct_client_command:execute:29 ct_client_command: error {badmatch,{error,sql_error}} [{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,63}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:18:49.121 [error] <0.331.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[{badmatch,{error,sql_error}}],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:22:42.086 [error] <0.326.0> gen_server <0.326.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-09 19:22:42.157 [error] <0.326.0> CRASH REPORT Process <0.326.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-09 19:33:07.886 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-09 19:33:07.890 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-09 19:33:07.903 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-09 19:33:07.904 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-09 19:33:07.904 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-09 19:33:07.905 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-09 19:33:07.906 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-09 19:33:07.906 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-09 19:33:07.907 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-09 19:33:07.907 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-09 19:33:07.914 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-09 19:33:07.915 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-09 19:33:07.922 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-09 19:33:07.956 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-09 19:33:07.978 [info] <0.292.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-09 19:33:22.154 [info] <0.309.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 19:33:22.155 [info] <0.310.0>@ct_session:init:12 ct_session has started (<0.310.0>)
+2012-11-09 19:33:22.163 [error] <0.309.0>@ct_client_command:execute:29 ct_client_command: error {badmatch,{error,sql_error}} [{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,63}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:33:22.227 [error] <0.309.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[{badmatch,{error,sql_error}}],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:34:51.596 [info] <0.314.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 19:34:51.597 [info] <0.315.0>@ct_session:init:12 ct_session has started (<0.315.0>)
+2012-11-09 19:37:33.266 [info] <0.319.0>@ct_player:init:74 ct_player has started (<0.319.0>)
+2012-11-09 19:37:33.266 [error] <0.314.0>@ct_client_command:execute:29 ct_client_command: error badarg [{erlang,list_to_atom,[1005],[]},{ct_player_sup,start_player,1,[{file,"src/ct_player_sup.erl"},{line,27}]},{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,75}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]}].
+2012-11-09 19:37:33.336 [error] <0.314.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[badarg],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:37:50.276 [info] <0.321.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-09 19:37:50.276 [info] <0.322.0>@ct_session:init:12 ct_session has started (<0.322.0>)
+2012-11-09 19:37:51.470 [info] <0.326.0>@ct_player:init:74 ct_player has started (<0.326.0>)
+2012-11-09 19:37:51.470 [error] <0.321.0>@ct_client_command:execute:29 ct_client_command: error badarg [{erlang,list_to_atom,[1002],[]},{ct_player_sup,start_player,1,[{file,"src/ct_player_sup.erl"},{line,27}]},{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,75}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]}].
+2012-11-09 19:37:51.577 [error] <0.321.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[badarg],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:38:32.836 [info] <0.328.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-09 19:38:32.836 [info] <0.329.0>@ct_session:init:12 ct_session has started (<0.329.0>)
+2012-11-09 19:38:38.059 [info] <0.333.0>@ct_player:init:74 ct_player has started (<0.333.0>)
+2012-11-09 19:38:38.059 [error] <0.328.0>@ct_client_command:execute:29 ct_client_command: error badarg [{erlang,list_to_atom,[1001],[]},{ct_player_sup,start_player,1,[{file,"src/ct_player_sup.erl"},{line,27}]},{ct_client_command,do_command,2,[{file,"src/ct_client_command.erl"},{line,75}]},{ct_client_command,execute,2,[{file,"src/ct_client_command.erl"},{line,14}]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,45}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]}].
+2012-11-09 19:38:38.123 [error] <0.328.0>@ct_yaws_catacomb_ws_endpoint:handle_message:52 Error in ct_yaws_catacomb_ws_endpoint: error badarg [{erlang,list_to_binary,[badarg],[]},{ct_yaws_catacomb_ws_endpoint,handle_message,2,[{file,"src/ct_yaws_catacomb_ws_endpoint.erl"},{line,49}]},{yaws_websockets,'-do_callback_fun/2-fun-0-',4,[{file,"src/yaws_websockets.erl"},{line,257}]},{lists,foldl,3,[{file,"lists.erl"},{line,1197}]},{yaws_websockets,handle_info,2,[{file,"src/yaws_websockets.erl"},{line,147}]},{gen_server,handle_msg,5,[{file,"gen_server.erl"},{line,607}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,227}]}].
+2012-11-09 19:38:49.311 [error] <0.309.0> gen_server <0.309.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-09 19:38:49.383 [error] <0.309.0> CRASH REPORT Process <0.309.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-09 19:41:43.598 [error] <0.314.0> gen_server <0.314.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-09 19:41:43.638 [error] <0.314.0> CRASH REPORT Process <0.314.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-09 19:42:27.738 [error] <0.321.0> gen_server <0.321.0> terminated with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87
+2012-11-09 19:42:27.803 [error] <0.321.0> CRASH REPORT Process <0.321.0> with 0 neighbours exited with reason: bad record state in ct_yaws_catacomb_ws_endpoint:handle_message/2 line 87 in gen_server:terminate/6 line 747
+2012-11-09 19:53:40.436 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-09 19:53:40.443 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-09 19:53:40.454 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-09 19:53:40.454 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-09 19:53:40.455 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-09 19:53:40.456 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-09 19:53:40.456 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-09 19:53:40.457 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-09 19:53:40.458 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-09 19:53:40.459 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-09 19:53:40.465 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-09 19:53:40.466 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-09 19:53:40.467 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-09 19:53:40.481 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-09 19:53:40.521 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-09 19:53:48.052 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"jordi">> Password: <<"pass">> 
+2012-11-09 19:53:48.053 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-09 19:53:48.761 [info] <0.311.0>@ct_player:init:74 ct_player has started (<0.311.0>)
+2012-11-09 20:07:57.716 [info] <0.294.0> stop_ready([], <0.299.0>)
+
+2012-11-09 20:07:57.718 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-09 20:08:00.650 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-09 20:08:00.655 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-09 20:08:00.669 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-09 20:08:00.670 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-09 20:08:00.670 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-09 20:08:00.671 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-09 20:08:00.672 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-09 20:08:00.673 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-09 20:08:00.674 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-09 20:08:00.674 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-09 20:08:00.681 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-09 20:08:00.682 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-09 20:08:00.683 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-09 20:08:00.701 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-09 20:08:00.740 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-09 20:08:03.179 [info] <0.294.0> stop_ready([], <0.295.0>)
+
+2012-11-09 20:08:03.180 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-09 20:21:14.886 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-09 20:21:14.890 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-09 20:21:14.904 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-09 20:21:14.905 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-09 20:21:14.906 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-09 20:21:14.907 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-09 20:21:14.907 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-09 20:21:14.908 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-09 20:21:14.909 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-09 20:21:14.909 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-09 20:21:14.916 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-09 20:21:14.917 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-09 20:21:14.924 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-09 20:21:14.959 [info] <0.285.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-09 20:21:14.963 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-09 20:21:26.524 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 20:21:26.525 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-09 20:21:29.882 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-09 20:22:33.877 [info] <0.316.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 20:22:33.877 [info] <0.317.0>@ct_session:init:12 ct_session has started (<0.317.0>)
+2012-11-09 20:22:34.668 [info] <0.321.0>@ct_player:init:84 ct_player has started (<0.321.0>)
+2012-11-09 20:42:29.854 [info] <0.285.0> stop_ready([], <0.299.0>)
+
+2012-11-09 20:42:29.854 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-09 20:42:32.672 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-09 20:42:32.676 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-09 20:42:32.690 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-09 20:42:32.691 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-09 20:42:32.692 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-09 20:42:32.693 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-09 20:42:32.693 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-09 20:42:32.694 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-09 20:42:32.695 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-09 20:42:32.695 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-09 20:42:32.702 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-09 20:42:32.719 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-09 20:42:32.725 [info] <0.83.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.83.0>)
+2012-11-09 20:42:32.744 [info] <0.209.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-09 20:42:32.752 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-09 20:45:22.487 [info] <0.209.0> stop_ready([], <0.213.0>)
+
+2012-11-09 20:45:22.487 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-09 21:36:31.659 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-09 21:36:31.663 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-09 21:36:31.676 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-09 21:36:31.677 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-09 21:36:31.678 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-09 21:36:31.678 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-09 21:36:31.679 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-09 21:36:31.680 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-09 21:36:31.680 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-09 21:36:31.681 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-09 21:36:31.688 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-09 21:36:31.689 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-09 21:36:31.705 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-09 21:36:31.731 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-09 21:36:31.732 [info] <0.289.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-09 21:36:34.071 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:36:34.072 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-09 21:36:34.811 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-09 21:36:38.184 [info] <0.313.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:36:38.185 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-09 21:36:38.801 [info] <0.318.0>@ct_player:init:84 ct_player has started (<0.318.0>)
+2012-11-09 21:42:20.920 [info] <0.289.0> stop_ready([], <0.312.0>)
+
+2012-11-09 21:42:20.921 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-09 21:42:27.772 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-09 21:42:27.776 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-09 21:42:27.791 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-09 21:42:27.793 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-09 21:42:27.794 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-09 21:42:27.795 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-09 21:42:27.795 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-09 21:42:27.796 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-09 21:42:27.797 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-09 21:42:27.797 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-09 21:42:27.805 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-09 21:42:27.806 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-09 21:42:27.813 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-09 21:42:27.841 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-09 21:42:27.869 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-09 21:42:30.461 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:42:30.463 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-09 21:42:31.130 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-09 21:42:35.412 [info] <0.313.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:42:35.412 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-09 21:42:36.086 [info] <0.318.0>@ct_player:init:84 ct_player has started (<0.318.0>)
+2012-11-09 21:44:18.122 [info] <0.294.0> stop_ready([], <0.312.0>)
+
+2012-11-09 21:44:18.125 [error] <0.77.0> Supervisor ct_yaws_sup had child ct_yaws_start started with ct_yaws_start:start() at <0.78.0> exit with reason noproc in context shutdown_error
+2012-11-09 21:44:27.216 [info] <0.6.0> Application lager started on node nonode@nohost
+2012-11-09 21:44:27.220 [info] <0.6.0> Application emysql started on node nonode@nohost
+2012-11-09 21:44:27.234 [info] <0.71.0>@ct_root_sup:init:13 ct_root_sup has started (<0.71.0>)
+2012-11-09 21:44:27.235 [info] <0.72.0>@ct_auth_service:init:17 ct_auth_service has started (<0.72.0>)
+2012-11-09 21:44:27.236 [info] <0.73.0>@ct_character_service:init:18 ct_character_service has started (<0.73.0>)
+2012-11-09 21:44:27.236 [info] <0.74.0>@ct_session_sup:init:11 ct_session_sup has started (<0.74.0>)
+2012-11-09 21:44:27.237 [info] <0.75.0>@ct_player_sup:init:11 ct_player_sup has started (<0.75.0>)
+2012-11-09 21:44:27.238 [info] <0.76.0>@ct_room_sup:init:14 ct_room_sup has started (<0.76.0>)
+2012-11-09 21:44:27.241 [info] <0.77.0>@ct_yaws_sup:init:11 ct_yaws_sup has started (<0.77.0>)
+2012-11-09 21:44:27.244 [info] <0.78.0>@ct_yaws_start:run:10 ct_yaws_start has started (<0.78.0>)
+2012-11-09 21:44:27.251 [info] <0.79.0>@ct_config_service:init:26 ct_config_service has started (<0.79.0>)
+2012-11-09 21:44:27.253 [info] <0.80.0>@ct_god:init:18 ct_god has started (<0.80.0>)
+2012-11-09 21:44:27.259 [info] <0.81.0>@ct_ai_sup:init:12 ct_ai_sup has started (<0.81.0>)
+2012-11-09 21:44:27.282 [info] <0.6.0> Application catacomb_core started on node nonode@nohost
+2012-11-09 21:44:27.310 [info] <0.294.0> Yaws: Listening to 0.0.0.0:8081 for <1> virtual servers:
+ - http://localhost:8081 under ./www/
+
+2012-11-09 21:44:30.033 [info] <0.306.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:44:30.034 [info] <0.307.0>@ct_session:init:12 ct_session has started (<0.307.0>)
+2012-11-09 21:44:30.479 [info] <0.311.0>@ct_player:init:84 ct_player has started (<0.311.0>)
+2012-11-09 21:44:33.838 [info] <0.313.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:44:33.839 [info] <0.314.0>@ct_session:init:12 ct_session has started (<0.314.0>)
+2012-11-09 21:44:34.275 [info] <0.318.0>@ct_player:init:84 ct_player has started (<0.318.0>)
+2012-11-09 21:47:19.773 [info] <0.324.0>@ct_client_command:do_command:43 Log in: User: <<"dcodix">> Password: <<"pass">> 
+2012-11-09 21:47:19.774 [info] <0.325.0>@ct_session:init:12 ct_session has started (<0.325.0>)
+2012-11-09 21:47:25.612 [info] <0.324.0>@ct_client_command:do_command:43 Log in: User: <<"dcodix">> Password: <<"pass">> 
+2012-11-09 21:47:25.612 [info] <0.327.0>@ct_session:init:12 ct_session has started (<0.327.0>)
+2012-11-09 21:47:32.852 [info] <0.324.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:47:32.852 [info] <0.329.0>@ct_session:init:12 ct_session has started (<0.329.0>)
+2012-11-09 21:47:33.688 [info] <0.333.0>@ct_player:init:84 ct_player has started (<0.333.0>)
+2012-11-09 21:47:40.576 [info] <0.334.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:47:40.577 [info] <0.335.0>@ct_session:init:12 ct_session has started (<0.335.0>)
+2012-11-09 21:47:41.240 [info] <0.339.0>@ct_player:init:84 ct_player has started (<0.339.0>)
+2012-11-09 21:48:27.439 [info] <0.345.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:48:27.440 [info] <0.346.0>@ct_session:init:12 ct_session has started (<0.346.0>)
+2012-11-09 21:48:28.264 [info] <0.350.0>@ct_player:init:84 ct_player has started (<0.350.0>)
+2012-11-09 21:49:11.065 [info] <0.355.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:49:11.065 [info] <0.356.0>@ct_session:init:12 ct_session has started (<0.356.0>)
+2012-11-09 21:49:11.784 [info] <0.360.0>@ct_player:init:84 ct_player has started (<0.360.0>)
+2012-11-09 21:50:03.916 [info] <0.366.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:50:03.916 [info] <0.367.0>@ct_session:init:12 ct_session has started (<0.367.0>)
+2012-11-09 21:50:04.640 [info] <0.371.0>@ct_player:init:84 ct_player has started (<0.371.0>)
+2012-11-09 21:51:31.477 [info] <0.377.0>@ct_client_command:do_command:43 Log in: User: <<"dani">> Password: <<"pass">> 
+2012-11-09 21:51:31.477 [info] <0.378.0>@ct_session:init:12 ct_session has started (<0.378.0>)
+2012-11-09 21:51:32.080 [info] <0.382.0>@ct_player:init:84 ct_player has started (<0.382.0>)
