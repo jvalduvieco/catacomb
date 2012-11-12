@@ -39,6 +39,6 @@ init([]) ->
                 permanent, infinity, worker, [ct_god]},
     		{{global,ct_ai_sup},
         		{ct_ai_sup, start_link, []},
-        		permanent, infinity, worker, [ct_ai_sup]}
+        		permanent, infinity, supervisor, [ct_ai_sup]}
         	]
         }}.
