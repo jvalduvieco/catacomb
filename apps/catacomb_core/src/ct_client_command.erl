@@ -111,8 +111,9 @@ do_command(Cmd,State) ->
 			%%ct_player:info(Status#State.ct_client_state)
 			{ok,[],State};
 		<<"attack">>->
-			PlayerId=ct_translation_tools:get_value(<<"character_id">>, Cmd),
-			ct_player:attack(State#ct_client_state.player_handle,ct_player_sup:get_handler(PlayerId)),
+			PlayerId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"character_id">>, Cmd))),
+			{ok,OtherPlayer}=ct_player_sup:get_handler(PlayerId),
+			ct_player:attack(State#ct_client_state.player_handle,OtherPlayer),
 			{ok,[],State};
 		<<"player_talk_request">>->
             Message=ct_translation_tools:get_value(<<"message">>,Cmd),

@@ -188,14 +188,16 @@ function processResponse(data)
         case "room_chat_talk":
             roomChatTalk(obj.body);
             break;
-        case "object_picked":
+	    case "object_picked":
             addToInventory(obj.body);
             break;
         case "object_dropped":
             objectDropped(obj.body);
             break;
+        case "attack_info":
+            attackInfo(obj.body);
+            break;
     }
-
 }
 
 function loginResponse(obj)
@@ -304,7 +306,8 @@ function playerSeen(data)
     var name = data.name;
     var id = data.public_id;
     writeTimeline("You can see " + name);
-    $("#playersInRoom").append('<dt id="playerSeen' + id + '">' + name + '</dt>');
+    //$("#playersInRoom").append('<dt id="playerSeen' + id + '">' + name + '</dt>');
+    $("#playersInRoom").append('<dt id="playerSeen' + id + '"><button class="btn btn-danger btn-mini" type="button" onclick="playerAttack(' + id + ')">Attack ' + name + '</button></dt>');
 
     $("#playerUnseen" + id).remove();
 }
@@ -333,4 +336,45 @@ function objectDropped(data)
     var id=data.object_id;
     $("#inventoryObject" + id).remove();
     writeTimeline("Object dropped");
+}
+function playerAttack(id)
+{
+    ws.send('{"type":"attack","body":{"character_id":"' + id + '"}}');
+}
+
+function attackInfo(data)
+{
+    var type = data.msg_type;
+    var otherPlayer = data.otherplayer;
+    var damage = data.damage;
+
+
+    switch (type)
+    {
+        case "failed":
+            writeTimeline(otherPlayer + " failed to hit you.");
+            break;
+        case "hitted":
+            writeTimeline(otherPlayer + " hitted you dealing " + damage + ".");
+            break;
+        case "dodged":
+            writeTimeline("You dodged " + otherPlayer + " attack.");
+            break;
+        case "dead":
+            writeTimeline("You are DEAD! " + otherPlayer + " killed you.");
+            break;
+        case "otherfailed":
+            writeTimeline("You failed to hit " + otherPlayer + ".");
+            break;
+        case "otherhitted":
+            writeTimeline("Youy hit " + otherPlayer + " dealing " + damage + ".");
+            break;
+        case "otherdodged":
+            writeTimeline(otherplayer + " doddged your attack.");
+            break;
+        case "otherdead":
+            writeTimeline("You killed " + otherPlayer + " !!");
+            break;
+        
+    }
 }

@@ -3,7 +3,6 @@
 -export([start_link/0]).
 -export([init/1,start_player/1,get_handler/1]).
 
-
 start_link() ->
     supervisor:start_link({global, ?MODULE}, ?MODULE, []).
 

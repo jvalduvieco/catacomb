@@ -1,6 +1,6 @@
 {release,
 {"catacomb_core","1"},
-{erts,"5.9.2"},
+{erts,"5.9.*"},
 [{kernel,"2.15.2"},
 {stdlib, "1.18.2"},
 {sasl, "2.2.1"},
