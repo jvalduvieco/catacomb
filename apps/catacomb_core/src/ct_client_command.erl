@@ -100,14 +100,15 @@ do_command(Cmd,State) ->
 		<<"catch">>->
 			%%ct_player:catch(Status#status.player_pid,ObjectId)
 			{ok,[],State};
-		<<"drop">>->
-			%%ct_player:drop(Status#status.player_pid,ObjectId)
+		<<"drop_object">>->
+      ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>, Cmd))),
+			ct_player:drop_object(State#ct_client_state.player_handle,ObjectId),
 			{ok,[],State};
 		<<"get_inventory">>->
-			%%ct_player:get_inventory(Status#status.player_pid)
+			%%ct_player:get_inventory(State#ct_client_state.player_handle)
 			{ok,[],State};
 		<<"info">> ->
-			%%ct_player:info(Status#status.player_pid)
+			%%ct_player:info(Status#State.ct_client_state)
 			{ok,[],State};
 		<<"attack">>->
 			PlayerId=ct_translation_tools:get_value(<<"character_id">>, Cmd),
@@ -116,6 +117,10 @@ do_command(Cmd,State) ->
 		<<"player_talk_request">>->
             Message=ct_translation_tools:get_value(<<"message">>,Cmd),
 			ct_player:talk(State#ct_client_state.player_handle, Message),
+			{ok,[],State};
+		<<"pick_object_request">>->
+			ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>,Cmd))),
+			ct_player:pick_object(State#ct_client_state.player_handle,ObjectId),
 			{ok,[],State};
 		InvalidCommand->
 			ErrorStr= "Unkown command: "++ binary_to_list(InvalidCommand),

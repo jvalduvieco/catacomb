@@ -124,6 +124,10 @@ function setUI()
             $("#getCharacterListButton").attr('disabled', 'disabled');
             $("#sendButton").removeAttr('disabled');
             $("#chatSendButton").attr('disabled', 'disabled');
+            $("#controls-characters").hide();
+            $("#controls-chat").hide();
+            $("#controls-auth").show();
+            $("#controls-game").hide();
             break;
         case STATUS_CONNECTED_AUTH:
             $("#connectButton").attr('disabled', 'disabled');
@@ -132,6 +136,9 @@ function setUI()
             $("#getCharacterListButton").removeAttr('disabled');
             $("#sendButton").removeAttr('disabled');
             $("#chatSendButton").attr('disabled', 'disabled');
+            $("#controls-characters").show();
+            $("#controls-chat").show();
+            $("#controls-auth").hide();
             break;
         case STATUS_NOT_CONNECTED:
             $("#connectButton").removeAttr('disabled');
@@ -145,6 +152,10 @@ function setUI()
             $("#playersUnseen").empty();
             $("#chatRoom").empty();
             $("#roomName").empty();
+            $("#controls-characters").hide();
+            $("#controls-chat").hide();
+            $("#controls-auth").hide();
+            $("#controls-game").hide();
             break;
     }
 }
@@ -176,6 +187,12 @@ function processResponse(data)
             break;
         case "room_chat_talk":
             roomChatTalk(obj.body);
+            break;
+        case "object_picked":
+            addToInventory(obj.body);
+            break;
+        case "object_dropped":
+            objectDropped(obj.body);
             break;
     }
 
@@ -224,11 +241,13 @@ function roomInfo(data)
 {
     var name = data.name;
     var exits = data.exits;
+    var objects = data.objects;
 
     writeTimeline("You are in room: " + name);
 
     $("#roomName").html(name);
     disableAllRoomDirections();
+    $("#objectsInRoom").empty();
     $.each(exits, function(index, value) {
         switch(value)
         {
@@ -242,11 +261,26 @@ function roomInfo(data)
             case "se": $("#roomDirSE").removeAttr('disabled'); break;
         }
     });
-
+    $.each(objects,function(index,value) {
+        $("#objectsInRoom").append('<button id=pickObjectBtn'+value.id+' onclick="pickObject(' + value.id + ',\''+value.name+'\')" class="btn btn-success pickObjectButton">' + value.name + '</button>');
+    });
     $("#playersUnseen").empty();
     $("#chatSendButton").removeAttr('disabled');
 }
-
+function pickObject(id,name)
+{
+    $("#objectsInRoom.pickObjectBtn"+id).attr('disabled', 'disabled');
+    //Fixme: Check if the object was really picked
+    ws.send('{"type":"pick_object_request","body":{"object_id":"' + id + '"}}');
+    writeTimeline("You picked a "+ name);
+}
+function addToInventory(data)
+{
+    var name = data.name;
+    var id = data.id;
+    $("#objectsInInventory").append('<div id="inventoryObject' + id + '" class="row-fluid"><div class="span7">' + name + '</div><div class="span5"> <button onclick="dropObject(' + id + ')" class="btn btn-mini btn-success character-list-button"> DROP </button> <button onclick="wearObject(' + id + ')" class="btn btn-mini btn-success character-list-button"> WEAR</button></div></div>');
+    $("#pickObjectBtn" + id).remove();
+}
 function characterList(data)
 {
     $("#characterList").empty();
@@ -259,9 +293,10 @@ function characterList(data)
 }
 function loadCharacter(id)
 {
-    $(".character-list-button").attr('disabled', 'disabled');
     ws.send('{"type":"load_character_request","body":{"character_id":"' + id + '"}}');
     writeTimeline("Character loaded");
+    $("#controls-characters").hide();
+    $("#controls-game").show();
 }
 
 function playerSeen(data)
@@ -288,4 +323,14 @@ function roomChatTalk(data)
     var name = data.player_name;
     var message = data.message;
     $("#timeline").prepend('<div class="chat-message">[' + name + ']: ' + message + '</div>');
+}
+function dropObject(id)
+{
+    ws.send('{"type":"drop_object","body":{"object_id":"' + id + '"}}');
+}
+function objectDropped(data)
+{
+    var id=data.object_id;
+    $("#inventoryObject" + id).remove();
+    writeTimeline("Object dropped");
 }

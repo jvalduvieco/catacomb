@@ -3,7 +3,7 @@
 
 -export([start_link/1,stop/1]).
 -export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_fun/2,get_public_id/1]).
--export([go/2, set_room/2,seen/2,unseen/3,entered/4,leave_denied/1,talk/2,heard/3]).
+-export([go/2, set_room/2,seen/2,unseen/3,entered/5,leave_denied/1,talk/2,heard/3,pick_object/2,object_picked/2,drop_object/2]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
 -include ("ct_character_info.hrl").
@@ -43,8 +43,8 @@ set_client(Player,Client) ->
 set_feedback_fun(Player, Fun) ->
 	gen_server:cast(ct_player:get_pid(Player), {set_feedback_fun, Fun}).
 %% Events
-entered(Player, RoomPid, RoomExits, RoomName) ->
-	gen_server:cast(ct_player:get_pid(Player), {entered, RoomPid, RoomExits, RoomName}).
+entered(Player, RoomPid, RoomExits, RoomName,RoomObjects) ->
+	gen_server:cast(ct_player:get_pid(Player), {entered, RoomPid, RoomExits, RoomName,RoomObjects}).
 seen(Player,OtherPlayer) ->
 	gen_server:cast(ct_player:get_pid(Player), {seen, OtherPlayer}).
 unseen(Player,OtherPlayer,Direction) ->
@@ -57,7 +57,12 @@ talk(Player, Message) ->
   gen_server:cast(ct_player:get_pid(Player),{talk, Message}).
 heard(Player, PlayerWhoTalksName, Message) ->
   gen_server:cast(ct_player:get_pid(Player),{heard, PlayerWhoTalksName, Message}).
-
+pick_object(Player, ObjectId) ->
+	gen_server:cast(ct_player:get_pid(Player),{pick_object, ObjectId}).
+object_picked(Player,Object) ->
+	gen_server:cast(ct_player:get_pid(Player),{object_picked, Object}).
+drop_object(Player,ObjectId) ->
+	gen_server:cast(ct_player:get_pid(Player),{drop_object, ObjectId}).
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
 	State=#player_state{
@@ -116,7 +121,7 @@ handle_cast({unseen, OtherPlayer, Direction}, State) ->
 			]}}
 		]}),
 	{noreply,State};
-handle_cast({entered, RoomPid, RoomExits, RoomName}, State) ->
+handle_cast({entered, RoomPid, RoomExits, RoomName,RoomObjects}, State) ->
 	NewState=State#player_state{room_exits=RoomExits,room=RoomPid},
 	%ct_client_command:send_feedback(State,
 	FeedbackFun = State#player_state.feedback_fun,
@@ -124,7 +129,8 @@ handle_cast({entered, RoomPid, RoomExits, RoomName}, State) ->
 		{obj,[{"type",<<"room_info">>},
 			{"body",{obj,[
 				{"name",RoomName},
-				{"exits",[X || {X,_} <- RoomExits]}
+				{"exits",[X || {X,_} <- RoomExits]},
+				{"objects",lists:flatten([ {obj,X} || {_,X} <- RoomObjects])} % FIXME create a new message to report objects appeared after entering the room
 			]}}
 		]}),
 	%ct_client_command:send_feedback(State,io_lib:format("~s is entering into a ~s ~n", [State#player_state.name,RoomName])),
@@ -158,6 +164,34 @@ handle_cast({heard, PlayerWhoTalksName, Message},State) ->
       ]}}
     ]}),
   {noreply,State};
+handle_cast({pick_object,ObjectId},State) ->
+	ct_room:pick_object(State#player_state.room,State,ObjectId),
+	{noreply,State};
+handle_cast({object_picked,Object},State) ->
+	NewState=State#player_state{inventory=[{proplists:get_value(id,Object),Object}]++State#player_state.inventory},
+	FeedbackFun = State#player_state.feedback_fun,
+  	FeedbackFun(State,
+    {obj,[{"type",<<"object_picked">>},
+      {"body",{obj,Object}}
+    ]}),
+    {noreply,NewState};
+handle_cast({drop_object,ObjectId},State) ->
+	FeedbackFun = State#player_state.feedback_fun,
+	Result=proplists:get_value(ObjectId,State#player_state.inventory,none),
+	NewState=case Result of 
+		none ->
+			FeedbackFun(State,
+				{obj,[{"type",<<"object_dropped">>},
+					{"body",object_not_found}]}),
+			State;
+		Object ->
+      ct_room:add_object(State#player_state.room,Object),
+			FeedbackFun(State,
+				{obj,[{"type",<<"object_dropped">>},
+				{"body",{obj,[{"object_id",ObjectId}]}}]}),
+			State#player_state{inventory=proplists:delete(ObjectId,State#player_state.inventory)}
+	end,
+	{noreply,NewState};
 handle_cast(stop, State) ->
 	% leave the room
 	ct_room:player_left(State#player_state.room,left_game,State),

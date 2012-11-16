@@ -13,10 +13,12 @@
 
     <div class="span3">
         <div class="controls controls-connection">
-            <button id="connectButton" class="btn">Connect</button>
-            <button id="disconnectButton" class="btn">Disconnect</button>
+            <div id="connection-controls-content" class="connection-controls-content">
+                <button id="connectButton" class="btn">Connect</button>
+                <button id="disconnectButton" class="btn">Disconnect</button>
+            </div>
         </div>
-        <div class="controls controls-auth">
+        <div id="controls-auth" class="controls controls-auth">
             <input id="login" type="text" class="input-small" placeholder="Login">
             <input id="password" type="password" class="input-small" placeholder="Password">
             <button id="loginButton" class="btn">Login</button><br/>
@@ -33,10 +35,16 @@
                 </div>
             </div>
         </div>
-        <div class="controls controls-characters">
+        <div id="controls-characters" class="controls controls-characters">
             <div id="characterList"></div>
         </div>
-
+        <div id="controls-chat" class="controls controls-chat">
+            <div class="input-append">
+                <input id="chatMessage" type="text" class="span9" placeholder="Chat message">
+                <button id="chatSendButton" class="btn btn-inverse">Send</button>
+            </div>
+            <div id="chatRoom"></div>
+        </div>
         <div class="controls controls-debug">
             <input type="text" id="messageField" size="100" placeholder="json"/><br/>
             <button id="sendButton" class="btn">Send</button>
@@ -44,7 +52,7 @@
     </div>
 
     <div class="span9">
-        <div class="controls controls-game">
+        <div id="controls-game" class="controls controls-game">
             <div class="row-fluid">
                 <div class="span8">
                     <ul class="nav nav-tabs" id="myTab">
@@ -85,7 +93,10 @@
                                 <ul class="unstyled">
                                     <dl>Room</dl>
                                     <dt id="roomName"></dt>
-
+                                    <dl>Room objects</dl>
+                                    <dt>
+                                      <ul id="objectsInRoom" class="unstyled"></ul>
+                                    </dt>
                                     <dl>Players in room</dl>
                                     <dt>
                                       <ul id="playersInRoom" class="unstyled"></ul>
@@ -99,12 +110,9 @@
                             </div>
                         </div>
                         <div class="span12">
-                            <div class="controls controls-chat">
-                                <div class="input-append">
-                                    <input id="chatMessage" type="text" class="span9" placeholder="Chat message">
-                                    <button id="chatSendButton" class="btn btn-inverse">Send</button>
+                            <div id="inventory" class="controls controls-inventory">
+                                <div id="objectsInInventory">
                                 </div>
-                                <div id="chatRoom"></div>
                             </div>
                         </div>
                     </div>
