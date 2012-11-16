@@ -355,7 +355,7 @@ function attackInfo(data)
             writeTimeline(otherPlayer + " failed to hit you.");
             break;
         case "hitted":
-            writeTimeline(otherPlayer + " hitted you dealing " + damage + ".");
+            writeTimeline(otherPlayer + " hit you dealing " + damage + ".");
             break;
         case "dodged":
             writeTimeline("You dodged " + otherPlayer + " attack.");
@@ -370,7 +370,7 @@ function attackInfo(data)
             writeTimeline("Youy hit " + otherPlayer + " dealing " + damage + ".");
             break;
         case "otherdodged":
-            writeTimeline(otherplayer + " doddged your attack.");
+            writeTimeline(otherPlayer + " dodged your attack.");
             break;
         case "otherdead":
             writeTimeline("You killed " + otherPlayer + " !!");
