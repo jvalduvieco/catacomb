@@ -53,3 +53,12 @@ UPDATE `character` SET public_id=1004 WHERE id=4;
 UPDATE `character` SET public_id=1005 WHERE id=5;
 CREATE UNIQUE INDEX character_public_id_idx
 ON `character` ( public_id );
+
+
+# 2 ====
+USE catacomb;
+ALTER TABLE `character` ADD hit_chance int(4) NOT NULL DEFAULT 10 AFTER life_points;
+ALTER TABLE `character` ADD dodge_chance int(4) NOT NULL DEFAULT 0 AFTER hit_chance;
+ALTER TABLE `character` ADD max_damage int(4) NOT NULL DEFAULT 2 AFTER dodge_chance;
+ALTER TABLE `character` ADD min_damage int(4) NOT NULL DEFAULT 1 AFTER max_damage;
+ALTER TABLE `character` ADD armor int(4) NOT NULL DEFAULT 0 AFTER min_damage;

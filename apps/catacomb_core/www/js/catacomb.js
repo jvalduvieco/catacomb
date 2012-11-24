@@ -124,6 +124,10 @@ function setUI()
             $("#getCharacterListButton").attr('disabled', 'disabled');
             $("#sendButton").removeAttr('disabled');
             $("#chatSendButton").attr('disabled', 'disabled');
+            $("#controls-characters").hide();
+            $("#controls-chat").hide();
+            $("#controls-auth").show();
+            $("#controls-game").hide();
             break;
         case STATUS_CONNECTED_AUTH:
             $("#connectButton").attr('disabled', 'disabled');
@@ -132,6 +136,9 @@ function setUI()
             $("#getCharacterListButton").removeAttr('disabled');
             $("#sendButton").removeAttr('disabled');
             $("#chatSendButton").attr('disabled', 'disabled');
+            $("#controls-characters").show();
+            $("#controls-chat").show();
+            $("#controls-auth").hide();
             break;
         case STATUS_NOT_CONNECTED:
             $("#connectButton").removeAttr('disabled');
@@ -143,9 +150,18 @@ function setUI()
             disableAllRoomDirections();
             $("#playersInRoom").empty();
             $("#playersUnseen").empty();
+            $("#objectsInRoom").empty();
+            $("#timeline").empty();
             $("#chatRoom").empty();
             $("#roomName").empty();
-            heartbeatStop();
+      	    $("#controls-characters").hide();
+            $("#characterList").empty();
+            $("#controls-chat").hide();
+            $("#controls-auth").hide();
+            $("#controls-game").hide();
+            $("#objectsInInventory").empty();
+            $("#objectsWorn").empty();
+	     heartbeatStop();
             break;
     }
 }
@@ -179,11 +195,25 @@ function processResponse(data)
         case "room_chat_talk":
             roomChatTalk(obj.body);
             break;
-        case "heartbeat_response":
+ 	case "object_picked":
+            addToInventory(obj.body);
+            break;
+        case "object_dropped":
+            objectDropped(obj.body);
+            break;
+        case "object_worn":
+           objectWorn(obj.body);
+           break;
+        case "object_unworn":
+            objectUnworn(obj.body);
+            break;
+        case "attack_info":
+            attackInfo(obj.body);
+            break;
+ 	case "heartbeat_response":
             heartbeatResponse(obj.body);
             break;
     }
-
 }
 
 function loginResponse(obj)
@@ -229,11 +259,13 @@ function roomInfo(data)
 {
     var name = data.name;
     var exits = data.exits;
+    var objects = data.objects;
 
     writeTimeline("You are in room: " + name);
 
     $("#roomName").html(name);
     disableAllRoomDirections();
+    $("#objectsInRoom").empty();
     $.each(exits, function(index, value) {
         switch(value)
         {
@@ -247,11 +279,26 @@ function roomInfo(data)
             case "se": $("#roomDirSE").removeAttr('disabled'); break;
         }
     });
-
+    $.each(objects,function(index,value) {
+        $("#objectsInRoom").append('<button id=pickObjectBtn'+value.id+' onclick="pickObject(' + value.id + ',\''+value.name+'\')" class="btn btn-success pickObjectButton">' + value.name + '</button>');
+    });
     $("#playersUnseen").empty();
     $("#chatSendButton").removeAttr('disabled');
 }
-
+function pickObject(id,name)
+{
+    $("#objectsInRoom.pickObjectBtn"+id).attr('disabled', 'disabled');
+    //Fixme: Check if the object was really picked
+    ws.send('{"type":"pick_object_request","body":{"object_id":"' + id + '"}}');
+    writeTimeline("You picked a "+ name);
+}
+function addToInventory(data)
+{
+    var name = data.name;
+    var id = data.id;
+    $("#objectsInInventory").append('<div id="inventoryObject' + id + '" class="row-fluid"><div class="span7">' + name + '</div><div class="span5"> <button onclick="dropObject(' + id + ')" class="btn btn-mini btn-success character-list-button"> DROP </button> <button onclick="wearObject(' + id + ')" class="btn btn-mini btn-success character-list-button"> WEAR</button></div></div>');
+    $("#pickObjectBtn" + id).remove();
+}
 function characterList(data)
 {
     $("#characterList").empty();
@@ -264,9 +311,10 @@ function characterList(data)
 }
 function loadCharacter(id)
 {
-    $(".character-list-button").attr('disabled', 'disabled');
     ws.send('{"type":"load_character_request","body":{"character_id":"' + id + '"}}');
     writeTimeline("Character loaded");
+    $("#controls-characters").hide();
+    $("#controls-game").show();
 }
 
 function playerSeen(data)
@@ -274,7 +322,8 @@ function playerSeen(data)
     var name = data.name;
     var id = data.public_id;
     writeTimeline("You can see " + name);
-    $("#playersInRoom").append('<dt id="playerSeen' + id + '">' + name + '</dt>');
+    //$("#playersInRoom").append('<dt id="playerSeen' + id + '">' + name + '</dt>');
+    $("#playersInRoom").append('<dt id="playerSeen' + id + '"><button class="btn btn-danger btn-mini" type="button" onclick="playerAttack(' + id + ')">Attack ' + name + '</button></dt>');
 
     $("#playerUnseen" + id).remove();
 }
@@ -295,7 +344,6 @@ function roomChatTalk(data)
     $("#chatRoom").prepend('<div class="chat-message">[' + name + ']: ' + message + '</div>');
     $("#timeline").prepend('<div class="chat-message">[' + name + ']: ' + message + '</div>');
 }
-
 // Heartbeat
 var heartbeatId;
 var heartbeatLastTimeDiff = null;
@@ -325,3 +373,81 @@ function heartbeatResponse()
     heartbeatLastTimeDiff = heartbeatTs2.getTime() - heartbeatTs1.getTime();
     writeStatus("Heartbeat response time diff: " + heartbeatLastTimeDiff + " ms");
 }
+function dropObject(id)
+{
+    ws.send('{"type":"drop_object","body":{"object_id":"' + id + '"}}');
+}
+function objectDropped(data)
+{
+    var id=data.object_id;
+    $("#inventoryObject" + id).remove();
+    writeTimeline("Object dropped");
+}
+function wearObject(id)
+{
+    ws.send('{"type":"wear_object","body":{"object_id":"' + id + '"}}');
+}
+function unWearObject(ObjectId,position)
+{
+    ws.send('{"type":"unwear_object","body":{"object_id":"' + ObjectId + '","position":"'+ position +'"}}');
+}
+
+
+function objectWorn(data)
+{
+    var name = data.name;
+    var id = data.id;
+    var pos= data.wearing;
+    $("#wornObjects").append('<div id="wornObject' + id + '" class="row-fluid"><div class="span7">' + name + '</div><div class="span5"> <button onclick="unWearObject(' + id + ',\'' + pos + '\')" class="btn btn-mini btn-success character-list-button"> UNWEAR </button> </div></div>');
+    $("#inventoryObject" + id).remove();
+    writeTimeline("You are wearing a " + name);
+}
+function objectUnworn(data)
+{
+    var name = data.name;
+    var id=data.id;
+    $("#wornObject"+id).remove();
+    addToInventory(data);
+}
+function playerAttack(id)
+{
+    ws.send('{"type":"attack","body":{"character_id":"' + id + '"}}');
+}
+
+function attackInfo(data)
+{
+    var type = data.msg_type;
+    var otherPlayer = data.otherplayer;
+    var damage = data.damage;
+
+
+    switch (type)
+    {
+        case "failed":
+            writeTimeline(otherPlayer + " failed to hit you.");
+            break;
+        case "hitted":
+            writeTimeline(otherPlayer + " hit you dealing " + damage + ".");
+            break;
+        case "dodged":
+            writeTimeline("You dodged " + otherPlayer + " attack.");
+            break;
+        case "dead":
+            writeTimeline("You are DEAD! " + otherPlayer + " killed you.");
+            break;
+        case "otherfailed":
+            writeTimeline("You failed to hit " + otherPlayer + ".");
+            break;
+        case "otherhitted":
+            writeTimeline("You hit " + otherPlayer + " dealing " + damage + ".");
+            break;
+        case "otherdodged":
+            writeTimeline(otherPlayer + " dodged your attack.");
+            break;
+        case "otherdead":
+            writeTimeline("You killed " + otherPlayer + " !!");
+            break;
+        
+    }
+}
+

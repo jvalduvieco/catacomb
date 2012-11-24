@@ -14,8 +14,8 @@ body {
 
 .controls {
     position: relative;
-    margin: 15px 0;
-    padding: 39px 19px 14px;
+    margin: 5px 0;
+    padding: 30px 5px 5px;
     *padding-top: 19px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -73,6 +73,12 @@ body {
   overflow-y: auto;
 }
 
+.controls-inventory::after {
+    content:"Inventory";
+}
+.controls-wornObjects::after {
+    content:"Worn objects";
+}
 .response {
     margin: 15px 0;
     padding: 20px;
@@ -84,9 +90,20 @@ body {
 }
 
 .character-list-button {
-    margin: 10px;
+    margin: 2px;
 }
 
 .chat-message {
     font-size: 10px;
+}
+dt, dd {
+    line-height: 15px;
+}
+dl {
+    margin-bottom: 2px;
+    margin-top: 0px;
+}
+
+.connection-controls-content {
+    margin: 0 auto
 }

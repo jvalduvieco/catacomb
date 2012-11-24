@@ -45,7 +45,7 @@ handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
     {_BoolResult,Result,NewClientState}=ct_client_command:execute(Data,ClientState),
     
     NewState=State#state{client_command_state=NewClientState},
-
+    lager:debug("Returning ~p",[Result]),
     {reply, {text, list_to_binary(Result)}, NewState}
   catch Exc:Why ->
       Trace=erlang:get_stacktrace(),

@@ -100,14 +100,20 @@ do_command(Cmd,State) ->
 		<<"catch">>->
 			%%ct_player:catch(Status#status.player_pid,ObjectId)
 			{ok,[],State};
-		<<"drop">>->
-			%%ct_player:drop(Status#status.player_pid,ObjectId)
+		<<"drop_object">>->
+      ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>, Cmd))),
+			ct_player:drop_object(State#ct_client_state.player_handle,ObjectId),
 			{ok,[],State};
 		<<"get_inventory">>->
-			%%ct_player:get_inventory(Status#status.player_pid)
+			%%ct_player:get_inventory(State#ct_client_state.player_handle)
 			{ok,[],State};
 		<<"info">> ->
-			%%ct_player:info(Status#status.player_pid)
+			%%ct_player:info(Status#State.ct_client_state)
+			{ok,[],State};
+		<<"attack">>->
+			PlayerId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"character_id">>, Cmd))),
+			{ok,OtherPlayer}=ct_player_sup:get_handler(PlayerId),
+			ct_player:attack(State#ct_client_state.player_handle,OtherPlayer),
 			{ok,[],State};
 		<<"hit">>->
 			%%ct_player:hit(Status#status.player_pid,PlayerPid)
@@ -118,8 +124,21 @@ do_command(Cmd,State) ->
 			{ok,[],State};
 		<<"heartbeat_request">>->
       LastTimeDiff=ct_translation_tools:get_value(<<"ltd">>,Cmd),
-			ct_player:heartbeat(State#ct_client_state.player_handle, LastTimeDiff),
+ct_player:heartbeat(State#ct_client_state.player_handle, LastTimeDiff),
 			{ok,[],State};
+<<"pick_object_request">>->
+			ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>,Cmd))),
+			ct_player:pick_object(State#ct_client_state.player_handle,ObjectId),
+			{ok,[],State};
+    <<"wear_object">>->
+      ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>,Cmd))),
+      ct_player:wear(State#ct_client_state.player_handle,ObjectId),
+      {ok,[],State};
+    <<"unwear_object">>->
+      ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>,Cmd))),
+      Position=list_to_existing_atom(binary_to_list(ct_translation_tools:get_value(<<"position">>,Cmd))),
+      ct_player:unwear(State#ct_client_state.player_handle,ObjectId,Position),
+      {ok,[],State};
 		InvalidCommand->
 			ErrorStr= "Unkown command: "++ binary_to_list(InvalidCommand),
 			CmdResult={obj,[{"type",<<"general_response">>},{"result",<<"failure">>},{"body",list_to_binary(ErrorStr)}]},

@@ -2,7 +2,7 @@
 -behaviour(gen_server).
 
 -export([start_link/2,stop/0]).
--export([enter/4, request_leave/3,get_exits/1,player_left/3,add_exit/4,chat_talk/3]).
+-export([enter/4, request_leave/3,get_exits/1,player_left/3,add_exit/4,chat_talk/3,add_object/2,pick_object/3]).
 -export([relative_coords_to_absolute/5,find_neighbours_entrances/5]). %% REMOVEME When done
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
 
@@ -65,7 +65,10 @@ add_exit(RoomPid,Exit,X,Y)->
 		false ->
 			{badarg,[]}
 	end.
-
+add_object(RoomPid,Object) ->
+	gen_server:cast(RoomPid, {add_object,Object}).
+pick_object(RoomPid,Player,ObjectId) ->
+	gen_server:cast(RoomPid, {pick_object,Player,ObjectId}).
 %% chat
 chat_talk(RoomPid, PlayerWhoTalksName, Message) ->
   gen_server:cast(RoomPid, {chat_talk, PlayerWhoTalksName, Message}).
@@ -103,7 +106,7 @@ handle_call({get_exits},_From, State) ->
 	{reply,{ok,State#state.exits},State}.
 handle_cast({enter, Player, RoomFromPid, Direction}, State) ->
   case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Direction, Player); false -> true end,
-  ct_player:entered(Player, self(), State#state.exits, State#state.room_name),
+  ct_player:entered(Player, self(), State#state.exits, State#state.room_name,State#state.objects),
 
   %% chat
 %%   HandlerId = {ct_room_chat, make_ref()},
@@ -126,19 +129,19 @@ handle_cast({add_exit, Exit,X,Y}, State) ->
 	%io:format("FROM {~p,~p} :: State ~p :  NewState :~p ~n",[X,Y,State,NewState]),
 	{noreply, NewState};
 handle_cast({player_left, Player, Direction}, State) ->
+  	%% chat
+  	ChatPlayerPid = proplists:get_value(Player#player_state.my_pid, State#state.chat_players_pid),
+  	gen_event:delete_handler(State#state.chat_evm_pid, ChatPlayerPid, []),
 
-  %% chat
-  ChatPlayerPid = proplists:get_value(Player#player_state.my_pid, State#state.chat_players_pid),
-  gen_event:delete_handler(State#state.chat_evm_pid, ChatPlayerPid, []),
-
-  %% Check if player is really in
-  NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)],
+  	%% Check if player is really in
+  	NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)],
                        chat_players_pid=proplists:delete(Player#player_state.my_pid, State#state.chat_players_pid)},
 	%% Replace by room event handler?
-  lists:map(fun(X) -> ct_player:unseen(X,Player,Direction) end,NewState#state.players),
-  lists:map(fun(X) -> if Player/=X -> ct_player:unseen(Player,X,none) end end,NewState#state.players),
+	lists:map(fun(X) -> ct_player:unseen(X,Player,Direction) end,NewState#state.players),
+	lists:map(fun(X) -> if Player/=X -> ct_player:unseen(Player,X,none) end end,NewState#state.players),
 
 	{noreply, NewState};
+
 handle_cast({request_leave, Direction, Player}, State) ->
 	%controlar que es pugui anar en la direcció
 	case [{Dir,Coords} || {Dir,Coords} <- State#state.exits, Direction=:=Dir] of
@@ -158,9 +161,25 @@ handle_cast({print_exits}, State) ->
 	lager:debug("{~p,~p} :  ~p ~n",[State#state.x,State#state.y,State#state.exits]),
 	{noreply, State};
 handle_cast({chat_talk, PlayerWhoTalksName, Message}, State) ->
-  lager:debug("cast room chat talk: ~p: ~p~n", [PlayerWhoTalksName, Message]),
-  gen_event:notify(State#state.chat_evm_pid, {talk, PlayerWhoTalksName, Message}),
-  {noreply, State};
+  	lager:debug("cast room chat talk: ~p: ~p~n", [PlayerWhoTalksName, Message]),
+  	gen_event:notify(State#state.chat_evm_pid, {talk, PlayerWhoTalksName, Message}),
+  	{noreply, State};
+handle_cast({add_object,Object},State) ->
+  % TODO: Notify users already in the room
+	lager:debug("{~p,~p} cast add object: ~p ~n", [State#state.x,State#state.y,Object]),
+	NewState=State#state{objects=[{proplists:get_value(id,Object),Object}]++State#state.objects},
+	{noreply,NewState};
+handle_cast({pick_object,Player,ObjectId},State) ->
+	Result=proplists:get_value(ObjectId,State#state.objects,none),
+	NewState=case Result of 
+		none ->
+			ct_player:object_picked(Player,object_not_found),
+			State;
+		Object ->
+			ct_player:object_picked(Player,Object),
+			State#state{objects=proplists:delete(ObjectId,State#state.objects)}
+	end,
+	{noreply,NewState};
 handle_cast(stop, State) -> {stop, normal, State}.
 
 %% System Callbacks
