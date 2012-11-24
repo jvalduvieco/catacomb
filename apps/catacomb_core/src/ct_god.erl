@@ -39,20 +39,21 @@ handle_call({init_map}, _From, State) ->
     {reply, ok, State}.
 
 objects() ->
-    % FIXME: Id's are hardcoded. Should be generated on runtime for each object dropped. A player must be able to wear two identical objects.
-    [[{name,<<"Iron sword">>}, {id,2001},{mechanichal_damage, 1}, {mechanical_armor, 1},{wearing_hand,1}],
-     [{name,<<"Steel sword">>}, {id,2002}, {mechanichal_damage, 1}, {mechanical_armor, 2},{wearing_hand,1}],
-     [{name,<<"Mithril sword">>}, {id,2003},{mechanichal_damage, 1}, {mechanical_armor, 3},{wearing_hand,1}],
-     [{name,<<"Iron great helm">>}, {id,2004},{mechanichal_damage, 0}, {mechanical_armor, 1},{wearing_hand,1}],
-     [{name,<<"Steel great helm">>}, {id,2005},{mechanichal_damage, 0}, {mechanical_armor, 2},{wearing_hand,1}],
-     [{name,<<"Mithril great helm">>}, {id,2006},{mechanichal_damage, 0}, {mechanical_armor, 3},{wearing_hand,1}],
-     [{name,<<"Iron cuirass">>}, {id,2007},{mechanichal_damage, 0}, {mechanical_armor, 1},{wearing_head,1}],
-     [{name,<<"Steel cuirass">>}, {id,2008},{mechanichal_damage, 0}, {mechanical_armor, 2},{wearing_head,1}],
-     [{name,<<"Mithril cuirass">>}, {id,2009},{mechanichal_damage, 0}, {mechanical_armor, 3},{wearing_head,1}]
+    % TODO Id's are hardcoded. Should be generated on runtime for each object dropped. A player must be able to wear two identical objects.
+    [[{name,<<"Iron sword">>}, {id,2001},{damage, {obj,[{mechanical,1}]}},{wearing,hand}],
+     [{name,<<"Steel sword">>}, {id,2002}, {damage, {obj,[{mechanical,2}]}}, {wearing,hand}],
+     [{name,<<"Mithril sword">>}, {id,2003},{damage, {obj,[{mechanical,3}]}}, {wearing,hand}],
+     [{name,<<"Iron great helm">>}, {id,2004}, {armor,{obj,[{mechanical, 1}]}},{wearing,head}],
+     [{name,<<"Steel great helm">>}, {id,2005}, {armor,{obj,[{mechanical, 1}]}},{wearing,head}],
+     [{name,<<"Mithril great helm">>}, {id,2006}, {damage, {obj,[{mechanical,3}]}},{armor,{obj,[{mechanical, 1},{poison, 1}]}},{wearing,head}],
+     [{name,<<"Iron cuirass">>}, {id,2007}, {armor,{obj,[{mechanical, 1}]}},{wearing,chest}],
+     [{name,<<"Steel cuirass">>}, {id,2008}, {armor,{obj,[{mechanical, 1}]}},{wearing,chest}],
+     [{name,<<"Mithril cuirass">>}, {id,2009}, {armor,{obj,[{mechanical, 1}]}},{wearing,chest}]
      ].
 
 get_random_object() ->
     L = objects(),
+
     lists:nth(random:uniform(length(L)), L).
 drop_objects(RoomCoords) ->
     {ok,Room}=ct_room_sup:get_pid(RoomCoords),

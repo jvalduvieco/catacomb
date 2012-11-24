@@ -76,6 +76,9 @@ body {
 .controls-inventory::after {
     content:"Inventory";
 }
+.controls-wornObjects::after {
+    content:"Worn objects";
+}
 .response {
     margin: 15px 0;
     padding: 20px;

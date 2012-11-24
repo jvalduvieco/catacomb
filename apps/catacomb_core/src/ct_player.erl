@@ -3,7 +3,7 @@
 
 -export([start_link/1,stop/1]).
 -export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_fun/2,get_public_id/1]).
--export([go/2, set_room/2,seen/2,unseen/3,entered/5,leave_denied/1,talk/2,heard/3,hit/5,attack/2,pick_object/2,object_picked/2,drop_object/2]).
+-export([go/2, set_room/2,seen/2,unseen/3,entered/5,leave_denied/1,talk/2,heard/3,hit/4,attack/2,pick_object/2,object_picked/2,drop_object/2,wear/2,unwear/3]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
 -include ("ct_character_info.hrl").
@@ -42,8 +42,8 @@ set_client(Player,Client) ->
 	gen_server:cast(ct_player:get_pid(Player), {set_client, Client}).
 set_feedback_fun(Player, Fun) ->
 	gen_server:cast(ct_player:get_pid(Player), {set_feedback_fun, Fun}).
-hit(Player,OtherPlayer,HitChance,MaxDamage,MinDamage) ->
-	gen_server:cast(ct_player:get_pid(Player),{hit, OtherPlayer, HitChance, MaxDamage, MinDamage}).
+hit(Player,OtherPlayer,HitChance,BattleStats) ->
+	gen_server:cast(ct_player:get_pid(Player),{hit, OtherPlayer, HitChance, BattleStats}).
 attack(Player,OtherPlayer) ->
 	gen_server:cast(ct_player:get_pid(Player),{attack, OtherPlayer}).
 
@@ -68,6 +68,10 @@ object_picked(Player,Object) ->
 	gen_server:cast(ct_player:get_pid(Player),{object_picked, Object}).
 drop_object(Player,ObjectId) ->
 	gen_server:cast(ct_player:get_pid(Player),{drop_object, ObjectId}).
+wear(Player,ObjectId) ->
+  gen_server:cast(ct_player:get_pid(Player),{wear, ObjectId}).
+unwear(Player,ObjectId,Position) ->
+  gen_server:cast(ct_player:get_pid(Player),{unwear, ObjectId,Position}).
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
 	State=#player_state{
@@ -83,7 +87,8 @@ init([{obj,CharacterSpecs}]) ->
 		armor=proplists:get_value(<<"armor">>, CharacterSpecs, none),
 		level=proplists:get_value(<<"level">>, CharacterSpecs, none),
 		experience_points=proplists:get_value(<<"experience_points">>, CharacterSpecs, none),
-		public_id=proplists:get_value(<<"public_id">>, CharacterSpecs, none)
+		public_id=proplists:get_value(<<"public_id">>, CharacterSpecs, none),
+    battle_stats=[{total_armor,[{none,0}]},{total_damage,[{none,0}]}]
 		%room=ct_room_sup:get_pid([proplists:get_value(<<"coord_x">>, CharacterSpecs, none),proplists:get_value(<<"coord_y">>, CharacterSpecs, none)])
 	},
 	lager:info("ct_player has started (~w)~n", [self()]),
@@ -143,7 +148,7 @@ handle_cast({entered, RoomPid, RoomExits, RoomName,RoomObjects}, State) ->
 			{"body",{obj,[
 				{"name",RoomName},
 				{"exits",[X || {X,_} <- RoomExits]},
-				{"objects",lists:flatten([ {obj,X} || {_,X} <- RoomObjects])} % FIXME create a new message to report objects appeared after entering the room
+				{"objects",[ {obj,X} || {_,X} <- RoomObjects]} % FIXME create a new message to report objects appeared after entering the room
 			]}}
 		]}),
 	%ct_client_command:send_feedback(State,io_lib:format("~s is entering into a ~s ~n", [State#player_state.name,RoomName])),
@@ -177,14 +182,14 @@ handle_cast({heard, PlayerWhoTalksName, Message},State) ->
       ]}}
     ]}),
   {noreply,State};
-handle_cast({hit, OtherPlayer, HitChance, MaxDamage, MinDamage}, State) ->
-	case random:uniform(100) > HitChance of
-		false -> 
+handle_cast({hit, OtherPlayer, _HitChance, BattleStats}, State) ->
+  % If player dice is lower than hit chance player hits opponent
+	%case random:uniform(100) > HitChance of
+	%	false ->
 			case random:uniform(100) > State#player_state.dodge_chance of
 				true -> 
-					Damage=(MinDamage+random:uniform(MaxDamage-MinDamage))-State#player_state.armor,
+					Damage=fight_result(BattleStats,State#player_state.battle_stats),
 					NewLifePoints = State#player_state.life_points - Damage,
-					%io:format("~p hits ~p dealing ~p .~n",[OtherPlayer#player_state.name,State#player_state.name,Damage]),
 					case NewLifePoints =< 0 of
 						true ->
 							FeedbackFun = State#player_state.feedback_fun,
@@ -229,8 +234,8 @@ handle_cast({hit, OtherPlayer, HitChance, MaxDamage, MinDamage}, State) ->
 								]}),
 
 							NewState=State#player_state{life_points=NewLifePoints}
-				end;
-				false -> 
+				    end;
+        false ->
 					NewState=State,
 					%io:format("~p tried to hit ~p but ~p dodged. ~n",[OtherPlayer#player_state.name,State#player_state.name,State#player_state.name]),
 					FeedbackFun = State#player_state.feedback_fun,
@@ -249,33 +254,32 @@ handle_cast({hit, OtherPlayer, HitChance, MaxDamage, MinDamage}, State) ->
 								{"otherplayer",State#player_state.name}
 							]}}
 						]})
-			end;
-		true -> 
-			NewState=State,
-			%io:format("~p failed tying to hit ~p. ~n",[OtherPlayer#player_state.name,State#player_state.name]),
-			FeedbackFun = State#player_state.feedback_fun,
-			FeedbackFun(State,
-				{obj,[{"type",<<"attack_info">>},
-					{"body",{obj,[
-						{"msg_type",<<"failed">>},
-						{"otherplayer",OtherPlayer#player_state.name}
-					]}}
-				]}),
-			OtherFeedbackFun = OtherPlayer#player_state.feedback_fun,
-			OtherFeedbackFun(OtherPlayer,
-				{obj,[{"type",<<"attack_info">>},
-					{"body",{obj,[
-						{"msg_type",<<"otherfailed">>},
-						{"otherplayer",OtherPlayer#player_state.name}
-					]}}
-				]})
+			end,
+		%true ->
+		%	NewState=State,
+		%	%io:format("~p failed tying to hit ~p. ~n",[OtherPlayer#player_state.name,State#player_state.name]),
+		%	FeedbackFun = State#player_state.feedback_fun,
+		%	FeedbackFun(State,
+%% 				{obj,[{"type",<<"attack_info">>},
+%% 					{"body",{obj,[
+%% 						{"msg_type",<<"failed">>},
+%% 						{"otherplayer",OtherPlayer#player_state.name}
+%% 					]}}
+%% 				]}),
+%% 			OtherFeedbackFun = OtherPlayer#player_state.feedback_fun,
+%% 			OtherFeedbackFun(OtherPlayer,
+%% 				{obj,[{"type",<<"attack_info">>},
+%% 					{"body",{obj,[
+%% 						{"msg_type",<<"otherfailed">>},
+%% 						{"otherplayer",OtherPlayer#player_state.name}
+%% 					]}}
+%% 				]})
 
-	end,
+%%	end,
 
 	{noreply, NewState};
 handle_cast({attack, OtherPlayer}, State) ->
-	ct_player:hit(OtherPlayer,State,State#player_state.hit_chance,State#player_state.max_damage,State#player_state.min_damage),
-	%io:format("otherplayer is:    ::  ~p ~n", [OtherPlayer]),
+  ct_player:hit(OtherPlayer,State,State#player_state.hit_chance,State#player_state.battle_stats),
 	{noreply, State};
 
 handle_cast({pick_object,ObjectId},State) ->
@@ -306,15 +310,64 @@ handle_cast({drop_object,ObjectId},State) ->
 			State#player_state{inventory=proplists:delete(ObjectId,State#player_state.inventory)}
 	end,
 	{noreply,NewState};
+handle_cast({wear,ObjectId},State) ->
+  FeedbackFun = State#player_state.feedback_fun,
+  lager:debug("wear ~p ~p ~p ~p",[ObjectId,State#player_state.worn_objects,State#player_state.inventory]),
+  NewState=case proplists:get_value(ObjectId,State#player_state.inventory,none) of
+    none ->
+      FeedbackFun(State,
+        {obj,[{"type",<<"object_worn">>},
+          {"body",object_not_found}]}),
+      State;
+    Object ->
+      Wearing=proplists:get_value(wearing,Object),
+      % Save object worn in new object position
+      OldObject= proplists:get_value(Wearing,State#player_state.worn_objects,[]),
+      % remove old object from worn objects
+      CleanWornObjects=proplists:delete(Wearing,State#player_state.worn_objects),
+      % Add new object to worn objects
+      WornObjects=CleanWornObjects ++ [{Wearing,Object}],
+      % Remove worn object from inventory
+      NewInventory=proplists:delete(ObjectId,State#player_state.inventory),
+      % Calculate Damage and Armor
+      BattleStats=calculate_battle_stats(WornObjects),
+      % Send some feedback to the user
+      FeedbackFun(State,
+        {obj,[{"type",<<"object_worn">>},
+          {"body",{obj,Object}}]}),
+      % Add old worn object to inventory and update list of worn objects
+      State#player_state{
+        worn_objects=WornObjects,
+        inventory=OldObject++NewInventory,
+        battle_stats=BattleStats}
+  end,
+  {noreply,NewState};
+handle_cast({unwear,ObjectId,Position},State) ->
+  lager:debug("unwear ~p ~p ~p ~p",[ObjectId,Position,State#player_state.worn_objects,State#player_state.inventory]),
+  FeedbackFun = State#player_state.feedback_fun,
+  Result=proplists:get_value(Position,State#player_state.worn_objects,none),
+  NewState=case Result of
+    none ->
+      FeedbackFun(State,
+        {obj,[{"type",<<"object_unworn">>},
+          {"body",object_not_found}]}),
+      State;
+    Object ->
+      % remove from worn objects
+      WornObjects=proplists:delete(Position,State#player_state.worn_objects),
+      NewInventory=State#player_state.inventory ++ [{ObjectId,Object}],
 
+      % Calculate Damage and Armor
+      BattleStats=calculate_battle_stats(WornObjects),
+      % Send some feedback to the user
+      FeedbackFun(State,
+        {obj,[{"type",<<"object_unworn">>},
+          {"body",{obj,Object}}]}),
+      % Add old worn object to inventory and update list of worn objects
+      State#player_state{worn_objects=WornObjects,inventory=NewInventory,battle_stats=BattleStats}
 
-
-
-
-
-
-
-
+  end,
+  {noreply,NewState};
 
 handle_cast(stop, State) ->
 	% leave the room
@@ -329,3 +382,28 @@ terminate(_Reason, State) -> {ok,State}.
 
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
 handle_info( _, State) -> {noreply,State}.
+
+clean_obj(X) when is_tuple(X)->
+  {obj,Result}=X,
+  Result;
+clean_obj(X) ->
+  X.
+calculate_battle_stats(WornObjects) ->
+  % Get all worn objects damage. list of tuples by damage type per object all in one list
+  ObjectsDamage=lists:flatten([clean_obj(proplists:get_value(damage,X,{obj,[{none, 0}]}))||{_,X}<-WornObjects]),
+  % Get all worn objects armor. list of tuples by armor type per object all in one list
+  ObjectsArmor=lists:flatten([clean_obj(proplists:get_value(armor,X,{obj,[{none, 0}]}))||{_,X}<-WornObjects]),
+  % Sum all Damage by type. A list of tuples by damage. Only one tuple per damage type
+  TotalDamage=[{X,lists:foldl(fun({_X,Value},Sum)-> Sum + Value end,0,proplists:lookup_all(X,ObjectsDamage))}||X<-proplists:get_keys(ObjectsDamage)],
+  % Sum all armor by type. The same as damage
+  TotalArmor=[{X,lists:foldl(fun({_X,Value},Sum)-> Sum + Value end,0,proplists:lookup_all(X,ObjectsArmor))}||X<-proplists:get_keys(ObjectsArmor)],
+  lager:debug("total damage: ~p, total armor: ~p",[TotalDamage,TotalArmor]),
+  [{total_armor,TotalArmor},{total_damage,TotalDamage}].
+
+fight_result(AttackerBattleStats, MyBattleStats)->
+  MyArmor=proplists:get_value(total_armor,MyBattleStats),
+  % Damage - Armor = Damage received
+  % Take every Damage attacker can do and substract armor on that type of damage
+  DamageList=[Value-proplists:get_value(Type,MyArmor,0)||{Type,Value}<-proplists:get_value(total_damage,AttackerBattleStats)],
+  % Sum all positive damages
+  lists:foldl(fun(X, Sum) -> case X >0 of true -> X+Sum;_ -> Sum end end,  0, DamageList).

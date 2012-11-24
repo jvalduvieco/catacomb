@@ -150,12 +150,17 @@ function setUI()
             disableAllRoomDirections();
             $("#playersInRoom").empty();
             $("#playersUnseen").empty();
+            $("#objectsInRoom").empty();
+            $("#timeline").empty();
             $("#chatRoom").empty();
             $("#roomName").empty();
             $("#controls-characters").hide();
+            $("#characterList").empty();
             $("#controls-chat").hide();
             $("#controls-auth").hide();
             $("#controls-game").hide();
+            $("#objectsInInventory").empty();
+            $("#objectsWorn").empty();
             break;
     }
 }
@@ -193,6 +198,12 @@ function processResponse(data)
             break;
         case "object_dropped":
             objectDropped(obj.body);
+            break;
+        case "object_worn":
+           objectWorn(obj.body);
+           break;
+        case "object_unworn":
+            objectUnworn(obj.body);
             break;
         case "attack_info":
             attackInfo(obj.body);
@@ -337,6 +348,32 @@ function objectDropped(data)
     $("#inventoryObject" + id).remove();
     writeTimeline("Object dropped");
 }
+function wearObject(id)
+{
+    ws.send('{"type":"wear_object","body":{"object_id":"' + id + '"}}');
+}
+function unWearObject(ObjectId,position)
+{
+    ws.send('{"type":"unwear_object","body":{"object_id":"' + ObjectId + '","position":"'+ position +'"}}');
+}
+
+
+function objectWorn(data)
+{
+    var name = data.name;
+    var id = data.id;
+    var pos= data.wearing;
+    $("#wornObjects").append('<div id="wornObject' + id + '" class="row-fluid"><div class="span7">' + name + '</div><div class="span5"> <button onclick="unWearObject(' + id + ',\'' + pos + '\')" class="btn btn-mini btn-success character-list-button"> UNWEAR </button> </div></div>');
+    $("#inventoryObject" + id).remove();
+    writeTimeline("You are wearing a " + name);
+}
+function objectUnworn(data)
+{
+    var name = data.name;
+    var id=data.id;
+    $("#wornObject"+id).remove();
+    addToInventory(data);
+}
 function playerAttack(id)
 {
     ws.send('{"type":"attack","body":{"character_id":"' + id + '"}}');
@@ -367,7 +404,7 @@ function attackInfo(data)
             writeTimeline("You failed to hit " + otherPlayer + ".");
             break;
         case "otherhitted":
-            writeTimeline("Youy hit " + otherPlayer + " dealing " + damage + ".");
+            writeTimeline("You hit " + otherPlayer + " dealing " + damage + ".");
             break;
         case "otherdodged":
             writeTimeline(otherPlayer + " dodged your attack.");

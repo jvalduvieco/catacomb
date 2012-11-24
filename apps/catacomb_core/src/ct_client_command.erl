@@ -116,13 +116,22 @@ do_command(Cmd,State) ->
 			ct_player:attack(State#ct_client_state.player_handle,OtherPlayer),
 			{ok,[],State};
 		<<"player_talk_request">>->
-            Message=ct_translation_tools:get_value(<<"message">>,Cmd),
+      Message=ct_translation_tools:get_value(<<"message">>,Cmd),
 			ct_player:talk(State#ct_client_state.player_handle, Message),
 			{ok,[],State};
 		<<"pick_object_request">>->
 			ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>,Cmd))),
 			ct_player:pick_object(State#ct_client_state.player_handle,ObjectId),
 			{ok,[],State};
+    <<"wear_object">>->
+      ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>,Cmd))),
+      ct_player:wear(State#ct_client_state.player_handle,ObjectId),
+      {ok,[],State};
+    <<"unwear_object">>->
+      ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>,Cmd))),
+      Position=list_to_existing_atom(binary_to_list(ct_translation_tools:get_value(<<"position">>,Cmd))),
+      ct_player:unwear(State#ct_client_state.player_handle,ObjectId,Position),
+      {ok,[],State};
 		InvalidCommand->
 			ErrorStr= "Unkown command: "++ binary_to_list(InvalidCommand),
 			CmdResult={obj,[{"type",<<"general_response">>},{"result",<<"failure">>},{"body",list_to_binary(ErrorStr)}]},
