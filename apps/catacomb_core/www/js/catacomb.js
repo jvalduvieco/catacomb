@@ -113,6 +113,10 @@ function setStatusAuthenticated()
     setUI();
 }
 
+function cleanUI()
+{
+
+}
 function setUI()
 {
     switch(currentStatus)
@@ -124,10 +128,7 @@ function setUI()
             $("#getCharacterListButton").attr('disabled', 'disabled');
             $("#sendButton").removeAttr('disabled');
             $("#chatSendButton").attr('disabled', 'disabled');
-            $("#controls-characters").hide();
-            $("#controls-chat").hide();
             $("#controls-auth").show();
-            $("#controls-game").hide();
             break;
         case STATUS_CONNECTED_AUTH:
             $("#connectButton").attr('disabled', 'disabled');
@@ -161,7 +162,7 @@ function setUI()
             $("#controls-game").hide();
             $("#objectsInInventory").empty();
             $("#objectsWorn").empty();
-	     heartbeatStop();
+	        heartbeatStop();
             break;
     }
 }
@@ -395,19 +396,31 @@ function unWearObject(ObjectId,position)
 
 function objectWorn(data)
 {
-    var name = data.name;
-    var id = data.id;
-    var pos= data.wearing;
-    $("#wornObjects").append('<div id="wornObject' + id + '" class="row-fluid"><div class="span7">' + name + '</div><div class="span5"> <button onclick="unWearObject(' + id + ',\'' + pos + '\')" class="btn btn-mini btn-success character-list-button"> UNWEAR </button> </div></div>');
-    $("#inventoryObject" + id).remove();
+    if (typeof (data.worn_object.id) != "undefined" )
+    {
+        var name = data.worn_object.name;
+        var id = data.worn_object.id;
+        var pos= data.worn_object.wearing;
+
+        $("#wornObjects").append('<div id="wornObject' + id + '" class="row-fluid"><div class="span7">' + name + '</div><div class="span5"> <button onclick="unWearObject(' + id + ',\'' + pos + '\')" class="btn btn-mini btn-success character-list-button"> UNWEAR </button> </div></div>');
+        $("#inventoryObject" + id).remove();
+    }
+    if (typeof (data.unworn_object.id) != "undefined" )
+    {
+        var prevObjectName = data.unworn_object.name;
+        var prevObjectId = data.unworn_object.id;
+        var prevObjectPos= data.unworn_object.wearing;
+        $("#wornObject" + prevObjectId).remove();
+        addToInventory(data.unworn_object);
+    }
     writeTimeline("You are wearing a " + name);
 }
 function objectUnworn(data)
 {
-    var name = data.name;
-    var id=data.id;
+    var name = data.unworn_object.name;
+    var id=data.unworn_object.id;
     $("#wornObject"+id).remove();
-    addToInventory(data);
+    addToInventory(data.unworn_object);
 }
 function playerAttack(id)
 {

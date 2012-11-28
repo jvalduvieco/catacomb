@@ -76,10 +76,10 @@ unwear(Player,ObjectId,Position) ->
   gen_server:cast(ct_player:get_pid(Player),{unwear, ObjectId,Position}).
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
-  lager:debug("starting heartbeat process..."),
-  {ok,HeartbeatPid} = ct_player_heartbeat:start_link(#player_state{my_pid=self()}),
-  lager:debug("heartbeat process started ~p", [HeartbeatPid]),
-  ct_player_heartbeat:heartbeat_start(HeartbeatPid),
+  %lager:debug("starting heartbeat process..."),
+  %{ok,HeartbeatPid} = ct_player_heartbeat:start_link(#player_state{my_pid=self()}),
+  %lager:debug("heartbeat process started ~p", [HeartbeatPid]),
+  %ct_player_heartbeat:heartbeat_start(HeartbeatPid),
 
   State=#player_state{
 		id=proplists:get_value(<<"id">>, CharacterSpecs, none),
@@ -95,7 +95,7 @@ init([{obj,CharacterSpecs}]) ->
 		level=proplists:get_value(<<"level">>, CharacterSpecs, none),
 		experience_points=proplists:get_value(<<"experience_points">>, CharacterSpecs, none),
 		public_id=proplists:get_value(<<"public_id">>, CharacterSpecs, none),
- 		heartbeat_pid=HeartbeatPid,
+ 		%heartbeat_pid=HeartbeatPid,
     battle_stats=[{total_armor,[{none,0}]},{total_damage,[{none,0}]}]
 		%room=ct_room_sup:get_pid([proplists:get_value(<<"coord_x">>, Charac
 		%room=ct_room_sup:get_pid([proplists:get_value(<<"coord_x">>, CharacterSpecs, none),proplists:get_value(<<"coord_y">>, CharacterSpecs, none)])
@@ -201,7 +201,7 @@ handle_cast({heartbeat, LastTimeDiff},State) ->
       {"body",{obj,[]}}
     ]}),
   %% hearbeat
-  ct_player_heartbeat:heartbeat(State#player_state.heartbeat_pid, LastTimeDiff),
+  %ct_player_heartbeat:heartbeat(State#player_state.heartbeat_pid, LastTimeDiff),
   {noreply, State};
 handle_cast({hit, OtherPlayer, _HitChance, BattleStats}, State) ->
   % If player dice is lower than hit chance player hits opponent
@@ -333,7 +333,7 @@ handle_cast({drop_object,ObjectId},State) ->
 	{noreply,NewState};
 handle_cast({wear,ObjectId},State) ->
   FeedbackFun = State#player_state.feedback_fun,
-  lager:debug("wear ~p ~p ~p ~p",[ObjectId,State#player_state.worn_objects,State#player_state.inventory]),
+  lager:debug("wear ~p ~p ~p ~n",[ObjectId,State#player_state.worn_objects,State#player_state.inventory]),
   NewState=case proplists:get_value(ObjectId,State#player_state.inventory,none) of
     none ->
       FeedbackFun(State,
@@ -355,11 +355,11 @@ handle_cast({wear,ObjectId},State) ->
       % Send some feedback to the user
       FeedbackFun(State,
         {obj,[{"type",<<"object_worn">>},
-          {"body",{obj,Object}}]}),
+          {"body",{obj,[{"worn_object",{obj,Object}},{"unworn_object",{obj,OldObject}}]}}]}),
       % Add old worn object to inventory and update list of worn objects
       State#player_state{
         worn_objects=WornObjects,
-        inventory=OldObject++NewInventory,
+        inventory=[{proplists:get_value(id,OldObject),OldObject}]++NewInventory,
         battle_stats=BattleStats}
   end,
   {noreply,NewState};
@@ -375,6 +375,7 @@ handle_cast({unwear,ObjectId,Position},State) ->
       State;
     Object ->
       % remove from worn objects
+      OldObject=proplists:get_value(Position,State#player_state.worn_objects) ,
       WornObjects=proplists:delete(Position,State#player_state.worn_objects),
       NewInventory=State#player_state.inventory ++ [{ObjectId,Object}],
 
@@ -383,7 +384,7 @@ handle_cast({unwear,ObjectId,Position},State) ->
       % Send some feedback to the user
       FeedbackFun(State,
         {obj,[{"type",<<"object_unworn">>},
-          {"body",{obj,Object}}]}),
+            {"body",{obj,[{"unworn_object",{obj,OldObject}}]}}]}),
       % Add old worn object to inventory and update list of worn objects
       State#player_state{worn_objects=WornObjects,inventory=NewInventory,battle_stats=BattleStats}
 

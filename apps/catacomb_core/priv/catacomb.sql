@@ -1,7 +1,7 @@
 CREATE DATABASE catacomb;
 CREATE USER 'catacomb'@'localhost' IDENTIFIED BY  'pass';
 GRANT USAGE ON * . * TO  'catacomb'@'localhost' IDENTIFIED BY  'pass' ;
-GRANT ALL PRIVILEGES ON  'catacomb' . * TO  'catacomb'@'localhost' WITH GRANT OPTION ;
+GRANT ALL PRIVILEGES ON  catacomb.* TO  'catacomb'@'localhost' WITH GRANT OPTION ;
 
 USE catacomb;
 
