@@ -1,12 +1,19 @@
 -module(ct_client_command).
 -export([execute/2,send_feedback/2,client_disconnected/1]).
--include ("ct_character_info.hrl").
 
--record(ct_client_state,{session_pid=none,
-	user_id=none,
-	player_handle=none}).
+-record(ct_client_state,{session_pid=undefined,
+	user_id=undefined,
+	player_handle=undefined}).
 
-execute(Cmd,State) -> %% State contains State data relevant to this module
+execute(Cmd,StateFromGateway) ->
+  % State contains State data relevant to this module
+  % initialize if necessary
+  State=case StateFromGateway of
+    undefined ->
+         #ct_client_state{};
+    _ ->
+      StateFromGateway
+      end,
 	try 
 		DecodeResult=ct_translation_tools:from_client(Cmd),
     	case DecodeResult of
@@ -19,8 +26,8 @@ execute(Cmd,State) -> %% State contains State data relevant to this module
         		lager:error("Error when decoding ~p~n",[Error]),
         		Result=list_to_binary("Error when decoding: " ++ atom_to_list(Error)),
         		{error,Result,State};
-  			_ -> 	
-        		lager:error("WTF?~n"),
+  			  _ ->
+         		lager:error("WTF?~n"),
         		{error,[],State}
     	end
     catch
@@ -40,10 +47,10 @@ do_command(Cmd,State) ->
 		<<"login_request">> ->
 			User=ct_translation_tools:get_value(<<"user">>,Cmd),
 			Password=ct_translation_tools:get_value(<<"password">>,Cmd),
-			lager:info("Log in: User: ~p Password: ~p ~n",[User,Password]),
+			lager:debug("Log in: User: ~p Password: ~p ~n",[User,Password]),
 			% Check if we have a session. If there is no session create a new one.
 			{ok,SessionPid}=case State#ct_client_state.session_pid of
-				none ->
+        undefined ->
 					ct_session_sup:get_new_session_pid();
 				_ ->
 					{ok,State#ct_client_state.session_pid}
@@ -90,7 +97,7 @@ do_command(Cmd,State) ->
 			{ok,[],State};
 		<<"logout">>->
 			%% tell the session to die
-			%% suicide ourselves
+			%% stop the player
 			{ok,[],State};
 		<<"player_go_request">>->
 			% check if there is a player already, if the user has logged in, etc...

@@ -58,7 +58,7 @@ handle_cast({feedback, Feedback}, State) ->
                            {"exits", Exits}]}}]} ->
       lager:debug("room name: ~p~n", [RoomName]),
       lager:debug("exits: ~p~n", [Exits]),
-% behaviour on enter room
+      % behaviour on enter room
       NewState2 = State#ai_state{room_name = RoomName, room_exits = Exits},
       Fun = State#ai_state.behaviour_on_room_enter,
       NewState3 = Fun(NewState2),
@@ -69,18 +69,17 @@ handle_cast({feedback, Feedback}, State) ->
       PlayersSeen = State#ai_state.players_seen,
       PlayersSeen2 = proplists:delete(PlayerId, PlayersSeen),
       PlayersSeen3 = PlayersSeen2 ++ [{PlayerId, PlayerName}],
-% behaviour on player seen
+      % behaviour on player seen
       NewState2 = State#ai_state{players_seen = PlayersSeen3},
       Fun = State#ai_state.behaviour_on_player_seen,
       NewState3 = Fun(NewState2),
       NewState3;
     {obj, [{"type", <<"unseen_by_info">>},
            {"body", {obj, LastPlayerUnseen}}]} ->
-%%LastPlayerUnseen = [{"name",PlayerName},{"player_id",PlayerId},{"direction",Direction}]
       PlayersSeen = State#ai_state.players_seen,
       PlayerId = proplists:get_value("player_id", LastPlayerUnseen),
       PlayersSeen2 = proplists:delete(PlayerId, PlayersSeen),
-% behaviour on player seen
+      % behaviour on player seen
       NewState2 = State#ai_state{players_seen = PlayersSeen2, last_player_unseen = LastPlayerUnseen},
       Fun = State#ai_state.behaviour_on_player_unseen,
       NewState3 = Fun(NewState2),

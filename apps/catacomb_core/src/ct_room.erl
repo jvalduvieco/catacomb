@@ -91,13 +91,12 @@ init({X,Y}) ->
 	{RoomName, Props}=create_room_properties(),		%% Define Room properties and name.
 	{ok,RoomExits}=create_room_exits(X,Y,MaxX,MaxY),
 
-  %% start chat server
+  % start chat server
   {ok, ChatPid} = gen_event:start_link(),
 
-  %% state
+  % state
   State=#state{x=X,y=Y,room_name=RoomName,exits=RoomExits,params=Props, chat_evm_pid=ChatPid},
 	ets:insert(coordToPid,{list_to_atom([X,Y]),self()}),
-	%io:format("~p : ~w ~n",[{X,Y},RoomExits]),
   {ok, State}.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 
@@ -108,8 +107,7 @@ handle_cast({enter, Player, RoomFromPid, Direction}, State) ->
   case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Direction, Player); false -> true end,
   ct_player:entered(Player, self(), State#state.exits, State#state.room_name,State#state.objects),
 
-  %% chat
-%%   HandlerId = {ct_room_chat, make_ref()},
+  % chat
   HandlerId = {ct_room_chat, Player#player_state.my_pid},
   gen_event:add_sup_handler(State#state.chat_evm_pid, HandlerId, [Player]),
 
@@ -117,8 +115,7 @@ handle_cast({enter, Player, RoomFromPid, Direction}, State) ->
   NewState=State#state{players=[Player|State#state.players],
                        chat_players_pid=[{Player#player_state.my_pid, HandlerId}|State#state.chat_players_pid]},
 
-  % Notificar players de la room que hi ha un nou player
-  %lists:map(fun(X) -> io:format("~w is here.~n",[X]) end,State#state.players),
+  % Notify that a player entered into the room
   %% Replace by room event handler?
   lists:map(fun(X) -> ct_player:seen(X,Player) end,State#state.players),
   lists:map(fun(X) -> ct_player:seen(Player,X) end,State#state.players),
@@ -126,30 +123,28 @@ handle_cast({enter, Player, RoomFromPid, Direction}, State) ->
 handle_cast({add_exit, Exit,X,Y}, State) ->
 	NewExits=lists:sort(lists:append(State#state.exits,[{Exit,[X,Y]}])),
 	NewState=State#state{exits=NewExits},
-	%io:format("FROM {~p,~p} :: State ~p :  NewState :~p ~n",[X,Y,State,NewState]),
 	{noreply, NewState};
 handle_cast({player_left, Player, Direction}, State) ->
-  	%% chat
-  	ChatPlayerPid = proplists:get_value(Player#player_state.my_pid, State#state.chat_players_pid),
-  	gen_event:delete_handler(State#state.chat_evm_pid, ChatPlayerPid, []),
-
-  	%% Check if player is really in
-  	NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)],
-                       chat_players_pid=proplists:delete(Player#player_state.my_pid, State#state.chat_players_pid)},
-	%% Replace by room event handler?
-	lists:map(fun(X) -> ct_player:unseen(X,Player,Direction) end,NewState#state.players),
-	lists:map(fun(X) -> if Player/=X -> ct_player:unseen(Player,X,none) end end,NewState#state.players),
+  % chat
+  ChatPlayerPid = proplists:get_value(Player#player_state.my_pid, State#state.chat_players_pid),
+  gen_event:delete_handler(State#state.chat_evm_pid, ChatPlayerPid, []),
+  %% Check if player is really in
+  NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)],
+                     chat_players_pid=proplists:delete(Player#player_state.my_pid, State#state.chat_players_pid)},
+  % Replace by room event handler?
+  lists:map(fun(X) -> ct_player:unseen(X,Player,Direction) end,NewState#state.players),
+  lists:map(fun(X) -> if Player/=X -> ct_player:unseen(Player,X,none) end end,NewState#state.players),
 
 	{noreply, NewState};
-
 handle_cast({request_leave, Direction, Player}, State) ->
-	%controlar que es pugui anar en la direcció
+	% Check that direction exists
 	case [{Dir,Coords} || {Dir,Coords} <- State#state.exits, Direction=:=Dir] of
     	[{_,Coords}] -> 
-			%obtenir la room destí
+			  % Obtain target room
     		{ok,RoomToPid}=ct_room_sup:get_pid(Coords),
-			%notificar ala habitació desti que el player entra
-			ct_room:enter(RoomToPid,Direction,Player,self());
+			  % Notify target room that a player is entering
+        % FIXME: Move to player?
+			  ct_room:enter(RoomToPid,Direction,Player,self());
     	[] ->
     		ct_player:leave_denied(Player),
 			true
@@ -291,7 +286,6 @@ find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits) ->
 								case lists:member(e,[W||{W,_}<-NeighExits]) of
 									true -> w;
 									false ->
-										%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
 										case lists:member(w,[Z||Z<-RandomExits]) of
 											true -> ct_room:add_exit(NeighRoom,e,X,Y),
 												null;
@@ -302,7 +296,6 @@ find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits) ->
 								case lists:member(ne,[W||{W,_}<-NeighExits]) of
 									true -> sw;
 									false ->
-										%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
 										case lists:member(sw,[Z||Z<-RandomExits]) of
 											true -> ct_room:add_exit(NeighRoom,ne,X,Y),
 												null;
@@ -313,7 +306,6 @@ find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits) ->
 								case lists:member(se,[W||{W,_}<-NeighExits]) of
 									true -> nw;
 									false ->
-										%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
 										case lists:member(nw,[Z||Z<-RandomExits]) of
 											true -> ct_room:add_exit(NeighRoom,se,X,Y),
 												null;
@@ -324,7 +316,6 @@ find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits) ->
 								case lists:member(n,[W||{W,_}<-NeighExits]) of
 									true -> s;
 									false ->
-										%io:format("neg : ~p    mine: ~p     result ~p      pid: ~p ~n",[NeighExits,RandomExits,lists:member(w,[W||W<-RandomExits]),NeighRoom]),
 										case lists:member(s,[Z||Z<-RandomExits]) of
 											true -> ct_room:add_exit(NeighRoom,n,X,Y),
 												null;
@@ -346,7 +337,6 @@ create_room_exits(X,Y,MaxX,MaxY)->
 			PossibleExits) ),
 	NeighExits=find_neighbours_entrances(X,Y,MaxX,MaxY,RandomExits),
 	%% We have a list of exits cardinal point [s,w,n]
-	%%io:format("Exits (~w): ~w ~n",[[X,Y],lists:umerge(lists:sort(RandomExits),lists:sort(NeighExits))]),
 	Exits=clean_exits(translate(X,Y,MaxX,MaxY,lists:umerge(lists:sort(RandomExits),lists:sort(NeighExits)))),
 	{ok,Exits}.
 translate(_,_,_,_,[]) -> [];
