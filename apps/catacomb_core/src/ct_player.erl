@@ -82,10 +82,10 @@ object_picked(Player,Object) ->
 
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
-  %lager:debug("starting heartbeat process..."),
-  %{ok,HeartbeatPid} = ct_player_heartbeat:start_link(#player_state{my_pid=self()}),
-  %lager:debug("heartbeat process started ~p", [HeartbeatPid]),
-  %ct_player_heartbeat:heartbeat_start(HeartbeatPid),
+  lager:debug("starting heartbeat process..."),
+  {ok,HeartbeatPid} = ct_player_heartbeat:start_link(#player_state{my_pid=self()}),
+  lager:debug("heartbeat process started ~p", [HeartbeatPid]),
+  ct_player_heartbeat:heartbeat_start(HeartbeatPid),
 
   State=#player_state{
 		id=proplists:get_value(<<"id">>, CharacterSpecs, none),
@@ -101,7 +101,7 @@ init([{obj,CharacterSpecs}]) ->
 		level=proplists:get_value(<<"level">>, CharacterSpecs, none),
 		experience_points=proplists:get_value(<<"experience_points">>, CharacterSpecs, none),
 		public_id=proplists:get_value(<<"public_id">>, CharacterSpecs, none),
- 		%heartbeat_pid=HeartbeatPid,
+ 		heartbeat_pid=HeartbeatPid,
     battle_stats=[{total_armor,[{none,0}]},{total_damage,[{none,0}]}]
 	},
 
@@ -202,8 +202,8 @@ handle_cast({heartbeat, LastTimeDiff},State) ->
     ]},
     State#player_state.feedback_data
   ),
-  % hearbeat
-  %ct_player_heartbeat:heartbeat(State#player_state.heartbeat_pid, LastTimeDiff),
+  % heartbeat
+  ct_player_heartbeat:heartbeat(State#player_state.heartbeat_pid, LastTimeDiff),
   {noreply, State};
 %% Attack another player
 handle_cast({attack, OtherPlayer}, State) ->
