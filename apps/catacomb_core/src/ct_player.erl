@@ -2,7 +2,7 @@
 -behaviour(gen_server).
 
 -export([start_link/1,stop/1]).
--export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_fun/2,get_public_id/1,heartbeat/2]).
+-export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_data/2,get_feedback_data/1,get_public_id/1,heartbeat/2]).
 -export([go/2, set_room/2,seen/2,unseen/3,entered/5,leave_denied/1,talk/2,heard/3,hit/4,attack/2,pick_object/2,object_picked/2,drop_object/2,wear/2,unwear/3]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
@@ -38,9 +38,11 @@ set_room(Player,[X,Y]) ->
 %% Link player to the websocket server
 set_client(Player,Client) ->
   gen_server:cast(ct_player:get_pid(Player), {set_client, Client}).
-%% Set feedback function
-set_feedback_fun(Player, Fun) ->
-  gen_server:cast(ct_player:get_pid(Player), {set_feedback_fun, Fun}).
+%% Set feedback data
+set_feedback_data(Player,FeedbackData) ->
+  gen_server:cast(ct_player:get_pid(Player), {set_feedback_data, FeedbackData}).
+get_feedback_data(#player_state{feedback_data=FeedbackData} = _Player) ->
+  FeedbackData.
 
 %% Client API
 go(Player,Direction) ->
@@ -117,6 +119,9 @@ handle_cast({set_client,Client},State) ->
 handle_cast({set_feedback_fun,Fun},State) ->
 	NewState=State#player_state{feedback_fun=Fun},
 	{noreply,NewState};
+handle_cast({set_feedback_data,FeedbackData},State) ->
+  NewState=State#player_state{feedback_data=FeedbackData},
+  {noreply,NewState};
 handle_cast({go, Direction}, State) ->
   ct_room:request_leave(State#player_state.room,Direction,State),
   {noreply, State};
@@ -124,51 +129,51 @@ handle_cast({seen, OtherPlayer}, State) ->
 	CleanOtherPlayer=OtherPlayer#player_state{located_players=[]},
 	NewState=State#player_state{located_players=[CleanOtherPlayer|State#player_state.located_players]},
 	lager:debug("~s: has been seen by ~s~n",[State#player_state.name,ct_player:get_name(OtherPlayer)]),
-	FeedbackFun = State#player_state.feedback_fun,
-	FeedbackFun(State,
-		{obj,[{"type",<<"seen_by_info">>},
-			{"body",{obj,[
-				{"name",ct_player:get_name(OtherPlayer)},
-				{"public_id",ct_player:get_public_id(OtherPlayer)}
-			]}}
-		]}),
+	ct_feedback:send(
+    {obj,[{"type",<<"seen_by_info">>},
+          {"body",{obj,[
+            {"name",ct_player:get_name(OtherPlayer)},
+            {"public_id",ct_player:get_public_id(OtherPlayer)}
+          ]}}
+    ]},
+    State#player_state.feedback_data),
 	{noreply,NewState};
 handle_cast({unseen, OtherPlayer, Direction}, State) ->
 	%%The player left the room
 	NewState=State#player_state{located_players=[P || P <- State#player_state.located_players, ct_player:get_pid(P)=/=ct_player:get_pid(OtherPlayer)]},
-	FeedbackFun = State#player_state.feedback_fun,
-	FeedbackFun(State,
+  ct_feedback:send(
 		{obj,[{"type",<<"unseen_by_info">>},
 			{"body",{obj,[
 				{"name",ct_player:get_name(OtherPlayer)},
 				{"public_id",ct_player:get_public_id(OtherPlayer)}, 
 				{"direction", Direction}
 			]}}
-		]}),
+		]},
+    State#player_state.feedback_data),
 	{noreply,NewState};
 handle_cast({entered, RoomPid, RoomExits, RoomName,RoomObjects}, State) ->
 	NewState=State#player_state{room_exits=RoomExits,room=RoomPid},
-	FeedbackFun = State#player_state.feedback_fun,
-	FeedbackFun(State,
+  ct_feedback:send(
 		{obj,[{"type",<<"room_info">>},
 			{"body",{obj,[
 				{"name",RoomName},
 				{"exits",[X || {X,_} <- RoomExits]},
 				{"objects",[ {obj,X} || {_,X} <- RoomObjects]} % FIXME create a new message to report objects appeared after entering the room
 			]}}
-		]}),
+		]},
+    State#player_state.feedback_data),
 	{noreply, NewState};
 %% Notification, a user tried to leave the room by a direction without door
 handle_cast({leave_denied},State) ->
 	lager:debug("~s has hit with a wall ~n", [State#player_state.name]),
-	FeedbackFun = State#player_state.feedback_fun,
-	FeedbackFun(State,
+  ct_feedback:send(
 		{obj,[{"type",<<"game_message_info">>},
 			{"body",{obj,[
 				{"msg_type",<<"warning">>},
 				{"contents",<<"You hit a cold, hard wall">>}
 			]}}
-		]}),
+		]},
+  State#player_state.feedback_data),
 	{noreply,State};
 %% Say something to the room
 handle_cast({talk, Message},State) ->
@@ -177,25 +182,26 @@ handle_cast({talk, Message},State) ->
 	{noreply,State};
 %% Receive a message from other player
 handle_cast({heard, PlayerWhoTalksName, Message},State) ->
-  FeedbackFun = State#player_state.feedback_fun,
-  FeedbackFun(State,
+  ct_feedback:send(
     {obj,[{"type",<<"room_chat_talk">>},
       {"body",{obj,[
         {"player_name", PlayerWhoTalksName},
         {"message", Message}
       ]}}
-    ]}),
+    ]},
+    State#player_state.feedback_data),
   {noreply,State};
 %% Collect heartbeat info from client
 %% Fixme: Move to session or tooling module
 handle_cast({heartbeat, LastTimeDiff},State) ->
   lager:debug("heartbeat last time diff: ~p ms~n", [LastTimeDiff]),
   % heartbeat response to cli
-  FeedbackFun = State#player_state.feedback_fun,
-  FeedbackFun(State,
+  ct_feedback:send(
     {obj,[{"type",<<"heartbeat_response">>},
       {"body",{obj,[]}}
-    ]}),
+    ]},
+    State#player_state.feedback_data
+  ),
   % hearbeat
   %ct_player_heartbeat:heartbeat(State#player_state.heartbeat_pid, LastTimeDiff),
   {noreply, State};
@@ -215,67 +221,67 @@ handle_cast({hit, OtherPlayer, _HitChance, BattleStats}, State) ->
       NewLifePoints = State#player_state.life_points - Damage,
       case NewLifePoints =< 0 of
         true ->
-          FeedbackFun = State#player_state.feedback_fun,
-          FeedbackFun(State,
+          ct_feedback:send(
             {obj,[{"type",<<"attack_info">>},
               {"body",{obj,[
                 {"msg_type",<<"dead">>},
                 {"otherplayer",OtherPlayer#player_state.name},
                 {"damage",Damage}
               ]}}
-            ]}),
-          OtherFeedbackFun = OtherPlayer#player_state.feedback_fun,
-          OtherFeedbackFun(OtherPlayer,
+            ]},
+            State#player_state.feedback_data),
+          ct_feedback:send(
             {obj,[{"type",<<"attack_info">>},
               {"body",{obj,[
                 {"msg_type",<<"otherdead">>},
                 {"otherplayer",State#player_state.name},
                 {"damage",Damage}
               ]}}
-            ]}),
+            ]},
+            State#player_state.feedback_data),
 
           NewState=State#player_state{life_points=NewLifePoints};
-%FALTA eliminar el jugador!!
+        %TODO: Kill the player
         false ->
-          FeedbackFun = State#player_state.feedback_fun,
-          FeedbackFun(State,
+          ct_feedback:send(
             {obj,[{"type",<<"attack_info">>},
               {"body",{obj,[
                 {"msg_type",<<"hitted">>},
                 {"otherplayer",OtherPlayer#player_state.name},
                 {"damage",Damage}
               ]}}
-            ]}),
-          OtherFeedbackFun = OtherPlayer#player_state.feedback_fun,
-          OtherFeedbackFun(OtherPlayer,
+            ]},
+          State#player_state.feedback_data),
+          ct_feedback:send(
             {obj,[{"type",<<"attack_info">>},
               {"body",{obj,[
                 {"msg_type",<<"otherhitted">>},
                 {"otherplayer",State#player_state.name},
                 {"damage",Damage}
               ]}}
-            ]}),
+            ]},
+          get_feedback_data(OtherPlayer)),
 
           NewState=State#player_state{life_points=NewLifePoints}
       end;
     false ->
       NewState=State,
-      FeedbackFun = State#player_state.feedback_fun,
-      FeedbackFun(State,
+      ct_feedback:send(
         {obj,[{"type",<<"attack_info">>},
           {"body",{obj,[
             {"msg_type",<<"dodged">>},
             {"otherplayer",OtherPlayer#player_state.name}
           ]}}
-        ]}),
-      OtherFeedbackFun = OtherPlayer#player_state.feedback_fun,
-      OtherFeedbackFun(OtherPlayer,
+        ]},
+        State#player_state.feedback_data),
+      ct_feedback:send(
         {obj,[{"type",<<"attack_info">>},
           {"body",{obj,[
             {"msg_type",<<"otherdodged">>},
             {"otherplayer",State#player_state.name}
           ]}}
-        ]})
+        ]},
+        get_feedback_data(OtherPlayer))
   end,
 %true ->
 %	NewState=State,
@@ -307,44 +313,45 @@ handle_cast({pick_object,ObjectId},State) ->
 %% Notification that an object is picked from the room
 handle_cast({object_picked,Object},State) ->
 	NewInventory= [{proplists:get_value(id,Object),Object}]++State#player_state.inventory,
-  FeedbackFun = State#player_state.feedback_fun,
-  	FeedbackFun(State,
+  ct_feedback:send(
     {obj,[{"type",<<"object_picked">>},
       {"body",{obj,Object}}
-    ]}),
-    {noreply,State#player_state{inventory=NewInventory}};
+    ]},
+    State#player_state.feedback_data),
+  {noreply,State#player_state{inventory=NewInventory}};
 %% Drop an object form the inventory to the room
 handle_cast({drop_object,ObjectId},State) ->
-	FeedbackFun = State#player_state.feedback_fun,
   % Check if the object is in the inventory
 	Result=proplists:get_value(ObjectId,State#player_state.inventory,none),
 	NewState=case Result of 
 		none ->
-			FeedbackFun(State,
+      ct_feedback:send(
 				{obj,[{"type",<<"object_dropped">>},
-					{"body",object_not_found}]}),
+					{"body",object_not_found}]},
+        State#player_state.feedback_data),
 			State;
 		Object ->
       %remove the object from the inventory
-      NewInventory=inventory=proplists:delete(ObjectId,State#player_state.inventory),
+      NewInventory=proplists:delete(ObjectId,State#player_state.inventory),
       % return the object to the room
       ct_room:add_object(State#player_state.room,Object),
-			FeedbackFun(State,
+      ct_feedback:send(
 				{obj,[{"type",<<"object_dropped">>},
-				{"body",{obj,[{"object_id",ObjectId}]}}]}),
+				{"body",{obj,[{"object_id",ObjectId}]}}]},
+        State#player_state.feedback_data),
 			State#player_state{inventory=NewInventory}
 	end,
 	{noreply,NewState};
 %% Wear an object form inventory
 handle_cast({wear,ObjectId},State) ->
-  FeedbackFun = State#player_state.feedback_fun,
   lager:debug("wear ~p ~p ~p ~n",[ObjectId,State#player_state.worn_objects,State#player_state.inventory]),
   % Check if the object is in the inventory
   NewState=case proplists:get_value(ObjectId,State#player_state.inventory,none) of
     none ->
-      FeedbackFun(State,
+      ct_feedback:send(
         {obj,[{"type",<<"object_worn">>},
-          {"body",object_not_found}]}),
+          {"body",object_not_found}]},
+        State#player_state.feedback_data),
       State;
     Object ->
       % Find where the new object is to be worn
@@ -362,9 +369,10 @@ handle_cast({wear,ObjectId},State) ->
       % Calculate Damage and Armor
       BattleStats=calculate_battle_stats(WornObjects),
       % Send some feedback to the user
-      FeedbackFun(State,
+      ct_feedback:send(
         {obj,[{"type",<<"object_worn">>},
-          {"body",{obj,[{"worn_object",{obj,Object}},{"unworn_object",{obj,OldObject}}]}}]}),
+          {"body",{obj,[{"worn_object",{obj,Object}},{"unworn_object",{obj,OldObject}}]}}]},
+        State#player_state.feedback_data),
       % Add old worn object to inventory and update list of worn objects
       State#player_state{
         worn_objects=WornObjects,
@@ -376,14 +384,14 @@ handle_cast({wear,ObjectId},State) ->
 %% Unwears an object and returns to inventory
 handle_cast({unwear,ObjectId,Position},State) ->
   lager:debug("unwear ~p ~p ~p ~p",[ObjectId,Position,State#player_state.worn_objects,State#player_state.inventory]),
-  FeedbackFun = State#player_state.feedback_fun,
   % find whether we are wearing requested objct
   Result=proplists:get_value(Position,State#player_state.worn_objects,none),
   NewState=case Result of
     none ->
-      FeedbackFun(State,
+      ct_feedback:send(
         {obj,[{"type",<<"object_unworn">>},
-          {"body",object_not_found}]}),
+          {"body",object_not_found}]},
+      State#player_state.feedback_data),
       State;
     Object ->
       % remove from worn objects
@@ -395,9 +403,10 @@ handle_cast({unwear,ObjectId,Position},State) ->
       % Calculate new Damage and Armor
       BattleStats=calculate_battle_stats(WornObjects),
       % Send some feedback to the user
-      FeedbackFun(State,
+      ct_feedback:send(
         {obj,[{"type",<<"object_unworn">>},
-            {"body",{obj,[{"unworn_object",{obj,OldObject}}]}}]}),
+            {"body",{obj,[{"unworn_object",{obj,OldObject}}]}}]},
+        State#player_state.feedback_data),
 
       % Add old worn object to inventory and update list of worn objects
       State#player_state{worn_objects=WornObjects,inventory=NewInventory,battle_stats=BattleStats}

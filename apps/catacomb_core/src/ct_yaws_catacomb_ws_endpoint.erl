@@ -9,7 +9,8 @@
 %% initial state.
 -record(state, {frag_type = none,               % fragment type
                 acc = <<>>,                     % accumulate fragment data
-                client_command_state=undefined}).    % client command state (opaque)
+                client_command_state=undefined, % client command state (opaque)
+                feedback_data=undefined}).      % feedback data to reach the user
 
 %% start of a fragmented message
 handle_message(#ws_frame_info{fin=0,
@@ -34,13 +35,23 @@ handle_message(#ws_frame_info{fin=1,
     {reply, {text, Unfragged}, #state{frag_type=none, acc = <<>>}};
 
 %% one full non-fragmented message
-handle_message(#ws_frame_info{opcode=text, data=Data}, State) ->
+%% Called first time
+handle_message( #ws_frame_info{} = FrameInfo,
+                #state{client_command_state=undefined}) ->
+  % Initialize client state
+  lager:debug("Initializing "),
+  NewClientCommandState=ct_client_command:client_connected(),
+  PartialFeedbackData=ct_feedback:set_feedback_module(ct_yaws_gateway_feedback,undefined),
+  FeedbackData=ct_feedback:set_gateway_pid(self(),PartialFeedbackData),
+  % Handle message
+  handle_message (FrameInfo,#state{client_command_state=NewClientCommandState,feedback_data=FeedbackData});
+%% Called once initialized
+handle_message(#ws_frame_info{opcode=text, data=Data} = FrameInfo, #state{} = State) ->
   try
-    is_record (State,state),
     ClientState=State#state.client_command_state,
-
+    FeedbackData=State#state.feedback_data,
     %% Decode received data into a Erlang structures
-    {_BoolResult,Result,NewClientState}=ct_client_command:execute(Data,ClientState),
+    {_BoolResult,Result,NewClientState}=ct_client_command:execute(Data,ClientState,FeedbackData),
 
     NewState=State#state{client_command_state=NewClientState},
     lager:debug("Returning ~p",[Result]),

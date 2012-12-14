@@ -1,46 +1,44 @@
 -module(ct_client_command).
--export([execute/2,send_feedback/2,client_disconnected/1]).
+-export([execute/3,client_connected/0,client_disconnected/1]).
 
 -record(ct_client_state,{session_pid=undefined,
 	user_id=undefined,
 	player_handle=undefined}).
 
-execute(Cmd,StateFromGateway) ->
+execute(Cmd,#ct_client_state{} = StateFromGateway,FeedbackData) ->
   % State contains State data relevant to this module
-  % initialize if necessary
-  State=case StateFromGateway of
-    undefined ->
-         #ct_client_state{};
-    _ ->
-      StateFromGateway
-      end,
 	try 
 		DecodeResult=ct_translation_tools:from_client(Cmd),
     	case DecodeResult of
       		{ok, DataObj} ->
-      			{BoolResult,Result,NewState}=do_command(DataObj,State),
+      			{BoolResult,Result,NewState}=do_command(DataObj,StateFromGateway,FeedbackData),
       			% Encode response in JSON format. Force ok response as an error here probably is a developer bug
       			{ok,EncodedJSON}=ct_translation_tools:to_client(Result),
       			{BoolResult,EncodedJSON,NewState};
       		{error, Error} -> 
         		lager:error("Error when decoding ~p~n",[Error]),
         		Result=list_to_binary("Error when decoding: " ++ atom_to_list(Error)),
-        		{error,Result,State};
+        		{error,Result,StateFromGateway};
   			  _ ->
          		lager:error("WTF?~n"),
-        		{error,[],State}
+        		{error,[],StateFromGateway}
     	end
     catch
 		What:Why ->
 		    Trace=erlang:get_stacktrace(),
 		    lager:error("ct_client_command: ~p ~p ~p.\n", [What,Why,Trace]),
-		    {stop, Why, State}
+		    {stop, Why, StateFromGateway}
   	end.
+%% Initialize client state
+client_connected() ->
+  #ct_client_state{}.
+
+%% Cleanup client data
 client_disconnected(#ct_client_state{session_pid=SessionPid,player_handle=PlayerHandle}) ->
 	ct_session:stop(SessionPid),
 	ct_player:stop(PlayerHandle).
 
-do_command(Cmd,State) ->
+do_command(Cmd,State,FeedbackData) ->
 	Command=ct_translation_tools:get_type(Cmd),
   lager:debug("Command: ~p~n", [Command]),
 	Result=case Command of
@@ -80,8 +78,9 @@ do_command(Cmd,State) ->
 
 			{ok, CharacterData} = ct_character_service:get_character_data(State#ct_client_state.user_id,CharacterId),
 			{ok, PlayerHandle} = ct_player_sup:start_player(CharacterData),
-			ct_player:set_client(PlayerHandle,self()),
-			ct_player:set_feedback_fun(PlayerHandle, fun(Player, Feedback) -> ct_client_command:send_feedback(Player, Feedback) end),
+			%ct_player:set_client(PlayerHandle,self()),
+      ct_player:set_feedback_data(PlayerHandle,FeedbackData),
+			%ct_player:set_feedback_fun(PlayerHandle, fun(Player, Feedback) -> ct_client_command:send_feedback(Player, Feedback) end),
 			ok = ct_session:set_character(State#ct_client_state.session_pid, CharacterId),
 				
 			{ok,{obj, [{"type", <<"load_character_response">>}, 
@@ -153,11 +152,3 @@ ct_player:heartbeat(State#ct_client_state.player_handle, LastTimeDiff),
 		%% Chat commands to be added
 		end,
 	Result.
-	websocket_feedback(Pid,Feedback)->
-		{ok,Response}=ct_translation_tools:to_client(Feedback),
-		yaws_api:websocket_send(Pid,{text, list_to_binary(Response)}).
-	send_feedback(Player,Feedback)->
-		ClientPid=ct_player:get_client(Player),
-		% Depending on app configuration do a callback
-		websocket_feedback(ClientPid,Feedback).
-

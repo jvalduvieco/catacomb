@@ -2,7 +2,8 @@
 
 -record(state, {frag_type = none,               % fragment type
                 acc = <<>>,                     % accumulate fragment data
-                client_command_state=undefined}).    % client command state (opaque)
+                client_command_state=undefined,    % client command state (opaque)
+                feedback_data=undefined}).      % feedback data to reach the user
 
 out(A) -> 
 	InitialState = [],
