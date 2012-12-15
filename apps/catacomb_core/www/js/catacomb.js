@@ -1,3 +1,6 @@
+// player id once logged
+var session_player_public_id=undefined;
+
 $(document).ready(function()
 {
     setStatusNotConnected();
@@ -109,6 +112,8 @@ function setStatusConnected()
 }
 function setStatusAuthenticated()
 {
+    //Maybe there is a better place to do this.
+    session_player_public_id=undefined;
     currentStatus = STATUS_CONNECTED_AUTH;
     setUI();
 }
@@ -182,7 +187,7 @@ function processResponse(data)
             characterList(obj.body);
             break;
         case "load_character_response":
-            heartbeatStart();
+            characterLoaded(obj.body);
             break;
         case "room_info":
             roomInfo(obj.body);
@@ -196,8 +201,8 @@ function processResponse(data)
         case "room_chat_talk":
             roomChatTalk(obj.body);
             break;
- 	case "object_picked":
-            addToInventory(obj.body);
+ 	    case "object_picked":
+ 	        objectPicked(obj.body);
             break;
         case "object_dropped":
             objectDropped(obj.body);
@@ -211,8 +216,14 @@ function processResponse(data)
         case "attack_info":
             attackInfo(obj.body);
             break;
- 	case "heartbeat_response":
+ 	    case "heartbeat_response":
             heartbeatResponse(obj.body);
+            break;
+        case "object_picked_by_player":
+            objectPickedByPlayer(obj.body);
+            break;
+        case "object_dropped_by_player":
+            objectDroppedByPlayer(obj.body);
             break;
     }
 }
@@ -255,7 +266,12 @@ function chatTalk()
     ws.send('{"type":"player_talk_request","body":{"message":"' + message + '"}}');
     $("#chatMessage").val('');
 }
+function characterLoaded(data)
+{
 
+    heartbeatStart();
+    session_player_public_id=data.player_public_id;
+}
 function roomInfo(data)
 {
     var name = data.name;
@@ -281,24 +297,47 @@ function roomInfo(data)
         }
     });
     $.each(objects,function(index,value) {
-        $("#objectsInRoom").append('<button id=pickObjectBtn'+value.id+' onclick="pickObject(' + value.id + ',\''+value.name+'\')" class="btn btn-success pickObjectButton">' + value.name + '</button>');
+        addObjectToRoom(value);
     });
     $("#playersUnseen").empty();
     $("#chatSendButton").removeAttr('disabled');
 }
 function pickObject(id,name)
 {
-    $("#objectsInRoom.pickObjectBtn"+id).attr('disabled', 'disabled');
-    //Fixme: Check if the object was really picked
     ws.send('{"type":"pick_object_request","body":{"object_id":"' + id + '"}}');
-    writeTimeline("You picked a "+ name);
+}
+function objectPicked(data)
+{
+    var object=data.object;
+    var object_name=object.name;
+    var object_id=object.id;
+
+    addToInventory(object);
+    removeObjectFromRoomObjectsPanel(object_id);
+    writeTimeline("You picked a "+ object_name);
+}
+function objectPickedByPlayer(data)
+{
+    var object_id=data.object.id;
+    var object_name=data.object.name;
+    var player_id=data.player_id;
+    var player_name=data.player_name;
+
+    removeObjectFromRoomObjectsPanel(object_id);
+    if (player_id != session_player_public_id)
+                writeTimeline(player_name + " picked a " + object_name);
+}
+function removeObjectFromRoomObjectsPanel(object_id)
+{
+    $("#objectsInRoom.pickObjectBtn"+object_id).attr('disabled', 'disabled');
+    $("#pickObjectBtn" + object_id).remove();
 }
 function addToInventory(data)
 {
     var name = data.name;
     var id = data.id;
     $("#objectsInInventory").append('<div id="inventoryObject' + id + '" class="row-fluid"><div class="span7">' + name + '</div><div class="span5"> <button onclick="dropObject(' + id + ')" class="btn btn-mini btn-success character-list-button"> DROP </button> <button onclick="wearObject(' + id + ')" class="btn btn-mini btn-success character-list-button"> WEAR</button></div></div>');
-    $("#pickObjectBtn" + id).remove();
+
 }
 function characterList(data)
 {
@@ -349,6 +388,7 @@ function roomChatTalk(data)
 var heartbeatId;
 var heartbeatLastTimeDiff = null;
 var heartbeatTs1;
+
 function heartbeatStart()
 {
     // heartbeat
@@ -384,6 +424,20 @@ function objectDropped(data)
     $("#inventoryObject" + id).remove();
     writeTimeline("Object dropped");
 }
+function objectDroppedByPlayer(data)
+{
+    var object=data.object;
+    var player_name=data.player_name;
+    var player_id=data.player_id;
+
+    addObjectToRoom(object);
+    if (player_id != session_player_public_id)
+        writeTimeline(player_name + " dropped a " + object.name);
+}
+function addObjectToRoom(object)
+{
+     $("#objectsInRoom").append('<button id=pickObjectBtn'+object.id+' onclick="pickObject(' + object.id + ',\''+object.name+'\')" class="btn btn-success pickObjectButton">' + object.name + '</button>');
+}
 function wearObject(id)
 {
     ws.send('{"type":"wear_object","body":{"object_id":"' + id + '"}}');
@@ -392,8 +446,6 @@ function unWearObject(ObjectId,position)
 {
     ws.send('{"type":"unwear_object","body":{"object_id":"' + ObjectId + '","position":"'+ position +'"}}');
 }
-
-
 function objectWorn(data)
 {
     if (typeof (data.worn_object.id) != "undefined" )

@@ -77,12 +77,15 @@ do_command(Cmd,State,FeedbackData) ->
 			CharacterId = ct_translation_tools:get_value(<<"character_id">>, Cmd),
 
 			{ok, CharacterData} = ct_character_service:get_character_data(State#ct_client_state.user_id,CharacterId),
-			{ok, PlayerHandle} = ct_player_sup:start_player(CharacterData),
-      ct_player:set_feedback_data(PlayerHandle,FeedbackData),
+			{ok, PlayerHandle} = ct_player_sup:start_player(CharacterData,FeedbackData),
 			ok = ct_session:set_character(State#ct_client_state.session_pid, CharacterId),
 				
 			{ok,{obj, [{"type", <<"load_character_response">>}, 
-							{"result", <<"success">>}]},
+							{"result", <<"success">>},
+              {"body",{obj,[
+              {"player_public_id",ct_player:get_public_id(PlayerHandle)},
+              {"player_name",ct_player:get_name(PlayerHandle)}
+              ]}}]},
 						State#ct_client_state{player_handle = PlayerHandle}};
 		<<"start_game">>->
 			%% Unfreeze the character

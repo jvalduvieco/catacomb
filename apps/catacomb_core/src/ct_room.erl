@@ -2,7 +2,7 @@
 -behaviour(gen_server).
 
 -export([start_link/2,stop/0]).
--export([enter/4, request_leave/3,get_exits/1,player_left/3,add_exit/4,chat_talk/3,add_object/2,pick_object/3]).
+-export([enter/4, request_leave/3,get_exits/1,player_left/3,add_exit/4,chat_talk/3,add_object/3,pick_object/3]).
 -export([relative_coords_to_absolute/5,find_neighbours_entrances/5]). %% REMOVEME When done
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2]).
 
@@ -19,7 +19,7 @@
 	players=[],
 	objects=[],
 	params=[],
-  chat_evm_pid,
+  room_evm_pid,
   chat_players_pid=[]}).
 
 
@@ -65,8 +65,8 @@ add_exit(RoomPid,Exit,X,Y)->
 		false ->
 			{badarg,[]}
 	end.
-add_object(RoomPid,Object) ->
-	gen_server:cast(RoomPid, {add_object,Object}).
+add_object(RoomPid,Player,Object) ->
+	gen_server:cast(RoomPid, {add_object,Player,Object}).
 pick_object(RoomPid,Player,ObjectId) ->
 	gen_server:cast(RoomPid, {pick_object,Player,ObjectId}).
 %% chat
@@ -91,51 +91,60 @@ init({X,Y}) ->
 	{RoomName, Props}=create_room_properties(),		%% Define Room properties and name.
 	{ok,RoomExits}=create_room_exits(X,Y,MaxX,MaxY),
 
-  % start chat server
-  {ok, ChatPid} = gen_event:start_link(),
+  % start room event manager
+  {ok, RoomEventManagerPid} = gen_event:start_link(),
 
   % state
-  State=#state{x=X,y=Y,room_name=RoomName,exits=RoomExits,params=Props, chat_evm_pid=ChatPid},
+  State=#state{x=X, y=Y, room_name=RoomName, exits=RoomExits, params=Props, room_evm_pid=RoomEventManagerPid},
 	ets:insert(coordToPid,{list_to_atom([X,Y]),self()}),
   {ok, State}.
 stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% Callbacks
+%% Tool function to see which exits has a room
 handle_call({get_exits},_From, State) ->
 	{reply,{ok,State#state.exits},State}.
+%% Tool function to add exits to a room
+handle_cast({add_exit, Exit,X,Y}, State) ->
+  NewExits=lists:sort(lists:append(State#state.exits,[{Exit,[X,Y]}])),
+  NewState=State#state{exits=NewExits},
+  {noreply, NewState};
+%% Tool to print room exits
+handle_cast({print_exits}, State) ->
+  lager:debug("{~p,~p} :  ~p ~n",[State#state.x,State#state.y,State#state.exits]),
+  {noreply, State};
+
+%% A player enters into the room
 handle_cast({enter, Player, RoomFromPid, Direction}, State) ->
+  % tell the room the player is coming from that the player is no longer there
   case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Direction, Player); false -> true end,
+  % Tell the player that she has entered into this room
   ct_player:entered(Player, self(), State#state.exits, State#state.room_name,State#state.objects),
-
-  % chat
-  HandlerId = {ct_room_chat, Player#player_state.my_pid},
-  gen_event:add_sup_handler(State#state.chat_evm_pid, HandlerId, [Player]),
-
-  %% save entering player and player chat in a proplist
-  NewState=State#state{players=[Player|State#state.players],
-                       chat_players_pid=[{Player#player_state.my_pid, HandlerId}|State#state.chat_players_pid]},
-
+  % Subscribe the player to room event handler
+  HandlerId = {ct_room_events, ct_player:get_public_id(Player)},
+  gen_event:add_sup_handler(State#state.room_evm_pid, HandlerId, [ct_player:get_feedback_data(Player)]),
+  %% save entering player
+  NewState=State#state{players=[Player|State#state.players]},
   % Notify that a player entered into the room
   %% Replace by room event handler?
   lists:map(fun(X) -> ct_player:seen(X,Player) end,State#state.players),
   lists:map(fun(X) -> ct_player:seen(Player,X) end,State#state.players),
   {noreply, NewState};
-handle_cast({add_exit, Exit,X,Y}, State) ->
-	NewExits=lists:sort(lists:append(State#state.exits,[{Exit,[X,Y]}])),
-	NewState=State#state{exits=NewExits},
-	{noreply, NewState};
+
+%% A player leaves the room
 handle_cast({player_left, Player, Direction}, State) ->
-  % chat
-  ChatPlayerPid = proplists:get_value(Player#player_state.my_pid, State#state.chat_players_pid),
-  gen_event:delete_handler(State#state.chat_evm_pid, ChatPlayerPid, []),
-  %% Check if player is really in
-  NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)],
-                     chat_players_pid=proplists:delete(Player#player_state.my_pid, State#state.chat_players_pid)},
+  % Unsubscribe player from room event handler
+  HandlerId = {ct_room_events, ct_player:get_public_id(Player)},
+  ok=gen_event:delete_handler(State#state.room_evm_pid, HandlerId, []),
+  %% Remove the player from players list
+  NewState=State#state{players=[P || P <- State#state.players, ct_player:get_pid(P)=/=ct_player:get_pid(Player)]},
   % Replace by room event handler?
   lists:map(fun(X) -> ct_player:unseen(X,Player,Direction) end,NewState#state.players),
   lists:map(fun(X) -> if Player/=X -> ct_player:unseen(Player,X,none) end end,NewState#state.players),
-
 	{noreply, NewState};
+
+%% Before leaving the room the UI client asks the server for permission to leave
+%% Server also checks if there is a door, notifies, the target room, etc..
 handle_cast({request_leave, Direction, Player}, State) ->
 	% Check that direction exists
 	case [{Dir,Coords} || {Dir,Coords} <- State#state.exits, Direction=:=Dir] of
@@ -151,19 +160,20 @@ handle_cast({request_leave, Direction, Player}, State) ->
 	end,
 	{noreply,State};
 
-%tmp
-handle_cast({print_exits}, State) ->
-	lager:debug("{~p,~p} :  ~p ~n",[State#state.x,State#state.y,State#state.exits]),
-	{noreply, State};
+%% Somebody talks into the room
 handle_cast({chat_talk, PlayerWhoTalksName, Message}, State) ->
   	lager:debug("cast room chat talk: ~p: ~p~n", [PlayerWhoTalksName, Message]),
-  	gen_event:notify(State#state.chat_evm_pid, {talk, PlayerWhoTalksName, Message}),
+  	gen_event:notify(State#state.room_evm_pid, {talk, PlayerWhoTalksName, Message}),
   	{noreply, State};
-handle_cast({add_object,Object},State) ->
-  % TODO: Notify users already in the room
-	lager:debug("{~p,~p} cast add object: ~p ~n", [State#state.x,State#state.y,Object]),
+
+%% An object is dropped into the room by somebody
+handle_cast({add_object,Player,Object},State) ->
+	lager:debug("{~p,~p} cast add object: ~p ~n", [State#state.x, State#state.y, Object]),
+  gen_event:notify(State#state.room_evm_pid, {object_dropped_by_player, Player, Object}),
 	NewState=State#state{objects=[{proplists:get_value(id,Object),Object}]++State#state.objects},
 	{noreply,NewState};
+
+%% An object is picked from the room
 handle_cast({pick_object,Player,ObjectId},State) ->
 	Result=proplists:get_value(ObjectId,State#state.objects,none),
 	NewState=case Result of 
@@ -172,6 +182,7 @@ handle_cast({pick_object,Player,ObjectId},State) ->
 			State;
 		Object ->
 			ct_player:object_picked(Player,Object),
+      gen_event:notify(State#state.room_evm_pid, {object_picked_by_player, Player, Object}),
 			State#state{objects=proplists:delete(ObjectId,State#state.objects)}
 	end,
 	{noreply,NewState};

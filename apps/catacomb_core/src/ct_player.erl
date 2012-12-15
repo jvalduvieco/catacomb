@@ -181,16 +181,16 @@ handle_cast({talk, Message},State) ->
   ct_room:chat_talk(State#player_state.room, State#player_state.name, Message),
 	{noreply,State};
 %% Receive a message from other player
-handle_cast({heard, PlayerWhoTalksName, Message},State) ->
-  ct_feedback:send(
-    {obj,[{"type",<<"room_chat_talk">>},
-      {"body",{obj,[
-        {"player_name", PlayerWhoTalksName},
-        {"message", Message}
-      ]}}
-    ]},
-    State#player_state.feedback_data),
-  {noreply,State};
+%handle_cast({heard, PlayerWhoTalksName, Message},State) ->
+%  ct_feedback:send(
+%    {obj,[{"type",<<"room_chat_talk">>},
+%      {"body",{obj,[
+%        {"player_name", PlayerWhoTalksName},
+%        {"message", Message}
+%      ]}}
+%    ]},
+%    State#player_state.feedback_data),
+%  {noreply,State};
 %% Collect heartbeat info from client
 %% Fixme: Move to session or tooling module
 handle_cast({heartbeat, LastTimeDiff},State) ->
@@ -315,7 +315,8 @@ handle_cast({object_picked,Object},State) ->
 	NewInventory= [{proplists:get_value(id,Object),Object}]++State#player_state.inventory,
   ct_feedback:send(
     {obj,[{"type",<<"object_picked">>},
-      {"body",{obj,Object}}
+      {"body",{obj,[
+      {"object",{obj,Object}}]}}
     ]},
     State#player_state.feedback_data),
   {noreply,State#player_state{inventory=NewInventory}};
@@ -334,7 +335,7 @@ handle_cast({drop_object,ObjectId},State) ->
       %remove the object from the inventory
       NewInventory=proplists:delete(ObjectId,State#player_state.inventory),
       % return the object to the room
-      ct_room:add_object(State#player_state.room,Object),
+      ct_room:add_object(State#player_state.room,State,Object),
       ct_feedback:send(
 				{obj,[{"type",<<"object_dropped">>},
 				{"body",{obj,[{"object_id",ObjectId}]}}]},

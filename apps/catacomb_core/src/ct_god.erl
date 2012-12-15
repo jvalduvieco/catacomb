@@ -57,7 +57,7 @@ get_random_object() ->
     lists:nth(random:uniform(length(L)), L).
 drop_objects(RoomCoords) ->
     {ok,Room}=ct_room_sup:get_pid(RoomCoords),
-    ct_room:add_object(Room,get_random_object()).
+    ct_room:add_object(Room,undefined,get_random_object()).
 
 
 %% System Callbacks
