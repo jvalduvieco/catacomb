@@ -1,5 +1,6 @@
 // player id once logged
 var session_player_public_id=undefined;
+var heartbeatEnabled=undefined;
 
 $(document).ready(function()
 {
@@ -167,7 +168,8 @@ function setUI()
             $("#controls-game").hide();
             $("#objectsInInventory").empty();
             $("#objectsWorn").empty();
-	        heartbeatStop();
+            if (heartbeatEnabled)
+	            heartbeatStop();
             break;
     }
 }
@@ -182,6 +184,9 @@ function processResponse(data)
     {
         case "login_response":
             loginResponse(obj);
+            break;
+        case "game_info_response":
+            gameInfoResponse(obj.body);
             break;
         case "get_character_list_response":
             characterList(obj.body);
@@ -268,9 +273,8 @@ function chatTalk()
 }
 function characterLoaded(data)
 {
-
-    heartbeatStart();
     session_player_public_id=data.player_public_id;
+    getGameInfo();
 }
 function roomInfo(data)
 {
@@ -305,6 +309,17 @@ function roomInfo(data)
 function pickObject(id,name)
 {
     ws.send('{"type":"pick_object_request","body":{"object_id":"' + id + '"}}');
+}
+function getGameInfo()
+{
+    ws.send('{"type":"game_info_request","body":undefined}');
+}
+function gameInfoResponse(data)
+{
+    heartbeatEnabled=data.heartbeat_enabled;
+
+    if (heartbeatEnabled)
+        heartbeatStart();
 }
 function objectPicked(data)
 {

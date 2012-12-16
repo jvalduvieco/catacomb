@@ -111,6 +111,9 @@ do_command(Cmd,State,FeedbackData) ->
       ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>, Cmd))),
 			ct_player:drop_object(State#ct_client_state.player_handle,ObjectId),
 			{ok,[],State};
+    <<"game_info_request">>->
+      GameInfo=ct_session:get_game_info(State#ct_client_state.session_pid),
+      {ok,{obj,[{"type",<<"game_info_response">>},{"body",{obj,GameInfo}}]},State};
 		<<"get_inventory">>->
 			%%ct_player:get_inventory(State#ct_client_state.player_handle)
 			{ok,[],State};
@@ -131,9 +134,9 @@ do_command(Cmd,State,FeedbackData) ->
 			{ok,[],State};
 		<<"heartbeat_request">>->
       LastTimeDiff=ct_translation_tools:get_value(<<"ltd">>,Cmd),
-ct_player:heartbeat(State#ct_client_state.player_handle, LastTimeDiff),
+      ct_player:heartbeat(State#ct_client_state.player_handle, LastTimeDiff),
 			{ok,[],State};
-<<"pick_object_request">>->
+    <<"pick_object_request">>->
 			ObjectId=list_to_integer(binary_to_list(ct_translation_tools:get_value(<<"object_id">>,Cmd))),
 			ct_player:pick_object(State#ct_client_state.player_handle,ObjectId),
 			{ok,[],State};

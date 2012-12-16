@@ -24,40 +24,43 @@ stop() -> gen_server:cast({global,?MODULE}, stop).
 
 %% User Callbacks
 handle_call({init_map}, _From, State) ->
-    lager:debug("Creating map ~p~n", [_From]),
-    X_list=lists:seq(1,ct_config_service:get_room_setup_max_x()),
-    Y_list=lists:seq(1,ct_config_service:get_room_setup_max_y()),
-    Combined_list=[[X,Y] || X <- X_list, Y <- Y_list],
-    lists:foldl( 
-        fun(RoomCoords, Sum) -> 
-            ct_room_sup:create_room(RoomCoords),
-            drop_objects(RoomCoords), 
-            Sum+1 
-        end
-    ,0, Combined_list),
-    %lists:foldl( fun(Room_coords, Sum) -> {ok,Pid}=ct_room_sup:get_pid(Room_coords), ct_room:print_exits(Pid), Sum+1 end,0, Combined_list),
-    {reply, ok, State}.
+  lager:debug("Creating map ~p~n", [_From]),
+  % Cache MaxX and MaxY to avoid innecessary request to ct_config_service
+  MaxX=ct_config_service:lookup(room_setup_max_x),
+  MaxY=ct_config_service:lookup(room_setup_max_y),
+  X_list=lists:seq(1,MaxX),
+  Y_list=lists:seq(1,MaxY),
+  Combined_list=[[X,Y] || X <- X_list, Y <- Y_list],
+  lists:foldl(
+      fun(RoomCoords, Sum) ->
+          ct_room_sup:create_room(RoomCoords),
+          drop_objects(RoomCoords),
+          Sum+1
+      end
+  ,0, Combined_list),
+  %lists:foldl( fun(Room_coords, Sum) -> {ok,Pid}=ct_room_sup:get_pid(Room_coords), ct_room:print_exits(Pid), Sum+1 end,0, Combined_list),
+  {reply, ok, State}.
 
 objects() ->
-    % TODO Id's are hardcoded. Should be generated on runtime for each object dropped. A player must be able to wear two identical objects.
-    [[{name,<<"Iron sword">>}, {id,2001},{damage, {obj,[{mechanical,1}]}},{wearing,hand}],
-     [{name,<<"Steel sword">>}, {id,2002}, {damage, {obj,[{mechanical,2}]}}, {wearing,hand}],
-     [{name,<<"Mithril sword">>}, {id,2003},{damage, {obj,[{mechanical,3}]}}, {wearing,hand}],
-     [{name,<<"Iron great helm">>}, {id,2004}, {armor,{obj,[{mechanical, 1}]}},{wearing,head}],
-     [{name,<<"Steel great helm">>}, {id,2005}, {armor,{obj,[{mechanical, 1}]}},{wearing,head}],
-     [{name,<<"Mithril great helm">>}, {id,2006}, {damage, {obj,[{mechanical,3}]}},{armor,{obj,[{mechanical, 1},{poison, 1}]}},{wearing,head}],
-     [{name,<<"Iron cuirass">>}, {id,2007}, {armor,{obj,[{mechanical, 1}]}},{wearing,chest}],
-     [{name,<<"Steel cuirass">>}, {id,2008}, {armor,{obj,[{mechanical, 1}]}},{wearing,chest}],
-     [{name,<<"Mithril cuirass">>}, {id,2009}, {armor,{obj,[{mechanical, 1}]}},{wearing,chest}]
-     ].
+  % TODO Id's are hardcoded. Should be generated on runtime for each object dropped. A player must be able to wear two identical objects.
+  [[{name,<<"Iron sword">>}, {id,2001},{damage, {obj,[{mechanical,1}]}},{wearing,hand}],
+    [{name,<<"Steel sword">>}, {id,2002}, {damage, {obj,[{mechanical,2}]}}, {wearing,hand}],
+    [{name,<<"Mithril sword">>}, {id,2003},{damage, {obj,[{mechanical,3}]}}, {wearing,hand}],
+    [{name,<<"Iron great helm">>}, {id,2004}, {armor,{obj,[{mechanical, 1}]}},{wearing,head}],
+    [{name,<<"Steel great helm">>}, {id,2005}, {armor,{obj,[{mechanical, 1}]}},{wearing,head}],
+    [{name,<<"Mithril great helm">>}, {id,2006}, {damage, {obj,[{mechanical,3}]}},{armor,{obj,[{mechanical, 1},{poison, 1}]}},{wearing,head}],
+    [{name,<<"Iron cuirass">>}, {id,2007}, {armor,{obj,[{mechanical, 1}]}},{wearing,chest}],
+    [{name,<<"Steel cuirass">>}, {id,2008}, {armor,{obj,[{mechanical, 1}]}},{wearing,chest}],
+    [{name,<<"Mithril cuirass">>}, {id,2009}, {armor,{obj,[{mechanical, 1}]}},{wearing,chest}]
+   ].
 
 get_random_object() ->
-    L = objects(),
+  L = objects(),
+  lists:nth(random:uniform(length(L)), L).
 
-    lists:nth(random:uniform(length(L)), L).
 drop_objects(RoomCoords) ->
-    {ok,Room}=ct_room_sup:get_pid(RoomCoords),
-    ct_room:add_object(Room,undefined,get_random_object()).
+  {ok,Room}=ct_room_sup:get_pid(RoomCoords),
+  ct_room:add_object(Room,undefined,get_random_object()).
 
 
 %% System Callbacks

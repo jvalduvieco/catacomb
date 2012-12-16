@@ -3,7 +3,7 @@
 
 -export([start_link/1,stop/1]).
 -export([get_handler/1,is_player/1,get_pid/1,get_name/1,get_max_life_points/1,get_life_points/1,get_client/1,set_client/2,set_feedback_data/2,get_feedback_data/1,get_public_id/1,heartbeat/2]).
--export([go/2, set_room/2,seen/2,unseen/3,entered/5,leave_denied/1,talk/2,heard/3,hit/4,attack/2,pick_object/2,object_picked/2,drop_object/2,wear/2,unwear/3]).
+-export([go/2, set_room/2,seen/2,unseen/3,entered/6,leave_denied/1,talk/2,heard/3,hit/4,attack/2,pick_object/2,object_picked/2,drop_object/2,wear/2,unwear/3]).
 -export([init/1,handle_cast/2,handle_call/3,terminate/2,code_change/3,handle_info/2]).
 
 -include ("ct_character_info.hrl").
@@ -65,8 +65,8 @@ stop(Player) ->
   gen_server:cast(ct_player:get_pid(Player),stop).
 
 %% Events
-entered(Player, RoomPid, RoomExits, RoomName,RoomObjects) ->
-	gen_server:cast(ct_player:get_pid(Player), {entered, RoomPid, RoomExits, RoomName,RoomObjects}).
+entered(Player, RoomPid, RoomExits, RoomName, RoomObjects, RoomPlayers) ->
+	gen_server:cast(ct_player:get_pid(Player), {entered, RoomPid, RoomExits, RoomName,RoomObjects,RoomPlayers}).
 seen(Player,OtherPlayer) ->
 	gen_server:cast(ct_player:get_pid(Player), {seen, OtherPlayer}).
 unseen(Player,OtherPlayer,Direction) ->
@@ -83,9 +83,15 @@ object_picked(Player,Object) ->
 %% Internal functions
 init([{obj,CharacterSpecs}]) ->
   lager:debug("starting heartbeat process..."),
-  {ok,HeartbeatPid} = ct_player_heartbeat:start_link(#player_state{my_pid=self()}),
-  lager:debug("heartbeat process started ~p", [HeartbeatPid]),
-  ct_player_heartbeat:heartbeat_start(HeartbeatPid),
+  HeartbeatPid = case ct_config_service:lookup(heartbeat_enabled) of
+    true ->
+      {ok,Pid} = ct_player_heartbeat:start_link(#player_state{my_pid=self()}),
+      lager:debug("heartbeat process started ~p", [Pid]),
+      Pid;
+    false ->
+      lager:debug("Not starting heartbeat process"),
+      none
+  end,
 
   State=#player_state{
 		id=proplists:get_value(<<"id">>, CharacterSpecs, none),
@@ -109,6 +115,7 @@ init([{obj,CharacterSpecs}]) ->
   {ok, State}.
 
 %% Client API Callbacks
+%% Tools
 handle_cast({set_room, [X,Y]}, State) ->
 	{ok,RoomPid}=ct_room_sup:get_pid([X,Y]),
 	ct_room:enter(RoomPid, none, State, null),
@@ -116,15 +123,17 @@ handle_cast({set_room, [X,Y]}, State) ->
 handle_cast({set_client,Client},State) ->
 	NewState=State#player_state{client=Client},
 	{noreply,NewState};
-handle_cast({set_feedback_fun,Fun},State) ->
-	NewState=State#player_state{feedback_fun=Fun},
-	{noreply,NewState};
+
 handle_cast({set_feedback_data,FeedbackData},State) ->
   NewState=State#player_state{feedback_data=FeedbackData},
   {noreply,NewState};
+
+%% The user wants to move the player
 handle_cast({go, Direction}, State) ->
   ct_room:request_leave(State#player_state.room,Direction,State),
   {noreply, State};
+
+%% The player is seen by another player
 handle_cast({seen, OtherPlayer}, State) ->
 	CleanOtherPlayer=OtherPlayer#player_state{located_players=[]},
 	NewState=State#player_state{located_players=[CleanOtherPlayer|State#player_state.located_players]},
@@ -138,6 +147,8 @@ handle_cast({seen, OtherPlayer}, State) ->
     ]},
     State#player_state.feedback_data),
 	{noreply,NewState};
+
+%% Another player does not see this one
 handle_cast({unseen, OtherPlayer, Direction}, State) ->
 	%%The player left the room
 	NewState=State#player_state{located_players=[P || P <- State#player_state.located_players, ct_player:get_pid(P)=/=ct_player:get_pid(OtherPlayer)]},
@@ -151,18 +162,22 @@ handle_cast({unseen, OtherPlayer, Direction}, State) ->
 		]},
     State#player_state.feedback_data),
 	{noreply,NewState};
-handle_cast({entered, RoomPid, RoomExits, RoomName,RoomObjects}, State) ->
+
+%% The player has entered into a room
+handle_cast({entered, RoomPid, RoomExits, RoomName, RoomObjects, RoomPlayers}, State) ->
 	NewState=State#player_state{room_exits=RoomExits,room=RoomPid},
   ct_feedback:send(
 		{obj,[{"type",<<"room_info">>},
 			{"body",{obj,[
 				{"name",RoomName},
 				{"exits",[X || {X,_} <- RoomExits]},
-				{"objects",[ {obj,X} || {_,X} <- RoomObjects]} % FIXME create a new message to report objects appeared after entering the room
+				{"objects",[ {obj,X} || {_,X} <- RoomObjects]},
+        {"players",[ {obj,X} || {_,X} <- RoomPlayers]}
 			]}}
 		]},
     State#player_state.feedback_data),
 	{noreply, NewState};
+
 %% Notification, a user tried to leave the room by a direction without door
 handle_cast({leave_denied},State) ->
 	lager:debug("~s has hit with a wall ~n", [State#player_state.name]),
@@ -175,6 +190,7 @@ handle_cast({leave_denied},State) ->
 		]},
   State#player_state.feedback_data),
 	{noreply,State};
+
 %% Say something to the room
 handle_cast({talk, Message},State) ->
 	lager:debug("~s say ~s~n", [State#player_state.name, Message]),
@@ -193,6 +209,8 @@ handle_cast({talk, Message},State) ->
 %  {noreply,State};
 %% Collect heartbeat info from client
 %% Fixme: Move to session or tooling module
+
+%% Heartbeats, Ui sends heardbeats to the player
 handle_cast({heartbeat, LastTimeDiff},State) ->
   lager:debug("heartbeat last time diff: ~p ms~n", [LastTimeDiff]),
   % heartbeat response to cli
@@ -203,13 +221,15 @@ handle_cast({heartbeat, LastTimeDiff},State) ->
     State#player_state.feedback_data
   ),
   % heartbeat
-  ct_player_heartbeat:heartbeat(State#player_state.heartbeat_pid, LastTimeDiff),
+  %ct_player_heartbeat:heartbeat(State#player_state.heartbeat_pid, LastTimeDiff),
   {noreply, State};
+
 %% Attack another player
 handle_cast({attack, OtherPlayer}, State) ->
   % Hit target player
   ct_player:hit(OtherPlayer,State,State#player_state.hit_chance,State#player_state.battle_stats),
 	{noreply, State};
+
 %% A hit is received
 handle_cast({hit, OtherPlayer, _HitChance, BattleStats}, State) ->
 % If player dice is lower than hit chance player hits opponent
@@ -306,10 +326,12 @@ handle_cast({hit, OtherPlayer, _HitChance, BattleStats}, State) ->
 %%	end,
 
   {noreply, NewState};
-%% Ask the room for an object
+
+%% Ask the room to pick an object, room controls objects to avoid race conditions
 handle_cast({pick_object,ObjectId},State) ->
 	ct_room:pick_object(State#player_state.room,State,ObjectId),
 	{noreply,State};
+
 %% Notification that an object is picked from the room
 handle_cast({object_picked,Object},State) ->
 	NewInventory= [{proplists:get_value(id,Object),Object}]++State#player_state.inventory,
@@ -320,6 +342,7 @@ handle_cast({object_picked,Object},State) ->
     ]},
     State#player_state.feedback_data),
   {noreply,State#player_state{inventory=NewInventory}};
+
 %% Drop an object form the inventory to the room
 handle_cast({drop_object,ObjectId},State) ->
   % Check if the object is in the inventory
@@ -343,7 +366,8 @@ handle_cast({drop_object,ObjectId},State) ->
 			State#player_state{inventory=NewInventory}
 	end,
 	{noreply,NewState};
-%% Wear an object form inventory
+
+%% Wear an object from inventory
 handle_cast({wear,ObjectId},State) ->
   lager:debug("wear ~p ~p ~p ~n",[ObjectId,State#player_state.worn_objects,State#player_state.inventory]),
   % Check if the object is in the inventory
@@ -382,7 +406,7 @@ handle_cast({wear,ObjectId},State) ->
   end,
   {noreply,NewState};
 
-%% Unwears an object and returns to inventory
+%% Unwears an object and return to inventory
 handle_cast({unwear,ObjectId,Position},State) ->
   lager:debug("unwear ~p ~p ~p ~p",[ObjectId,Position,State#player_state.worn_objects,State#player_state.inventory]),
   % find whether we are wearing requested objct
@@ -414,6 +438,7 @@ handle_cast({unwear,ObjectId,Position},State) ->
 
   end,
   {noreply,NewState};
+
 handle_cast(stop, State) ->
 	% leave the room
 	ct_room:player_left(State#player_state.room,left_game,State),
@@ -428,11 +453,16 @@ terminate(_Reason, State) -> {ok,State}.
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
 handle_info( _, State) -> {noreply,State}.
 
+%% Tools to manipulate datastructures.
+%% FIXME: Remove the need to use {obj, ...
 clean_obj(X) when is_tuple(X)->
   {obj,Result}=X,
   Result;
 clean_obj(X) ->
   X.
+
+%% Tools to manipulate character data
+%% Calculate total damage and armor from weared objects
 calculate_battle_stats(WornObjects) ->
   % Get all worn objects damage. list of tuples by damage type per object all in one list
   ObjectsDamage=lists:flatten([clean_obj(proplists:get_value(damage,X,{obj,[{none, 0}]}))||{_,X}<-WornObjects]),
@@ -445,6 +475,7 @@ calculate_battle_stats(WornObjects) ->
   lager:debug("total damage: ~p, total armor: ~p",[TotalDamage,TotalArmor]),
   [{total_armor,TotalArmor},{total_damage,TotalDamage}].
 
+%% Calculate damage inflinged to a user
 fight_result(AttackerBattleStats, MyBattleStats)->
   MyArmor=proplists:get_value(total_armor,MyBattleStats),
   % Damage - Armor = Damage received

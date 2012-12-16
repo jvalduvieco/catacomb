@@ -86,8 +86,8 @@ print_exits(RoomPid)->
 init({X,Y}) ->
   <<A:32, B:32, C:32>> = crypto:rand_bytes(12),
   random:seed({A,B,C}),
-  MaxX=ct_config_service:get_room_setup_max_x(),
-  MaxY=ct_config_service:get_room_setup_max_y(),
+  MaxX=ct_config_service:lookup(room_setup_max_x),
+  MaxY=ct_config_service:lookup(room_setup_max_y),
 	{RoomName, Props}=create_room_properties(),		%% Define Room properties and name.
 	{ok,RoomExits}=create_room_exits(X,Y,MaxX,MaxY),
 
@@ -118,15 +118,15 @@ handle_cast({print_exits}, State) ->
 handle_cast({enter, Player, RoomFromPid, Direction}, State) ->
   % tell the room the player is coming from that the player is no longer there
   case is_pid(RoomFromPid) of	true -> ct_room:player_left(RoomFromPid, Direction, Player); false -> true end,
-  % Tell the player that she has entered into this room
-  ct_player:entered(Player, self(), State#state.exits, State#state.room_name,State#state.objects),
   % Subscribe the player to room event handler
   HandlerId = {ct_room_events, ct_player:get_public_id(Player)},
   gen_event:add_sup_handler(State#state.room_evm_pid, HandlerId, [ct_player:get_feedback_data(Player)]),
-  %% save entering player
+  % Tell the player that she has entered into this room
+  ct_player:entered(Player, self(), State#state.exits, State#state.room_name,State#state.objects,State#state.players),
+  % save entering player
   NewState=State#state{players=[Player|State#state.players]},
   % Notify that a player entered into the room
-  %% Replace by room event handler?
+  % Replace by room event handler?
   lists:map(fun(X) -> ct_player:seen(X,Player) end,State#state.players),
   lists:map(fun(X) -> ct_player:seen(Player,X) end,State#state.players),
   {noreply, NewState};
